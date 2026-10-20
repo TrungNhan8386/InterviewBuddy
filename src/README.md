@@ -16,6 +16,13 @@ npm run dev
 
 Open http://localhost:3000. The home page shows whether Supabase is configured.
 
+To check that the keys really work, open:
+
+- http://localhost:3000/api/health – Supabase database, auth, and that the Gemini model exists.
+- http://localhost:3000/api/health?ai=1 – also asks Gemini for a one-word reply. On staging this needs a signed-in user, to protect the free quota.
+
+`"ok": true` means everything works. Otherwise the `detail` field says what failed. The same URLs work on the staging site.
+
 - Fill in `.env.local` with the values Nhân sends you privately. **Never commit it.**
 - Without `.env.local` the app still starts, so you can build UI with mock data. Anything that calls Supabase will throw a clear error until the keys are set.
 
