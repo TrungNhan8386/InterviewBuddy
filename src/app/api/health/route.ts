@@ -75,24 +75,34 @@ async function checkModel(apiKey: string, model: string): Promise<Check> {
   }
 }
 
+const GENERATE_TIMEOUT_MS = 20_000;
+
 async function checkGenerate(apiKey: string, model: string): Promise<Check> {
+  const started = Date.now();
+  const seconds = () => `${((Date.now() - started) / 1000).toFixed(1)}s`;
   try {
     const res = await fetch(`${GEMINI_BASE}/models/${encodeURIComponent(model)}:generateContent`, {
       method: "POST",
       headers: { "x-goog-api-key": apiKey, "Content-Type": "application/json" },
       cache: "no-store",
+      signal: AbortSignal.timeout(GENERATE_TIMEOUT_MS),
       body: JSON.stringify({
         contents: [{ parts: [{ text: "Reply with exactly one word: OK" }] }],
-        generationConfig: { maxOutputTokens: 20, thinkingConfig: { thinkingBudget: 0 } },
+        generationConfig: { maxOutputTokens: 50 },
       }),
     });
     const body = await res.json().catch(() => null);
     if (!res.ok) {
-      return { status: "error", detail: `${res.status} ${body?.error?.message ?? ""}`.trim() };
+      // 503 = Gemini overloaded (temporary), 429 = free quota used up.
+      return { status: "error", detail: `${res.status} after ${seconds()}: ${body?.error?.message ?? ""}`.trim() };
     }
-    const text: string = body?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
-    return { status: "ok", detail: `AI replied: ${text.trim().slice(0, 40)}` };
+    const parts: { text?: string }[] = body?.candidates?.[0]?.content?.parts ?? [];
+    const text = parts.map((p) => p.text ?? "").join("").trim();
+    return { status: "ok", detail: `AI replied "${text.slice(0, 40)}" in ${seconds()}` };
   } catch (e) {
+    if (e instanceof Error && e.name === "TimeoutError") {
+      return { status: "error", detail: `no reply within ${GENERATE_TIMEOUT_MS / 1000}s (Gemini overloaded?)` };
+    }
     return { status: "error", detail: errorMessage(e) };
   }
 }
