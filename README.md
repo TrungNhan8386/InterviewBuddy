@@ -55,3 +55,9 @@ Course project for **Introduction to Software Engineering**, University of Scien
 - Open a pull request and get at least one teammate's review before merging.
 - Never commit secrets. Put API keys in `.env.local`, which is git-ignored.
 - Keep interview recordings and other personal data in the team's shared Drive, not in this repository.
+
+## CV/JD Analysis API — SCRUM-39
+
+The API module in [`src`](src/README.md) accepts CV/JD text and returns a weighted fit score and matched/missing skills.
+See the [API contract](docs/api/CV_JD_ANALYSIS_API_v1.md), [handoff for Khang](docs/api/HANDOFF_TO_KHANG.md), and [test report](docs/test/SCRUM-39_TEST_REPORT.md).
+Live Gemini verification is pending a server API key; the offline fixture tests are explicitly identified in the report.

@@ -1,0 +1,10 @@
+{
+  "task": "SCRUM-43",
+  "mode": "live-gemini",
+  "generatedAt": "2026-10-23T10:05:07.119Z",
+  "provenance": "Only the five AI-authored synthetic CV/JD fixtures are sent to Gemini. No real personal data.",
+  "status": "blocked",
+  "cases": [],
+  "reason": "GEMINI_API_KEY is not configured. No live requests were sent.",
+  "externalGeminiCalls": 0
+}
