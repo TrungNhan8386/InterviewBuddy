@@ -6,10 +6,10 @@ Ngày: 23/10/2026. Kiểm thử do Codex thực hiện; không phải đánh gi�
 
 | Jira | Yêu cầu | Phần triển khai | Ranh giới xác minh |
 |---|---|---|---|
-| SCRUM-40 | Gọi Gemini xử lý CV/JD text | `src/lib/analysis/gemini.mjs`, `service.mjs`, `http.mjs`; adapter Next.js và server Node | Đã kiểm thử cấu trúc lời gọi và lỗi với transport giả lập; chưa gọi Gemini thật. |
+| SCRUM-40 | Gọi Gemini xử lý CV/JD text | `src/lib/analysis/gemini.mjs`, `service.mjs`, `http.mjs`; adapter Next.js và server Node | Đã kiểm thử transport/lỗi và đã gọi Gemini thật trên 5 cặp CV/JD. |
 | SCRUM-41 | Fit Score, matched/missing skills | `scoring.mjs`, kiểm tra trích dẫn và gộp alias | Đã kiểm tra cách tính điểm với kết quả kỳ vọng cho 5 cặp dữ liệu. |
 | SCRUM-42 | API contract cho Khang | `docs/api/CV_JD_ANALYSIS_API_v1.md`, `HANDOFF_TO_KHANG.md`, client helper, ví dụ JSON | Sẵn nội dung bàn giao qua repo; chưa có xác nhận của Khang. |
-| SCRUM-43 | Xác minh ít nhất 5 cặp CV/JD | Fixtures, unit tests, script offline và script live | Offline có thể tái chạy; kiểm thử AI thật đang chờ API key. |
+| SCRUM-43 | Xác minh ít nhất 5 cặp CV/JD | Fixtures, unit tests, script offline và script live | 5/5 cặp đạt qua HTTP nội bộ giả lập và 5/5 cặp đạt với Gemini thật. |
 
 ## 2. Dữ liệu kiểm thử
 
@@ -25,7 +25,7 @@ Kết quả Gemini giả lập được chỉ định trong fixture để kiểm
 | CVJD-05 | Java internship; thiếu Spring Boot; kiểm tra làm tròn | 4/6 | 66,67 |
 
 Nguồn: [fixtures/cv-jd-pairs.json](fixtures/cv-jd-pairs.json).
-Chạy offline không xác nhận rằng Gemini thật sẽ nhận diện đúng phủ định hay ý nghĩa kỹ năng; việc đó thuộc lần kiểm thử live.
+Chạy offline xác minh đường đi dữ liệu và số học. Lần kiểm thử live cũng đã đạt kết quả kỳ vọng cho cả 5 cặp, bao gồm ca phủ định kỹ năng và ca tiếng Việt. Đây là chứng cứ cho 5 ca cụ thể, không phải kết luận về độ chính xác trên mọi CV/JD.
 
 ## 3. Các lớp kiểm tra
 
@@ -37,8 +37,10 @@ Chạy offline không xác nhận rằng Gemini thật sẽ nhận diện đúng
 
 ## 4. Lệnh tái chạy và chứng cứ
 
-Kết quả đã chạy: **61/61 kiểm thử tự động đạt**, **5/5 cặp qua HTTP nội bộ đạt** với Gemini transport giả lập.
-Kiểm thử Gemini thật: **blocked**, chưa có key, **0** lời gọi ngoài đã gửi.
+Kết quả đã chạy: **63/63 kiểm thử tự động đạt**, **5/5 cặp qua HTTP nội bộ đạt** với Gemini transport giả lập.
+Kiểm thử Gemini thật: **passed, 5/5**, dùng `gemini-3.5-flash-lite`; điểm lần lượt **100, 60, 0, 80, 66,67**.
+
+Lần thử đầu với cấu hình cũ có timeout/lỗi request. Chẩn đoán thật xác định `maxItems` trong schema gây request bị từ chối; đã bỏ ràng buộc đó khỏi schema, giữ giới hạn 40 ở backend và thêm regression tests. Model mặc định được đổi sang Flash-Lite sau khi xác minh lời gọi thật. Kết quả trong file live là lần chạy thành công sau bản sửa.
 
 Từ thư mục `src`:
 
@@ -46,19 +48,22 @@ Từ thư mục `src`:
 npm test
 npm run verify:offline
 npm run verify:live
+npm run verify:secrets
 ```
 
 - [Kết quả HTTP offline cho 5 cặp](results/SCRUM-39-offline.json).
 - [Nhật ký bộ kiểm thử tự động](results/SCRUM-39-unit.tap).
 - [Trạng thái kiểm thử Gemini thật](results/SCRUM-39-live.json).
+- [Kết quả kiểm tra không lộ key](results/SCRUM-39-secret-check.json).
 - `verify:live` thiếu key: ghi `blocked`, không gửi request ngoài, exit code **2**. Có key: gửi đúng 5 cặp giả lập và so sánh với kết quả kỳ vọng.
 - Nếu có khác biệt về điểm/kỹ năng trong lần chạy thật, báo cáo ghi `needs-review`; không tự đánh dấu đạt.
 
-## 5. Công việc còn chờ
+## 5. Bảo vệ key và phần tích hợp còn chờ
 
-1. Nhóm tạo/cấu hình `GEMINI_API_KEY`, chọn model khả dụng, rồi chạy `npm run verify:live`.
-2. Xem xét từng phân tích thật, nhất là bằng chứng phủ định và các trường hợp kỹ năng tương đương.
-3. Khang ghép mã frontend và xác minh luồng sử dụng hoàn chỉnh của SCRUM-46.
-4. Review nhánh/PR trước khi merge vào `main` theo quy định repository.
+- Key nằm trong `.env.local` được Git bỏ qua, không được tracking; quyền truy cập tệp cục bộ đã giới hạn cho tài khoản Windows hiện tại.
+- Lời gọi Gemini gửi key trong header, không đưa vào URL, prompt hoặc dữ liệu trả về. Không ghi key hoặc lỗi provider thô vào log.
+- Script `verify:secrets` quét tệp có thể được commit, staged diff và diff của nhánh so với `origin/main`; kết quả phải là `leaksFound: 0` trước khi push.
+- Khang còn cần ghép mã frontend và xác minh luồng sử dụng hoàn chỉnh của SCRUM-46.
+- Nhóm còn cần review nhánh/PR trước khi merge vào `main`.
 
 Chưa xác nhận build trong app Next.js hoàn chỉnh, kết nối database/auth, hay triển khai Vercel vì repo hiện chưa có các phần đó.

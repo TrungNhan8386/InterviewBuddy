@@ -41,7 +41,8 @@ export const GEMINI_ANALYSIS_SCHEMA = {
   properties: {
     requirements: {
       type: 'array',
-      maxItems: LIMITS.maxRequirements,
+      // Enforce the limit in scoring.mjs. A maxItems constraint here can
+      // exceed Gemini's structured-output grammar complexity budget.
       items: {
         type: 'object',
         additionalProperties: false,

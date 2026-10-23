@@ -1,7 +1,7 @@
 import { AnalysisError, invalidAiResponse } from './errors.mjs';
 import { GEMINI_ANALYSIS_SCHEMA } from './contracts.mjs';
 
-export const DEFAULT_MODEL = 'gemini-3.8-flash';
+export const DEFAULT_MODEL = 'gemini-3.5-flash-lite';
 
 export function buildGeminiRequest(input) {
   return {

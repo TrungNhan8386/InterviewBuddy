@@ -59,6 +59,7 @@ Thêm key vào `.env.local` của app Next.js, khởi động lại, rồi gọi
 ## Trạng thái bàn giao
 
 - Mã API và contract đã được viết; có 5 cặp dữ liệu giả lập và kiểm thử offline tái chạy được.
-- Chưa kiểm chứng Gemini thật do nhóm chưa có key.
+- Đã kiểm chứng Gemini thật với `gemini-3.5-flash-lite`: 5/5 cặp giả lập đạt kết quả kỳ vọng. Xem báo cáo trong `docs/test/results/SCRUM-39-live.json`.
+- Key được giữ ở cấu hình cục bộ, không đi kèm nhánh hoặc tài liệu. Mỗi môi trường chạy cần tự cấu hình key ở server.
 - Chưa xác nhận tích hợp với giao diện Khang vì mã giao diện chưa được đẩy lên repo.
 - Tài liệu này là nội dung bàn giao qua repository; chưa có xác nhận Khang đã đọc hoặc tích hợp.

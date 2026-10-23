@@ -3,7 +3,7 @@
 Ngày: 23/10/2026. Phạm vi: SCRUM-39, SCRUM-40, SCRUM-41, SCRUM-42, SCRUM-43; bên gọi: SCRUM-46 của Khang.
 
 Đây là contract được triển khai trong nhánh `feature/SCRUM-39-cv-jd-analysis`.
-Đã có kiểm thử tự động với dữ liệu giả lập; việc xác nhận phản hồi Gemini thật còn chờ API key.
+Đã kiểm thử tự động và đã xác minh Gemini thật với 5 cặp CV/JD giả lập ngày 23/10/2026: 5/5 đạt kết quả kỳ vọng. Model được xác minh: `gemini-3.5-flash-lite`.
 
 ## 1. Endpoint
 
@@ -65,6 +65,7 @@ Mỗi phần tử `requirements`:
 - `importance`: `required` hoặc `preferred`.
 - `matched`: boolean. Khi `false`, `cvEvidence` là chuỗi rỗng.
 - Backend kiểm tra trích dẫn tồn tại trong văn bản gốc, có chuẩn hóa Unicode, chữ hoa/thường và khoảng trắng để so sánh.
+- Giới hạn tối đa 40 yêu cầu được thực thi ở backend. Không đưa `maxItems` vào schema gửi Gemini vì ràng buộc này đã làm request thật bị từ chối; có regression test cho cả hai điều kiện.
 - Kiểm tra trích dẫn giúp phát hiện trích dẫn bịa; ngữ nghĩa của việc khớp kỹ năng vẫn cần kiểm chứng bằng kết quả Gemini thật.
 - [Response đầy đủ mẫu](examples/analyze.success.json) được tạo từ **transport giả lập**, có `model: "gemini-offline-fixture"`. Đây là mẫu contract cho frontend, không phải chứng cứ chạy Gemini thật.
 
@@ -151,7 +152,7 @@ Khi người dùng gửi lại hoặc rời màn hình, có thể hủy request 
 | Biến | Mặc định | Ý nghĩa |
 |---|---|---|
 | `GEMINI_API_KEY` | Không có | Bắt buộc để gọi Gemini thật. |
-| `GEMINI_MODEL` | `gemini-3.8-flash` | Đổi thành model có structured output mà key của nhóm truy cập được. |
+| `GEMINI_MODEL` | `gemini-3.5-flash-lite` | Model đã chạy đạt cả 5 ca thật; có thể đổi sang model structured output mà key truy cập được. |
 | `GEMINI_TIMEOUT_MS` | `30000` | Số nguyên từ 1.000 đến 45.000 ms. |
 | `ALLOWED_ORIGINS` | Rỗng nếu không cấu hình | Danh sách origin frontend, phân cách bằng dấu phẩy. Cùng origin luôn được phép. |
 | `HOST` | `127.0.0.1` | Chỉ dùng cho server độc lập. |
@@ -166,4 +167,4 @@ Module chưa kết nối lớp đăng nhập hoặc giới hạn tần suất ch
 - [Gemini structured outputs](https://ai.google.dev/gemini-api/docs/generate-content/structured-output): JSON schema và kiểm tra dữ liệu trả về ở ứng dụng.
 - [Danh sách Gemini models](https://ai.google.dev/gemini-api/docs/models): kiểm tra model khả dụng khi có key.
 
-Các tài liệu được đối chiếu ngày 23/10/2026; model mặc định chưa được xác minh bằng lời gọi thật trong môi trường nhóm.
+Các tài liệu được đối chiếu ngày 23/10/2026. Xem [kết quả kiểm thử thật](../test/results/SCRUM-39-live.json); file này chỉ chứa dữ liệu giả lập, kết quả phân tích và metadata của model, không có thông tin xác thực.

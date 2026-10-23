@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateInput, LIMITS } from '../lib/analysis/contracts.mjs';
+import { validateInput, LIMITS, GEMINI_ANALYSIS_SCHEMA } from '../lib/analysis/contracts.mjs';
 import { scoreAnalysis } from '../lib/analysis/scoring.mjs';
 import { createAnalysisService } from '../lib/analysis/service.mjs';
 import { fixtures, mockProviderFor, assertExpected } from './helpers.mjs';
@@ -100,5 +100,15 @@ test('rejects an AI-supplied score and malformed field types', () => {
   assert.throws(() => scoreAnalysis({ ...fixtures[0].aiResponse, fitScore: 100 }, fixtures[0].input), { code: 'INVALID_AI_RESPONSE' });
   const raw = structuredClone(fixtures[0].aiResponse);
   raw.requirements[0].matched = 'true';
+  assert.throws(() => scoreAnalysis(raw, fixtures[0].input), { code: 'INVALID_AI_RESPONSE' });
+});
+
+test('Gemini schema avoids a maxItems constraint that fails real requests', () => {
+  assert.equal(Object.hasOwn(GEMINI_ANALYSIS_SCHEMA.properties.requirements, 'maxItems'), false);
+});
+
+test('backend still rejects more than forty requirements', () => {
+  const raw = structuredClone(fixtures[0].aiResponse);
+  raw.requirements = Array.from({ length: 41 }, () => structuredClone(raw.requirements[0]));
   assert.throws(() => scoreAnalysis(raw, fixtures[0].input), { code: 'INVALID_AI_RESPONSE' });
 });

@@ -1,5 +1,5 @@
 {
-  "analysisId": "dcb62da7-e103-404a-92ba-b6b39acc741e",
+  "analysisId": "a8f0f378-0ebb-4036-9778-b2c74fc90cc4",
   "fitScore": 60,
   "matchedSkills": [
     "Node.js",
@@ -54,6 +54,6 @@
     "model": "gemini-offline-fixture",
     "scoringVersion": "weighted-skills-v1",
     "language": "en",
-    "generatedAt": "2026-10-23T10:05:52.476Z"
+    "generatedAt": "2026-10-23T10:27:45.349Z"
   }
 }

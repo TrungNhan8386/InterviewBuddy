@@ -1,7 +1,7 @@
 {
   "task": "SCRUM-43",
   "mode": "offline-http-with-mocked-gemini",
-  "generatedAt": "2026-10-23T10:05:52.447Z",
+  "generatedAt": "2026-10-23T10:27:45.313Z",
   "externalGeminiCalls": 0,
   "provenance": "AI-authored synthetic CV/JD pairs and fixed fixture responses; no real Gemini output.",
   "limitation": "Verifies HTTP, Gemini request construction, response validation and scoring. Does not verify live AI extraction or semantic quality.",
