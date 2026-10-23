@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import Button from "@/components/ui/Button";
+import Topbar from "@/components/layout/Topbar";
 
 const navigation = [
   { label: "Dashboard", href: "/dashboard", ready: true },
@@ -98,27 +99,7 @@ export default function AppShell({
         </aside>
 
         <div className="min-w-0 flex-1">
-          <header className="flex min-h-20 flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-4 sm:px-8">
-            <p className="text-sm text-slate-500">
-              Không gian luyện phỏng vấn
-            </p>
-
-            <div className="flex items-center gap-3">
-              <div
-                aria-hidden="true"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-700"
-              >
-                TT
-              </div>
-
-              <div>
-                <p className="text-sm font-semibold">Tài</p>
-                <p className="text-xs text-slate-500">
-                  Tài khoản minh họa
-                </p>
-              </div>
-            </div>
-          </header>
+          <Topbar />
 
           <main
             id="main-content"
