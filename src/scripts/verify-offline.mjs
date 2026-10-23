@@ -5,7 +5,7 @@ import { createApiServer } from '../server.mjs';
 import { createAnalysisHandler } from '../lib/analysis/http.mjs';
 import { createAnalysisService } from '../lib/analysis/service.mjs';
 import { createGeminiProvider } from '../lib/analysis/gemini.mjs';
-import { createAnalysisClient } from '../lib/analysis/client.mjs';
+import { createAnalysisClient } from '../lib/analysis/core-client.mjs';
 import { fixtures, geminiEnvelope, assertExpected } from '../tests/helpers.mjs';
 
 const calls = [];

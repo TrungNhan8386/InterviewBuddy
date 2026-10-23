@@ -4,6 +4,7 @@ Ngày: 23/10/2026. Phạm vi: SCRUM-39, SCRUM-40, SCRUM-41, SCRUM-42, SCRUM-43; 
 
 Đây là contract được triển khai trong nhánh `feature/SCRUM-39-cv-jd-analysis`.
 Đã kiểm thử tự động và đã xác minh Gemini thật với 5 cặp CV/JD giả lập ngày 23/10/2026: 5/5 đạt kết quả kỳ vọng. Model được xác minh: `gemini-3.5-flash-lite`.
+Giao diện hiện có của Khang dùng một contract khác; xem [adapter `/api/analyze-fit`](KHANG_ANALYZE_FIT_COMPAT.md) để ghép mà không sửa client của Khang.
 
 ## 1. Endpoint
 
@@ -121,10 +122,10 @@ Phiên bản `weighted-skills-v1` là lựa chọn triển khai cho bản này, 
 Standalone server trả `404 NOT_FOUND` cho đường dẫn khác. Next.js xử lý đường dẫn không tồn tại theo app chủ.
 Các response không được cache. API không trả nguyên văn lỗi provider hoặc ghi CV/JD/key vào log.
 
-## 5. Gọi từ giao diện của Khang
+## 5. Gọi từ client của contract gốc
 
 ```javascript
-import { createAnalysisClient, AnalysisApiError } from '@/lib/analysis/client.mjs';
+import { createAnalysisClient, AnalysisApiError } from '@/lib/analysis/core-client.mjs';
 
 // Cùng Next.js app: bỏ baseUrl. Khi chạy API độc lập dùng URL local bên dưới.
 const analyzeCvJd = createAnalysisClient({ baseUrl: 'http://127.0.0.1:3001' });
@@ -144,7 +145,7 @@ async function handleAnalyze(cvText, jdText, signal) {
 }
 ```
 
-Khang giữ nguyên phần `/api/extract-cv`: lấy chuỗi text sau khi trích xuất, gán vào `cvText`, rồi gửi cùng `jdText` đến API này.
+Với client này, giữ nguyên phần `/api/extract-cv`: lấy chuỗi text sau khi trích xuất, gán vào `cvText`, rồi gửi cùng `jdText` đến API này. Trang `/analysis` hiện tại của Khang gọi `/api/analyze-fit` với `cv` và `jd`; dùng adapter ở trên cho trang đó.
 Khi người dùng gửi lại hoặc rời màn hình, có thể hủy request bằng `AbortController`.
 
 ## 6. Cấu hình server

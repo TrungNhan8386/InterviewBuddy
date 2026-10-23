@@ -36,7 +36,14 @@ async function readJson(request) {
   }
 }
 
-export function createAnalysisHandler({ analyze = createAnalysisService(), allowedOrigins = [] } = {}) {
+export function createAnalysisHandler({
+  analyze = createAnalysisService(),
+  allowedOrigins = [],
+  normalizeInput = validateInput,
+  formatResult = (result) => result,
+  formatError = (error) => error,
+  endpoint = '/api/analyze',
+} = {}) {
   const allowed = new Set(allowedOrigins);
   return async function handleAnalysis(request) {
     const headers = new Headers({
@@ -60,24 +67,22 @@ export function createAnalysisHandler({ analyze = createAnalysisService(), allow
       if (request.method === 'OPTIONS') return respond(204, null);
       if (request.method !== 'POST') {
         headers.set('Allow', 'POST, OPTIONS');
-        throw new AnalysisError('METHOD_NOT_ALLOWED', 'Use POST /api/analyze.', 405);
+        throw new AnalysisError('METHOD_NOT_ALLOWED', `Use POST ${endpoint}.`, 405);
       }
       if (request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json') {
         throw new AnalysisError('UNSUPPORTED_MEDIA_TYPE', 'Content-Type must be application/json.', 415);
       }
-      const body = validateInput(await readJson(request));
+      const body = normalizeInput(await readJson(request));
       const result = await analyze(body, { signal: request.signal });
-      return respond(200, result);
+      return respond(200, formatResult(result, body));
     } catch (error) {
       const known = error instanceof AnalysisError;
       const status = known ? error.status : 500;
-      return respond(status, {
-        error: {
-          code: known ? error.code : 'INTERNAL_ERROR',
-          message: known ? error.message : 'An unexpected error occurred.',
-          ...(known && error.details ? { details: error.details } : {}),
-        },
-      });
+      return respond(status, { error: formatError({
+        code: known ? error.code : 'INTERNAL_ERROR',
+        message: known ? error.message : 'An unexpected error occurred.',
+        ...(known && error.details ? { details: error.details } : {}),
+      }, status) });
     }
   };
 }

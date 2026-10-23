@@ -11,6 +11,8 @@ Ngày: 23/10/2026. Kiểm thử do Codex thực hiện; không phải đánh gi�
 | SCRUM-42 | API contract cho Khang | `docs/api/CV_JD_ANALYSIS_API_v1.md`, `HANDOFF_TO_KHANG.md`, client helper, ví dụ JSON | Sẵn nội dung bàn giao qua repo; chưa có xác nhận của Khang. |
 | SCRUM-43 | Xác minh ít nhất 5 cặp CV/JD | Fixtures, unit tests, script offline và script live | 5/5 cặp đạt qua HTTP nội bộ giả lập và 5/5 cặp đạt với Gemini thật. |
 
+Sau khi nhánh `feat/analysis-page` của Khang xuất hiện, đã thêm adapter `/api/analyze-fit` khớp `client.ts`/`types.ts` của nhánh đó tại commit `90f39da`. Adapter dùng lại cùng lõi Gemini và cách tính điểm; không tạo một thuật toán phân tích khác. Helper contract gốc được đổi thành `core-client.mjs` để không xung đột module `client.ts` của Khang. Xem [contract tương thích](../api/KHANG_ANALYZE_FIT_COMPAT.md).
+
 ## 2. Dữ liệu kiểm thử
 
 Toàn bộ CV/JD là **dữ liệu giả lập do AI soạn**, không phải khảo sát, hồ sơ cá nhân hay kết quả phỏng vấn thật.
@@ -37,7 +39,7 @@ Chạy offline xác minh đường đi dữ liệu và số học. Lần kiểm 
 
 ## 4. Lệnh tái chạy và chứng cứ
 
-Kết quả đã chạy: **63/63 kiểm thử tự động đạt**, **5/5 cặp qua HTTP nội bộ đạt** với Gemini transport giả lập.
+Kết quả sau khi thêm adapter: **76/76 kiểm thử tự động đạt**, gồm 5 ca ánh xạ contract Khang và một ca HTTP localhost; **5/5 cặp qua HTTP nội bộ đạt** với Gemini transport giả lập ở contract gốc.
 Kiểm thử Gemini thật: **passed, 5/5**, dùng `gemini-3.5-flash-lite`; điểm lần lượt **100, 60, 0, 80, 66,67**.
 
 Lần thử đầu với cấu hình cũ có timeout/lỗi request. Chẩn đoán thật xác định `maxItems` trong schema gây request bị từ chối; đã bỏ ràng buộc đó khỏi schema, giữ giới hạn 40 ở backend và thêm regression tests. Model mặc định được đổi sang Flash-Lite sau khi xác minh lời gọi thật. Kết quả trong file live là lần chạy thành công sau bản sửa.
@@ -64,6 +66,9 @@ npm run verify:secrets
 - Lời gọi Gemini gửi key trong header, không đưa vào URL, prompt hoặc dữ liệu trả về. Không ghi key hoặc lỗi provider thô vào log.
 - Script `verify:secrets` quét tệp có thể được commit, staged diff và diff của nhánh so với `origin/main`; kết quả phải là `leaksFound: 0` trước khi push.
 - Khang còn cần ghép mã frontend và xác minh luồng sử dụng hoàn chỉnh của SCRUM-46.
+- Bản xem trước cục bộ từ nhánh Khang tại commit `90f39da` đã build với `next build --webpack` và `npm run typecheck` đạt. Build mặc định qua Turbopack gặp lỗi tạo tiến trình ở `globals.css` trong môi trường này; lần Webpack cuối không còn cảnh báo import client sai.
+- Route `/api/analyze-fit` trên bản xem trước Next.js đã gọi Gemini thật bằng dữ liệu giả lập CVJD-02 và nhận 60 điểm, khớp Node.js/Docker, thiếu PostgreSQL. Không chép key vào bản xem trước; key được nạp cục bộ vào tiến trình server.
+- Chưa xác nhận thao tác giao diện trọn luồng trong trình duyệt, đăng nhập, hoặc việc Khang đã ghép mã vào nhánh của mình.
 - Nhóm còn cần review nhánh/PR trước khi merge vào `main`.
 
 Chưa xác nhận build trong app Next.js hoàn chỉnh, kết nối database/auth, hay triển khai Vercel vì repo hiện chưa có các phần đó.

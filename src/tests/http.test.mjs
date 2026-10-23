@@ -4,7 +4,7 @@ import { once } from 'node:events';
 import { createAnalysisHandler } from '../lib/analysis/http.mjs';
 import { createAnalysisService } from '../lib/analysis/service.mjs';
 import { createGeminiProvider } from '../lib/analysis/gemini.mjs';
-import { createAnalysisClient, AnalysisApiError } from '../lib/analysis/client.mjs';
+import { createAnalysisClient, AnalysisApiError } from '../lib/analysis/core-client.mjs';
 import { createApiServer } from '../server.mjs';
 import { POST as nextPost, GET as nextGet } from '../app/api/analyze/route.js';
 import { fixtures, mockProviderFor, assertExpected } from './helpers.mjs';
