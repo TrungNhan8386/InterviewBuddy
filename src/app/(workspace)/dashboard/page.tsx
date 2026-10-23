@@ -1,5 +1,7 @@
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import ProgressOverview from "@/components/dashboard/ProgressOverview";
+import UpcomingPractice from "@/components/dashboard/UpcomingPractice";
 
 const stats = [
   { label: "Total Sessions", value: "12", note: "+3 phiên trong tháng" },
@@ -90,8 +92,8 @@ export default function DashboardPage() {
         ))}
       </section>
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
-        <Card className="min-w-0 xl:col-span-2">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        <Card className="min-w-0">
           <h2 className="text-lg font-semibold">Recent Sessions</h2>
 
           <ul className="mt-4 divide-y divide-slate-100">
@@ -120,7 +122,9 @@ export default function DashboardPage() {
           </ul>
         </Card>
 
-        <Card>
+        <ProgressOverview />
+
+        <Card className="min-w-0">
           <h2 className="text-lg font-semibold">
             Recommended Next Steps
           </h2>
@@ -131,6 +135,8 @@ export default function DashboardPage() {
             <li>Thực hiện một buổi phỏng vấn thử đầy đủ.</li>
           </ol>
         </Card>
+
+        <UpcomingPractice />
       </div>
     </div>
   );
