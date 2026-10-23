@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import LogoutButton from "@/components/auth/LogoutButton";
+import UserIdentity from "@/components/auth/UserIdentity";
 
 export default function Topbar() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -8,7 +10,7 @@ export default function Topbar() {
   return (
     <header className="border-b border-slate-200 bg-white px-4 py-4 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="order-2 w-full md:order-1 md:w-auto md:flex-1 md:max-w-md">
+        <div className="order-2 w-full md:order-1 md:w-auto md:max-w-md md:flex-1">
           <label htmlFor="workspace-search" className="sr-only">
             Tìm kiếm phiên phỏng vấn, chủ đề hoặc kỹ năng
           </label>
@@ -41,7 +43,7 @@ export default function Topbar() {
           </p>
         </div>
 
-        <div className="order-1 flex w-full items-center justify-end gap-4 md:order-2 md:w-auto">
+        <div className="order-1 flex w-full min-w-0 items-center justify-end gap-4 md:order-2 md:w-auto">
           <button
             type="button"
             aria-label={
@@ -67,25 +69,12 @@ export default function Topbar() {
             </svg>
           </button>
 
-          <div className="flex min-w-0 items-center gap-3">
-            <div
-              aria-hidden="true"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-700"
-            >
-              TT
-            </div>
-
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold text-slate-900">
-                Tài
-              </p>
-
-              <p className="text-xs text-slate-500">
-                Tài khoản minh họa
-              </p>
-            </div>
-          </div>
+          <UserIdentity />
         </div>
+      </div>
+
+      <div className="mt-3 flex justify-end">
+        <LogoutButton />
       </div>
 
       <section

@@ -51,7 +51,7 @@ export default function DashboardPage() {
 
       <section className="rounded-2xl border border-indigo-100 bg-indigo-50 p-6 sm:p-8">
         <p className="text-xs font-semibold tracking-widest text-indigo-600">
-          WELCOME BACK, TÀI!
+          WELCOME BACK!
         </p>
 
         <h2 className="mt-3 text-2xl font-bold sm:text-3xl">
