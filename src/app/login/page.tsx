@@ -1,15 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { Suspense, useState, type FormEvent } from "react";
 import { createClient } from "@/lib/supabase/client";
+import AuthCallbackNotice from "@/components/auth/AuthCallbackNotice";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
 
 export default function LoginPage() {
-
   const router = useRouter();
+
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,6 +67,7 @@ export default function LoginPage() {
         setMessage(
           "Nếu địa chỉ này đủ điều kiện đăng ký, bạn sẽ nhận được email xác nhận. Hãy kiểm tra hộp thư và mục spam. Nếu đã có tài khoản, hãy chuyển sang đăng nhập."
         );
+
         setPassword("");
         setConfirmPassword("");
       } else {
@@ -140,6 +142,10 @@ export default function LoginPage() {
             {isSignup ? "Tạo tài khoản" : "Chào mừng trở lại"}
           </h1>
 
+          <Suspense fallback={null}>
+            <AuthCallbackNotice />
+          </Suspense>
+
           <p className="mt-2 text-sm text-slate-500">
             {isSignup
               ? "Đăng ký để bắt đầu luyện phỏng vấn."
@@ -157,9 +163,11 @@ export default function LoginPage() {
 
           <div className="my-6 flex items-center gap-3">
             <div className="h-px flex-1 bg-slate-200" />
+
             <span className="text-xs text-slate-400">
               hoặc dùng email
             </span>
+
             <div className="h-px flex-1 bg-slate-200" />
           </div>
 
@@ -184,7 +192,9 @@ export default function LoginPage() {
               id="password"
               label="Mật khẩu"
               type="password"
-              autoComplete={isSignup ? "new-password" : "current-password"}
+              autoComplete={
+                isSignup ? "new-password" : "current-password"
+              }
               placeholder={
                 isSignup ? "Ít nhất 8 ký tự" : "Nhập mật khẩu"
               }
@@ -228,7 +238,11 @@ export default function LoginPage() {
               </p>
             )}
 
-            <Button type="submit" className="w-full" disabled={busy}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={busy}
+            >
               {busy
                 ? "Đang xử lý..."
                 : isSignup
