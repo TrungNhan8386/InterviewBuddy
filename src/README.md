@@ -1,51 +1,113 @@
-# InterviewBuddy — CV/JD Analysis API (SCRUM-39)
+# InterviewBuddy – Web app
 
-Backend cho SCRUM-40/41, API contract cho SCRUM-42 và kiểm thử cho SCRUM-43.
-Module không cần thư viện ngoài; chạy độc lập bằng Node.js hoặc ghép vào Next.js App Router.
+Next.js 16 (App Router) + TypeScript + Tailwind CSS 4 + ESLint, with Supabase for auth and database.
 
-## Chạy nhanh
+## Run it on your machine
 
-Yêu cầu Node.js **22.9 trở lên**. Mở terminal tại thư mục này:
+Requirements: [Node.js](https://nodejs.org) 20.9 or newer (check with `node -v`) and Git.
 
-```powershell
-if (-not (Test-Path .env.local)) { Copy-Item .env.example .env.local }
-# Nếu mới tạo tệp, điền GEMINI_API_KEY trong .env.local trên máy của bạn.
-npm start
+```bash
+git clone https://github.com/TrungNhan8386/InterviewBuddy.git
+cd InterviewBuddy/src
+npm install
+cp .env.example .env.local   # Windows PowerShell: Copy-Item .env.example .env.local
+npm run dev
 ```
 
-Endpoint local: `POST http://127.0.0.1:3001/api/analyze` và endpoint dùng đúng contract giao diện Khang: `POST http://127.0.0.1:3001/api/analyze-fit`.
-Không có key: API trả `503 AI_NOT_CONFIGURED`; không tự trả dữ liệu giả.
-Không cần `npm install` vì module chỉ dùng thư viện tích hợp sẵn trong Node.js.
+Open http://localhost:3000. The home page shows whether Supabase is configured.
 
-## Tài liệu cho Khang
+To check that the keys really work, open:
 
-- [API contract v1 — request, response, mã lỗi và cách nối UI](../docs/api/CV_JD_ANALYSIS_API_v1.md).
-- [Contract tương thích với nhánh `feat/analysis-page` của Khang](../docs/api/KHANG_ANALYZE_FIT_COMPAT.md).
-- [Hướng dẫn bàn giao SCRUM-42 → SCRUM-46](../docs/api/HANDOFF_TO_KHANG.md).
-- [Request mẫu](../docs/api/examples/analyze.request.json) và [response mẫu từ kiểm thử offline](../docs/api/examples/analyze.success.json).
-- Client dùng trong trình duyệt cho contract gốc: `lib/analysis/core-client.mjs` (kèm khai báo TypeScript). Tên này không xung đột với `client.ts` của Khang.
-- Adapter Next.js: `app/api/analyze/route.js` và `app/api/analyze-fit/route.js`.
+- http://localhost:3000/api/health – Supabase database, auth, and that the Gemini model exists.
+- http://localhost:3000/api/health?ai=1 – also asks Gemini for a one-word reply. On staging this needs a signed-in user, to protect the free quota.
 
-## Kiểm thử
+`"ok": true` means everything works. Otherwise the `detail` field says what failed. The same URLs work on the staging site.
 
-```powershell
-npm test
-npm run verify:offline
-# Chỉ chạy khi đã cấu hình key; gửi 5 cặp dữ liệu giả lập đến Gemini thật:
-npm run verify:live
-# Kiểm tra không có key trong mã, báo cáo hoặc thay đổi Git:
-npm run verify:secrets
+- Fill in `.env.local` with the values Nhân sends you privately. **Never commit it.**
+- Without `.env.local` the app still starts, so you can build UI with mock data. Anything that calls Supabase will throw a clear error until the keys are set.
+
+## Scripts
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the dev server on port 3000 |
+| `npm run build` | Production build (run it before opening a PR) |
+| `npm run start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript check without building |
+
+## Folder layout
+
+```
+src/
+├── app/                    Pages and API routes (App Router)
+│   ├── api/                API routes – server only (e.g. api/analyze-fit)
+│   ├── auth/callback/      Supabase redirect after Google sign-in / email confirmation
+│   ├── layout.tsx          Root layout
+│   └── page.tsx            Home page (temporary)
+├── components/ui/          Shared Button, Card, Input (owner: Tài)
+├── lib/supabase/
+│   ├── client.ts           Supabase client for Client Components
+│   ├── server.ts           Supabase client for Server Components and API routes
+│   ├── admin.ts            service_role client – server only, bypasses RLS
+│   ├── proxy.ts            Session refresh used by proxy.ts
+│   └── env.ts              Reads the public Supabase variables
+├── supabase/migrations/    SQL migrations (owner: Nhân)
+├── proxy.ts                Runs before every request (Next.js 16 name for middleware)
+└── .env.example            Variable names only, no values
 ```
 
-`verify:offline` chạy qua HTTP nội bộ và thay thế transport Gemini bằng fixture.
-`verify:live` không dùng fixture response; nếu thiếu key, ghi báo cáo `blocked` và thoát với mã 2.
-Xem [báo cáo kiểm thử](../docs/test/SCRUM-39_TEST_REPORT.md).
+Owners and rules for each folder are in the week-3 guide. `components/ui/` and `app/api/` are created by their owners when they start.
 
-## Phạm vi tích hợp
+## Using Supabase
 
-- API nhận **văn bản** CV/JD. Phần tải và trích xuất PDF `/api/extract-cv` thuộc mã của Khang.
-- `server.mjs` chỉ mở trên `127.0.0.1` theo mặc định; cho phép frontend local bằng `ALLOWED_ORIGINS` trong `.env.local`.
-- Khi ghép cùng Next.js, đặt `lib/analysis/`, `app/api/analyze/` và `app/api/analyze-fit/` ở cùng cấp gốc mã nguồn. Không thay `package.json` của app đang có bằng package của module này. Có thể bỏ `core-client.mjs` nếu chỉ dùng giao diện Khang; không ghi đè `client.ts`/`types.ts`.
-- Module không thêm cơ sở dữ liệu, đăng nhập, lưu CV hay sửa giao diện của thành viên khác.
-- Đã gọi Gemini thật với `gemini-3.5-flash-lite`: 5/5 cặp CV/JD đạt kết quả kỳ vọng qua API lõi. Lớp tương thích với contract của Khang đã kiểm thử offline; bản xem trước Next.js từ commit `90f39da` đã build/typecheck và gọi Gemini thật qua route với ca CVJD-02. Chưa xác nhận thao tác giao diện trọn luồng trong trình duyệt.
-- Key chỉ lưu trong cấu hình cục bộ được Git bỏ qua; người lấy nhánh cần cấu hình key ở môi trường chạy của họ. Không chép key vào frontend hoặc tài liệu bàn giao.
+```tsx
+// Server Component or API route – acts as the signed-in user, RLS applies
+import { createClient } from "@/lib/supabase/server";
+
+const supabase = await createClient();
+const { data: sessions } = await supabase.from("interview_sessions").select("*");
+```
+
+```tsx
+// Client Component
+"use client";
+import { createClient } from "@/lib/supabase/client";
+
+const supabase = createClient();
+await supabase.auth.signInWithOAuth({
+  provider: "google",
+  options: { redirectTo: `${location.origin}/auth/callback` },
+});
+```
+
+- Call Gemini and use `SUPABASE_SERVICE_ROLE_KEY` **only** in server code (`app/api/*`).
+- Any variable starting with `NEXT_PUBLIC_` is sent to the browser. Never give a secret that prefix.
+- Check the user on the server with `supabase.auth.getClaims()`.
+
+## Database
+
+The schema is in `supabase/migrations/`. Design and RLS rules: [`docs/analysis and design/database-design.md`](../docs/analysis%20and%20design/database-design.md). Architecture: [`docs/analysis and design/architecture.md`](../docs/analysis%20and%20design/architecture.md).
+
+To change the schema, add a **new** migration file (`YYYYMMDDHHMMSS_short_name.sql`) instead of editing an old one, and ask Nhân to review it.
+
+## Notes on this Next.js version
+
+- `proxy.ts` replaces `middleware.ts` (Next.js 16).
+- `cacheComponents` is turned off in `next.config.ts` to keep data fetching simple. With it on, every page that reads the session must be wrapped in `<Suspense>`.
+- `npm audit` reports issues in ESLint's dependencies only (development tools, not shipped to users). Do not run `npm audit fix --force`; it downgrades `eslint-config-next`.
+
+## CV/JD analysis API (SCRUM-39)
+
+`POST /api/analyze-fit` (contract used by the `/analysis` page) and `POST /api/analyze` (original v1 contract) run inside this Next.js app, so `npm run dev` is enough. They need `GEMINI_API_KEY` in `.env.local`; without it they return `503 AI_NOT_CONFIGURED`.
+
+- [API contract v1](../docs/api/CV_JD_ANALYSIS_API_v1.md), [compatibility with the analysis page](../docs/api/KHANG_ANALYZE_FIT_COMPAT.md), [handoff notes](../docs/api/HANDOFF_TO_KHANG.md)
+- Code: `lib/analysis/*.mjs`, routes in `app/api/analyze/` and `app/api/analyze-fit/`
+
+| Command | What it does |
+| --- | --- |
+| `npm test` | Unit tests for the analysis module (Node 22.9+) |
+| `npm run verify:offline` | End-to-end check with a fake Gemini transport |
+| `npm run verify:live` | Sends 5 sample pairs to the real Gemini API (uses quota) |
+| `npm run verify:secrets` | Checks no keys leaked into code, reports or Git changes |
+| `npm run api:standalone` | Runs the API alone on port 3001 without Next.js |

@@ -28,7 +28,7 @@ Từ thư mục `src` của nhánh này:
 ```powershell
 if (-not (Test-Path .env.local)) { Copy-Item .env.example .env.local }
 # Nếu mới tạo tệp, thêm GEMINI_API_KEY vào .env.local.
-npm start
+npm run api:standalone
 ```
 
 Frontend Khang đang gọi URL tương đối `/api/analyze-fit`. Để thử backend độc lập trên port 3001, client phải dùng `http://127.0.0.1:3001/api/analyze-fit`; nếu không đổi client, hãy ghép route vào cùng app Next.js.
