@@ -13,7 +13,7 @@ import {
   analyzeFit,
   extractCvText,
 } from "@/lib/analysis/client";
-import type { AnalysisLanguage, AnalyzeFitResponse } from "@/lib/analysis/types";
+import { MIN_TEXT_CHARS, type AnalysisLanguage, type AnalyzeFitResponse } from "@/lib/analysis/types";
 
 type RunState =
   | { kind: "idle" }
@@ -37,7 +37,20 @@ export default function AnalysisWorkspace() {
 
   const cvText = cvFile ? cvFromPdf : cvPasted.trim();
   const busy = run.kind === "loading" || cvStatus.kind === "extracting";
-  const canSubmit = jd.trim().length > 0 && cvText.length > 0 && !busy;
+  const jdLength = jd.trim().length;
+  const jdTooShort = jdLength < MIN_TEXT_CHARS;
+  const cvTooShort = cvText.length < MIN_TEXT_CHARS;
+  const canSubmit = !jdTooShort && !cvTooShort && !busy;
+
+  // Tell the user exactly what is missing instead of letting the API return 400.
+  let submitHint = "";
+  if (jdLength === 0 || cvText.length === 0) {
+    submitHint = "Cần nhập JD và tải CV (hoặc dán nội dung CV) để phân tích.";
+  } else if (jdTooShort) {
+    submitHint = `JD quá ngắn, cần ít nhất ${MIN_TEXT_CHARS} ký tự (hiện có ${jdLength}).`;
+  } else if (cvTooShort) {
+    submitHint = `Nội dung CV quá ngắn, cần ít nhất ${MIN_TEXT_CHARS} ký tự.`;
+  }
 
   async function handleSelect(file: File) {
     const id = ++extractId.current;
@@ -129,10 +142,8 @@ export default function AnalysisWorkspace() {
             {run.kind === "loading" ? "Đang phân tích..." : "Phân tích mức độ phù hợp"}
           </Button>
 
-          {!canSubmit && !busy && (
-            <p className="text-center text-xs text-slate-500">
-              Cần nhập JD và tải CV (hoặc dán nội dung CV) để phân tích.
-            </p>
+          {!canSubmit && !busy && submitHint && (
+            <p className="text-center text-xs text-slate-500">{submitHint}</p>
           )}
           {USE_MOCK && (
             <p className="rounded-lg bg-slate-100 p-2 text-center text-xs text-slate-600">
