@@ -38,7 +38,10 @@ for (const fixture of fixtures) {
     assert.ok(body.requirements.every((item) => ['matched', 'missing'].includes(item.status)));
     assert.ok(body.requirements.every((item) => typeof item.evidence === 'string'));
     assert.ok(body.recommendation.length > 0);
-    assert.deepEqual(Object.keys(body).sort(), ['fitScore', 'matched', 'missing', 'recommendation', 'requirements'].sort());
+    assert.deepEqual(body.coaching.beforeInterview, fixture.aiResponse.coaching.beforeInterview);
+    assert.deepEqual(body.coaching.improvements, fixture.aiResponse.coaching.improvements);
+    assert.deepEqual(body.coaching.strengths, fixture.aiResponse.coaching.strengths);
+    assert.deepEqual(Object.keys(body).sort(), ['fitScore', 'matched', 'missing', 'recommendation', 'requirements', 'coaching'].sort());
   });
 }
 

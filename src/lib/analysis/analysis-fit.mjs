@@ -48,7 +48,7 @@ export function formatFitResult(result, input) {
     : (missing.length
       ? `Hãy bổ sung minh chứng về ${missingNames} vào CV hoặc luyện tập các kỹ năng này trước buổi phỏng vấn.`
       : 'Hãy chuẩn bị ví dụ dự án cụ thể để giải thích các kỹ năng đã thể hiện trong CV.');
-  return { fitScore: result.fitScore, matched, missing, requirements, recommendation };
+  return { fitScore: result.fitScore, matched, missing, requirements, recommendation, coaching: result.coaching };
 }
 
 export function formatFitError(error, status) {

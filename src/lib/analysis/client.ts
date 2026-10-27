@@ -52,6 +52,15 @@ export async function analyzeFit(input: AnalyzeFitRequest): Promise<AnalyzeFitRe
     throw new AnalyzeFitError(code, message);
   }
 
+  const coaching = body.coaching;
+  const validItems = (items: unknown): items is { skill: string; advice: string }[] =>
+    Array.isArray(items) && items.every((item) =>
+      item && typeof item.skill === "string" && typeof item.advice === "string");
+  if (!coaching || !validItems(coaching.beforeInterview)
+      || !validItems(coaching.improvements) || !validItems(coaching.strengths)) {
+    throw new AnalyzeFitError("INVALID_OUTPUT", MESSAGES.INVALID_OUTPUT);
+  }
+
   return body;
 }
 
