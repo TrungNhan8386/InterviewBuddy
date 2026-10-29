@@ -126,10 +126,15 @@ test('detailed interview preparation and strengths fit the validated response', 
   assert.throws(() => scoreAnalysis(raw, fixtures[1].input), { code: 'INVALID_AI_RESPONSE' });
 });
 
-test('a full skill match still needs interview preparation advice', () => {
+test('a full skill match accepts empty gap advice but keeps supported strengths', () => {
   const raw = structuredClone(fixtures[0].aiResponse);
   raw.coaching.beforeInterview = [];
-  assert.throws(() => scoreAnalysis(raw, fixtures[0].input), { code: 'INVALID_AI_RESPONSE' });
+  raw.coaching.improvements = [];
+  const result = scoreAnalysis(raw, fixtures[0].input);
+  assert.equal(result.fitScore, 100);
+  assert.deepEqual(result.coaching.beforeInterview, []);
+  assert.deepEqual(result.coaching.improvements, []);
+  assert.ok(result.coaching.strengths.length > 0);
 });
 
 test('empty requirements produce a useful 422, not a misleading zero score', () => {

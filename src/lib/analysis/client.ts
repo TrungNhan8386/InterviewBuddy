@@ -72,7 +72,12 @@ function toCode(status: number, code?: string): AnalyzeFitErrorCode {
   return "SERVER_ERROR";
 }
 
-export type ExtractCvResult = { text: string; pages: number };
+export type ExtractCvResult = {
+  text: string;
+  pages: number;
+  truncated: boolean;
+  originalChars: number;
+};
 
 // NO_TEXT = the PDF is a scan/image: show a warning and let the user paste the CV.
 export class CvExtractError extends Error {

@@ -100,9 +100,12 @@ export function scoreAnalysis(raw, input) {
   const missingSkills = new Map([...distinct].filter(([, item]) => !item.matched));
   const matchedSkills = new Map([...distinct].filter(([, item]) => item.matched));
   const preparationSkills = missingSkills.size > 0 ? missingSkills : matchedSkills;
+  // A complete match has no gap to improve. Gemini may legitimately leave the
+  // gap-focused sections empty, while strengths still need supported advice.
+  const needsGapAdvice = missingSkills.size > 0;
   const coaching = {
-    beforeInterview: validateCoachingItems(raw.coaching.beforeInterview, preparationSkills, true, 900),
-    improvements: validateCoachingItems(raw.coaching.improvements, allSkills, true),
+    beforeInterview: validateCoachingItems(raw.coaching.beforeInterview, preparationSkills, needsGapAdvice, 900),
+    improvements: validateCoachingItems(raw.coaching.improvements, allSkills, needsGapAdvice),
     strengths: validateCoachingItems(raw.coaching.strengths, matchedSkills, matchedSkills.size > 0, 900),
   };
   const scoreBreakdown = {

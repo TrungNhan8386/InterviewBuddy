@@ -59,10 +59,10 @@ export default function AnalysisWorkspace() {
     setCvStatus({ kind: "extracting" });
 
     try {
-      const { text, pages } = await extractCvText(file);
+      const { text, pages, truncated, originalChars } = await extractCvText(file);
       if (id !== extractId.current) return;
       setCvFromPdf(text);
-      setCvStatus({ kind: "ready", pages, chars: text.length });
+      setCvStatus({ kind: "ready", pages, chars: text.length, truncated, originalChars });
     } catch (e) {
       if (id !== extractId.current) return;
       if (e instanceof CvExtractError && e.code === "NO_TEXT") {
@@ -70,6 +70,8 @@ export default function AnalysisWorkspace() {
         setCvFile(null);
         setCvStatus({ kind: "warning", message: e.message });
       } else {
+        // A failed PDF must not keep the paste fallback disabled.
+        setCvFile(null);
         setCvStatus({ kind: "error", message: e instanceof Error ? e.message : "Không đọc được file PDF." });
       }
     }

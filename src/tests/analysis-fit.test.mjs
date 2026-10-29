@@ -82,6 +82,17 @@ test('Khang contract maps Gemini rate limit into the code used by his client', a
   assert.doesNotMatch(body.error.message, /Upstream/u);
 });
 
+test('Khang contract distinguishes Gemini connection failure from invalid AI output', async () => {
+  const handler = createAnalysisFitHandler({ analyze: async () => {
+    throw new AnalysisError('AI_UNAVAILABLE', 'Upstream connection detail.', 502);
+  } });
+  const response = await handler(fitRequest(khangInput(fixtures[0])));
+  assert.equal(response.status, 502);
+  const body = await response.json();
+  assert.equal(body.error.code, 'SERVER_ERROR');
+  assert.doesNotMatch(body.error.message, /Upstream/u);
+});
+
 test('Khang endpoint works through the standalone HTTP server', async () => {
   const fitHandler = createAnalysisFitHandler({
     analyze: createAnalysisService({ provider: mockProviderFor(fixtures[1]) }),
