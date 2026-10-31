@@ -61,8 +61,12 @@ export default function CvUpload({
       <div>
         <h2 className="text-base font-semibold text-slate-900">CV / Resume</h2>
         <p className="text-sm text-slate-500">
-          Tải CV dạng PDF hoặc dán nội dung CV bên dưới. File chỉ được đọc để phân tích, không
-          được lưu lại.
+          Tải CV dạng PDF hoặc dán nội dung CV bên dưới.
+        </p>
+        <p id="cv-privacy" className="mt-2 rounded-lg bg-slate-50 p-3 text-xs text-slate-600">
+          Quyền riêng tư: file PDF chỉ được đọc để lấy chữ và không được lưu lại. Phần chữ của CV,
+          JD và kết quả phân tích được lưu vào tài khoản của bạn để dùng cho buổi phỏng vấn thử;
+          chỉ bạn xem được.
         </p>
       </div>
 
