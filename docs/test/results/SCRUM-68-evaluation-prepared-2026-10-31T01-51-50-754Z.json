@@ -1,0 +1,373 @@
+{
+  "task": "SCRUM-68",
+  "mode": "prepared-only",
+  "runId": "2026-10-31T01-51-50-754Z",
+  "generatedAt": "2026-10-31T01:51:50.754Z",
+  "dateLocal": "2026-10-31",
+  "timezone": "Asia/Bangkok",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "0.2",
+  "contractVersion": "0.1",
+  "repetitions": 2,
+  "sourceSha256": {
+    "interviewer-prompt.mjs": "9a1db4990f92f4bc232adfb7342bc623d421aa8254686d8bd78b5eb0c10eeea4",
+    "interviewer-contract.mjs": "d208a5448979ea7ee3b33e204ac5729c20cd93ae596b22237a448bf44f1a96d9",
+    "interviewer-provider.mjs": "6262d95164d09118bbdecf1e8a46634e6ac4b546f9413159ae4a9b6defd34b25",
+    "interviewer-fixtures.mjs": "839549f09b82225bc6da8575c38f5e1282f477ed9f05d49b0e7ac0cf947eb077",
+    "session-contract.mjs": "2c1a102205f7f146145e6a1e26af3310c3e8f45b30d5be202cdc5f4f632e3bde"
+  },
+  "provenance": "Only AI-authored synthetic fixtures. Independent requests from the same completed-turn snapshot, not a multi-turn session or a user study.",
+  "interpretation": "valid-output checks structure and server policy; actionMatchesExpectation compares fixture-specific expectations, not expert ground truth. Content quality needs separate review.",
+  "humanReview": "pending",
+  "status": "prepared-only",
+  "externalCalls": 0,
+  "dataset": [
+    {
+      "id": "frontend-vi-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Tôi đưa bộ lọc vào dependency của useEffect, tạo AbortController cho mỗi lần gọi và hủy request cũ trong cleanup. Tôi lưu trạng thái loading, error và dữ liệu riêng; bỏ qua AbortError và chỉ cập nhật loading nếu request hiện tại chưa bị hủy. Tôi kiểm thử bằng cách cho request trước trả chậm hơn request sau để xác nhận giao diện luôn giữ dữ liệu của bộ lọc mới nhất."
+          }
+        ]
+      },
+      "requestSha256": "bc328ba7a023a691df90aee0210d1b49335e9624cca03ad79c50291494e5fb77"
+    },
+    {
+      "id": "frontend-vi-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em dùng useEffect để gọi API, rồi hiển thị dữ liệu lên giao diện."
+          }
+        ]
+      },
+      "requestSha256": "8af360b1d7d12aa8f78fbc7890b40f9226285b132127b4981ce06c46734b693e"
+    },
+    {
+      "id": "frontend-vi-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Frontend Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện; giải thích cách xử lý trạng thái tải và lỗi.",
+        "cvText": "Ứng viên minh họa đã làm ứng dụng danh sách công việc bằng React và gọi REST API. Không cung cấp tên, liên hệ hoặc công ty.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "React và gọi API",
+            "question": "Bạn xử lý việc gọi API khi người dùng đổi bộ lọc liên tục trong React như thế nào?",
+            "answer": "Em thường dành cuối tuần chơi bóng đá với bạn bè."
+          }
+        ]
+      },
+      "requestSha256": "4a155428a6774fe8396ecc6e9be990ce21e34fce080cdc45b025a9686daee310"
+    },
+    {
+      "id": "backend-en-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use an atomic UPDATE with quantity >= requested quantity in its WHERE clause, check the affected row count and create the order in the same transaction. A unique idempotency key prevents a retried request from creating a second order. In a concurrent integration test I would start two transactions against one remaining item and verify that only one order commits and stock never becomes negative."
+          }
+        ]
+      },
+      "requestSha256": "cf8343bf326b5723b476e3a5178b7969e3eb87de8f396f61b48bfcbd67977db5"
+    },
+    {
+      "id": "backend-en-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "I would use a transaction so the database takes care of it."
+          }
+        ]
+      },
+      "requestSha256": "54a13d162d75dc14e25c5c903533fff2def303e3430f993e2de1481861417ba2"
+    },
+    {
+      "id": "backend-en-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "input": {
+        "settings": {
+          "type": "technical",
+          "difficulty": "medium",
+          "language": "en",
+          "targetPosition": "Backend Junior",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Backend Junior: build Node.js REST APIs with PostgreSQL. Explain transactions, concurrent updates, idempotency and integration testing.",
+        "cvText": "Synthetic candidate built a Node.js inventory service using PostgreSQL transactions and integration tests. No identifying information.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "PostgreSQL transactions",
+            "question": "How would you prevent two concurrent purchase requests from overselling the last inventory item?",
+            "answer": "My favorite vacation was a trip to the mountains."
+          }
+        ]
+      },
+      "requestSha256": "e129ee8e0a71fe8cb4a9456aae2701a201375145d9b6c515188ccc51bb9d210a"
+    },
+    {
+      "id": "behavioral-vi-good",
+      "quality": "good",
+      "expectedActions": [
+        "next_topic"
+      ],
+      "input": {
+        "settings": {
+          "type": "behavioral",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Software Engineer Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Software Engineer Intern: phối hợp với nhóm, giao tiếp rõ ràng, chủ động tìm nguyên nhân lỗi và kiểm tra kết quả sửa lỗi.",
+        "cvText": "Ứng viên giả lập tham gia bài tập nhóm xây dựng website và viết kiểm thử cho một lỗi hiển thị. Không có thông tin cá nhân.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Trước hạn nộp bài một ngày, trang danh sách bị trắng khi API trả mảng rỗng. Tôi phụ trách tái hiện và khoanh vùng lỗi, còn một bạn kiểm tra response phía server. Tôi tạo dữ liệu rỗng để tái hiện, bổ sung nhánh empty state và viết regression test; sau đó nhờ bạn kiểm tra lại trên bản tích hợp. Nhóm đã xác nhận trường hợp rỗng hoạt động và nộp bản sửa trước hạn; tôi rút kinh nghiệm phải có test cho empty state từ đầu."
+          }
+        ]
+      },
+      "requestSha256": "da20ea1990f2dee5ff1e144d06a43bc6f5c4ab3b1a1d07585e2b5453f8f37c68"
+    },
+    {
+      "id": "behavioral-vi-vague",
+      "quality": "vague",
+      "expectedActions": [
+        "follow_up"
+      ],
+      "input": {
+        "settings": {
+          "type": "behavioral",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Software Engineer Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Software Engineer Intern: phối hợp với nhóm, giao tiếp rõ ràng, chủ động tìm nguyên nhân lỗi và kiểm tra kết quả sửa lỗi.",
+        "cvText": "Ứng viên giả lập tham gia bài tập nhóm xây dựng website và viết kiểm thử cho một lỗi hiển thị. Không có thông tin cá nhân.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Nhóm em gặp lỗi, sau đó cả nhóm cùng sửa và hoàn thành bài."
+          }
+        ]
+      },
+      "requestSha256": "6b3e7fcfbc23c2dc1f5da174dce42947c98cfcdd441112856c634fa6287a2c99"
+    },
+    {
+      "id": "behavioral-vi-off_topic",
+      "quality": "off_topic",
+      "expectedActions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "input": {
+        "settings": {
+          "type": "behavioral",
+          "difficulty": "medium",
+          "language": "vi",
+          "targetPosition": "Software Engineer Intern",
+          "durationMinutes": 15,
+          "plannedQuestions": 5
+        },
+        "state": {
+          "status": "in_progress",
+          "elapsedSeconds": 90
+        },
+        "jdText": "Software Engineer Intern: phối hợp với nhóm, giao tiếp rõ ràng, chủ động tìm nguyên nhân lỗi và kiểm tra kết quả sửa lỗi.",
+        "cvText": "Ứng viên giả lập tham gia bài tập nhóm xây dựng website và viết kiểm thử cho một lỗi hiển thị. Không có thông tin cá nhân.",
+        "history": [
+          {
+            "kind": "main",
+            "topic": "Phối hợp xử lý lỗi",
+            "question": "Hãy kể một lần bạn phối hợp với nhóm để xử lý một lỗi khó trước hạn bàn giao.",
+            "answer": "Em thích học các môn thể thao vì giúp cơ thể khỏe mạnh."
+          }
+        ]
+      },
+      "requestSha256": "3a280607efdb6579f5c9481ebacb6bc3954a2b82b0c8a71a524d7a7bb67c17ae"
+    }
+  ],
+  "cases": [],
+  "summary": {
+    "planned": 18,
+    "validOutputs": 0,
+    "actionMatches": 0,
+    "failures": 0,
+    "skipped": 0,
+    "latencyMs": null,
+    "repeatedActions": [
+      {
+        "fixtureId": "frontend-vi-good",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "frontend-vi-vague",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "frontend-vi-off_topic",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "backend-en-good",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "backend-en-vague",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "backend-en-off_topic",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "behavioral-vi-good",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "behavioral-vi-vague",
+        "actions": [],
+        "sameAction": null
+      },
+      {
+        "fixtureId": "behavioral-vi-off_topic",
+        "actions": [],
+        "sameAction": null
+      }
+    ]
+  }
+}

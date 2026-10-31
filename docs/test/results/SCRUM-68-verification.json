@@ -1,0 +1,21 @@
+{
+  "task": "SCRUM-68",
+  "dateLocal": "2026-10-31",
+  "regression": {
+    "total": 116,
+    "passed": 116,
+    "evidence": "SCRUM-68-regression.tap"
+  },
+  "scriptsEslint": "passed",
+  "documentLinks": "passed",
+  "findingsWordUnits": 264,
+  "evidenceSummary": "SCRUM-68-evaluation-summary.json",
+  "sourceAndRequestHashes": "verified by summarizer",
+  "secretScan": {
+    "configuredKeyPresent": true,
+    "filesChecked": 14,
+    "leaks": 0
+  },
+  "contentReview": "AI-assisted only; independent review by Nhan pending",
+  "externalChanges": "No Jira status/assignee changes, Slack messages, commit or push."
+}
