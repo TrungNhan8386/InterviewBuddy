@@ -16,7 +16,9 @@
     "seed": "node --env-file-if-exists=.env.local scripts/seed.mjs",
     "test:session-api": "node --env-file-if-exists=.env.local scripts/test-session-api.mjs",
     "interview:spike": "node scripts/interviewer-spike.mjs",
-    "interview:spike:live": "node --env-file-if-exists=.env.local scripts/interviewer-spike.mjs --live"
+    "interview:spike:live": "node --env-file-if-exists=.env.local scripts/interviewer-spike.mjs --live",
+    "interview:evaluate": "node scripts/evaluate-interviewer.mjs",
+    "interview:evaluate:live": "node --env-file-if-exists=.env.local scripts/evaluate-interviewer.mjs --live"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

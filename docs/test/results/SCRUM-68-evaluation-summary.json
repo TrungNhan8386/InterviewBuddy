@@ -1,0 +1,370 @@
+{
+  "task": "SCRUM-68",
+  "generatedAt": "2026-10-31T01:55:18.079Z",
+  "dateLocal": "2026-10-31",
+  "status": "completed-with-rate-limit-recovery-needs-human-review",
+  "model": "gemini-3.5-flash-lite",
+  "promptVersion": "0.2",
+  "contractVersion": "0.1",
+  "provenance": "Merged evidence only; no new Gemini calls. Initial 429 and skipped case remain in the original matrix. Content review is separate and AI-assisted.",
+  "sources": [
+    {
+      "name": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json",
+      "sha256": "805a9be6f809e5c0ea65f61cd8d1513d16bf1d1787912f742273b998e5615527"
+    },
+    {
+      "name": "ai-interviewer-spike-behavioral-vi-vague-v0.2.json",
+      "sha256": "31452531283469a20507bd94fb2c047518dc4a4e01d3915ebd61ca20f7fa8a1f"
+    },
+    {
+      "name": "ai-interviewer-spike-behavioral-vi-off_topic-v0.2.json",
+      "sha256": "3c68abf5e172df112ed927f16312c1b65c37a3628905fbd968f2e11cb8a31192"
+    }
+  ],
+  "externalCalls": 19,
+  "initialFailures": [
+    {
+      "fixtureId": "behavioral-vi-vague",
+      "repetition": 2,
+      "error": "AI_RATE_LIMITED"
+    }
+  ],
+  "initiallySkipped": 1,
+  "scheduledResults": 18,
+  "validOutputs": 18,
+  "actionMatches": 18,
+  "latencyMs": {
+    "min": 1001,
+    "max": 2616,
+    "median": 1597.5
+  },
+  "actionPairs": [
+    {
+      "fixtureId": "frontend-vi-good",
+      "actions": [
+        "next_topic",
+        "next_topic"
+      ],
+      "sameAction": true
+    },
+    {
+      "fixtureId": "frontend-vi-vague",
+      "actions": [
+        "follow_up",
+        "follow_up"
+      ],
+      "sameAction": true
+    },
+    {
+      "fixtureId": "frontend-vi-off_topic",
+      "actions": [
+        "next_topic",
+        "follow_up"
+      ],
+      "sameAction": false
+    },
+    {
+      "fixtureId": "backend-en-good",
+      "actions": [
+        "next_topic",
+        "next_topic"
+      ],
+      "sameAction": true
+    },
+    {
+      "fixtureId": "backend-en-vague",
+      "actions": [
+        "follow_up",
+        "follow_up"
+      ],
+      "sameAction": true
+    },
+    {
+      "fixtureId": "backend-en-off_topic",
+      "actions": [
+        "follow_up",
+        "next_topic"
+      ],
+      "sameAction": false
+    },
+    {
+      "fixtureId": "behavioral-vi-good",
+      "actions": [
+        "next_topic",
+        "next_topic"
+      ],
+      "sameAction": true
+    },
+    {
+      "fixtureId": "behavioral-vi-vague",
+      "actions": [
+        "follow_up",
+        "follow_up"
+      ],
+      "sameAction": true
+    },
+    {
+      "fixtureId": "behavioral-vi-off_topic",
+      "actions": [
+        "follow_up",
+        "follow_up"
+      ],
+      "sameAction": true
+    }
+  ],
+  "cases": [
+    {
+      "fixtureId": "backend-en-good",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1001,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "Can you explain how you would design an integration test for a Node.js REST endpoint using PostgreSQL to ensure the test database stays clean between test runs?",
+        "topic": "Integration testing",
+        "reason": "The previous transaction and concurrency question is fully answered, moving to the next JD competency."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "backend-en-off_topic",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1479,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Could you please bring the discussion back to the inventory service and explain how PostgreSQL transactions would handle concurrent purchase requests?",
+        "topic": "PostgreSQL transactions",
+        "reason": "The previous answer was completely off-topic."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "backend-en-vague",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1104,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Could you specify what transaction isolation level or locking mechanism you would use to prevent both requests from reading the same available quantity before either updates it?",
+        "topic": "PostgreSQL transactions",
+        "reason": "The answer mentions transactions generally but lacks the specific mechanism for concurrent updates."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "behavioral-vi-good",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1915,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "Trong quá trình phối hợp nhóm để sửa lỗi, nếu có sự khác biệt về quan điểm giữa bạn và thành viên khác về nguyên nhân lỗi, bạn thường xử lý như thế nào?",
+        "topic": "Giải quyết mâu thuẫn nhóm",
+        "reason": "Ứng viên đã hoàn thành câu hỏi về phối hợp xử lý lỗi, chuyển sang chủ đề giao tiếp và xử lý mâu thuẫn trong nhóm theo yêu cầu JD."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "behavioral-vi-off_topic",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1749,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Bạn có thể chia sẻ một tình huống cụ thể trong dự án nhóm khi gặp một lỗi hiển thị và cách bạn cùng các thành viên phối hợp tìm nguyên nhân không?",
+        "topic": "Phối hợp xử lý lỗi",
+        "reason": "Câu trả lời trước chưa liên quan đến việc xử lý lỗi và phối hợp nhóm theo yêu cầu."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "behavioral-vi-vague",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1514,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Bạn có thể chia sẻ cụ thể hơn về cách phân công công việc trong nhóm và vai trò cá nhân của bạn trong tình huống đó không?",
+        "topic": "Phối hợp xử lý lỗi",
+        "reason": "Câu trả lời còn quá chung chung, cần làm rõ vai trò cá nhân và cách phân công công việc theo phương pháp STAR."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "frontend-vi-good",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1886,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "Trong ứng dụng React danh sách công việc của bạn, làm thế nào để quản lý trạng thái tải dữ liệu và hiển thị thông báo lỗi khi REST API gặp sự cố?",
+        "topic": "Xử lý trạng thái tải và lỗi",
+        "reason": "Ứng viên đã trả lời tốt câu hỏi trước, chuyển sang chủ đề tiếp theo về xử lý trạng thái tải và lỗi theo JD."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "frontend-vi-off_topic",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1380,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn hãy giải thích cách quản lý trạng thái tải (loading state) và trạng thái lỗi (error state) trong một component React khi gọi REST API.",
+        "topic": "Xử lý trạng thái tải và lỗi",
+        "reason": "Ứng viên trả lời lạc đề, cần chuyển sang topic tiếp theo trong JD về React."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "frontend-vi-vague",
+      "repetition": 1,
+      "status": "valid-output",
+      "latencyMs": 1299,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Khi người dùng đổi bộ lọc liên tục, việc gọi API qua useEffect mà em vừa nêu có thể dẫn đến vấn đề gì về hiệu năng hoặc hiển thị dữ liệu cũ, và em sẽ xử lý vấn đề đó ra sao?",
+        "topic": "React và gọi API",
+        "reason": "Ứng viên chưa đề cập đến việc hủy request cũ hoặc xử lý race condition khi gọi API liên tục."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "backend-en-good",
+      "repetition": 2,
+      "status": "valid-output",
+      "latencyMs": 2094,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "How do you design an idempotent POST endpoint for creating orders in Node.js so that retried requests do not create duplicates?",
+        "topic": "idempotency",
+        "reason": "The previous topic was successfully answered and now we transition to the next untested JD competency."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "backend-en-off_topic",
+      "repetition": 2,
+      "status": "valid-output",
+      "latencyMs": 1044,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "Can you explain what idempotency means in the context of designing REST APIs and why it is important for payment or inventory operations?",
+        "topic": "Idempotency",
+        "reason": "The previous answer was completely off-topic, so the interview is moving to the next planned competency."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "backend-en-vague",
+      "repetition": 2,
+      "status": "valid-output",
+      "latencyMs": 1816,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Could you specify which transaction isolation level or locking mechanism you would use to ensure safety during that check-and-update process?",
+        "topic": "PostgreSQL transactions",
+        "reason": "The answer mentions transactions generally but lacks the specific mechanism for preventing concurrent overselling."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "behavioral-vi-good",
+      "repetition": 2,
+      "status": "valid-output",
+      "latencyMs": 2211,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "Trong quá trình phối hợp nhóm để sửa lỗi trên, nếu gặp tình huống các thành viên có ý kiến khác nhau về nguyên nhân gốc rễ, bạn thường chủ động giải quyết như thế nào?",
+        "topic": "Giao tiếp và giải quyết mâu thuẫn",
+        "reason": "Chuyển sang chủ đề giao tiếp và xử lý tình huống nhóm theo yêu cầu JD."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "behavioral-vi-off_topic",
+      "repetition": 2,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Câu trả lời trước chưa liên quan đến việc xử lý lỗi. Bạn có thể kể cụ thể một lần cùng nhóm khắc phục một lỗi trong quá trình làm website không?",
+        "topic": "Phối hợp xử lý lỗi",
+        "reason": "Ứng viên trả lời lạc đề sang thể thao, cần hỏi lại để làm rõ năng lực phối hợp xử lý lỗi theo JD."
+      },
+      "latencyMs": 2260,
+      "evidence": "ai-interviewer-spike-behavioral-vi-off_topic-v0.2.json"
+    },
+    {
+      "fixtureId": "behavioral-vi-vague",
+      "repetition": 2,
+      "status": "valid-output",
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Bạn có thể chia sẻ cụ thể hơn về vai trò của bạn và các bước cụ thể nhóm đã thực hiện để tìm ra nguyên nhân và sửa lỗi hiển thị đó không?",
+        "topic": "Phối hợp xử lý lỗi",
+        "reason": "Câu trả lời còn quá chung chung, cần làm rõ vai trò cá nhân và hành động cụ thể theo mô hình STAR."
+      },
+      "latencyMs": 2616,
+      "evidence": "ai-interviewer-spike-behavioral-vi-vague-v0.2.json"
+    },
+    {
+      "fixtureId": "frontend-vi-good",
+      "repetition": 2,
+      "status": "valid-output",
+      "latencyMs": 1681,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "next_topic",
+        "question": "Bạn kiểm thử giao diện trong React như thế nào để đảm bảo hiển thị đúng trạng thái lỗi khi REST API trả về mã lỗi 500?",
+        "topic": "Kiểm thử giao diện và xử lý lỗi",
+        "reason": "Ứng viên đã trả lời tốt câu hỏi về API và AbortController; chuyển sang kỹ năng kiểm thử giao diện và xử lý trạng thái lỗi theo yêu cầu JD."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "frontend-vi-off_topic",
+      "repetition": 2,
+      "status": "valid-output",
+      "latencyMs": 1036,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Bạn có thể quay lại câu hỏi về cách xử lý gọi API và trạng thái tải trong React khi người dùng đổi bộ lọc liên tục được không?",
+        "topic": "React và gọi API",
+        "reason": "Câu trả lời trước chưa liên quan đến câu hỏi kỹ thuật."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    },
+    {
+      "fixtureId": "frontend-vi-vague",
+      "repetition": 2,
+      "status": "valid-output",
+      "latencyMs": 1152,
+      "actionMatchesExpectation": true,
+      "result": {
+        "action": "follow_up",
+        "question": "Khi người dùng thay đổi bộ lọc liên tục, useEffect của em có thực hiện hủy các request cũ đang chạy dở không?",
+        "topic": "React và gọi API",
+        "reason": "Cần làm rõ cách ứng viên xử lý race condition khi gọi API liên tục."
+      },
+      "evidence": "SCRUM-68-evaluation-live-2026-10-31T01-52-09-037Z.json"
+    }
+  ],
+  "humanReview": "pending"
+}
