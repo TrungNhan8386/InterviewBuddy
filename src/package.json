@@ -14,7 +14,9 @@
     "verify:live": "node --env-file-if-exists=.env.local scripts/verify-live.mjs",
     "verify:secrets": "node --env-file-if-exists=.env.local scripts/check-secret-leaks.mjs",
     "seed": "node --env-file-if-exists=.env.local scripts/seed.mjs",
-    "test:session-api": "node --env-file-if-exists=.env.local scripts/test-session-api.mjs"
+    "test:session-api": "node --env-file-if-exists=.env.local scripts/test-session-api.mjs",
+    "interview:spike": "node scripts/interviewer-spike.mjs",
+    "interview:spike:live": "node --env-file-if-exists=.env.local scripts/interviewer-spike.mjs --live"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
