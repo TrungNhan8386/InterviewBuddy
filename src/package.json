@@ -16,7 +16,9 @@
     "seed": "node --env-file-if-exists=.env.local scripts/seed.mjs",
     "test:session-api": "node --env-file-if-exists=.env.local scripts/test-session-api.mjs",
     "interview:spike": "node scripts/interviewer-spike.mjs",
-    "interview:spike:live": "node --env-file-if-exists=.env.local scripts/interviewer-spike.mjs --live"
+    "interview:spike:live": "node --env-file-if-exists=.env.local scripts/interviewer-spike.mjs --live",
+    "verify:interview-next": "node scripts/verify-interview-next.mjs",
+    "verify:interview-next:live": "node --env-file-if-exists=.env.local scripts/verify-interview-next.mjs --live"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -28,6 +30,7 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.14",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
