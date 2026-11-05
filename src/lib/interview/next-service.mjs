@@ -2,6 +2,7 @@ import { isUuid } from './session-contract.mjs';
 import { InterviewerError, validateInterviewerInput, validateInterviewerOutput } from './interviewer-contract.mjs';
 import { PROMPT_VERSION } from './interviewer-prompt.mjs';
 import { QUESTION_PLAN_VERSION } from './question-plan.mjs';
+import { CONVERSATION_MEMORY_VERSION } from './conversation-memory.mjs';
 
 export function validateNextRequest(body) {
   if (!body || typeof body !== 'object' || Array.isArray(body)
@@ -65,6 +66,7 @@ export function createNextService({ repository, provider, now = Date.now }) {
     try {
       return await repository.finish(request, claim.token, decision, {
         model: provider.model, promptVersion: PROMPT_VERSION, contextVersion: QUESTION_PLAN_VERSION,
+        memoryVersion: CONVERSATION_MEMORY_VERSION,
       });
     } catch (error) {
       // These RPC results explicitly mean no question was committed. Other

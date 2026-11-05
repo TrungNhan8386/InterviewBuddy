@@ -1,5 +1,7 @@
 # AI interviewer — hợp đồng nội bộ v0.1
 
+> Bản dưới ghi nhận spike ngày 31/10/2026. Phần HTTP đã được tích hợp qua [Interview Next API v1](INTERVIEW_NEXT_API_v1.md). SCRUM-93 giữ nguyên schema đầu vào/đầu ra nội bộ, cập nhật prompt lên v0.8 và thêm [4 lượt gần nhất + tóm tắt](INTERVIEW_FLOW_CONTEXT_v1.md); không gửi toàn bộ `history` nguyên văn tới Gemini nữa. Backend vẫn nhận và kiểm tra toàn bộ history chuẩn.
+
 | Thông tin | Giá trị |
 | --- | --- |
 | Ngày | 31/10/2026, giờ Việt Nam |
