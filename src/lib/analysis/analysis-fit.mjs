@@ -54,6 +54,7 @@ export function formatFitResult(result, input) {
 export function formatFitError(error, status) {
   let code = 'SERVER_ERROR';
   if ([400, 413, 415].includes(status) || error.code === 'NO_JOB_REQUIREMENTS') code = 'BAD_INPUT';
+  else if (error.code === 'AI_DAILY_LIMIT') return { code: 'DAILY_LIMIT', message: error.message };
   else if (status === 429) code = 'RATE_LIMIT';
   else if (error.code === 'INVALID_AI_RESPONSE' || error.code === 'AI_CONTENT_BLOCKED') code = 'INVALID_OUTPUT';
   const messages = {

@@ -5,8 +5,21 @@ import { createAnalysisService } from '../lib/analysis/service.mjs';
 import { createAnalysisFitHandler } from '../lib/analysis/analysis-fit.mjs';
 import { AnalysisError } from '../lib/analysis/errors.mjs';
 import { createApiServer } from '../server.mjs';
-import { POST as nextPost, GET as nextGet } from '../app/api/analyze-fit/route.js';
+import { createSignedInAnalysisRoute } from '../lib/ai/signed-in-analysis-route.mjs';
+import { AiLimitError } from '../lib/ai/daily-limit.mjs';
 import { fixtures, mockProviderFor } from './helpers.mjs';
+
+// Same wiring as app/api/analyze-fit/route.js (SCRUM-81), with injected sign-in and AI counter.
+function fitRoute({ user = { supabase: null, userId: 'user-1' }, consume = async () => ({ allowed: true }), provider } = {}) {
+  return createSignedInAnalysisRoute({
+    createHandler: (options) => createAnalysisFitHandler(options),
+    authenticate: async () => user,
+    createCounter: () => consume,
+    ...(provider ? { createProvider: () => provider } : {}),
+  });
+}
+const nextPost = fitRoute().POST;
+const nextGet = fitRoute().handle;
 
 function fitRequest(input, options = {}) {
   return new Request('http://localhost:3001/api/analyze-fit', {
@@ -111,4 +124,27 @@ test('Khang endpoint works through the standalone HTTP server', async () => {
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }
+});
+
+test('analyze-fit route requires sign-in and stops at the daily AI limit (SCRUM-81)', async () => {
+  const signedOut = await fitRoute({ user: null }).POST(fitRequest({ jd: 'x', cv: 'y' }));
+  assert.equal(signedOut.status, 401);
+  assert.equal((await signedOut.json()).error.code, 'UNAUTHORIZED');
+
+  let geminiCalls = 0;
+  const provider = { model: 'mock', analyze: async () => { geminiCalls += 1; throw new Error('must not be called'); } };
+  const consume = async () => { throw new AiLimitError('AI_DAILY_LIMIT', { limit: 100 }); };
+  const input = khangInput(fixtures[0]);
+  const limited = await fitRoute({ consume, provider }).POST(fitRequest(input));
+  assert.equal(limited.status, 429);
+  const { error } = await limited.json();
+  assert.equal(error.code, 'DAILY_LIMIT');
+  assert.match(error.message, /100 lượt\/ngày/);
+  assert.equal(geminiCalls, 0);
+
+  // Invalid input is rejected before the AI call is counted.
+  let counted = 0;
+  const bad = await fitRoute({ consume: async () => { counted += 1; } }).POST(fitRequest({}));
+  assert.equal(bad.status, 400);
+  assert.equal(counted, 0);
 });

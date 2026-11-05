@@ -42,6 +42,8 @@ export type AnalyzeFitResponse = {
 export type AnalyzeFitErrorCode =
   | "BAD_INPUT"
   | "RATE_LIMIT"
+  | "DAILY_LIMIT" // the user's daily AI limit is used up (SCRUM-81)
+  | "UNAUTHORIZED"
   | "INVALID_OUTPUT"
   | "SERVER_ERROR"
   | "NETWORK_ERROR"; // client side only: the request never reached the server
