@@ -1,7 +1,7 @@
 # Interview Next API v1 — SCRUM-92
 
 Status: implemented locally; requires migration review/application before hosted use.
-Source: `src/app/api/interview/next/route.ts`. Internal AI contract remains [v0.1](AI_INTERVIEWER_CONTRACT_v0.1.md); prompt is now v0.4.
+Source: `src/app/api/interview/next/route.ts`. Internal AI contract remains [v0.1](AI_INTERVIEWER_CONTRACT_v0.1.md); current prompt is v0.8 after SCRUM-93.
 
 ## Prerequisite
 
@@ -48,7 +48,9 @@ The atomic claim loads the signed-in user's session snapshot and ordered questio
 
 The prompt supplies policies for HR/technical/behavioral, easy/medium/hard and vi/en. Difficulty is specific to the interview round: hard technical questions can probe a hypothetical failure or concurrency trade-off; hard behavioral questions invite a real past disagreement or competing priorities and reflection; hard HR questions probe professional judgment without assuming management experience. Missing or heading-only documents use the target position. Technical questions prefer hypothetical wording for techniques not explicitly evidenced in the CV. Behavioral questions invite real past experiences using STAR. Output is validated through the existing schema/policy checks before SQL persists the question.
 
-The existing bounded follow-up/end policy is reused. Last-four-turn context compaction and a short summary remain SCRUM-93. Streaming and first-token latency targets remain SCRUM-94. Scoring and feedback creation are not part of this API; no placeholder scores are inserted into `feedbacks`.
+SCRUM-93 adds bounded conversation memory: only the last four completed question-answer pairs are sent verbatim, with an extractive summary of earlier topics/answers capped at 6000 UTF-16 units of serialized JSON. Full persisted history still controls counts, topic selection and exact normalized duplicate rejection. The summary is rebuilt locally without a second AI call, and is not accepted from the client. Metadata records `memoryVersion: last-four-extractive-v1`. See [flow and context handoff](INTERVIEW_FLOW_CONTEXT_v1.md).
+
+The bounded follow-up/end policy is reused. The latest answer takes priority over selecting a new JD topic: clarify vagueness or a useful unresolved detail while follow-up is allowed; move on from a complete answer with no useful unresolved detail or an explicit refusal. End/time/question limits remain deterministic server decisions. Streaming and first-token latency targets remain SCRUM-94. Scoring and feedback creation are not part of this API; no placeholder scores are inserted into `feedbacks`.
 
 ## Retries and concurrency
 
