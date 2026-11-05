@@ -127,6 +127,8 @@ for (const [label, response, code] of [
   ['candidate safety', envelope(valid, 'SAFETY'), 'AI_CONTENT_BLOCKED'],
   ['null', null, 'INVALID_OUTPUT'], ['empty', {}, 'INVALID_OUTPUT'],
   ['bad JSON', { candidates: [{ finishReason: 'STOP', content: { parts: [{ text: 'not JSON' }] } }] }, 'INVALID_OUTPUT'],
+  ['null content part', { candidates: [{ finishReason: 'STOP', content: { parts: [null] } }] }, 'INVALID_OUTPUT'],
+  ['scalar content part', { candidates: [{ finishReason: 'STOP', content: { parts: ['not a content part'] } }] }, 'INVALID_OUTPUT'],
   ['wrong schema', envelope({ ...valid, action: 'new_topic' }), 'INVALID_OUTPUT'],
 ]) {
   test(`provider rejects ${label}`, async () => {
