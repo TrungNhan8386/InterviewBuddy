@@ -60,6 +60,10 @@ export type ChatErrorCode =
   | "DATABASE_NOT_READY"
   | "AI_NOT_CONFIGURED"
   | "AI_TIMEOUT"
+  | "AI_DAILY_LIMIT"
+  | "SESSION_CLOSED"
+  | "RESPONSE_TIMEOUT"
+  | "REQUEST_CANCELLED"
   | "SAVE_FAILED" // client side: the answer could not be saved
   | "NETWORK_ERROR" // client side: the request never reached the server
   | "SERVER_ERROR";

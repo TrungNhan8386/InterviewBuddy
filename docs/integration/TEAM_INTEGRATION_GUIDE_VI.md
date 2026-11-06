@@ -2,6 +2,8 @@
 
 Ngày đối chiếu mã nguồn: **06/11/2026**. Phạm vi: đăng nhập → phân tích CV/JD → thiết lập phiên → Chat với AI → lưu câu trả lời → tiếp tục phiên → kết thúc.
 
+**Bổ sung khi xuất bản code:** nhánh `feat/scrum-94-chat-streaming-hung` ghép các nhánh persistence của Nhân (`b509af5`), Chat của Khang (`ce7d687`) và hướng dẫn (`026568c`), sau đó thêm triển khai streaming và các sửa tích hợp. Những dòng “chưa commit/push” bên dưới ghi lại snapshot trước đợt xuất bản. Xem [báo cáo xuất bản và kiểm tra](../test/SCRUM-94_PUBLICATION_20261106_VI.md); trạng thái nghiệm thu Chat/Supabase thật vẫn chưa đạt xác nhận.
+
 Tài liệu này hướng dẫn tích hợp và bàn giao, không xác nhận nhóm đã nghiệm thu. Các tên nhánh/commit bên dưới là snapshot đã kiểm tra cục bộ; cần fetch và kiểm tra lại trước khi ghép code.
 
 ## 1. Nhóm cần làm gì trước?
@@ -348,7 +350,7 @@ npm run verify:secrets
 
 Chạy ESLint cho các file thực sự thay đổi theo phạm vi PR. Các kết quả lịch sử 241/241 offline và 5 kịch bản UI giả lập không thay thế việc chạy lại trên commit mà nhóm sẽ review.
 
-Runner `src/tests/browser/chat_stream_ui.py` hiện phục vụ worktree tích hợp trên máy này, cần Python có Playwright và Edge; script đang trỏ dependency root sang thư mục `main` bên cạnh. Khi chuyển cho máy khác, người nhận cần chỉnh cấu hình đường dẫn hoặc dùng checkout độc lập tương ứng trước khi chạy. Chọn `--bundler turbopack` để kiểm tra cả CSS theo cấu hình Tailwind hiện có. Runner tạo route fixture tạm rồi dọn sau test; không dùng route này làm đường vào Chat sản phẩm.
+Runner `src/tests/browser/chat_stream_ui.py` cần Python có Playwright và Edge. Bản xuất bản code tự nhận dependency root khi `node_modules` là junction; checkout độc lập không cần có thư mục `main` bên cạnh. Chọn `--bundler turbopack` để kiểm tra cả CSS theo cấu hình Tailwind hiện có. Runner tạo route fixture tạm rồi dọn sau test; không dùng route này làm đường vào Chat sản phẩm.
 
 ### 9.2. Kiểm tra persistence trên Supabase thật, không gọi Gemini
 
@@ -431,7 +433,7 @@ Mẫu ghi kết quả:
 
 - [Session API](../api/INTERVIEW_SESSION_API_v1.md): tạo phiên và liên kết analysis. Bản trong nhánh persistence có phần cập nhật mới hơn snapshot `main` local.
 - [Interview Next API](../api/INTERVIEW_NEXT_API_v1.md): request/response và quy tắc lượt.
-- Contract streaming hiện có ở bản SCRUM-94 local: `docs/api/INTERVIEW_STREAM_API_v1.md` (SSE, draft, complete và lỗi). File đó chưa có trên `origin/main` và không được xuất bản trong PR hướng dẫn này; phần hợp đồng cần để ghép Chat đã được ghi trực tiếp ở mục 7–8.
+- [Streaming API](../api/INTERVIEW_STREAM_API_v1.md): SSE, draft, complete và lỗi; được bổ sung trong nhánh xuất bản code SCRUM-94. PR #21 trước đó chỉ chứa hướng dẫn và liên kết README.
 - Nhánh persistence có thêm `docs/api/INTERVIEW_PERSISTENCE_API_v1.md`: nguồn đối chiếu GET turns/resume, answers, end và quota.
 - Quy ước branch/PR, người review/merge: [README repository](../../README.md).
 

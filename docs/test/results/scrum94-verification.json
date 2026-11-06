@@ -1,0 +1,97 @@
+{
+  "dateLocal": "2026-11-05",
+  "branch": "feat/scrum-94-interview-streaming",
+  "base": "baa2f8e12a12ca67e6f378fc9f7c4322a2237aaf",
+  "status": "implemented-locally; two-second latency target not passed consistently",
+  "skillsApplied": [
+    "gemini-api-dev",
+    "test-driven-development",
+    "systematic-debugging",
+    "webapp-testing",
+    "verification-before-completion",
+    "supabase-postgres-best-practices"
+  ],
+  "transport": "Opt-in Accept: text/event-stream; legacy JSON preserved",
+  "protocolEvents": [
+    "ready",
+    "delta",
+    "complete",
+    "error"
+  ],
+  "schemaValidation": "Full decision validated before SQL; browser validates public response/session; only question text is provisional",
+  "tests": {
+    "passed": 201,
+    "failed": 0,
+    "baseTests": 169,
+    "newTests": 32
+  },
+  "targetedEslint": "passed",
+  "productionBuild": "passed",
+  "typecheck": "passed",
+  "tdd": {
+    "providerInitialRedToGreen": 9,
+    "httpRedToGreen": 8,
+    "clientRedToGreen": 11,
+    "hardeningRegressionsRedToGreen": 2,
+    "inBandErrorRegressionsRedToGreen": 2,
+    "localTranscripts": "tmp/scrum94-*"
+  },
+  "browserControlled": {
+    "cases": 8,
+    "status": "passed",
+    "report": "docs/test/results/scrum94-browser-controlled.json",
+    "firstTextMs": 151.7000000011176,
+    "completeMs": 2557.5
+  },
+  "browserLive": {
+    "model": "gemini-3.5-flash-lite",
+    "cases": 5,
+    "validSavedQuestions": 4,
+    "failedRequests": [
+      {
+        "id": "live-long-history",
+        "error": "AI_UNAVAILABLE",
+        "saved": 0
+      }
+    ],
+    "validWithinTwoSeconds": 3,
+    "twoSecondTargetPassed": false,
+    "successfulFirstTextMs": [
+      1287.9000000003725,
+      1330.4000000003725,
+      1545.800000000745,
+      3803.5999999996275
+    ],
+    "medianSuccessfulFirstTextMs": 1438.1000000005588,
+    "p95SuccessfulFirstTextMs": 3803.5999999996275,
+    "successfulReplayChecks": 4,
+    "source": "Real Gemini; synthetic profiles and histories; no automatic retries",
+    "report": "docs/test/results/scrum94-browser-live.json"
+  },
+  "externalGeminiRequestsThisTask": 8,
+  "externalRequestBreakdown": {
+    "initial": 1,
+    "staleServerDiagnosticExcludedFromBenchmark": 1,
+    "freshTraceDiagnostic": 1,
+    "finalFiveCaseRun": 5
+  },
+  "environment": {
+    "browser": "156.0.4314.58",
+    "playwright": "1.64.1",
+    "python": "3.11",
+    "auth": "simulated",
+    "database": "local PGlite",
+    "sharedDatabaseChanged": false,
+    "chatUiIntegrated": false
+  },
+  "testServerLifecycle": "Direct Node PID + unique instance ID + reject occupied port + verify port closed; all verification servers stopped",
+  "limitations": [
+    "Two-second target not met for every real request; slow first valid case about 3804ms",
+    "One final request failed with upstream AI_UNAVAILABLE after provisional text; no question saved",
+    "No hosted Supabase authentication or production Chat UI end-to-end test",
+    "Semantic question quality inherited from SCRUM-93; not an independent expert assessment"
+  ],
+  "secretScan": "passed; 400 files checked, zero configured-key leaks; env file ignored and untracked",
+  "commitOrPushPerformed": false,
+  "jiraModified": false
+}

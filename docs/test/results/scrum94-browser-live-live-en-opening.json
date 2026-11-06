@@ -1,0 +1,73 @@
+{
+  "mode": "live",
+  "boundary": "Real browser + production consumer/handler/service/provider; simulated authentication and local PGlite. Live mode uses real Gemini.",
+  "provenance": "AI-authored synthetic CV/JD/answers. No real applicant data.",
+  "metric": "click to actual nonempty question text, measured after two requestAnimationFrame callbacks; ready/loading frames do not count",
+  "results": [
+    {
+      "id": "live-en-opening",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "8fe66888-ed32-42f9-a79c-c0687637c1c9",
+      "firstVisibleMs": null,
+      "firstVisibleText": null,
+      "firstVisibleStatus": null,
+      "firstPreviewMs": null,
+      "previewUpdates": 0,
+      "completeMs": 1505.800000000745,
+      "error": "INVALID_OUTPUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 1,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "failed"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "browser": "156.0.4314.58",
+  "fixtures": {
+    "instanceId": "d67a8f7a-89bc-4196-8147-e8337bf837df",
+    "mode": "live",
+    "fixtures": [
+      {
+        "id": "live-en-opening",
+        "label": "Gemini · mở đầu tiếng Anh",
+        "sessionId": "8fe66888-ed32-42f9-a79c-c0687637c1c9",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-vi-opening",
+        "label": "Gemini · mở đầu tiếng Việt",
+        "sessionId": "372bac2c-3278-4381-899c-05bedd1f72f2",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-en-followup",
+        "label": "Gemini · hỏi tiếp kỹ thuật",
+        "sessionId": "8ccc5139-d404-4670-8e63-9eb241909f83",
+        "afterAnswerId": "6e32f76d-9e9b-4b7e-b464-88e433917611"
+      },
+      {
+        "id": "live-vi-behavioral",
+        "label": "Gemini · hỏi tiếp hành vi",
+        "sessionId": "f1889080-4072-4b5e-88d1-4ada00b8dd73",
+        "afterAnswerId": "b4875d6b-becf-4a88-af77-a273b5df7bec"
+      },
+      {
+        "id": "live-long-history",
+        "label": "Gemini · lịch sử dài",
+        "sessionId": "6a4c86f1-2d4c-455e-82af-5d56a6b45312",
+        "afterAnswerId": "32a2e8bb-c625-4e75-a249-558497adeb88"
+      }
+    ]
+  },
+  "functionalChecks": "failed",
+  "failure": "INVALID_OUTPUT",
+  "withinTwoSeconds": 0,
+  "sampleCount": 1,
+  "allSamplesWithinTwoSeconds": false
+}

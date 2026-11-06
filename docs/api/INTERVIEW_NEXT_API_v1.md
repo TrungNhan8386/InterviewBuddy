@@ -1,6 +1,6 @@
 # Interview Next API v1 — SCRUM-92
 
-Status: implemented locally; requires migration review/application before hosted use.
+Status: implemented; requires migration review/application before hosted use. SCRUM-94 adds opt-in streaming in [Streaming API v1](INTERVIEW_STREAM_API_v1.md); final JSON remains compatible.
 Source: `src/app/api/interview/next/route.ts`. Internal AI contract remains [v0.1](AI_INTERVIEWER_CONTRACT_v0.1.md); current prompt is v0.8 after SCRUM-93.
 
 ## Prerequisite

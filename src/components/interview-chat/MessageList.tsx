@@ -3,23 +3,26 @@
 import { useEffect, useRef } from "react";
 import type { CHAT_TEXT } from "@/lib/interview-chat/text";
 import type { ChatTurn } from "@/lib/interview-chat/types";
+import type { InterviewStreamStatus } from "@/lib/interview/next-stream-client.mjs";
 
 type Props = {
   text: (typeof CHAT_TEXT)["vi"];
   turns: ChatTurn[];
   thinking: boolean; // waiting for the next question
   saving: boolean; // the last answer is being saved
+  preview: string;
+  generationStatus: InterviewStreamStatus;
 };
 
 // SCRUM-97: AI questions, follow-up labels and the user's answers.
-export default function MessageList({ text, turns, thinking, saving }: Props) {
+export default function MessageList({ text, turns, thinking, saving, preview, generationStatus }: Props) {
   const endRef = useRef<HTMLDivElement>(null);
   const lastAnswerId = turns.at(-1)?.answer?.id;
 
   // Keep the newest message in view.
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [turns.length, lastAnswerId, thinking]);
+  }, [turns.length, lastAnswerId, thinking, preview]);
 
   return (
     <div
@@ -63,6 +66,13 @@ export default function MessageList({ text, turns, thinking, saving }: Props) {
         </div>
       ))}
 
+      {thinking && preview && (
+        <div className="max-w-[90%] self-start sm:max-w-[80%]" data-testid="question-preview">
+          <p className="mb-1 text-xs text-slate-500">{text.provisional}</p>
+          <p className="whitespace-pre-wrap break-words rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-3 text-sm text-slate-900">{preview}</p>
+        </div>
+      )}
+
       {(thinking || saving) && (
         <div className="flex items-center gap-2 self-start text-sm text-slate-500" role="status">
           <span className="flex gap-1" aria-hidden="true">
@@ -70,7 +80,7 @@ export default function MessageList({ text, turns, thinking, saving }: Props) {
             <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400 [animation-delay:-0.15s]" />
             <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400" />
           </span>
-          {saving ? text.saving : text.thinking}
+          {saving ? text.saving : generationStatus === "extended" ? text.extendedWait : generationStatus === "slow" ? text.slow : text.thinking}
         </div>
       )}
 

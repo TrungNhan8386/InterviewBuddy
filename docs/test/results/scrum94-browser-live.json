@@ -1,0 +1,209 @@
+{
+  "mode": "live",
+  "boundary": "Real browser + production consumer/handler/service/provider; simulated authentication and local PGlite. Live mode uses real Gemini.",
+  "provenance": "AI-authored synthetic CV/JD/answers. No real applicant data.",
+  "metric": "click to actual nonempty question text, measured after two requestAnimationFrame callbacks; ready/loading frames do not count",
+  "results": [
+    {
+      "id": "live-en-opening",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "c6b50cfc-4086-4af0-8f08-30f2540557b7",
+      "firstVisibleMs": 3803.5999999996275,
+      "firstVisibleText": "How would you handle loading states and API error handling when fetching data from a REST",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 3796.199999999255,
+      "previewUpdates": 3,
+      "completeMs": 3962.5,
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "f4068e39-994a-4b70-9736-a20953471be5",
+          "kind": "main",
+          "topic": "API Integration and State Management",
+          "content": "How would you handle loading states and API error handling when fetching data from a REST endpoint in a React component?",
+          "position": 1
+        },
+        "sessionId": "c6b50cfc-4086-4af0-8f08-30f2540557b7"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 1,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed"
+      },
+      "withinTwoSeconds": false,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-vi-opening",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "f65125b8-af49-4138-992e-cb65bb4671f2",
+      "firstVisibleMs": 1545.800000000745,
+      "firstVisibleText": "Bạn sẽ làm gì để xử lý trạng thái tải dữ liệu (loading state) và",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1532.5999999996275,
+      "previewUpdates": 3,
+      "completeMs": 1683.4000000003725,
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "158ba77a-ecb8-4f6b-9b24-5e4cac1ed4c8",
+          "kind": "main",
+          "topic": "Xử lý trạng thái tải và lỗi API",
+          "content": "Bạn sẽ làm gì để xử lý trạng thái tải dữ liệu (loading state) và hiển thị thông báo lỗi khi một REST API gọi từ component React bị thất bại?",
+          "position": 1
+        },
+        "sessionId": "f65125b8-af49-4138-992e-cb65bb4671f2"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 2,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed"
+      },
+      "withinTwoSeconds": true,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-en-followup",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "2e496d29-55f9-4f5e-ab24-c8640fd46a94",
+      "firstVisibleMs": 1287.9000000003725,
+      "firstVisibleText": "Which specific transaction isolation level or locking mechanism would you use to ensure overs",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1280.0999999996275,
+      "previewUpdates": 3,
+      "completeMs": 1393.5999999996275,
+      "error": null,
+      "output": {
+        "action": "follow_up",
+        "question": {
+          "id": "c0a66f69-dbd1-468d-8249-4e49a89ab5c9",
+          "kind": "follow_up",
+          "topic": "PostgreSQL transactions",
+          "content": "Which specific transaction isolation level or locking mechanism would you use to ensure overselling is prevented in that scenario?",
+          "position": 2
+        },
+        "sessionId": "2e496d29-55f9-4f5e-ab24-c8640fd46a94"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 3,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed"
+      },
+      "withinTwoSeconds": true,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-vi-behavioral",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "917fa09e-4ea9-47f9-abc8-083a27e912ec",
+      "firstVisibleMs": 1330.4000000003725,
+      "firstVisibleText": "Bạn có thể chia sẻ cụ thể hơn về vai trò cá nhân của bạn trong việc",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1318.2000000011176,
+      "previewUpdates": 3,
+      "completeMs": 1487.7000000011176,
+      "error": null,
+      "output": {
+        "action": "follow_up",
+        "question": {
+          "id": "5d11b102-a1b3-4418-90f5-9b6edde35946",
+          "kind": "follow_up",
+          "topic": "Phối hợp xử lý lỗi",
+          "content": "Bạn có thể chia sẻ cụ thể hơn về vai trò cá nhân của bạn trong việc tìm ra nguyên nhân và cách bạn phối hợp giao tiếp với các thành viên khác lúc đó không?",
+          "position": 2
+        },
+        "sessionId": "917fa09e-4ea9-47f9-abc8-083a27e912ec"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 4,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed"
+      },
+      "withinTwoSeconds": true,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-long-history",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "e81d0ce9-f58a-496c-907c-4e504dc76a97",
+      "firstVisibleMs": 1766.5,
+      "firstVisibleText": "Which specific transaction isolation level or locking mechanism would you use to prevent race",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1754.9000000003725,
+      "previewUpdates": 1,
+      "completeMs": 1806.800000000745,
+      "error": "AI_UNAVAILABLE",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 5,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "failed"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "browser": "156.0.4314.58",
+  "fixtures": {
+    "instanceId": "a40858b5-9f8f-42c8-9921-efeac5b09fdd",
+    "mode": "live",
+    "fixtures": [
+      {
+        "id": "live-en-opening",
+        "label": "Gemini · mở đầu tiếng Anh",
+        "sessionId": "c6b50cfc-4086-4af0-8f08-30f2540557b7",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-vi-opening",
+        "label": "Gemini · mở đầu tiếng Việt",
+        "sessionId": "f65125b8-af49-4138-992e-cb65bb4671f2",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-en-followup",
+        "label": "Gemini · hỏi tiếp kỹ thuật",
+        "sessionId": "2e496d29-55f9-4f5e-ab24-c8640fd46a94",
+        "afterAnswerId": "bacfc120-63fe-40de-926a-1e2fb756e9ae"
+      },
+      {
+        "id": "live-vi-behavioral",
+        "label": "Gemini · hỏi tiếp hành vi",
+        "sessionId": "917fa09e-4ea9-47f9-abc8-083a27e912ec",
+        "afterAnswerId": "aab87a42-8d9d-4d97-ad31-031d934d61a6"
+      },
+      {
+        "id": "live-long-history",
+        "label": "Gemini · lịch sử dài",
+        "sessionId": "e81d0ce9-f58a-496c-907c-4e504dc76a97",
+        "afterAnswerId": "003fc838-8b09-4832-ad0a-1a7f56f8915a"
+      }
+    ]
+  },
+  "functionalChecks": "failed",
+  "failure": "AI_UNAVAILABLE",
+  "withinTwoSeconds": 3,
+  "sampleCount": 5,
+  "allSamplesWithinTwoSeconds": false
+}
