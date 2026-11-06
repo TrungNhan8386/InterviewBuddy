@@ -79,6 +79,7 @@ Errors have `{ "error": { "code": "...", "message": "..." } }`.
 | 409 | SESSION_CONTEXT_INVALID | Saved settings/history is inconsistent or exceeds the context budget. |
 | 422 | AI_CONTENT_BLOCKED | Provider rejected the content. |
 | 429 | AI_RATE_LIMITED | Gemini quota/rate limit. |
+| 429 | AI_DAILY_LIMIT | The user's own daily AI call limit is used up (SCRUM-81, [Persistence API §6](INTERVIEW_PERSISTENCE_API_v1.md)). |
 | 502 | INVALID_OUTPUT / AI_UNAVAILABLE | Invalid AI result or upstream/network failure. |
 | 503 | DATABASE_NOT_READY | Missing Supabase configuration or missing migration/RPC. |
 | 503 | AI_NOT_CONFIGURED / AI_CONFIGURATION_ERROR | Missing/invalid server AI configuration. |

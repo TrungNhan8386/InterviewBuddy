@@ -61,6 +61,8 @@ export const RESULT_TEXT: Record<AnalysisLanguage, ResultText> = {
     errors: {
       BAD_INPUT: "JD hoặc CV đang trống hoặc quá dài. Vui lòng kiểm tra lại.",
       RATE_LIMIT: "AI đang quá tải, vui lòng thử lại sau ít phút.",
+      DAILY_LIMIT: "Bạn đã dùng hết lượt AI hôm nay. Hạn mức được làm mới lúc 0:00 (giờ Việt Nam).",
+      UNAUTHORIZED: "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
       INVALID_OUTPUT: "AI trả kết quả không hợp lệ. Vui lòng bấm phân tích lại.",
       SERVER_ERROR: "Có lỗi ở máy chủ. Vui lòng thử lại sau.",
       NETWORK_ERROR: "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.",
@@ -99,6 +101,8 @@ export const RESULT_TEXT: Record<AnalysisLanguage, ResultText> = {
     errors: {
       BAD_INPUT: "The JD or CV is empty or too long. Please check your input.",
       RATE_LIMIT: "The AI service is busy. Please try again in a few minutes.",
+      DAILY_LIMIT: "You have used all AI calls for today. The limit resets at 00:00 Vietnam time.",
+      UNAUTHORIZED: "Your session has expired. Please sign in again.",
       INVALID_OUTPUT: "The AI returned an invalid result. Please run the analysis again.",
       SERVER_ERROR: "A server error occurred. Please try again later.",
       NETWORK_ERROR: "Could not reach the server. Check your connection and try again.",

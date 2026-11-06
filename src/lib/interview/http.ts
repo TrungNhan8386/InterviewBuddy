@@ -42,6 +42,8 @@ const MESSAGES: Record<InterviewApiErrorCode, string> = {
   BAD_INPUT: "Some interview settings are missing or invalid.",
   UNAUTHORIZED: "Please sign in first.",
   NOT_FOUND: "Interview session not found.",
+  STALE_TURN: "This is not the current question any more. Reload the interview.",
+  SESSION_CLOSED: "This interview has already ended.",
   SERVER_ERROR: "Could not save the interview session. Please try again.",
 };
 
@@ -49,6 +51,8 @@ const STATUS: Record<InterviewApiErrorCode, number> = {
   BAD_INPUT: 400,
   UNAUTHORIZED: 401,
   NOT_FOUND: 404,
+  STALE_TURN: 409,
+  SESSION_CLOSED: 409,
   SERVER_ERROR: 500,
 };
 

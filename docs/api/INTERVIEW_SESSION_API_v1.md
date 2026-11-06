@@ -111,6 +111,8 @@ Responses:
 
 Another user's session returns 404, not 403, so nobody can tell whether a session id exists.
 
+Since 05/11 the response also contains `startedAt`, `endedAt`, every question with its answer (`turns`), `progress` and `resume`. Saving answers, resuming and ending a session are described in [Interview Persistence & AI Limit API v1](INTERVIEW_PERSISTENCE_API_v1.md).
+
 ## 4. Saving the CV/JD analysis (for Khang, SCRUM-72)
 
 Decision (week-4 guide, section 5.1): the analysis is saved **on its own** in `fit_analyses`, tied to the user, because it happens before a session exists. When a session is created, the API links the latest one.
@@ -166,3 +168,4 @@ curl -X POST http://localhost:3000/api/interview \
 | Date | Version | Change |
 | --- | --- | --- |
 | 30/10/2026 | 1.0 | First version |
+| 05/11/2026 | 1.1 | GET returns turns, progress and resume state (SCRUM-80); see the Persistence API |
