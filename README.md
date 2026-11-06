@@ -32,6 +32,8 @@ The app lives in `/src`. Setup steps are in [src/README.md](src/README.md). Arch
 
 Team integration instructions (Vietnamese): [connect Supabase, CV/JD analysis, session setup, Chat and AI streaming](docs/integration/TEAM_INTEGRATION_GUIDE_VI.md). Includes ownership, local configuration, API handoffs and verification boundaries.
 
+Supabase handoff for Nhân: [configuration, migration status and test-account checklist](docs/integration/supabase-handoff/README.md).
+
 ## Repository structure
 
 ```

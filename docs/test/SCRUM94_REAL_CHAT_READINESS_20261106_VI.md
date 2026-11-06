@@ -1,5 +1,7 @@
 # Chuẩn bị kiểm tra Chat và Supabase thật — 06/11/2026
 
+Cập nhật sau khi nhận cấu hình: đã chạy Chat, Supabase và Gemini thật. Xem [báo cáo kiểm thử thật](SCRUM-94_REAL_CHAT_SUPABASE_20261106_VI.md). Các trạng thái thiếu cấu hình bên dưới là bản ghi của giai đoạn chuẩn bị, không phải trạng thái hiện tại.
+
 Ghi chú xuất bản: đây là bản ghi giai đoạn chuẩn bị local. Code tương ứng được gom lên nhánh `feat/scrum-94-chat-streaming-hung`; xem [báo cáo xuất bản](SCRUM-94_PUBLICATION_20261106_VI.md). Các thông báo chưa commit/push ở dưới mô tả thời điểm chuẩn bị, không phải kết luận rằng code luôn chỉ ở local.
 
 Hướng dẫn thực hiện cho cả nhóm: [Kết nối Supabase, analysis, Setup, Chat và streaming](../integration/TEAM_INTEGRATION_GUIDE_VI.md). Tài liệu có thứ tự ghép code, cấu hình trên từng máy, contract API và checklist bàn giao.

@@ -27,6 +27,8 @@ pnpm-debug.log*
 
 # Testing
 coverage/
+# Private real-environment screenshots include test-account details.
+/docs/test/images/real-chat-supabase-20261106/
 
 # Editors and OS
 .vscode/*
