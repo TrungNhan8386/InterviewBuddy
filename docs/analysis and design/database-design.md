@@ -1,11 +1,14 @@
 # InterviewBuddy – Database Design (v1.0)
 
-Author: Nguyen Tran Trung Nhan · Sprint 2, week 4 · Status: **matches the Supabase database after both migrations below**
+Author: Nguyen Tran Trung Nhan · Sprint 2, week 4 · Status: **local schema reference; verify migration application on staging**
 
 Database: Supabase (PostgreSQL 17). Migrations, applied in order:
 
 1. [`20261021000000_initial_schema.sql`](../../src/supabase/migrations/20261021000000_initial_schema.sql) – the 7 tables and RLS.
 2. [`20261030000000_interview_session_settings.sql`](../../src/supabase/migrations/20261030000000_interview_session_settings.sql) – Interview Setup fields (UC-05) and the ownership check for linked analyses.
+
+3. [`20261103000000_interview_next.sql`](../../src/supabase/migrations/20261103000000_interview_next.sql) – per-turn generation reservations and atomic next-question RPCs.
+4. [`20261107000000_settings_data.sql`](../../src/supabase/migrations/20261107000000_settings_data.sql) – atomic own-data purge and a guarded answer persistence bridge; adds no tables.
 
 Change the schema only with a new migration file, never by hand in the dashboard.
 
@@ -22,6 +25,19 @@ erDiagram
   QUESTIONS ||--o| ANSWERS : "answered by"
   ANSWERS ||--o| FEEDBACKS : "scored by"
   INTERVIEW_SESSIONS ||--o| REPORTS : "summarized in"
+
+  INTERVIEW_SESSIONS ||--o{ INTERVIEW_NEXT_GENERATIONS : "reserves"
+  ANSWERS |o--o{ INTERVIEW_NEXT_GENERATIONS : "anchors"
+  QUESTIONS |o--o{ INTERVIEW_NEXT_GENERATIONS : "produces"
+  INTERVIEW_NEXT_GENERATIONS {
+    uuid session_id PK,FK
+    text turn_key PK
+    uuid after_answer_id FK
+    text status
+    uuid question_id FK
+    jsonb response
+    jsonb metadata
+  }
 
   AUTH_USERS {
     uuid id PK
@@ -145,3 +161,16 @@ The migration was run on a local PostgreSQL (PGlite) with stand-ins for `auth.us
 | Deleting a user removes all of their data | Pass |
 
 To apply on Supabase: SQL Editor > New query > paste the migration file > Run. Then check that Table Editor shows "RLS enabled" on all 7 tables.
+
+## 5. Week 7 additions (SCRUM-85/88)
+
+`interview_next_generations` is internal state keyed by `(session_id,turn_key)`.
+Its session and answer links cascade on deletion; question_id becomes null when its question is deleted.
+Authenticated users have only limited column reads for their own sessions; writes use the guarded next-question RPCs.
+Do not expose lease tokens or raw provider metadata in the browser.
+
+`delete_own_practice_data()` has no user-id parameter. It requires auth.uid(), serializes repeated purges on the profile row, deletes only that user's sessions and analyses atomically, and returns row counts. Session children (questions, answers, feedbacks, reports, generation records) cascade. CV/JD snapshots are deleted with sessions. The profile, preferred language and auth account remain.
+
+`save_own_interview_answer(session,question,content)` locks the owned session, accepts only its latest question while in progress, saves a text answer, and returns an existing answer only for an identical retry. Anonymous and foreign access is rejected. Both new security-definer functions use an empty search path and have execution revoked from public/anon, granted only to authenticated.
+
+The verification table above describes earlier migration checks. Week 7 local test results and hosted checks are recorded separately in `docs/testing/WEEK7_ACCEPTANCE.md`; no hosted migration application is claimed here.
