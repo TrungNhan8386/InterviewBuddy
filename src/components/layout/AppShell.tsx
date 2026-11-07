@@ -14,7 +14,7 @@ const navigation = [
   { label: "Practice Plan", href: "/practice-plan", ready: false },
   { label: "History", href: "/history", ready: false },
   { label: "Profile", href: "/profile", ready: true },
-  { label: "Settings", href: "/settings", ready: false },
+  { label: "Settings", href: "/settings", ready: true },
 ];
 
 export default function AppShell({
