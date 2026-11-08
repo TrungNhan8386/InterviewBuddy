@@ -6,8 +6,17 @@ import { createAnalysisService } from '../lib/analysis/service.mjs';
 import { createGeminiProvider } from '../lib/analysis/gemini.mjs';
 import { createAnalysisClient, AnalysisApiError } from '../lib/analysis/core-client.mjs';
 import { createApiServer } from '../server.mjs';
-import { POST as nextPost, GET as nextGet } from '../app/api/analyze/route.js';
+import { createSignedInAnalysisRoute } from '../lib/ai/signed-in-analysis-route.mjs';
 import { fixtures, mockProviderFor, assertExpected } from './helpers.mjs';
+
+// Same wiring as app/api/analyze/route.js, with a signed-in user and an unlimited AI counter.
+const nextRoute = createSignedInAnalysisRoute({
+  createHandler: (options) => createAnalysisHandler(options),
+  authenticate: async () => ({ supabase: null, userId: 'user-1' }),
+  createCounter: () => async () => ({ allowed: true }),
+});
+const nextPost = nextRoute.POST;
+const nextGet = nextRoute.handle;
 
 function request(body = fixtures[0].input, { method = 'POST', headers = {} } = {}) {
   return new Request('http://localhost:3001/api/analyze', {

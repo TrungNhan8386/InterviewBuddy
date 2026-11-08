@@ -123,6 +123,8 @@ export function toSessionResponse(row) {
     id: row.id,
     status: row.status,
     createdAt: row.created_at,
+    startedAt: row.started_at ?? null,
+    endedAt: row.ended_at ?? null,
     settings: {
       type: row.round_type,
       difficulty: row.difficulty,
@@ -140,5 +142,84 @@ export function toSessionResponse(row) {
       createdAt: analysis.created_at,
       result: analysis.result,
     },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Answers and resume (SCRUM-80)
+// ---------------------------------------------------------------------------
+
+export const ANSWER_MAX = 12000; // same limit as the AI interviewer input
+export const ANSWER_DURATION_MAX = 3600;
+
+const ANSWER_FIELDS = ['questionId', 'content', 'inputMode', 'durationSeconds'];
+
+/** Validates the body of POST /api/interview/{id}/answers. */
+export function validateSaveAnswer(body) {
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return { ok: false, fields: { body: 'Send a JSON object.' } };
+  }
+  const fields = {};
+  for (const key of Object.keys(body)) {
+    if (!ANSWER_FIELDS.includes(key)) fields[key] = 'Unknown field.';
+  }
+  if (!isUuid(body.questionId)) fields.questionId = 'Must be the id of the current question.';
+  const content = typeof body.content === 'string' ? body.content.trim() : '';
+  if (!content) fields.content = 'Required.';
+  else if (content.length > ANSWER_MAX) fields.content = `At most ${ANSWER_MAX} characters.`;
+  const inputMode = body.inputMode ?? 'text';
+  if (!INPUT_MODES.includes(inputMode)) fields.inputMode = `One of: ${INPUT_MODES.join(', ')}.`;
+  const duration = body.durationSeconds ?? null;
+  if (duration !== null && (typeof duration !== 'number' || !Number.isFinite(duration)
+      || duration < 0 || duration > ANSWER_DURATION_MAX)) {
+    fields.durationSeconds = `A number from 0 to ${ANSWER_DURATION_MAX}, or null.`;
+  }
+  if (Object.keys(fields).length) return { ok: false, fields };
+  return { ok: true, value: { questionId: body.questionId, content, inputMode, durationSeconds: duration } };
+}
+
+/** Questions (ordered by position, each with its answer or null) in API shape. */
+export function toTurns(questionRows) {
+  return [...questionRows]
+    .sort((a, b) => a.position - b.position)
+    .map((q) => {
+      // PostgREST returns a one-to-one embed as an object; accept an array too.
+      const answer = Array.isArray(q.answers) ? q.answers[0] ?? null : q.answers ?? null;
+      return {
+        question: {
+          id: q.id, position: q.position, kind: q.kind, topic: q.topic ?? null,
+          content: q.content, createdAt: q.created_at,
+        },
+        answer: answer && {
+          id: answer.id, content: answer.content, inputMode: answer.input_mode,
+          durationSeconds: answer.duration_seconds == null ? null : Number(answer.duration_seconds),
+          createdAt: answer.created_at,
+        },
+      };
+    });
+}
+
+/**
+ * What the chat page should do when it opens (or reopens) a session:
+ * - not_started:       POST /api/interview/next { sessionId, afterAnswerId: null }
+ * - awaiting_answer:   show `questionId` and wait for the user's answer
+ * - awaiting_question: POST /api/interview/next { sessionId, afterAnswerId }
+ * - finished:          show the end of the interview
+ */
+export function toResumeState(status, turns) {
+  if (status !== 'in_progress') return { state: 'finished' };
+  const last = turns.at(-1);
+  if (!last) return { state: 'not_started', afterAnswerId: null };
+  if (!last.answer) return { state: 'awaiting_answer', questionId: last.question.id };
+  return { state: 'awaiting_question', afterAnswerId: last.answer.id };
+}
+
+/** Counts shown in the chat header ("Question 3 of 8"). */
+export function toProgress(turns, plannedQuestions) {
+  const main = turns.filter((t) => t.question.kind === 'main');
+  return {
+    mainQuestionsAsked: main.length,
+    mainQuestionsAnswered: main.filter((t) => t.answer).length,
+    plannedQuestions,
   };
 }
