@@ -278,7 +278,7 @@ test('all 18 round/difficulty/language combinations reach prompt policies with i
     assert.equal(payload.documents.cvText, base.cvText); assert.equal(payload.documents.jdText, base.jdText);
     assert.deepEqual(payload.settings, base.settings);
     assert.ok(payload.questionPlan.roundPolicy); assert.ok(payload.questionPlan.difficultyPolicy);
-    assert.ok(body.systemInstruction.parts[0].text.includes('Lexical overlap is not evidence'));
+    assert.ok(payload.questionPlan.cvContext.every((excerpt) => base.cvText.includes(excerpt)));
   }
 });
 

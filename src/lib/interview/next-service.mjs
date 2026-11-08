@@ -42,39 +42,59 @@ export function contextFromSnapshot(snapshot, now = Date.now()) {
 }
 
 export function createNextService({ repository, provider, now = Date.now }) {
-  return async function next(body, { signal } = {}) {
+  async function* generate(body, { signal, streaming = false, trace = () => {} } = {}) {
     const request = validateNextRequest(body);
     if (signal?.aborted) throw new InterviewerError('REQUEST_CANCELLED', 'Request cancelled.', 408);
     // Claim is atomic in PostgreSQL; no transaction stays open across an AI call.
     const claim = await repository.claim(request);
-    if (claim.kind === 'ready') return claim.response;
+    trace('claimed');
+    if (claim.kind === 'ready') { trace('replay'); yield { event: 'complete', data: claim.response }; return; }
     if (claim.kind === 'busy') throw new InterviewerError('GENERATION_IN_PROGRESS', 'A question is already being generated. Try this turn again shortly.', 409);
     if (claim.kind !== 'claimed' || !isUuid(claim.token)) throw new InterviewerError('SERVER_ERROR', 'Could not prepare this turn.', 500);
-    let decision;
+    let release = true;
     try {
+      yield { event: 'ready', data: { sessionId: request.sessionId } };
       const context = contextFromSnapshot(claim, now());
-      decision = validateInterviewerOutput(await provider.next(context, { signal }), context);
+      trace('context_ready');
+      let decision;
+      if (streaming) {
+        if (typeof provider.stream !== 'function') throw new InterviewerError('AI_CONFIGURATION_ERROR', 'Streaming is not configured.', 503);
+        for await (const item of provider.stream(context, { signal, trace })) {
+          if (item.type === 'delta') yield { event: 'delta', data: { text: item.text } };
+          else if (item.type === 'decision' && !decision) decision = item.value;
+          else throw new InterviewerError('INVALID_OUTPUT', 'The interviewer returned an invalid stream.');
+        }
+      } else decision = await provider.next(context, { signal, trace });
+      decision = validateInterviewerOutput(decision, context);
+      trace('decision_validated');
+      if (decision.action === 'end') trace('end');
       if (signal?.aborted) throw new InterviewerError('REQUEST_CANCELLED', 'Request cancelled.', 408);
-    } catch (error) {
-      // Failed generation/validation may be explicitly retried. Never hide the
-      // failure behind a canned question or an automatic billable AI retry.
-      await repository.release(request, claim.token).catch(() => {});
-      throw error;
-    }
-    // An uncertain commit is deliberately not released: a retry must first
-    // recover the persisted result, or wait for the lease to expire.
-    try {
-      return await repository.finish(request, claim.token, decision, {
-        model: provider.model, promptVersion: PROMPT_VERSION, contextVersion: QUESTION_PLAN_VERSION,
-        memoryVersion: CONVERSATION_MEMORY_VERSION,
-      });
-    } catch (error) {
-      // These RPC results explicitly mean no question was committed. Other
-      // errors can be a lost acknowledgement and must preserve the lease.
-      if (error instanceof InterviewerError && ['INVALID_OUTPUT', 'STALE_TURN', 'LEASE_LOST'].includes(error.code)) {
-        await repository.release(request, claim.token).catch(() => {});
+      // From here a failed acknowledgement may hide a successful commit.
+      // Leave its reservation intact unless SQL definitively rejected it.
+      release = false;
+      let result;
+      try {
+        trace('persistence_started');
+        result = await repository.finish(request, claim.token, decision, {
+          model: provider.model, promptVersion: PROMPT_VERSION, contextVersion: QUESTION_PLAN_VERSION,
+          memoryVersion: CONVERSATION_MEMORY_VERSION,
+        });
+        trace('persisted');
+      } catch (error) {
+        if (error instanceof InterviewerError && ['INVALID_OUTPUT', 'STALE_TURN', 'LEASE_LOST'].includes(error.code)) release = true;
+        throw error;
       }
-      throw error;
+      yield { event: 'complete', data: result };
+    } finally {
+      // Also runs on iterator.return() after a browser disconnect. A catch-only
+      // cleanup would leak a lease when the generator is suspended at a delta.
+      if (release) await repository.release(request, claim.token).catch(() => {});
     }
+  }
+  const next = async (body, options) => {
+    for await (const item of generate(body, options)) if (item.event === 'complete') return item.data;
+    throw new InterviewerError('SERVER_ERROR', 'The interview did not finish.', 500);
   };
+  next.stream = (body, options) => generate(body, { ...options, streaming: true });
+  return next;
 }

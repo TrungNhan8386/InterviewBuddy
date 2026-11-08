@@ -66,9 +66,8 @@ export function withAnalysisLimit(provider, consume) {
  * (time or question limit reached) are not counted.
  */
 export function withInterviewerLimit(provider, consume) {
-  return {
-    ...provider,
-    async next(value, options) {
+  async function authorize(value, options) {
+      if (options?.signal?.aborted) throw new InterviewerError('REQUEST_CANCELLED', 'The request was cancelled.', 408);
       if (!createEndDecision(validateInterviewerInput(value))) {
         try {
           await consume();
@@ -81,6 +80,15 @@ export function withInterviewerLimit(provider, consume) {
             'Could not check the daily AI limit. Please try again.', error.code === 'DATABASE_NOT_READY' ? 503 : 500);
         }
       }
+  }
+  return {
+    ...provider,
+    ...(typeof provider.stream === 'function' ? { async *stream(value, options) {
+      await authorize(value, options);
+      yield* provider.stream(value, options);
+    } } : {}),
+    async next(value, options) {
+      await authorize(value, options);
       return provider.next(value, options);
     },
   };

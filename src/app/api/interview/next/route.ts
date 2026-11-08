@@ -11,6 +11,8 @@ export const runtime = 'nodejs';
 export const maxDuration = 60;
 
 export const POST = createNextHandler({
+  observeTiming: process.env.INTERVIEW_TIMING_LOGS === '1'
+    ? (event) => console.info('[interview-next timing]', JSON.stringify(event)) : undefined,
   authenticate: async (request) => {
     if (!isSupabaseConfigured) throw new InterviewerError('DATABASE_NOT_READY', 'Supabase is not configured.', 503);
     return getSignedInClient(request);

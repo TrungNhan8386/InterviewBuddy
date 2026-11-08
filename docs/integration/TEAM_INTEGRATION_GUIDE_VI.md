@@ -1,6 +1,10 @@
 # InterviewBuddy — Hướng dẫn kết nối các phần của nhóm
 
-Ngày đối chiếu mã nguồn: **06/11/2026**. Phạm vi: đăng nhập → phân tích CV/JD → thiết lập phiên → Chat với AI → lưu câu trả lời → tiếp tục phiên → kết thúc.
+Ngày đối chiếu mã nguồn: **07/11/2026**. Phạm vi: đăng nhập → phân tích CV/JD → thiết lập phiên → Chat với AI → lưu câu trả lời → tiếp tục phiên → kết thúc.
+
+**Cập nhật ghép Setup:** đã kết hợp nhánh Tài `c7d5ca7` với bản SCRUM-94 `de1b323`, giữ Chat streaming và nhận Setup/Dashboard/Settings mới. Bản ghép đạt 243 test cục bộ, lint, typecheck và 5 nhóm kiểm tra giao diện; chưa chạy lại AI/persistence thật hoặc triển khai migration Settings lên cloud. Xem [báo cáo xử lý xung đột](../test/SCRUM-94_SETUP_MERGE_20261107_VI.md).
+
+**Bổ sung khi xuất bản code:** nhánh `feat/scrum-94-chat-streaming-hung` ghép các nhánh persistence của Nhân (`b509af5`), Chat của Khang (`ce7d687`) và hướng dẫn (`026568c`), sau đó thêm triển khai streaming và các sửa tích hợp. Những dòng “chưa commit/push” bên dưới ghi lại snapshot trước đợt xuất bản. Xem [báo cáo xuất bản và kiểm tra](../test/SCRUM-94_PUBLICATION_20261106_VI.md); trạng thái nghiệm thu Chat/Supabase thật vẫn chưa đạt xác nhận.
 
 Tài liệu này hướng dẫn tích hợp và bàn giao, không xác nhận nhóm đã nghiệm thu. Các tên nhánh/commit bên dưới là snapshot đã kiểm tra cục bộ; cần fetch và kiểm tra lại trước khi ghép code.
 
@@ -14,20 +18,20 @@ Tài liệu này hướng dẫn tích hợp và bàn giao, không xác nhận nh
 
 | Hạng mục | Trạng thái đã kiểm tra |
 | --- | --- |
-| Bản ghép persistence + Chat + streaming | Có tại thư mục `scrum94-chat-supabase`, nhánh local `test/scrum94-chat-supabase-20261106`; thay đổi tích hợp chưa commit/push. |
-| SCRUM-94 riêng | Có trong thư mục `main`, nhánh local `feat/scrum-94-interview-streaming`; phần triển khai mới chưa commit/push. Chưa có remote branch tương ứng trong danh sách refs đã kiểm tra. |
-| Chat + API giả lập | Có báo cáo 5 kịch bản đạt với component Chat thật và HTTP giả lập; không gọi Supabase/Gemini. |
-| Kiểm thử offline bản ghép | Log lần chạy trước ghi nhận 241/241 đạt; không phải kiểm thử Supabase cloud. |
-| Chat + Supabase dùng chung + Gemini thật | **Chưa xác minh.** Bản local được kiểm tra chưa có URL/anon key Supabase và chưa có tài khoản test được xác nhận. |
-| Trang thiết lập `/interview/new` | Hiện mới kiểm tra form/xem trước. Nút “Bắt đầu phỏng vấn” đang disabled, chưa nối tạo phiên và chuyển sang Chat. |
+| Bản ghép persistence + Chat + streaming | Nhánh `feat/scrum-94-chat-streaming-hung`, thư mục `publish-scrum94`; nền `de1b323` đã xuất bản qua PR #22, phần ghép Setup ngày 07/11 đang được chốt local. |
+| SCRUM-94 riêng | Streaming/policy đã nằm trong nhánh tích hợp; bản cũ ở thư mục `main` được giữ để bảo toàn thay đổi local. |
+| Setup/Chat/Settings + HTTP nghiệp vụ giả lập | Bản ghép 07/11 đạt 5 nhóm kiểm tra trên trang có bảo vệ: đăng nhập/profile thật, HTTP phiên/Settings và SSE giả lập; không gọi Gemini hay ghi/xóa practice data cloud. |
+| Kiểm thử offline bản ghép | 243/243 đạt; không phải kiểm thử Supabase cloud. |
+| Chat + Supabase dùng chung + Gemini thật | Đã chạy trên `444fc08` ngày 06/11: API 19/19 đạt; 19/20 lượt sinh mới hợp lệ, 16/20 nhanh và hợp lệ. Chưa đạt toàn bộ SCRUM-94 và chưa chạy lại trên bản ghép Setup. Xem [báo cáo thật](../test/SCRUM-94_REAL_CHAT_SUPABASE_20261106_VI.md). |
+| Trang thiết lập `/interview/new` | Đã nối POST tạo phiên và mở Chat streaming trong bản ghép local; còn cần xác nhận lại luồng dùng API/Supabase thật sau tích hợp. |
 
-Hướng dẫn dưới đây phân biệt rõ phần đã có trong bản ghép và phần thành viên còn cần nối. Tài liệu không tự thay đổi code của trang thiết lập.
+Hướng dẫn dưới đây phân biệt code đã ghép với các bước kiểm thử cloud và bàn giao còn cần xác nhận.
 
 ## 2. Trách nhiệm và nội dung bàn giao
 
 | Phần | Người phụ trách theo tài liệu/mã nguồn hiện có | Bàn giao cho nhóm | Điều kiện kiểm tra |
 | --- | --- | --- | --- |
-| Supabase, persistence, hạn mức AI — SCRUM-79 | Nhân | URL/anon key qua kênh phù hợp; trạng thái 4 migration; tài khoản test; API tạo/tải phiên, lưu answer, kết thúc; RPC quota | Lưu/tải lại được; tài khoản khác không truy cập dữ liệu; quota chặn trước khi gọi AI. |
+| Supabase, persistence, hạn mức AI — SCRUM-79 | Nhân | URL/anon key qua kênh phù hợp; trạng thái 4 migration persistence và migration Settings bổ sung; tài khoản test; API tạo/tải phiên, lưu answer, kết thúc; RPC quota | Lưu/tải lại được; tài khoản khác không truy cập dữ liệu; quota chặn trước khi gọi AI. |
 | AI interview/streaming — SCRUM-92/93/94 | Hưng | API `/api/interview/next`; quy tắc follow-up/next-topic; SSE consumer; timeout, hủy, số đo và test | Chỉ xác nhận câu hỏi sau kiểm tra và lưu DB; draft lỗi được xóa; không gọi AI tự động thêm khi thử lại. |
 | Chat — SCRUM-95 | Khang | `/interview/[id]`; render lịch sử; gửi answer qua API; preview streaming; thông báo vi/en và resume | Dùng đúng answer ID; khóa gửi khi câu hỏi chưa hoàn tất; reload không mất các lượt đã lưu. |
 | Đăng nhập và UI dùng chung | Tài theo README của nhóm | Luồng đăng nhập, session cookie, bảo vệ trang | Các API nhận đúng tài khoản đã đăng nhập; phiên hết hạn có đường đăng nhập lại. |
@@ -171,7 +175,7 @@ npm run dev
 
 ## 6. Chuẩn bị Supabase — Nhân/admin thực hiện
 
-Xác nhận bốn migration sau đã được áp dụng **đúng thứ tự** lên project test:
+Xác nhận năm migration sau đã được áp dụng **đúng thứ tự** lên project test; migration Settings thứ 5 còn cần review/xác nhận cloud sau bản ghép này:
 
 | Thứ tự | File trong `src/supabase/migrations/` | Chức năng |
 | --- | --- | --- |
@@ -179,8 +183,9 @@ Xác nhận bốn migration sau đã được áp dụng **đúng thứ tự** l
 | 2 | `20261030000000_interview_session_settings.sql` | Thiết lập phiên/liên kết analysis. |
 | 3 | `20261103000000_interview_next.sql` | Claim/finish/release cho lượt sinh câu hỏi. |
 | 4 | `20261105000000_session_resume_ai_limit.sql` | Lưu answer, resume và hạn mức AI. |
+| 5 | `20261107000000_settings_data.sql` | Xóa practice data của chính user và answer bridge tương thích; không reset AI usage. |
 
-Các RPC cần có: `claim_interview_next`, `finish_interview_next`, `release_interview_next`, `save_interview_answer`, `consume_ai_call`.
+Các RPC cần có cho Chat streaming: `claim_interview_next`, `finish_interview_next`, `release_interview_next`, `save_interview_answer`, `consume_ai_call`. Migration Settings bổ sung `delete_own_practice_data` và `save_own_interview_answer`; route Chat chính vẫn dùng persistence API và `save_interview_answer`.
 
 Mỗi thành viên không tự chạy lại toàn bộ migration vào DB chung. Nhân/admin đối chiếu lịch sử migration rồi dùng quy trình triển khai DB của nhóm; không reset DB hoặc tắt RLS để vượt lỗi kết nối.
 
@@ -197,9 +202,11 @@ Nhân/admin cũng xác nhận:
 
 Các API dùng session cookie khi gọi cùng origin trong app, hoặc Bearer token của tài khoản test khi dùng công cụ API. Không gửi token vào tài liệu/báo cáo.
 
-### 7.1. Tạo phiên từ form — phần còn cần nối
+### 7.1. Tạo phiên từ form — đã nối trong bản ghép
 
 File UI: `src/app/(workspace)/interview/new/page.tsx`.
+
+Form gọi `POST /api/interview`, kiểm tra session ID rồi mở route sử dụng Chat streaming. Trong bản ghép hiện tại không cần thêm một Chat JSON khác hoặc tự tạo phiên bằng Console. Form vẫn yêu cầu ngày, trong khi contract API cho phép null.
 
 Ánh xạ tên field hiện có trong form:
 
@@ -237,7 +244,7 @@ Không gửi `plannedQuestions`: backend tự gán 15/30/45 phút → 5/8/12 câ
 
 Thành công: HTTP **201**, body `{ "sessionId": "<UUID thật>", "fitAnalysisId": null }`. Chỉ sau đó mới chuyển đến `/interview/<sessionId>`. Nếu lỗi, giữ người dùng ở form và hiển thị lỗi; khóa nút trong khi đang gửi để tránh tạo hai phiên.
 
-**Cách thử tạm khi nút Setup chưa nối:** đăng nhập trên app test, mở Developer Tools → Console tại cùng origin, chạy đoạn sau một lần. Đoạn này tạo một phiên test thật, không phải thay đổi code UI và chưa gọi Gemini:
+**Chỉ dành cho checkout cũ còn nút Setup disabled:** đăng nhập trên app test, mở Developer Tools → Console tại cùng origin, chạy đoạn sau một lần. Không cần bước này với bản ghép 07/11. Đoạn này tạo một phiên test thật, không phải thay đổi code UI và chưa gọi Gemini:
 
 ```javascript
 const response = await fetch('/api/interview', {
@@ -348,7 +355,7 @@ npm run verify:secrets
 
 Chạy ESLint cho các file thực sự thay đổi theo phạm vi PR. Các kết quả lịch sử 241/241 offline và 5 kịch bản UI giả lập không thay thế việc chạy lại trên commit mà nhóm sẽ review.
 
-Runner `src/tests/browser/chat_stream_ui.py` hiện phục vụ worktree tích hợp trên máy này, cần Python có Playwright và Edge; script đang trỏ dependency root sang thư mục `main` bên cạnh. Khi chuyển cho máy khác, người nhận cần chỉnh cấu hình đường dẫn hoặc dùng checkout độc lập tương ứng trước khi chạy. Chọn `--bundler turbopack` để kiểm tra cả CSS theo cấu hình Tailwind hiện có. Runner tạo route fixture tạm rồi dọn sau test; không dùng route này làm đường vào Chat sản phẩm.
+Runner `src/tests/browser/chat_stream_ui.py` cần Python có Playwright và Edge. Bản xuất bản code tự nhận dependency root khi `node_modules` là junction; checkout độc lập không cần có thư mục `main` bên cạnh. Chọn `--bundler turbopack` để kiểm tra cả CSS theo cấu hình Tailwind hiện có. Runner tạo route fixture tạm rồi dọn sau test; không dùng route này làm đường vào Chat sản phẩm.
 
 ### 9.2. Kiểm tra persistence trên Supabase thật, không gọi Gemini
 
@@ -421,7 +428,7 @@ Mẫu ghi kết quả:
 - [ ] Nhân xác nhận môi trường test, migration/RPC, user A/B và cung cấp URL/anon key.
 - [ ] Người ghép code xuất bản nhánh/PR chứa đủ persistence + Chat + SCRUM-94 + sửa quota/transport; ghi commit cho nhóm.
 - [ ] Mỗi thành viên cấu hình `src/.env.local`, tắt mock và đăng nhập được.
-- [ ] Người nhận Setup nối tạo phiên, xử lý lỗi và chuyển sang session ID thật; xác nhận người phụ trách với nhóm.
+- [ ] Xác nhận Setup đã ghép tạo phiên, xử lý lỗi và mở Chat đúng session qua API/Supabase thật; code nối đã có, kiểm tra cloud sau merge còn pending.
 - [ ] Khang kiểm tra save → next, resume, preview/complete, vi/en, hủy và không retry tự động.
 - [ ] Hưng kiểm tra AI policy, schema, timeout, quota stream và số đo UI/DB thật.
 - [ ] Nhóm chạy kiểm tra ownership/quota và ghi tối thiểu 20 lượt tốc độ, giữ cả ca lỗi.
@@ -431,7 +438,7 @@ Mẫu ghi kết quả:
 
 - [Session API](../api/INTERVIEW_SESSION_API_v1.md): tạo phiên và liên kết analysis. Bản trong nhánh persistence có phần cập nhật mới hơn snapshot `main` local.
 - [Interview Next API](../api/INTERVIEW_NEXT_API_v1.md): request/response và quy tắc lượt.
-- Contract streaming hiện có ở bản SCRUM-94 local: `docs/api/INTERVIEW_STREAM_API_v1.md` (SSE, draft, complete và lỗi). File đó chưa có trên `origin/main` và không được xuất bản trong PR hướng dẫn này; phần hợp đồng cần để ghép Chat đã được ghi trực tiếp ở mục 7–8.
+- [Streaming API](../api/INTERVIEW_STREAM_API_v1.md): SSE, draft, complete và lỗi; được bổ sung trong nhánh xuất bản code SCRUM-94. PR #21 trước đó chỉ chứa hướng dẫn và liên kết README.
 - Nhánh persistence có thêm `docs/api/INTERVIEW_PERSISTENCE_API_v1.md`: nguồn đối chiếu GET turns/resume, answers, end và quota.
 - Quy ước branch/PR, người review/merge: [README repository](../../README.md).
 

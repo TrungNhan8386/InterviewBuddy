@@ -1,0 +1,40 @@
+{
+  "version": "scrum94-acceptance-targets-v1",
+  "recordedDateLocal": "2026-11-05",
+  "task": "SCRUM-94",
+  "status": "working targets set at user request; pending team/instructor alignment; not a passed acceptance result",
+  "originalJiraRequirementPreserved": true,
+  "originalJiraFirstWordsLimitMs": 2000,
+  "uiAcknowledgementMs": 200,
+  "fastFirstAnswer": {
+    "limitMs": 2000,
+    "minimumRate": 0.9,
+    "requiresValidSavedFinalResult": true
+  },
+  "validSavedCompletion": { "limitMs": 5000, "minimumRate": 0.95 },
+  "completeResponseValidationRate": 1,
+  "slowWarningMs": 5000,
+  "extendedWaitNoticeMs": 10000,
+  "defaultUpstreamTimeoutMs": 30000,
+  "warningTimersImplementedInProductChat": false,
+  "minimumGenerationSamples": 20,
+  "requiredEnvironment": "Authenticated product Chat UI with shared Supabase; record model, environment, cold starts and network",
+  "denominator": "All valid new-question generation attempts, including upstream errors/timeouts and cold starts. Replay/end and deliberately invalid/cancel tests are reported separately. Do not exclude abandonment caused by slowness.",
+  "automaticBillableRetry": false,
+  "latestEvidence": {
+    "source": "docs/test/results/scrum94-browser-live.json",
+    "samples": 5,
+    "fastAndValid": 3,
+    "fastAndValidRate": 0.6,
+    "completeWithinLimit": 4,
+    "completeWithinLimitRate": 0.8,
+    "fastTargetPassed": false,
+    "completionTargetPassed": false,
+    "minimumSamplesMet": false,
+    "requiredEnvironmentMet": false
+  },
+  "newLiveRequestsForThisRecord": 0,
+  "jiraRecord": "Saved in the SCRUM-94 description on 2026-11-05; original title and status unchanged",
+  "jiraUrl": "https://nhom3-24c01-se.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-94",
+  "jiraScreenshot": "output/scrum94-targets/jira-targets-saved.jpg"
+}

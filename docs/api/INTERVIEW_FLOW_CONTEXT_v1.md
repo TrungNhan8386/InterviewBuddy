@@ -50,7 +50,7 @@ No summarizer API call or summary table is introduced. Rebuilding from canonical
 ## Preserved safeguards and limits
 
 - Main-question and follow-up counters use **full** history, not the four visible pairs.
-- JD selection also uses full history to prefer uncovered topics. JD/CV documents remain intact within the existing input limits.
+- JD selection also uses full history to prefer uncovered topics. Original JD/CV documents remain intact within the existing input limits. SCRUM-94 prompt v0.10 projects large documents into bounded verbatim passages plus current-turn evidence; see [Interview Next API](INTERVIEW_NEXT_API_v1.md). This is separate from the four-turn memory projection and does not change persisted context.
 - Output validation checks normalized exact duplicate questions against **all** previous questions, including those outside the window. It does not guarantee rejection of every semantic paraphrase.
 - Provider failures or invalid outputs are not automatically retried or replaced by a canned question. Reservation/replay behavior is unchanged.
 - Full-input validation still limits JD to 30k, CV to 50k, each answer to 12k and aggregate serialized context to 180k UTF-16 units. Compaction does not bypass these checks or promise simultaneous acceptance of every field at its individual maximum.

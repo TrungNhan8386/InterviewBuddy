@@ -9,6 +9,7 @@ import MessageList from "./MessageList";
 import AnswerBox from "./AnswerBox";
 import SidePanel from "./SidePanel";
 import EndInterviewDialog from "./EndInterviewDialog";
+import type { InterviewStreamStatus } from "@/lib/interview/next-stream-client.mjs";
 import { USE_MOCK, endSession, loadChatSession, requestNext, saveAnswer } from "@/lib/interview-chat/client";
 import { CHAT_TEXT } from "@/lib/interview-chat/text";
 import {
@@ -34,8 +35,6 @@ type Phase =
   | { kind: "error"; code: ChatErrorCode; retry: "save" | "next" }
   | { kind: "ended" };
 
-const MAX_BUSY_RETRIES = 5; // GENERATION_IN_PROGRESS: wait 2 s and ask for the same turn again
-const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const codeOf = (error: unknown): ChatErrorCode =>
   error instanceof InterviewChatError ? error.code : "SERVER_ERROR";
 
@@ -46,6 +45,9 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
   const [confirmEnd, setConfirmEnd] = useState(false);
   const [ending, setEnding] = useState(false);
   const [endError, setEndError] = useState<string | null>(null);
+  const [questionPreview, setQuestionPreview] = useState("");
+  const [generationStatus, setGenerationStatus] = useState<InterviewStreamStatus>("generating");
+  const generation = useRef<AbortController | null>(null);
 
   // Ignore results that arrive after the user left the page.
   const alive = useRef(true);
@@ -53,6 +55,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     alive.current = true;
     return () => {
       alive.current = false;
+      generation.current?.abort();
     };
   }, []);
 
@@ -61,11 +64,20 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
 
   const fetchNext = useCallback(
     async (afterAnswerId: string | null, isOpening: boolean) => {
+      generation.current?.abort();
+      const controller = new AbortController();
+      generation.current = controller;
+      setQuestionPreview("");
+      setGenerationStatus("generating");
       setPhase({ kind: "thinking" });
-      for (let attempt = 0; ; attempt++) {
         try {
-          const next = await requestNext(sessionId, afterAnswerId);
-          if (!alive.current) return;
+          const next = await requestNext(sessionId, afterAnswerId, {
+            signal: controller.signal,
+            onPreview: (text) => { if (alive.current && generation.current === controller) setQuestionPreview(text); },
+            onStatus: (status) => { if (alive.current && generation.current === controller) setGenerationStatus(status); },
+          });
+          if (!alive.current || generation.current !== controller) return;
+          if (controller.signal.aborted) throw new InterviewChatError("REQUEST_CANCELLED");
           if (next.action === "end" || !next.question) {
             setSession((s) => (s ? { ...s, status: "completed" } : s));
             setPhase({ kind: "ended" });
@@ -85,12 +97,8 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           setPhase({ kind: "answering" });
           return;
         } catch (error) {
-          if (!alive.current) return;
+          if (!alive.current || generation.current !== controller) return;
           const code = codeOf(error);
-          if (code === "GENERATION_IN_PROGRESS" && attempt < MAX_BUSY_RETRIES) {
-            await wait(2000);
-            continue;
-          }
           if (code === "STALE_TURN") {
             // Another tab moved the interview on: reload the saved history and continue.
             setPhase({ kind: "loading" });
@@ -99,8 +107,12 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           }
           setPhase({ kind: "error", code, retry: "next" });
           return;
+        } finally {
+          if (generation.current === controller) {
+            generation.current = null;
+            if (alive.current) setQuestionPreview("");
+          }
         }
-      }
     },
     [sessionId],
   );
@@ -184,6 +196,11 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
 
   async function confirmEndInterview() {
     if (!session) return;
+    const active = generation.current;
+    generation.current = null;
+    active?.abort();
+    setQuestionPreview("");
+    if (active) setPhase({ kind: "error", code: "REQUEST_CANCELLED", retry: "next" });
     setEnding(true);
     setEndError(null);
     try {
@@ -262,7 +279,15 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           turns={session.turns}
           thinking={phase.kind === "thinking"}
           saving={phase.kind === "saving"}
+          preview={questionPreview}
+          generationStatus={generationStatus}
         />
+
+        {phase.kind === "thinking" && (
+          <Button variant="secondary" onClick={() => generation.current?.abort()}>
+            {text.cancelGeneration}
+          </Button>
+        )}
 
         {phase.kind === "error" && (
           <div

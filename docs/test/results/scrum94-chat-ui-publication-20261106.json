@@ -1,0 +1,12 @@
+{
+  "boundary": "Actual Next.js Chat component + production transport; mocked HTTP; no Supabase/Gemini calls.",
+  "checks": [
+    "vi-preview-complete-answer-lock",
+    "en-preview-complete-answer-lock",
+    "5s-10s-notices-cancel-no-auto-retry",
+    "invalid-output-clears-draft",
+    "resume-existing-question-no-generation"
+  ],
+  "pageErrors": [],
+  "status": "passed"
+}

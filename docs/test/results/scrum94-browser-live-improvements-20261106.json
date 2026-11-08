@@ -1,0 +1,735 @@
+{
+  "mode": "live",
+  "boundary": "Real browser + production consumer/handler/service/provider; simulated authentication and local PGlite. Live mode uses real Gemini.",
+  "provenance": "AI-authored synthetic CV/JD/answers. No real applicant data.",
+  "metric": "click to actual nonempty question text, measured after two requestAnimationFrame callbacks; ready/loading frames do not count",
+  "results": [
+    {
+      "id": "live-en-opening",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "8079e7e8-7977-4ccf-a6f5-69464209c50e",
+      "firstVisibleMs": 1503.1000000000931,
+      "firstVisibleText": "How would you handle loading and error states when fetching data from a REST API",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1485.8000000000466,
+      "previewUpdates": 3,
+      "completeMs": 1662.1999999999534,
+      "acknowledgementMs": 19.399999999906868,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.8000000000465661
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 1661.8000000000466
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 1485.1999999999534,
+        "elapsedMs": 1661.1999999999534,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "91198b38-0e58-4ede-b83a-d5a2d1fe391c",
+          "kind": "main",
+          "topic": "API Integration and State Management",
+          "content": "How would you handle loading and error states when fetching data from a REST API in a React component?",
+          "position": 1
+        },
+        "sessionId": "8079e7e8-7977-4ccf-a6f5-69464209c50e"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 1,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "request_started",
+            "elapsedMs": 0.055900000000292493,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "authenticated",
+            "elapsedMs": 0.10390000000006694,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "body_parsed",
+            "elapsedMs": 1.4513000000006286,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "claimed",
+            "elapsedMs": 11.284200000000055,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "context_ready",
+            "elapsedMs": 13.249099999999999,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "upstream_started",
+            "elapsedMs": 18.324400000000423,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "upstream_headers",
+            "elapsedMs": 1402.3812000000007,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 1403.6409000000003,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "upstream_first_text",
+            "elapsedMs": 1469.1295,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "upstream_validated",
+            "elapsedMs": 1631.0097000000005,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "decision_validated",
+            "elapsedMs": 1631.9101,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "persistence_started",
+            "elapsedMs": 1631.9153000000006,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "persisted",
+            "elapsedMs": 1644.5348000000004,
+            "code": null
+          },
+          {
+            "requestId": "785c68cf-fe9e-44a4-9729-2c9643a8d3b1",
+            "stage": "complete",
+            "elapsedMs": 1644.6236,
+            "code": null
+          }
+        ]
+      },
+      "withinTwoSeconds": true,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-vi-opening",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "75011b16-acde-4474-9ade-fb96dbacfe81",
+      "firstVisibleMs": 1278.2999999998137,
+      "firstVisibleText": "Bạn sẽ thiết kế và xử lý các trạng thái tải dữ liệu (loading)",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1260,
+      "previewUpdates": 3,
+      "completeMs": 1470,
+      "acknowledgementMs": 28.299999999813735,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.09999999986030161
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 1469.7999999998137
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 1259.8000000000466,
+        "elapsedMs": 1469.8000000000466,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "06585765-2c56-418d-a30c-cd398bdf6160",
+          "kind": "main",
+          "topic": "Xử lý trạng thái API và lỗi",
+          "content": "Bạn sẽ thiết kế và xử lý các trạng thái tải dữ liệu (loading) và hiển thị lỗi như thế nào khi gọi một REST API trong ứng dụng React?",
+          "position": 1
+        },
+        "sessionId": "75011b16-acde-4474-9ade-fb96dbacfe81"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 2,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "request_started",
+            "elapsedMs": 0.003200000000106229,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "authenticated",
+            "elapsedMs": 0.014999999999417923,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "body_parsed",
+            "elapsedMs": 0.08820000000014261,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "claimed",
+            "elapsedMs": 3.4484999999995125,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "context_ready",
+            "elapsedMs": 4.110599999999977,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "upstream_started",
+            "elapsedMs": 4.753099999999904,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "upstream_headers",
+            "elapsedMs": 1210.9881999999998,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 1211.5014,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "upstream_first_text",
+            "elapsedMs": 1256.1103999999996,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "upstream_validated",
+            "elapsedMs": 1462.9232999999995,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "decision_validated",
+            "elapsedMs": 1463.0738000000001,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "persistence_started",
+            "elapsedMs": 1463.0756000000001,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "persisted",
+            "elapsedMs": 1466.0168999999996,
+            "code": null
+          },
+          {
+            "requestId": "bef86e42-5f4b-4d5d-aa93-aa4639cef4b4",
+            "stage": "complete",
+            "elapsedMs": 1466.0792999999994,
+            "code": null
+          }
+        ]
+      },
+      "withinTwoSeconds": true,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-en-followup",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "82687e6d-2b92-471a-93cd-f955d6cee3c6",
+      "firstVisibleMs": 1076.8000000000466,
+      "firstVisibleText": "Which specific transaction isolation level or locking mechanism would you use to ensure overs",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1050,
+      "previewUpdates": 3,
+      "completeMs": 1176,
+      "acknowledgementMs": 26.5,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.19999999995343387
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 1175.8000000000466
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 1049.6999999999534,
+        "elapsedMs": 1175.6000000000931,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "follow_up",
+        "question": {
+          "id": "23823213-2c82-4225-8f9f-a1cd9978e0cb",
+          "kind": "follow_up",
+          "topic": "PostgreSQL transactions",
+          "content": "Which specific transaction isolation level or locking mechanism would you use to ensure overselling is prevented under concurrent requests?",
+          "position": 2
+        },
+        "sessionId": "82687e6d-2b92-471a-93cd-f955d6cee3c6"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 3,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "request_started",
+            "elapsedMs": 0.005499999999301508,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "authenticated",
+            "elapsedMs": 0.018599999999423744,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "body_parsed",
+            "elapsedMs": 0.12029999999867869,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "claimed",
+            "elapsedMs": 4.490399999998772,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "context_ready",
+            "elapsedMs": 5.335499999999229,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "upstream_started",
+            "elapsedMs": 7.233299999999872,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "upstream_headers",
+            "elapsedMs": 1001.4997999999996,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 1001.7294999999995,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "upstream_first_text",
+            "elapsedMs": 1046.1666999999998,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "upstream_validated",
+            "elapsedMs": 1168.5463999999993,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "decision_validated",
+            "elapsedMs": 1168.7015999999985,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "persistence_started",
+            "elapsedMs": 1168.7033999999985,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "persisted",
+            "elapsedMs": 1171.7244999999984,
+            "code": null
+          },
+          {
+            "requestId": "92db28ee-f1cf-4011-bf49-fd44a2ddd4a7",
+            "stage": "complete",
+            "elapsedMs": 1171.7506999999987,
+            "code": null
+          }
+        ]
+      },
+      "withinTwoSeconds": true,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-vi-behavioral",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "34c228c1-c73c-4f98-9953-b98b3bb878a3",
+      "firstVisibleMs": 2293.3000000000466,
+      "firstVisibleText": "Bạn có thể chia sẻ cụ thể hơn về vai trò cá nhân của bạn trong việc",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 2272.899999999907,
+      "previewUpdates": 3,
+      "completeMs": 2459.6999999999534,
+      "acknowledgementMs": 26.300000000046566,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.19999999995343387
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 2459.600000000093
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 2272.7999999998137,
+        "elapsedMs": 2459.5,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "follow_up",
+        "question": {
+          "id": "22f6f6ee-2123-4980-b35b-f575aaed60a0",
+          "kind": "follow_up",
+          "topic": "Phối hợp xử lý lỗi",
+          "content": "Bạn có thể chia sẻ cụ thể hơn về vai trò cá nhân của bạn trong việc tìm ra nguyên nhân và kiểm thử lại kết quả sửa lỗi đó không?",
+          "position": 2
+        },
+        "sessionId": "34c228c1-c73c-4f98-9953-b98b3bb878a3"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 4,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "request_started",
+            "elapsedMs": 0.005000000001018634,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "authenticated",
+            "elapsedMs": 0.01330000000052678,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "body_parsed",
+            "elapsedMs": 0.10040000000117288,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "claimed",
+            "elapsedMs": 3.5406000000002678,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "context_ready",
+            "elapsedMs": 4.219100000000253,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "upstream_started",
+            "elapsedMs": 5.300500000001193,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "upstream_headers",
+            "elapsedMs": 2197.2436000000016,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 2197.5689,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "upstream_first_text",
+            "elapsedMs": 2269.4607000000015,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "upstream_validated",
+            "elapsedMs": 2452.4877000000015,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "decision_validated",
+            "elapsedMs": 2452.788700000001,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "persistence_started",
+            "elapsedMs": 2452.7909,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "persisted",
+            "elapsedMs": 2455.7166000000016,
+            "code": null
+          },
+          {
+            "requestId": "01d8bb9d-b8c8-4b1d-ad36-84622437214c",
+            "stage": "complete",
+            "elapsedMs": 2455.754200000001,
+            "code": null
+          }
+        ]
+      },
+      "withinTwoSeconds": false,
+      "replaySameQuestionWithoutExtraCall": true
+    },
+    {
+      "id": "live-long-history",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "5bc21a35-fc46-4174-821a-82dcf177406b",
+      "firstVisibleMs": 1261.4000000001397,
+      "firstVisibleText": "Which specific PostgreSQL transaction isolation level or locking mechanism would you use to prevent",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 1230.4000000001397,
+      "previewUpdates": 3,
+      "completeMs": 1374.3000000000466,
+      "acknowledgementMs": 28.100000000093132,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.10000000009313226
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 1374.3000000000466
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 1230.3000000000466,
+        "elapsedMs": 1374.1999999999534,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "follow_up",
+        "question": {
+          "id": "21c531fd-34b6-46f1-aaac-b1715633e6a4",
+          "kind": "follow_up",
+          "topic": "PostgreSQL transactions",
+          "content": "Which specific PostgreSQL transaction isolation level or locking mechanism would you use to prevent that overselling race condition?",
+          "position": 8
+        },
+        "sessionId": "5bc21a35-fc46-4174-821a-82dcf177406b"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 5,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "request_started",
+            "elapsedMs": 0.0036000000000058208,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "authenticated",
+            "elapsedMs": 0.021500000000742148,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "body_parsed",
+            "elapsedMs": 0.07190000000082364,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "claimed",
+            "elapsedMs": 3.0082000000002154,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "context_ready",
+            "elapsedMs": 3.541000000001077,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "upstream_started",
+            "elapsedMs": 4.506499999999505,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "upstream_headers",
+            "elapsedMs": 1184.5002000000004,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 1184.8430000000008,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "upstream_first_text",
+            "elapsedMs": 1227.7248,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "upstream_validated",
+            "elapsedMs": 1368.0442999999996,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "decision_validated",
+            "elapsedMs": 1368.2765,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "persistence_started",
+            "elapsedMs": 1368.2808000000005,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "persisted",
+            "elapsedMs": 1371.3981000000003,
+            "code": null
+          },
+          {
+            "requestId": "0a1ab4cc-97ba-41c8-a117-9d2217b796f2",
+            "stage": "complete",
+            "elapsedMs": 1371.4359000000004,
+            "code": null
+          }
+        ]
+      },
+      "withinTwoSeconds": true,
+      "replaySameQuestionWithoutExtraCall": true
+    }
+  ],
+  "pageErrors": [],
+  "browser": "156.0.4314.58",
+  "fixtures": {
+    "instanceId": "1a5e0434-78c7-4912-9020-9d853e29580f",
+    "mode": "live",
+    "fixtures": [
+      {
+        "id": "live-en-opening",
+        "label": "Gemini · mở đầu tiếng Anh",
+        "sessionId": "8079e7e8-7977-4ccf-a6f5-69464209c50e",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-vi-opening",
+        "label": "Gemini · mở đầu tiếng Việt",
+        "sessionId": "75011b16-acde-4474-9ade-fb96dbacfe81",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-en-followup",
+        "label": "Gemini · hỏi tiếp kỹ thuật",
+        "sessionId": "82687e6d-2b92-471a-93cd-f955d6cee3c6",
+        "afterAnswerId": "fa995f70-8192-4e58-b775-9d0e5e184f19"
+      },
+      {
+        "id": "live-vi-behavioral",
+        "label": "Gemini · hỏi tiếp hành vi",
+        "sessionId": "34c228c1-c73c-4f98-9953-b98b3bb878a3",
+        "afterAnswerId": "650e884b-258a-430a-b987-13cd4cc61aa2"
+      },
+      {
+        "id": "live-long-history",
+        "label": "Gemini · lịch sử dài",
+        "sessionId": "5bc21a35-fc46-4174-821a-82dcf177406b",
+        "afterAnswerId": "4babf86f-ef28-4397-87bf-814439b4c664"
+      }
+    ]
+  },
+  "functionalChecks": "passed",
+  "withinTwoSeconds": 4,
+  "sampleCount": 5,
+  "allSamplesWithinTwoSeconds": false
+}

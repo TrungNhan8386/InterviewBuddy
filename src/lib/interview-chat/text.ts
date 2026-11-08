@@ -12,6 +12,10 @@ type ChatText = {
   followUp: string;
   topic: string;
   thinking: string;
+  slow: string;
+  extendedWait: string;
+  cancelGeneration: string;
+  provisional: string;
   saving: string;
   answerLabel: string;
   answerPlaceholder: string;
@@ -57,6 +61,10 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     followUp: "Câu hỏi đào sâu",
     topic: "Chủ đề",
     thinking: "AI đang soạn câu hỏi…",
+    slow: "Phản hồi đang chậm. Bạn có thể tiếp tục chờ hoặc hủy.",
+    extendedWait: "Đã chờ hơn 10 giây. Bạn có thể hủy rồi thử lại cùng lượt.",
+    cancelGeneration: "Hủy tạo câu hỏi",
+    provisional: "Câu hỏi đang tạo, chưa được xác nhận lưu",
     saving: "Đang lưu câu trả lời…",
     answerLabel: "Câu trả lời của bạn",
     answerPlaceholder: "Gõ câu trả lời ở đây…",
@@ -120,6 +128,10 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       DATABASE_NOT_READY: "Máy chủ chưa sẵn sàng (thiếu cấu hình hoặc migration).",
       AI_NOT_CONFIGURED: "Máy chủ chưa cấu hình AI.",
       AI_TIMEOUT: "AI phản hồi quá lâu. Hãy thử lại.",
+      AI_DAILY_LIMIT: "Bạn đã dùng hết lượt AI hôm nay. Hạn mức làm mới lúc 0:00 giờ Việt Nam.",
+      SESSION_CLOSED: "Buổi phỏng vấn đã đóng. Hãy tải lại trang.",
+      RESPONSE_TIMEOUT: "Máy chủ phản hồi quá lâu. Thử lại cùng lượt để lấy kết quả đã lưu nếu có.",
+      REQUEST_CANCELLED: "Đã hủy tạo câu hỏi. Bạn có thể thử lại cùng lượt.",
       SAVE_FAILED: "Chưa lưu được câu trả lời. Nội dung vẫn còn trong ô, hãy thử lại.",
       NETWORK_ERROR: "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.",
       SERVER_ERROR: "Máy chủ gặp lỗi. Hãy thử lại.",
@@ -136,6 +148,10 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     followUp: "Follow-up",
     topic: "Topic",
     thinking: "The AI is writing the question…",
+    slow: "The response is taking longer. You can keep waiting or cancel.",
+    extendedWait: "You have waited over 10 seconds. You can cancel and retry the same turn.",
+    cancelGeneration: "Cancel question generation",
+    provisional: "Draft question, not yet confirmed saved",
     saving: "Saving your answer…",
     answerLabel: "Your answer",
     answerPlaceholder: "Type your answer here…",
@@ -199,6 +215,10 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       DATABASE_NOT_READY: "The server is not ready (missing configuration or migration).",
       AI_NOT_CONFIGURED: "The server has no AI configuration.",
       AI_TIMEOUT: "The AI took too long. Please try again.",
+      AI_DAILY_LIMIT: "You have used today's AI allowance. It resets at 00:00 Vietnam time.",
+      SESSION_CLOSED: "This interview is closed. Please reload the page.",
+      RESPONSE_TIMEOUT: "The server took too long. Retry the same turn to recover any saved question.",
+      REQUEST_CANCELLED: "Question generation was cancelled. You can retry the same turn.",
       SAVE_FAILED: "Your answer was not saved. It is still in the box; please try again.",
       NETWORK_ERROR: "Could not reach the server. Check your connection and try again.",
       SERVER_ERROR: "The server had an error. Please try again.",

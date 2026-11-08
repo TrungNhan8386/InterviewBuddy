@@ -1,0 +1,269 @@
+{
+  "mode": "controlled",
+  "boundary": "Real browser + production consumer/handler/service/provider; simulated authentication and local PGlite. Live mode uses real Gemini.",
+  "provenance": "AI-authored synthetic CV/JD/answers. No real applicant data.",
+  "metric": "click to actual nonempty question text, measured after two requestAnimationFrame callbacks; ready/loading frames do not count",
+  "results": [
+    {
+      "id": "slow-success",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "f05c63e5-864f-4266-9fc2-229a699e312a",
+      "firstVisibleMs": 151.7000000011176,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 146.90000000037253,
+      "previewUpdates": 3,
+      "completeMs": 2557.5,
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "64f576cd-ad4a-483e-a912-2d91f66a9a48",
+          "kind": "main",
+          "topic": "Kiểm thử API",
+          "content": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+          "position": 1
+        },
+        "sessionId": "f05c63e5-864f-4266-9fc2-229a699e312a"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed"
+      }
+    },
+    {
+      "id": "slow-success",
+      "mode": "controlled",
+      "replay": true,
+      "sessionId": "f05c63e5-864f-4266-9fc2-229a699e312a",
+      "firstVisibleMs": 18.40000000037253,
+      "firstVisibleText": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+      "firstVisibleStatus": "Đã lưu câu hỏi",
+      "firstPreviewMs": 5.400000000372529,
+      "previewUpdates": 1,
+      "completeMs": 5.400000000372529,
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "64f576cd-ad4a-483e-a912-2d91f66a9a48",
+          "kind": "main",
+          "topic": "Kiểm thử API",
+          "content": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+          "position": 1
+        },
+        "sessionId": "f05c63e5-864f-4266-9fc2-229a699e312a"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed"
+      }
+    },
+    {
+      "id": "unicode",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "b9383fe2-e4c3-48dc-bf1e-d90f283110c7",
+      "firstVisibleMs": 115.59999999962747,
+      "firstVisibleText": "Bạn chọn \"Go\" ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 105,
+      "previewUpdates": 3,
+      "completeMs": 870.0999999996275,
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "3195bbdf-b720-45a4-96d6-ff7f97ddc897",
+          "kind": "main",
+          "topic": "Ngôn ngữ",
+          "content": "Bạn chọn \"Go\" và 😀 như thế nào?",
+          "position": 1
+        },
+        "sessionId": "b9383fe2-e4c3-48dc-bf1e-d90f283110c7"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed"
+      }
+    },
+    {
+      "id": "invalid-output",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "c23b8a61-41ee-46da-be23-baeb2c224942",
+      "firstVisibleMs": 114.69999999925494,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 105.59999999962747,
+      "previewUpdates": 2,
+      "completeMs": 862.6999999992549,
+      "error": "INVALID_OUTPUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "failed"
+      }
+    },
+    {
+      "id": "truncated",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "f613f03e-058f-439c-b01a-77a421f8d6c7",
+      "firstVisibleMs": 115.19999999925494,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 105.09999999962747,
+      "previewUpdates": 1,
+      "completeMs": 862.6999999992549,
+      "error": "INVALID_OUTPUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "failed"
+      }
+    },
+    {
+      "id": "cancel",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "de43201a-e0c3-465d-b573-65feae9f6fb2",
+      "firstVisibleMs": 121.29999999888241,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 115.29999999888241,
+      "previewUpdates": 1,
+      "completeMs": 220.69999999925494,
+      "error": "REQUEST_CANCELLED",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": true,
+        "newQuestions": 0,
+        "generationStatus": "failed"
+      }
+    },
+    {
+      "id": "closed",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "196c64bc-9514-44d4-9471-b2844d4ba859",
+      "firstVisibleMs": null,
+      "firstVisibleText": null,
+      "firstVisibleStatus": null,
+      "firstPreviewMs": null,
+      "previewUpdates": 0,
+      "completeMs": 4.699999999254942,
+      "error": null,
+      "output": {
+        "action": "end",
+        "question": null,
+        "sessionId": "196c64bc-9514-44d4-9471-b2844d4ba859"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 0,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": null
+      }
+    },
+    {
+      "id": "busy",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "be2135ad-3039-437f-bb64-715fd1363f98",
+      "firstVisibleMs": null,
+      "firstVisibleText": null,
+      "firstVisibleStatus": null,
+      "firstPreviewMs": null,
+      "previewUpdates": 0,
+      "completeMs": 5.300000000745058,
+      "error": "GENERATION_IN_PROGRESS",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 0,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "generating"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "browser": "156.0.4314.58",
+  "fixtures": {
+    "instanceId": "d75dc0e9-67cd-4a02-90ee-0ff2c4504594",
+    "mode": "controlled",
+    "fixtures": [
+      {
+        "id": "slow-success",
+        "label": "Thành công · trả chữ trước khi hoàn tất",
+        "sessionId": "f05c63e5-864f-4266-9fc2-229a699e312a",
+        "afterAnswerId": null
+      },
+      {
+        "id": "invalid-output",
+        "label": "Lỗi · JSON có trường score không hợp lệ",
+        "sessionId": "c23b8a61-41ee-46da-be23-baeb2c224942",
+        "afterAnswerId": null
+      },
+      {
+        "id": "truncated",
+        "label": "Lỗi · phản hồi bị cắt giữa chừng",
+        "sessionId": "f613f03e-058f-439c-b01a-77a421f8d6c7",
+        "afterAnswerId": null
+      },
+      {
+        "id": "cancel",
+        "label": "Hủy khi đang nhận câu hỏi",
+        "sessionId": "de43201a-e0c3-465d-b573-65feae9f6fb2",
+        "afterAnswerId": null
+      },
+      {
+        "id": "unicode",
+        "label": "Tiếng Việt, dấu ngoặc kép và emoji",
+        "sessionId": "b9383fe2-e4c3-48dc-bf1e-d90f283110c7",
+        "afterAnswerId": null
+      },
+      {
+        "id": "closed",
+        "label": "Phiên đã đóng · không gọi AI",
+        "sessionId": "196c64bc-9514-44d4-9471-b2844d4ba859",
+        "afterAnswerId": null
+      },
+      {
+        "id": "busy",
+        "label": "Lượt đang được tạo · HTTP 409",
+        "sessionId": "be2135ad-3039-437f-bb64-715fd1363f98",
+        "afterAnswerId": null
+      }
+    ]
+  },
+  "functionalChecks": "passed"
+}

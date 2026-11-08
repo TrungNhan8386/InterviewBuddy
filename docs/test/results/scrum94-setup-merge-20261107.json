@@ -1,0 +1,60 @@
+{
+  "dateLocal": "2026-11-07",
+  "baseCommit": "de1b323",
+  "incomingCommit": "c7d5ca7",
+  "branch": "feat/scrum-94-chat-streaming-hung",
+  "conflictResolution": {
+    "files": [
+      "src/app/(workspace)/interview/[id]/page.tsx",
+      "docs/analysis and design/database-design.md"
+    ],
+    "route": "Keep the existing streaming Chat route and persistence API transport.",
+    "databaseDocument": "Keep persistence/daily-limit schema, add Settings as migration 5, remove duplicate generation diagram."
+  },
+  "offline": {
+    "command": "npm test",
+    "passed": 243,
+    "failed": 0,
+    "skipped": 0,
+    "boundary": "Local PGlite and mocked/localhost HTTP; no shared-Supabase schema/data changes or real Gemini requests."
+  },
+  "lint": {
+    "command": "npm run lint",
+    "status": "passed"
+  },
+  "types": {
+    "commands": [
+      "next typegen",
+      "npm run typecheck"
+    ],
+    "status": "passed"
+  },
+  "browser": {
+    "red": {
+      "status": "failed_as_expected",
+      "reason": "Setup start button is disabled before integration."
+    },
+    "green": {
+      "boundary": "Actual protected Setup/Chat/Settings pages with real Supabase test sign-in and profile reads; interview/settings HTTP mocked. No real generation, practice-data write or deletion.",
+      "checks": [
+        "vi Setup creates session and opens streaming preview then confirmed Chat",
+        "vi answer anchor, saved resume and end preserved",
+        "en Setup creates session and opens streaming preview then confirmed Chat",
+        "en answer anchor, saved resume and end preserved",
+        "Settings language save/reload; no deletion requested"
+      ],
+      "status": "passed",
+      "stage": "settings"
+    },
+    "testFile": "src/tests/browser/setup_streaming_integration.py",
+    "notAGeminiLatencyBenchmark": true
+  },
+  "sharedSupabasePracticeDataWrites": false,
+  "sharedSupabaseSchemaModified": false,
+  "realGeminiCalls": 0,
+  "productionBuildRun": false,
+  "fullScrum94AcceptanceClaimed": false,
+  "accountScreenshotsPublished": false,
+  "credentialsIncluded": false,
+  "serverLifecycle": "Fresh owned Node test server; entire owned process tree stopped after the run."
+}

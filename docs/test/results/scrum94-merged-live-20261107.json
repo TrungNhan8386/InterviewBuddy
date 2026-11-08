@@ -1,0 +1,750 @@
+{
+  "dateLocal": "2026-11-07",
+  "commit": "53a955c",
+  "model": "gemini-3.5-flash-lite",
+  "boundary": "Actual protected product Setup/Analysis/Chat/Settings, real Supabase Auth/database/RLS and real Gemini; no HTTP mocking.",
+  "syntheticData": true,
+  "pacingSecondsBetweenAiStarts": 8,
+  "timingDefinition": {
+    "opening": "Immediately before Setup start click, including create-session API and navigation, until visible question/confirmed completion.",
+    "answer": "Immediately before Send, including answer save, until visible question/confirmed completion.",
+    "ack": "Observed busy state after two animation frames; blank/spinner is never counted as question text.",
+    "measurement": "Visible preview body or confirmed new question only; raw first text must prefix the saved final question."
+  },
+  "analysis": [
+    {
+      "case": "vi-short",
+      "httpStatus": 200,
+      "cvChars": 685,
+      "jdChars": 415,
+      "savedThroughUI": true,
+      "fitScore": 87.5
+    }
+  ],
+  "attempts": [
+    {
+      "kind": "setup_click",
+      "start": 2631.399999999907,
+      "requestStart": 4915.5,
+      "httpStatus": 200,
+      "firstVisibleMs": null,
+      "completeMs": null,
+      "outcome": "error",
+      "errorCode": "UI_ERROR",
+      "firstVisibleText": null,
+      "seenFrame": null,
+      "ackFrame": 371,
+      "ackMs": 43,
+      "elapsedMs": 14610.700000000186,
+      "uiError": "Không kết nối được AI. Hãy thử lại.Thử lại",
+      "case": "vi-short",
+      "language": "vi",
+      "turn": 1,
+      "profileChars": 685,
+      "attemptNumber": 1,
+      "sessionReadHttpStatus": 200,
+      "savedTurnCount": 0,
+      "persisted": false,
+      "firstVisibleMeasurementValid": false,
+      "fastAndValid": false,
+      "completeWithinFiveSeconds": false,
+      "backendTiming": [
+        {
+          "stage": "request_started",
+          "elapsedMs": 0.039399999997840496,
+          "code": null
+        },
+        {
+          "stage": "authenticated",
+          "elapsedMs": 6.190500000000611,
+          "code": null
+        },
+        {
+          "stage": "body_parsed",
+          "elapsedMs": 7.130199999999604,
+          "code": null
+        },
+        {
+          "stage": "claimed",
+          "elapsedMs": 140.33569999999963,
+          "code": null
+        },
+        {
+          "stage": "context_ready",
+          "elapsedMs": 141.8145000000004,
+          "code": null
+        },
+        {
+          "stage": "upstream_started",
+          "elapsedMs": 274.77089999999953,
+          "code": null
+        },
+        {
+          "stage": "upstream_headers",
+          "elapsedMs": 12041.285499999998,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_frame",
+          "elapsedMs": 12042.882299999997,
+          "code": null
+        },
+        {
+          "stage": "failed",
+          "elapsedMs": 12241.780599999998,
+          "code": "AI_UNAVAILABLE"
+        }
+      ],
+      "backendErrorCode": "AI_UNAVAILABLE"
+    },
+    {
+      "kind": "opening_navigation",
+      "start": 0,
+      "requestStart": 2244.2999999998137,
+      "httpStatus": 200,
+      "firstVisibleMs": 4280.5,
+      "completeMs": 4695.0999999996275,
+      "outcome": "complete",
+      "errorCode": null,
+      "firstVisibleText": "Bạn sẽ cấu trúc AbortController trong một custom hook gọi API bằng",
+      "seenFrame": 482,
+      "case": "vi-short",
+      "language": "vi",
+      "turn": 1,
+      "profileChars": 685,
+      "attemptNumber": 2,
+      "requestToFirstVisibleMs": 2036.2000000001863,
+      "requestToCompleteMs": 2450.7999999998137,
+      "newLogicalGeneration": false,
+      "retryOfAttempt": 1,
+      "sessionReadHttpStatus": 200,
+      "savedTurnCount": 1,
+      "questionId": "question-test-01",
+      "questionText": "Bạn sẽ cấu trúc AbortController trong một custom hook gọi API bằng React và TypeScript thế nào để tự động hủy request cũ khi component unmount hoặc khi param thay đổi?",
+      "questionKind": "main",
+      "questionTopic": "React và TypeScript",
+      "persisted": true,
+      "previousAnswerPersisted": true,
+      "firstVisibleMeasurementValid": true,
+      "fastAndValid": false,
+      "completeWithinFiveSeconds": true,
+      "backendTiming": [
+        {
+          "stage": "request_started",
+          "elapsedMs": 0.04409999999916181,
+          "code": null
+        },
+        {
+          "stage": "authenticated",
+          "elapsedMs": 4.266599999999016,
+          "code": null
+        },
+        {
+          "stage": "body_parsed",
+          "elapsedMs": 5.560900000000402,
+          "code": null
+        },
+        {
+          "stage": "claimed",
+          "elapsedMs": 253.2507000000005,
+          "code": null
+        },
+        {
+          "stage": "context_ready",
+          "elapsedMs": 254.4998999999989,
+          "code": null
+        },
+        {
+          "stage": "upstream_started",
+          "elapsedMs": 440.6144999999997,
+          "code": null
+        },
+        {
+          "stage": "upstream_headers",
+          "elapsedMs": 1806.5550999999996,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_frame",
+          "elapsedMs": 1807.6291999999994,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_text",
+          "elapsedMs": 1919.871799999999,
+          "code": null
+        },
+        {
+          "stage": "upstream_validated",
+          "elapsedMs": 2173.103799999999,
+          "code": null
+        },
+        {
+          "stage": "decision_validated",
+          "elapsedMs": 2173.6440999999995,
+          "code": null
+        },
+        {
+          "stage": "persistence_started",
+          "elapsedMs": 2173.8315999999995,
+          "code": null
+        },
+        {
+          "stage": "persisted",
+          "elapsedMs": 2362.9977,
+          "code": null
+        },
+        {
+          "stage": "complete",
+          "elapsedMs": 2363.3209000000006,
+          "code": null
+        }
+      ],
+      "backendErrorCode": null
+    },
+    {
+      "kind": "send_click",
+      "start": 7998.199999999721,
+      "requestStart": 9137.599999999627,
+      "httpStatus": 200,
+      "firstVisibleMs": 4352.700000000186,
+      "completeMs": 4735.100000000093,
+      "outcome": "complete",
+      "errorCode": null,
+      "firstVisibleText": "Bạn có thể mô tả chi tiết cách bạn khởi tạo AbortController và",
+      "seenFrame": 1645,
+      "ackFrame": 1024,
+      "ackMs": 41.10000000009313,
+      "case": "vi-short",
+      "language": "vi",
+      "turn": 2,
+      "profileChars": 685,
+      "attemptNumber": 3,
+      "requestToFirstVisibleMs": 3213.3000000002794,
+      "requestToCompleteMs": 3595.7000000001863,
+      "newLogicalGeneration": true,
+      "sessionReadHttpStatus": 200,
+      "savedTurnCount": 2,
+      "questionId": "question-test-02",
+      "questionText": "Bạn có thể mô tả chi tiết cách bạn khởi tạo AbortController và truyền signal vào hàm fetch trong custom hook đó như thế nào không?",
+      "questionKind": "follow_up",
+      "questionTopic": "React và TypeScript",
+      "persisted": true,
+      "previousAnswerPersisted": true,
+      "firstVisibleMeasurementValid": true,
+      "fastAndValid": false,
+      "completeWithinFiveSeconds": true,
+      "backendTiming": [
+        {
+          "stage": "request_started",
+          "elapsedMs": 0.004300000000512227,
+          "code": null
+        },
+        {
+          "stage": "authenticated",
+          "elapsedMs": 3.7550000000010186,
+          "code": null
+        },
+        {
+          "stage": "body_parsed",
+          "elapsedMs": 4.365200000000186,
+          "code": null
+        },
+        {
+          "stage": "claimed",
+          "elapsedMs": 192.85419999999976,
+          "code": null
+        },
+        {
+          "stage": "context_ready",
+          "elapsedMs": 194.20700000000033,
+          "code": null
+        },
+        {
+          "stage": "upstream_started",
+          "elapsedMs": 396.15500000000065,
+          "code": null
+        },
+        {
+          "stage": "upstream_headers",
+          "elapsedMs": 3108.5438000000013,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_frame",
+          "elapsedMs": 3109.844900000002,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_text",
+          "elapsedMs": 3166.1463999999996,
+          "code": null
+        },
+        {
+          "stage": "upstream_validated",
+          "elapsedMs": 3380.9017000000003,
+          "code": null
+        },
+        {
+          "stage": "decision_validated",
+          "elapsedMs": 3381.338600000001,
+          "code": null
+        },
+        {
+          "stage": "persistence_started",
+          "elapsedMs": 3381.4712999999992,
+          "code": null
+        },
+        {
+          "stage": "persisted",
+          "elapsedMs": 3559.0383999999995,
+          "code": null
+        },
+        {
+          "stage": "complete",
+          "elapsedMs": 3559.2971000000016,
+          "code": null
+        }
+      ],
+      "backendErrorCode": null
+    },
+    {
+      "kind": "send_click",
+      "start": 15987.599999999627,
+      "requestStart": 16227.5,
+      "httpStatus": 200,
+      "firstVisibleMs": 3445.7000000001863,
+      "completeMs": 3849.9000000003725,
+      "outcome": "complete",
+      "errorCode": null,
+      "firstVisibleText": "Bạn sẽ xử lý việc xác thực form và hiển thị các trạng thái lỗi",
+      "seenFrame": 2665,
+      "ackFrame": 2174,
+      "ackMs": 36.60000000009313,
+      "case": "vi-short",
+      "language": "vi",
+      "turn": 3,
+      "profileChars": 685,
+      "attemptNumber": 4,
+      "requestToFirstVisibleMs": 3205.7999999998137,
+      "requestToCompleteMs": 3610.0,
+      "newLogicalGeneration": true,
+      "sessionReadHttpStatus": 200,
+      "savedTurnCount": 3,
+      "questionId": "question-test-03",
+      "questionText": "Bạn sẽ xử lý việc xác thực form và hiển thị các trạng thái lỗi như thế nào trong một component React sử dụng TypeScript?",
+      "questionKind": "main",
+      "questionTopic": "Xác thực form và trạng thái",
+      "persisted": true,
+      "previousAnswerPersisted": true,
+      "firstVisibleMeasurementValid": true,
+      "fastAndValid": false,
+      "completeWithinFiveSeconds": true,
+      "backendTiming": [
+        {
+          "stage": "request_started",
+          "elapsedMs": 0.004100000001926674,
+          "code": null
+        },
+        {
+          "stage": "authenticated",
+          "elapsedMs": 10.726300000002084,
+          "code": null
+        },
+        {
+          "stage": "body_parsed",
+          "elapsedMs": 11.779300000001967,
+          "code": null
+        },
+        {
+          "stage": "claimed",
+          "elapsedMs": 161.3641000000025,
+          "code": null
+        },
+        {
+          "stage": "context_ready",
+          "elapsedMs": 162.0534000000007,
+          "code": null
+        },
+        {
+          "stage": "upstream_started",
+          "elapsedMs": 317.672300000002,
+          "code": null
+        },
+        {
+          "stage": "upstream_headers",
+          "elapsedMs": 3104.932100000002,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_frame",
+          "elapsedMs": 3105.577000000001,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_text",
+          "elapsedMs": 3164.4436000000023,
+          "code": null
+        },
+        {
+          "stage": "upstream_validated",
+          "elapsedMs": 3401.0275,
+          "code": null
+        },
+        {
+          "stage": "decision_validated",
+          "elapsedMs": 3401.4325000000026,
+          "code": null
+        },
+        {
+          "stage": "persistence_started",
+          "elapsedMs": 3401.5640999999996,
+          "code": null
+        },
+        {
+          "stage": "persisted",
+          "elapsedMs": 3581.5758000000023,
+          "code": null
+        },
+        {
+          "stage": "complete",
+          "elapsedMs": 3581.835500000001,
+          "code": null
+        }
+      ],
+      "backendErrorCode": null
+    },
+    {
+      "kind": "send_click",
+      "start": 23989.5,
+      "requestStart": 24202.899999999907,
+      "httpStatus": 200,
+      "firstVisibleMs": 3609.399999999907,
+      "completeMs": 4048,
+      "outcome": "complete",
+      "errorCode": null,
+      "firstVisibleText": "Bạn sẽ triển khai cơ chế kiểm tra quyền truy cập (authentication-aware routing) trong",
+      "seenFrame": 3841,
+      "ackFrame": 3326,
+      "ackMs": 33.5,
+      "case": "vi-short",
+      "language": "vi",
+      "turn": 4,
+      "profileChars": 685,
+      "attemptNumber": 5,
+      "requestToFirstVisibleMs": 3396.0,
+      "requestToCompleteMs": 3834.600000000093,
+      "newLogicalGeneration": true,
+      "sessionReadHttpStatus": 200,
+      "savedTurnCount": 4,
+      "questionId": "question-test-04",
+      "questionText": "Bạn sẽ triển khai cơ chế kiểm tra quyền truy cập (authentication-aware routing) trong ứng dụng React với TypeScript như thế nào để ngăn người dùng chưa đăng nhập truy cập các trang nội bộ?",
+      "questionKind": "main",
+      "questionTopic": "Xác thực và định tuyến",
+      "persisted": true,
+      "previousAnswerPersisted": true,
+      "firstVisibleMeasurementValid": true,
+      "fastAndValid": false,
+      "completeWithinFiveSeconds": true,
+      "backendTiming": [
+        {
+          "stage": "request_started",
+          "elapsedMs": 0.0031999999991967343,
+          "code": null
+        },
+        {
+          "stage": "authenticated",
+          "elapsedMs": 16.74949999999808,
+          "code": null
+        },
+        {
+          "stage": "body_parsed",
+          "elapsedMs": 17.466499999998632,
+          "code": null
+        },
+        {
+          "stage": "claimed",
+          "elapsedMs": 171.3269999999975,
+          "code": null
+        },
+        {
+          "stage": "context_ready",
+          "elapsedMs": 172.20769999999902,
+          "code": null
+        },
+        {
+          "stage": "upstream_started",
+          "elapsedMs": 317.29609999999957,
+          "code": null
+        },
+        {
+          "stage": "upstream_headers",
+          "elapsedMs": 3312.711199999998,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_frame",
+          "elapsedMs": 3313.2598,
+          "code": null
+        },
+        {
+          "stage": "upstream_first_text",
+          "elapsedMs": 3356.3891000000003,
+          "code": null
+        },
+        {
+          "stage": "upstream_validated",
+          "elapsedMs": 3656.3246999999974,
+          "code": null
+        },
+        {
+          "stage": "decision_validated",
+          "elapsedMs": 3656.727899999998,
+          "code": null
+        },
+        {
+          "stage": "persistence_started",
+          "elapsedMs": 3656.8494999999966,
+          "code": null
+        },
+        {
+          "stage": "persisted",
+          "elapsedMs": 3807.5178000000014,
+          "code": null
+        },
+        {
+          "stage": "complete",
+          "elapsedMs": 3807.856399999997,
+          "code": null
+        }
+      ],
+      "backendErrorCode": null
+    },
+    {
+      "kind": "send_click",
+      "start": 31992.599999999627,
+      "requestStart": 32213.599999999627,
+      "httpStatus": 200,
+      "firstVisibleMs": null,
+      "completeMs": null,
+      "outcome": "error",
+      "errorCode": "UI_ERROR",
+      "firstVisibleText": null,
+      "seenFrame": null,
+      "ackFrame": 4479,
+      "ackMs": 36.8000000002794,
+      "elapsedMs": 3532.8000000002794,
+      "uiError": "Không kết nối được AI. Hãy thử lại.Thử lại",
+      "case": "vi-short",
+      "language": "vi",
+      "turn": 5,
+      "profileChars": 685,
+      "attemptNumber": 6,
+      "newLogicalGeneration": true,
+      "sessionReadHttpStatus": 200,
+      "savedTurnCount": 4,
+      "questionId": "question-test-04",
+      "questionText": "Bạn sẽ triển khai cơ chế kiểm tra quyền truy cập (authentication-aware routing) trong ứng dụng React với TypeScript như thế nào để ngăn người dùng chưa đăng nhập truy cập các trang nội bộ?",
+      "questionKind": "main",
+      "questionTopic": "Xác thực và định tuyến",
+      "persisted": false,
+      "previousAnswerPersisted": true,
+      "firstVisibleMeasurementValid": false,
+      "fastAndValid": false,
+      "completeWithinFiveSeconds": false,
+      "backendTiming": [
+        {
+          "stage": "request_started",
+          "elapsedMs": 0.009899999997287523,
+          "code": null
+        },
+        {
+          "stage": "authenticated",
+          "elapsedMs": 7.9055999999982305,
+          "code": null
+        },
+        {
+          "stage": "body_parsed",
+          "elapsedMs": 8.637699999999313,
+          "code": null
+        },
+        {
+          "stage": "claimed",
+          "elapsedMs": 158.3260999999984,
+          "code": null
+        },
+        {
+          "stage": "context_ready",
+          "elapsedMs": 159.0824999999968,
+          "code": null
+        },
+        {
+          "stage": "upstream_started",
+          "elapsedMs": 307.67759999999544,
+          "code": null
+        },
+        {
+          "stage": "upstream_headers",
+          "elapsedMs": 3134.572500000002,
+          "code": null
+        },
+        {
+          "stage": "failed",
+          "elapsedMs": 3282.4706000000006,
+          "code": "AI_UNAVAILABLE"
+        }
+      ],
+      "backendErrorCode": "AI_UNAVAILABLE"
+    }
+  ],
+  "sessions": [
+    {
+      "case": "vi-short",
+      "id": "session-test-01",
+      "fitAnalysisId": "analysis-test-01"
+    }
+  ],
+  "checks": [
+    {
+      "name": "real UI login A",
+      "passed": true
+    },
+    {
+      "name": "real Settings PATCH persists English",
+      "passed": true
+    },
+    {
+      "name": "new Setup defaults to saved profile language",
+      "passed": true
+    },
+    {
+      "name": "original profile language restored",
+      "passed": true
+    },
+    {
+      "name": "Dashboard links actual newly created vi-short",
+      "passed": true
+    },
+    {
+      "name": "real end API persists completed",
+      "passed": true
+    },
+    {
+      "name": "closed session reloads in UI without another generation",
+      "passed": true
+    },
+    {
+      "name": "original profile language remains restored",
+      "passed": true
+    },
+    {
+      "name": "B cannot read vi-short via real API",
+      "passed": true
+    },
+    {
+      "name": "foreign session displays localized NOT_FOUND without a code error screen",
+      "passed": true
+    }
+  ],
+  "actualNextHttpRequests": 6,
+  "stage": "real-ownership-B",
+  "status": "real_test_finished_with_upstream_failures",
+  "sharedSupabaseMigrationApplied": false,
+  "purgeInvoked": false,
+  "screenshotsPrivate": true,
+  "settingsGetHttpStatus": 200,
+  "errorType": "RuntimeError",
+  "summary": {
+    "allChatHttpAttempts": 6,
+    "newLogicalAttempts": 5,
+    "explicitRetries": 1,
+    "allSavedQuestions": 4,
+    "allFailedChatAttempts": 2,
+    "newValidSaved": 3,
+    "newFastAndValid": 0,
+    "newCompleteWithinFiveSeconds": 3,
+    "newAckWithin200ms": 5,
+    "successfulFirstTextMinMs": 3445.7,
+    "successfulFirstTextMaxMs": 4352.7,
+    "successfulCompleteMinMs": 3849.9,
+    "successfulCompleteMaxMs": 4735.1,
+    "analysisRequests": 1,
+    "analysisSaved": 1,
+    "checksPassed": 10,
+    "accountAppUsageBefore": 0,
+    "accountAppUsageAfter": 7,
+    "appDailyLimit": 100
+  },
+  "workingLatencyTargetsPassed": false,
+  "allChecksPassed": true,
+  "continuation": {
+    "reason": "Backend AI_UNAVAILABLE on the first opening; one explicit retry after diagnosis, not an automatic retry.",
+    "originalFailedAttemptRetained": 1,
+    "retriesAllowed": 1
+  },
+  "errorCode": "REAL_AI_STILL_FAILED",
+  "managementConnection": {
+    "pluginInstalled": true,
+    "toolStatus": "Unknown tool returned twice by list_projects; management SQL not reached."
+  },
+  "aiBatchStoppedReason": "Two upstream AI_UNAVAILABLE responses in six Chat HTTP attempts; one explicit retry already used. Stopped to preserve evidence and avoid repeated AI calls.",
+  "persistenceReview": [
+    {
+      "case": "vi-short",
+      "questionCount": 4,
+      "answerCount": 4,
+      "uniqueQuestions": true,
+      "lastAnswerRetainedAfterFailedGeneration": true,
+      "resumeState": "awaiting_question"
+    }
+  ],
+  "postFailureChecksStatus": "passed",
+  "postFailureAiRequests": 0,
+  "foreignUiObservation": {
+    "apiStatus": 404,
+    "apiErrorCode": "NOT_FOUND",
+    "alerts": [
+      "Không tìm thấy buổi phỏng vấn này, hoặc nó không thuộc tài khoản của bạn.Thử lạiVề Dashboard",
+      ""
+    ],
+    "headingTexts": []
+  },
+  "verificationHarnessNote": {
+    "initialForeignUiCheck": "A strict locator matched the localized error card and an empty development alert.",
+    "recheck": "Read all alert texts and visually inspected the UI; localized NOT_FOUND is present and no foreign data is shown.",
+    "sourceChangedToPass": false
+  },
+  "migrationStatus": {
+    "appliedThisRun": false,
+    "sourceFile": "src/supabase/migrations/20261107000000_settings_data.sql",
+    "sha256": "95f46054434abea2de2eec62ef15d3372919bf1b314f1d83a17c137ada9ed72b",
+    "newAnswerBridgeProbe": {
+      "httpStatus": 404,
+      "errorCode": "PGRST202"
+    },
+    "schemaDiscoveryHttpStatus": 401,
+    "schemaVisibilityInconclusive": true,
+    "pluginInstalled": true,
+    "managementOperation": "list_projects returned Unknown tool twice; no SQL or migration was executed."
+  },
+  "scopeNotCovered": [
+    "Minimum 20 new-generation acceptance sample",
+    "English real Chat",
+    "Long-profile real Chat",
+    "Production build/deployment",
+    "PDF upload/extraction",
+    "Real practice-data deletion",
+    "Fresh schema definition/history verification"
+  ],
+  "fullAcceptancePassed": false,
+  "retainedData": {
+    "sessions": 1,
+    "analyses": 1,
+    "questions": 4,
+    "answers": 4,
+    "sessionEnded": true,
+    "existingSeedsPreserved": true,
+    "profileLanguageRestored": "vi"
+  },
+  "publicationPrivacy": "Database IDs aliased; credentials, cookies, storage state and account screenshots remain private."
+}

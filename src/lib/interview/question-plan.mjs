@@ -27,8 +27,8 @@ function terms(text) {
 }
 function overlap(a, b) { return [...a].filter((word) => b.has(word)).length; }
 function passages(text) {
-  // Preserve exact source passages, including negation. Full documents remain
-  // in the request even when a passage is too long for this optional selector.
+  // Preserve exact passages, including negation. Full documents remain in the
+  // validated server context; document-context.mjs projects the model payload.
   return text.split(/\r?\n|;|(?<=[.!?])\s+/u).map((s) => s.trim())
     .filter((s) => s.length >= 2 && s.length <= 1500 && terms(s).size > 0);
 }

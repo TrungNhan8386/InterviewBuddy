@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InterviewBuddy · Kiểm tra streaming</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5fb;color:#172139;font:16px/1.6 system-ui,sans-serif}main{max-width:960px;margin:48px auto;padding:0 24px}.brand{font-size:18px;font-weight:750;color:#5343ce}.note{color:#526078}h1{font-size:30px;line-height:1.3;margin:12px 0}.panel{background:white;border:1px solid #dce2ed;border-radius:16px;padding:28px;margin:24px 0;box-shadow:0 5px 20px #17213906}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}label{display:block;font-weight:650;margin-bottom:8px}select,button{font:inherit;border-radius:8px;padding:10px 14px;min-height:46px}select{width:100%;border:1px solid #b9c3d5;background:white;margin-bottom:18px}button{border:1px solid #c3cbd9;background:white;cursor:pointer}button.primary{background:#5840d8;color:white;border-color:#5840d8}button:disabled{opacity:.5;cursor:default}.status{font-weight:650;color:#5141ba}.question{font-size:23px;line-height:1.65;min-height:90px;white-space:pre-wrap;overflow-wrap:anywhere}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.metric{background:#f7f8fc;border-radius:10px;padding:16px}.metric strong{display:block;font-size:23px}.metric span{font-size:14px;color:#526078}.error{color:#a22424;font-weight:600}.tag{display:inline-block;border-radius:6px;padding:3px 9px;background:#eae6ff;color:#49359d;font-size:14px}footer{font-size:14px;color:#526078}@media(max-width:600px){main{margin:24px auto;padding:0 16px}.panel{padding:20px}.metrics{grid-template-columns:1fr}h1{font-size:25px}}
+</style>
+</head>
+<body><main>
+<div class="brand">InterviewBuddy</div>
+<h1>Kiểm tra câu hỏi truyền trực tiếp</h1>
+<p class="note">Trang kiểm thử cục bộ · CV/JD giả lập · xác thực giả lập và database cục bộ.</p>
+<span class="tag" id="source">Đang tải tình huống</span>
+<section class="panel"><label for="case">Tình huống kiểm tra</label><select id="case" disabled></select>
+<div class="row"><button class="primary" id="start" disabled>Tạo câu hỏi</button><button id="cancel" disabled>Hủy</button><button id="replay" disabled>Gửi lại lượt này</button></div></section>
+<section class="panel" aria-label="Kết quả câu hỏi"><div id="status" class="status" role="status">Sẵn sàng</div>
+<p id="question" class="question" aria-live="polite"></p><p id="error" class="error" role="alert"></p>
+<div class="metrics"><div class="metric"><span>Chữ đầu tiên hiển thị</span><strong id="first">—</strong></div><div class="metric"><span>Hoàn tất phản hồi</span><strong id="duration">—</strong></div><div class="metric"><span>Câu hỏi đã lưu</span><strong id="saved">Chưa có</strong></div></div>
+</section><footer>Nội dung đang tạo là bản tạm. Chỉ phản hồi hoàn chỉnh hợp lệ và lưu thành công mới được xác nhận. Thời gian chữ đầu được ghi nhận sau hai khung hình trình duyệt.</footer>
+</main>
+<script type="module">
+import { requestInterviewNext } from './next-stream-client.mjs';
+const element = (id) => document.getElementById(id);
+const setup = await fetch('/fixtures').then((response) => response.json());
+element('source').textContent = setup.mode === 'live' ? 'Nguồn AI: Gemini thật' : 'Nguồn AI: phản hồi mô phỏng có kiểm soát';
+for (const fixture of setup.fixtures) element('case').add(new Option(fixture.label, fixture.id));
+element('case').disabled = false; element('start').disabled = false;
+let cancellation; let active = false; let lastBody;
+window.testResult = null;
+async function run(replay = false) {
+  if (active) return;
+  const start = performance.now();
+  const fixture = setup.fixtures.find((item) => item.id === element('case').value);
+  const body = replay ? lastBody : { sessionId: fixture.sessionId, afterAnswerId: fixture.afterAnswerId };
+  lastBody = body; active = true; cancellation = new AbortController();
+  for (const id of ['start', 'replay', 'case']) element(id).disabled = true;
+  element('cancel').disabled = false; element('question').textContent = ''; element('error').textContent = '';
+  element('status').textContent = 'Đang tạo câu hỏi'; element('first').textContent = '—'; element('duration').textContent = '—'; element('saved').textContent = 'Chưa có';
+  const result = { id: fixture.id, mode: setup.mode, replay, sessionId: body.sessionId, firstVisibleMs: null,
+    firstVisibleText: null, firstVisibleStatus: null, firstPreviewMs: null, previewUpdates: 0, completeMs: null,
+    acknowledgementMs: null, statusEvents: [], clientMetrics: null, error: null, output: null, finished: false };
+  window.testResult = result;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (window.testResult === result) result.acknowledgementMs = performance.now() - start;
+  }));
+  try {
+    const output = await requestInterviewNext(body, { signal: cancellation.signal, timeoutMs: fixture.browserTimeoutMs ?? 35000,
+      onStatus(status) {
+        result.statusEvents.push({ status, elapsedMs: performance.now() - start });
+        const notices = { generating: 'Đang tạo câu hỏi', slow: 'Phản hồi đang chậm. Bạn có thể tiếp tục chờ hoặc hủy.',
+          extended: 'Đã chờ hơn 10 giây. Bạn có thể hủy; chỉ gửi lại sau khi lượt hiện tại kết thúc.' };
+        if (notices[status]) element('status').textContent = notices[status];
+      }, onMetrics(metrics) { result.clientMetrics = metrics; }, onPreview(text) {
+      element('question').textContent = text;
+      if (text && /[\p{L}\p{N}]/u.test(text)) {
+        result.previewUpdates++;
+        if (result.firstPreviewMs === null) result.firstPreviewMs = performance.now() - start;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const visible = element('question').textContent;
+          if (window.testResult === result && result.firstVisibleMs === null && /[\p{L}\p{N}]/u.test(visible)) {
+            result.firstVisibleMs = performance.now() - start;
+            result.firstVisibleText = visible;
+            result.firstVisibleStatus = element('status').textContent;
+            element('first').textContent = Math.round(result.firstVisibleMs) + ' ms';
+          }
+        }));
+      }
+    } });
+    result.output = output; result.completeMs = performance.now() - start;
+    element('status').textContent = output.action === 'end' ? 'Phiên đã kết thúc' : 'Đã lưu câu hỏi';
+    element('saved').textContent = output.question ? 'Đã xác nhận' : 'Phiên đã đóng';
+  } catch (error) {
+    result.error = error.code ?? 'UNKNOWN'; result.completeMs = performance.now() - start;
+    element('status').textContent = error.code === 'REQUEST_CANCELLED' ? 'Đã hủy' : 'Không thể hoàn tất câu hỏi';
+    element('error').textContent = error.code === 'REQUEST_CANCELLED' ? '' : error.code + ': ' + error.message;
+  } finally {
+    element('duration').textContent = Math.round(result.completeMs) + ' ms';
+    element('cancel').disabled = true; active = false;
+    for (const id of ['start', 'case']) element(id).disabled = false;
+    element('replay').disabled = !lastBody;
+    setTimeout(() => { result.finished = true; }, 80);
+  }
+}
+element('start').addEventListener('click', () => run());
+element('replay').addEventListener('click', () => run(true));
+element('cancel').addEventListener('click', () => cancellation?.abort());
+element('case').addEventListener('change', () => { lastBody = null; element('replay').disabled = true; });
+</script></body></html>

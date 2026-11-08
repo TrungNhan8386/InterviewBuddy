@@ -1,0 +1,72 @@
+{
+  "mode": "live",
+  "boundary": "Real browser + production consumer/handler/service/provider; simulated authentication and local PGlite. Live mode uses real Gemini.",
+  "provenance": "AI-authored synthetic CV/JD/answers. No real applicant data.",
+  "metric": "click to actual nonempty question text, measured after two requestAnimationFrame callbacks; ready/loading frames do not count",
+  "results": [
+    {
+      "id": "live-en-opening",
+      "mode": "live",
+      "replay": false,
+      "sessionId": "63a48885-9c7e-4b04-b1dd-ea6bb03ed869",
+      "firstVisibleMs": 2059.0999999996275,
+      "firstVisibleText": "How would you handle loading and error states when fetching data from a REST API in a React",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 2048.2999999988824,
+      "previewUpdates": 1,
+      "completeMs": 2109,
+      "error": "INVALID_OUTPUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 1,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "failed"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "browser": "156.0.4314.58",
+  "fixtures": {
+    "mode": "live",
+    "fixtures": [
+      {
+        "id": "live-en-opening",
+        "label": "Gemini · mở đầu tiếng Anh",
+        "sessionId": "63a48885-9c7e-4b04-b1dd-ea6bb03ed869",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-vi-opening",
+        "label": "Gemini · mở đầu tiếng Việt",
+        "sessionId": "d0f7d7a2-f309-4774-bf02-d32910f62cb5",
+        "afterAnswerId": null
+      },
+      {
+        "id": "live-en-followup",
+        "label": "Gemini · hỏi tiếp kỹ thuật",
+        "sessionId": "5dff9d29-c3a2-47f6-abd8-1b5c043b8873",
+        "afterAnswerId": "7f16c41f-6307-4ddf-89f0-e911ba539ce4"
+      },
+      {
+        "id": "live-vi-behavioral",
+        "label": "Gemini · hỏi tiếp hành vi",
+        "sessionId": "72735b5b-b990-415c-a1f6-ffc82e57b9e1",
+        "afterAnswerId": "5fad3768-81fc-4b97-b27f-c88584306365"
+      },
+      {
+        "id": "live-long-history",
+        "label": "Gemini · lịch sử dài",
+        "sessionId": "0b895dc6-b509-40f7-a63e-b8278b7f84eb",
+        "afterAnswerId": "094c1008-797a-4481-bab4-fe36db7cbd9d"
+      }
+    ]
+  },
+  "functionalChecks": "failed",
+  "failure": "INVALID_OUTPUT",
+  "withinTwoSeconds": 0,
+  "sampleCount": 1,
+  "allSamplesWithinTwoSeconds": false
+}

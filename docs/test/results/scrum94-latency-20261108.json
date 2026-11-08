@@ -1,0 +1,1410 @@
+{
+  "dateLocal": "2026-11-08",
+  "baseCommit": "53a955c",
+  "branch": "feat/scrum-94-chat-streaming-hung",
+  "promptVersion": "0.10",
+  "model": "gemini-3.5-flash-lite",
+  "syntheticData": true,
+  "sourceSha256": {
+    "src/lib/interview/document-context.mjs": "062a57b28fd024fcedc945f9277e2c8bbbfdef1e5a3b664a0dffa57552a9a7ba",
+    "src/lib/interview/interviewer-prompt.mjs": "2e76283aee98042cebcc65fb3b60cdee6376f8d549f2650e439b3db6e9574c5f",
+    "src/lib/interview/interviewer-contract.mjs": "093f3213d151dd44599ee992aa88d6c18bb6a8d70e187f327adafc0d7d62fb62",
+    "src/lib/interview/interviewer-provider.mjs": "2f49c8d30eb4a645607f21ebbc46d44a406e8f822d49fbd4e796e5d7f33c4426"
+  },
+  "verification": {
+    "unitTests": 255,
+    "passed": 255,
+    "lintExit": 0,
+    "typecheckExit": 0,
+    "productionBuildExit": 0
+  },
+  "productFlow": {
+    "dateLocal": "2026-11-08",
+    "baseCommit": "53a955c",
+    "promptVersion": "0.10",
+    "runtime": "next start / production",
+    "boundary": "Real protected Analysis -> Setup -> Chat product UI, Supabase Auth/database and Gemini. Synthetic inputs only; no HTTP response or request mocking.",
+    "model": "gemini-3.5-flash-lite",
+    "attempts": [
+      {
+        "kind": "setup_click",
+        "start": 2802.399999999907,
+        "requestStart": 3802.399999999907,
+        "httpStatus": 200,
+        "firstVisibleMs": 2624.100000000093,
+        "completeMs": 2951.899999999907,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ thiết lập AbortController trong một custom hook gọi API bằng React và TypeScript như thế nào để tự động hủy các request cũ khi người dùng gõ tìm kiếm liên tục?",
+        "seenFrame": 316,
+        "ackFrame": 168,
+        "ackMs": 101.10000000009313,
+        "case": "vi-short",
+        "language": "vi",
+        "turn": 1,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 1,
+        "questionId": "question-01",
+        "questionText": "Bạn sẽ thiết lập AbortController trong một custom hook gọi API bằng React và TypeScript như thế nào để tự động hủy các request cũ khi người dùng gõ tìm kiếm liên tục?",
+        "questionKind": "main",
+        "questionTopic": "React và TypeScript",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": false,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 10791.5,
+        "requestStart": 10983.5,
+        "httpStatus": 200,
+        "firstVisibleMs": 1744.5,
+        "completeMs": 2129.0999999998603,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn có thể mô tả chi tiết các bước xử lý trong TypeScript và React để custom hook đó khởi tạo, truyền tín",
+        "seenFrame": 743,
+        "ackFrame": 643,
+        "ackMs": 77.5999999998603,
+        "case": "vi-short",
+        "language": "vi",
+        "turn": 2,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 2,
+        "questionId": "question-02",
+        "questionText": "Bạn có thể mô tả chi tiết các bước xử lý trong TypeScript và React để custom hook đó khởi tạo, truyền tín hiệu hủy vào fetch và cleanup khi component unmount hoặc khi query thay đổi không?",
+        "questionKind": "follow_up",
+        "questionTopic": "React và TypeScript",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 18800.59999999986,
+        "requestStart": 19091.699999999953,
+        "httpStatus": 200,
+        "firstVisibleMs": 1551.1999999999534,
+        "completeMs": 1886.6000000000931,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ triển khai việc xác thực form (form validation) kết hợp với TypeScript như thế nào để đảm bảo người dùng không",
+        "seenFrame": 1212,
+        "ackFrame": 1124,
+        "ackMs": 85,
+        "case": "vi-short",
+        "language": "vi",
+        "turn": 3,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 3,
+        "questionId": "question-03",
+        "questionText": "Bạn sẽ triển khai việc xác thực form (form validation) kết hợp với TypeScript như thế nào để đảm bảo người dùng không thể submit dữ liệu khi có lỗi định dạng?",
+        "questionKind": "main",
+        "questionTopic": "Xác thực form và định tuyến",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 26789.299999999814,
+        "requestStart": 26967.799999999814,
+        "httpStatus": 200,
+        "firstVisibleMs": 1979.1000000000931,
+        "completeMs": 2449.600000000093,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ triển khai việc kiểm tra dữ liệu đầu vào (form validation) trong một component React sử dụng TypeScript như thế",
+        "seenFrame": 1717,
+        "ackFrame": 1603,
+        "ackMs": 78.9000000001397,
+        "case": "vi-short",
+        "language": "vi",
+        "turn": 4,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 4,
+        "questionId": "question-04",
+        "questionText": "Bạn sẽ triển khai việc kiểm tra dữ liệu đầu vào (form validation) trong một component React sử dụng TypeScript như thế nào để hiển thị thông báo lỗi ngay khi người dùng nhập sai định dạng?",
+        "questionKind": "main",
+        "questionTopic": "Xác thực form và định tuyến",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 34797.69999999995,
+        "requestStart": 34984.799999999814,
+        "httpStatus": 200,
+        "firstVisibleMs": 1736.8999999999069,
+        "completeMs": 2154.5999999998603,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ",
+        "seenFrame": 2183,
+        "ackFrame": 2084,
+        "ackMs": 86.89999999990687,
+        "case": "vi-short",
+        "language": "vi",
+        "turn": 5,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 5,
+        "questionId": "question-05",
+        "questionText": "Bạn sẽ xử lý việc bảo vệ các route (authentication-aware routing) trong một ứng dụng React bằng TypeScript như thế nào để ngăn người dùng chưa đăng nhập truy cập vào các trang quản trị?",
+        "questionKind": "main",
+        "questionTopic": "Xác thực và định tuyến",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "setup_click",
+        "start": 4220.300000000047,
+        "requestStart": 4769.09999999986,
+        "httpStatus": 200,
+        "firstVisibleMs": 1536.3999999999069,
+        "completeMs": 1953.8999999999069,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How would",
+        "seenFrame": 340,
+        "ackFrame": 253,
+        "ackMs": 86,
+        "case": "en-short",
+        "language": "en",
+        "turn": 1,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 1,
+        "questionId": "question-06",
+        "questionText": "How would you implement authentication-aware routing in a React application to protect private views?",
+        "questionKind": "main",
+        "questionTopic": "Authentication-aware routing",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 12220.09999999986,
+        "requestStart": 12393.899999999907,
+        "httpStatus": 200,
+        "firstVisibleMs": 1519.3000000000466,
+        "completeMs": 1802.9000000001397,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Can you explain",
+        "seenFrame": 819,
+        "ackFrame": 733,
+        "ackMs": 85.60000000009313,
+        "case": "en-short",
+        "language": "en",
+        "turn": 2,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 2,
+        "questionId": "question-07",
+        "questionText": "Can you explain how you would structure the routing logic and handle redirection when an unauthenticated user attempts to access a protected view?",
+        "questionKind": "follow_up",
+        "questionTopic": "Authentication-aware routing",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 20229.800000000047,
+        "requestStart": 20406.59999999986,
+        "httpStatus": 200,
+        "firstVisibleMs": 1325.3999999999069,
+        "completeMs": 1609.6999999999534,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How would you use AbortController to cancel an obsolete fetch request when a user rapidly changes search inputs in a React component?",
+        "seenFrame": 1288,
+        "ackFrame": 1214,
+        "ackMs": 92,
+        "case": "en-short",
+        "language": "en",
+        "turn": 3,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 3,
+        "questionId": "question-08",
+        "questionText": "How would you use AbortController to cancel an obsolete fetch request when a user rapidly changes search inputs in a React component?",
+        "questionKind": "main",
+        "questionTopic": "AbortController request cancellation",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 28231.300000000047,
+        "requestStart": 28427.09999999986,
+        "httpStatus": 200,
+        "firstVisibleMs": 1440.3999999999069,
+        "completeMs": 1674.1999999999534,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How would you handle form validation and display error states for invalid inputs in a React component?",
+        "seenFrame": 1775,
+        "ackFrame": 1694,
+        "ackMs": 90.29999999981374,
+        "case": "en-short",
+        "language": "en",
+        "turn": 4,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 4,
+        "questionId": "question-09",
+        "questionText": "How would you handle form validation and display error states for invalid inputs in a React component?",
+        "questionKind": "main",
+        "questionTopic": "Form validation and error states",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 36241.5,
+        "requestStart": 36405.59999999986,
+        "httpStatus": 200,
+        "firstVisibleMs": 1246.5,
+        "completeMs": 1513.8000000000466,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How would",
+        "seenFrame": 2244,
+        "ackFrame": 2174,
+        "ackMs": 79.5,
+        "case": "en-short",
+        "language": "en",
+        "turn": 5,
+        "profileChars": 685,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 5,
+        "questionId": "question-10",
+        "questionText": "How would you design a React component to test and render component states for empty inputs and API error paths?",
+        "questionKind": "main",
+        "questionTopic": "Component and API error testing",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "setup_click",
+        "start": 2246.5,
+        "requestStart": 2809.0999999998603,
+        "httpStatus": 200,
+        "firstVisibleMs": 1924.5999999998603,
+        "completeMs": 2275.5,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ",
+        "seenFrame": 246,
+        "ackFrame": 136,
+        "ackMs": 90.89999999990687,
+        "case": "vi-long",
+        "language": "vi",
+        "turn": 1,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 1,
+        "questionId": "question-11",
+        "questionText": "Bạn sẽ thiết kế và xử lý các trạng thái tải, trống, thành công và lỗi khi tích hợp REST API trong một component React như thế nào?",
+        "questionKind": "main",
+        "questionTopic": "Tích hợp REST API và quản lý trạng thái",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 10258.199999999953,
+        "requestStart": 10419.199999999953,
+        "httpStatus": 200,
+        "firstVisibleMs": 2878.8000000000466,
+        "completeMs": 3213,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn có",
+        "seenFrame": 783,
+        "ackFrame": 616,
+        "ackMs": 78.89999999990687,
+        "case": "vi-long",
+        "language": "vi",
+        "turn": 2,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 2,
+        "questionId": "question-12",
+        "questionText": "Bạn có thể mô tả chi tiết cách xử lý và hiển thị từng trạng thái tải, trống, thành công và lỗi trong component React cụ thể của bạn không?",
+        "questionKind": "follow_up",
+        "questionTopic": "Tích hợp REST API và quản lý trạng thái",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": false,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 18270.100000000093,
+        "requestStart": 18435.100000000093,
+        "httpStatus": 200,
+        "firstVisibleMs": 1516,
+        "completeMs": 1833.8999999999069,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ",
+        "seenFrame": 1182,
+        "ackFrame": 1096,
+        "ackMs": 82.79999999981374,
+        "case": "vi-long",
+        "language": "vi",
+        "turn": 3,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 3,
+        "questionId": "question-13",
+        "questionText": "Bạn sẽ xử lý việc hủy các request cũ không còn cần thiết bằng AbortController trong React useEffect như thế nào để tránh cập nhật state trên component đã unmount?",
+        "questionKind": "follow_up",
+        "questionTopic": "Tích hợp REST API và quản lý trạng thái",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 26266,
+        "requestStart": 26435.5,
+        "httpStatus": 200,
+        "firstVisibleMs": 1570.7999999998137,
+        "completeMs": 1920.3999999999069,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ",
+        "seenFrame": 1665,
+        "ackFrame": 1576,
+        "ackMs": 86.89999999990687,
+        "case": "vi-long",
+        "language": "vi",
+        "turn": 4,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 4,
+        "questionId": "question-14",
+        "questionText": "Bạn sẽ triển khai cơ chế điều hướng được bảo vệ xác thực (authentication-aware routing) trong ứng dụng React/TypeScript như thế nào để xử lý các trường hợp người dùng chưa đăng nhập?",
+        "questionKind": "main",
+        "questionTopic": "Xác thực và điều hướng",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 34262.60000000009,
+        "requestStart": 34448,
+        "httpStatus": 200,
+        "firstVisibleMs": 1289.5,
+        "completeMs": 1558.6999999997206,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Bạn sẽ triển khai routing được bảo vệ xác thực bằng cách nào trong React Router để kiểm tra quyền truy cập trước khi render",
+        "seenFrame": 2128,
+        "ackFrame": 2056,
+        "ackMs": 89.5,
+        "case": "vi-long",
+        "language": "vi",
+        "turn": 5,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 5,
+        "questionId": "question-15",
+        "questionText": "Bạn sẽ triển khai routing được bảo vệ xác thực bằng cách nào trong React Router để kiểm tra quyền truy cập trước khi render component?",
+        "questionKind": "follow_up",
+        "questionTopic": "Xác thực và điều hướng",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "setup_click",
+        "start": 2853.7999999998137,
+        "requestStart": 3495.7999999998137,
+        "httpStatus": 200,
+        "firstVisibleMs": 2069.8000000002794,
+        "completeMs": 2321.2000000001863,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How would you structure a React component using TypeScript to handle asynchronous REST API loading, empty, success, and error states?",
+        "seenFrame": 290,
+        "ackFrame": 171,
+        "ackMs": 86.5,
+        "case": "en-long",
+        "language": "en",
+        "turn": 1,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 1,
+        "questionId": "question-16",
+        "questionText": "How would you structure a React component using TypeScript to handle asynchronous REST API loading, empty, success, and error states?",
+        "questionKind": "main",
+        "questionTopic": "React and TypeScript Interfaces",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": false,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 10862.799999999814,
+        "requestStart": 11050.69999999972,
+        "httpStatus": 200,
+        "firstVisibleMs": 1661.5,
+        "completeMs": 1912.1000000000931,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "Can you walk through how you would conditionally render those loading, empty, success, and error states in your JSX, or how you type",
+        "seenFrame": 746,
+        "ackFrame": 652,
+        "ackMs": 93.8000000002794,
+        "case": "en-long",
+        "language": "en",
+        "turn": 2,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 2,
+        "questionId": "question-17",
+        "questionText": "Can you walk through how you would conditionally render those loading, empty, success, and error states in your JSX, or how you type the state union for them?",
+        "questionKind": "follow_up",
+        "questionTopic": "React and TypeScript Interfaces",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 18872.899999999907,
+        "requestStart": 19041,
+        "httpStatus": 200,
+        "firstVisibleMs": 1183.2000000001863,
+        "completeMs": 1502.6000000000931,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How would you implement",
+        "seenFrame": 1198,
+        "ackFrame": 1132,
+        "ackMs": 83.20000000018626,
+        "case": "en-long",
+        "language": "en",
+        "turn": 3,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 3,
+        "questionId": "question-18",
+        "questionText": "How would you implement keyboard focus management and screen reader accessibility when a modal dialog opens and closes in a React application?",
+        "questionKind": "main",
+        "questionTopic": "Accessibility and Semantic HTML",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 26874.799999999814,
+        "requestStart": 27072.299999999814,
+        "httpStatus": 200,
+        "firstVisibleMs": 1981.1000000000931,
+        "completeMs": 2315.100000000093,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How would",
+        "seenFrame": 1723,
+        "ackFrame": 1613,
+        "ackMs": 98.5,
+        "case": "en-long",
+        "language": "en",
+        "turn": 4,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 4,
+        "questionId": "question-19",
+        "questionText": "How would you handle focus trapping and return focus to the triggering element when closing a custom modal component in React?",
+        "questionKind": "main",
+        "questionTopic": "Accessibility and Semantic HTML",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      },
+      {
+        "kind": "send_click",
+        "start": 34865.5,
+        "requestStart": 35058.60000000009,
+        "httpStatus": 200,
+        "firstVisibleMs": 1589.6999999997206,
+        "completeMs": 1908.5,
+        "outcome": "complete",
+        "errorCode": null,
+        "firstVisibleText": "How",
+        "seenFrame": 2179,
+        "ackFrame": 2089,
+        "ackMs": 89.6999999997206,
+        "case": "en-long",
+        "language": "en",
+        "turn": 5,
+        "profileChars": 12526,
+        "sessionReadStatus": 200,
+        "savedTurnCount": 5,
+        "questionId": "question-20",
+        "questionText": "How would you approach testing the error paths and retry logic of a component that integrates with a REST API?",
+        "questionKind": "main",
+        "questionTopic": "API integration and error testing",
+        "persisted": true,
+        "previousAnswerPersisted": true,
+        "firstVisibleMeasurementValid": true,
+        "fastAndValid": true,
+        "completeWithinFiveSeconds": true
+      }
+    ],
+    "sessions": [
+      {
+        "case": "vi-short",
+        "id": "session-01"
+      },
+      {
+        "case": "en-short",
+        "id": "session-02"
+      },
+      {
+        "case": "vi-long",
+        "id": "session-03"
+      },
+      {
+        "case": "en-long",
+        "id": "session-04"
+      }
+    ],
+    "checks": [
+      {
+        "name": "real login",
+        "passed": true
+      },
+      {
+        "name": "vi-short ambiguous answer gets follow-up",
+        "passed": true
+      },
+      {
+        "name": "vi-short reload no extra generation",
+        "passed": true
+      },
+      {
+        "name": "vi-short ended persisted",
+        "passed": true
+      },
+      {
+        "name": "en-short ambiguous answer gets follow-up",
+        "passed": true
+      },
+      {
+        "name": "en-short reload no extra generation",
+        "passed": true
+      },
+      {
+        "name": "en-short ended persisted",
+        "passed": true
+      },
+      {
+        "name": "vi-long ambiguous answer gets follow-up",
+        "passed": true
+      },
+      {
+        "name": "vi-long reload no extra generation",
+        "passed": true
+      },
+      {
+        "name": "vi-long ended persisted",
+        "passed": true
+      },
+      {
+        "name": "en-long ambiguous answer gets follow-up",
+        "passed": true
+      },
+      {
+        "name": "en-long reload no extra generation",
+        "passed": true
+      },
+      {
+        "name": "en-long ended persisted",
+        "passed": true
+      }
+    ],
+    "analysis": [
+      {
+        "case": "vi-short",
+        "httpStatus": 200,
+        "cvCharacters": 685,
+        "jdCharacters": 415,
+        "savedThroughUI": true
+      },
+      {
+        "case": "en-short",
+        "httpStatus": 200,
+        "cvCharacters": 685,
+        "jdCharacters": 415,
+        "savedThroughUI": true
+      },
+      {
+        "case": "vi-long",
+        "httpStatus": 200,
+        "cvCharacters": 12526,
+        "jdCharacters": 1109,
+        "savedThroughUI": true
+      },
+      {
+        "case": "en-long",
+        "httpStatus": 200,
+        "cvCharacters": 12526,
+        "jdCharacters": 1109,
+        "savedThroughUI": true
+      }
+    ],
+    "actualNextRequests": 20,
+    "status": "completed",
+    "automaticRetries": 0,
+    "pacingSeconds": 8,
+    "timing": "Opening begins before the Setup Start click including create-session API plus navigation; later turns before Send including answer persistence. Actual visible question text after two frames; complete requires saved final output.",
+    "migrationApplied": false,
+    "summary": {
+      "attempts": 20,
+      "validSaved": 20,
+      "fastAndValid": 17,
+      "completeWithinFiveSeconds": 20,
+      "firstVisibleP50Ms": 1570.7999999998137,
+      "firstVisibleP95Ms": 2624.100000000093,
+      "completeP50Ms": 1912.1000000000931,
+      "completeP95Ms": 2951.899999999907,
+      "ackWithin200ms": 20,
+      "checksPassed": 13,
+      "checksTotal": 13
+    },
+    "workingLatencyTargetsPassed": false
+  },
+  "providerAB": {
+    "dateLocal": "2026-11-08",
+    "boundary": "Direct real Gemini provider A/B; synthetic data, no product UI, authentication or Supabase persistence.",
+    "baselinePromptVersion": "0.8",
+    "candidatePromptVersion": "0.10",
+    "model": "gemini-3.5-flash-lite",
+    "live": true,
+    "pacingSeconds": 8,
+    "order": "AB/BA alternates for each paired input",
+    "attempts": [
+      {
+        "case": "opening-vi-short",
+        "variant": "baseline",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Bạn sẽ thiết kế và xử lý trạng thái tải (loading state) cùng với thông báo lỗi như thế nào khi gọi một REST API trong ứng dụng React?",
+          "topic": "Xử lý trạng thái tải và lỗi",
+          "reason": "Bắt đầu phỏng vấn kỹ thuật với câu hỏi về xử lý trạng thái tải và lỗi theo yêu cầu của JD."
+        },
+        "firstTextMs": 1473,
+        "completeMs": 1592,
+        "stages": {
+          "upstream_started": 2,
+          "upstream_headers": 1407,
+          "upstream_first_frame": 1411,
+          "upstream_first_text": 1472,
+          "upstream_validated": 1591
+        }
+      },
+      {
+        "case": "opening-vi-short",
+        "variant": "candidate",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Trong ứng dụng React, bạn sẽ cấu trúc code thế nào để gọi REST API và hiển thị đồng thời trạng thái tải dữ liệu cũng như thông báo lỗi khi có sự cố mạng xảy ra?",
+          "topic": "gọi REST API và xử lý trạng thái",
+          "reason": "Bắt đầu vòng phỏng vấn kỹ thuật bằng câu hỏi về cách gọi REST API và xử lý trạng thái theo JD."
+        },
+        "firstTextMs": 1193,
+        "completeMs": 1321,
+        "stages": {
+          "upstream_started": 2,
+          "upstream_headers": 1074,
+          "upstream_first_frame": 1075,
+          "upstream_first_text": 1193,
+          "upstream_validated": 1321
+        }
+      },
+      {
+        "case": "opening-en-short",
+        "variant": "candidate",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "How would you handle error states and loading indicators when fetching data from a REST API in a React component?",
+          "topic": "Frontend Intern: React REST API loading and error handling",
+          "reason": "Starting the interview with the first planned topic from the JD focus."
+        },
+        "firstTextMs": 1243,
+        "completeMs": 1476,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 1243,
+          "upstream_first_frame": 1243,
+          "upstream_first_text": 1243,
+          "upstream_validated": 1476
+        }
+      },
+      {
+        "case": "opening-en-short",
+        "variant": "baseline",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "How would you handle loading and error states when fetching data from a REST API in a React component?",
+          "topic": "API Integration and State Handling",
+          "reason": "The interview is starting with the first main question focusing on REST API handling as specified in the JD."
+        },
+        "firstTextMs": 1033,
+        "completeMs": 1126,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 1030,
+          "upstream_first_frame": 1031,
+          "upstream_first_text": 1033,
+          "upstream_validated": 1126
+        }
+      },
+      {
+        "case": "vague-technical-en",
+        "variant": "baseline",
+        "expectedActions": [
+          "follow_up"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "follow_up",
+          "question": "Which specific transaction isolation level or locking mechanism would you use to ensure overselling is prevented under high concurrency?",
+          "topic": "PostgreSQL transactions",
+          "reason": "The latest answer is too brief and does not specify the concurrency control mechanism."
+        },
+        "firstTextMs": 981,
+        "completeMs": 1115,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 917,
+          "upstream_first_frame": 917,
+          "upstream_first_text": 981,
+          "upstream_validated": 1115
+        }
+      },
+      {
+        "case": "vague-technical-en",
+        "variant": "candidate",
+        "expectedActions": [
+          "follow_up"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "follow_up",
+          "question": "Which specific transaction isolation level or locking mechanism would you use within that transaction to ensure the stock count doesn't drop below zero?",
+          "topic": "PostgreSQL transactions",
+          "reason": "The answer does not specify the concurrency control mechanism."
+        },
+        "firstTextMs": 873,
+        "completeMs": 932,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 774,
+          "upstream_first_frame": 775,
+          "upstream_first_text": 873,
+          "upstream_validated": 931
+        }
+      },
+      {
+        "case": "interesting-detail-en",
+        "variant": "candidate",
+        "expectedActions": [
+          "follow_up"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "follow_up",
+          "question": "How would you invalidate the cached product page stock value when the transaction commits?",
+          "topic": "PostgreSQL transactions",
+          "reason": "The candidate mentioned an unresolved issue with cache invalidation after the transaction commit."
+        },
+        "firstTextMs": 1275,
+        "completeMs": 1353,
+        "stages": {
+          "upstream_started": 3,
+          "upstream_headers": 1242,
+          "upstream_first_frame": 1243,
+          "upstream_first_text": 1275,
+          "upstream_validated": 1352
+        }
+      },
+      {
+        "case": "interesting-detail-en",
+        "variant": "baseline",
+        "expectedActions": [
+          "follow_up"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "follow_up",
+          "question": "You mentioned that the cached product page shows stale stock after the commit; how would you approach debugging or solving that cache invalidation issue?",
+          "topic": "PostgreSQL transactions",
+          "reason": "The candidate explicitly brought up an unresolved cache invalidation issue in their answer, which is worth a targeted follow-up on the same topic."
+        },
+        "firstTextMs": 1218,
+        "completeMs": 1462,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 1149,
+          "upstream_first_frame": 1149,
+          "upstream_first_text": 1218,
+          "upstream_validated": 1462
+        }
+      },
+      {
+        "case": "developed-behavioral-vi",
+        "variant": "baseline",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Hãy kể một lần bạn chủ động tìm ra nguyên nhân của một lỗi kỹ thuật tiềm ẩn trước khi nó ảnh hưởng đến hệ thống hoặc người dùng.",
+          "topic": "Chủ động tìm nguyên nhân lỗi",
+          "reason": "Ứng viên đã trả lời tốt câu hỏi trước, chuyển sang kỹ năng chủ động tìm nguyên nhân lỗi theo JD."
+        },
+        "firstTextMs": 1484,
+        "completeMs": 1554,
+        "stages": {
+          "upstream_started": 2,
+          "upstream_headers": 1481,
+          "upstream_first_frame": 1481,
+          "upstream_first_text": 1484,
+          "upstream_validated": 1554
+        }
+      },
+      {
+        "case": "developed-behavioral-vi",
+        "variant": "candidate",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Hãy kể về một lần bạn chủ động phát hiện ra một vấn đề tiềm ẩn trong dự án trước khi nó ảnh hưởng đến người dùng hoặc tiến độ.",
+          "topic": "Chủ động tìm nguyên nhân lỗi",
+          "reason": "Đã hoàn thành câu hỏi về phối hợp xử lý lỗi, chuyển sang năng lực chủ động tìm nguyên nhân lỗi theo JD."
+        },
+        "firstTextMs": 1236,
+        "completeMs": 1412,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 1179,
+          "upstream_first_frame": 1180,
+          "upstream_first_text": 1236,
+          "upstream_validated": 1412
+        }
+      },
+      {
+        "case": "declines-answer-vi",
+        "variant": "candidate",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Bạn sẽ hiển thị trạng thái tải và thông báo lỗi như thế nào khi người dùng gọi một REST API trong ứng dụng React?",
+          "topic": "giải thích cách xử lý trạng thái tải và lỗi",
+          "reason": "Ứng viên muốn chuyển chủ đề, hệ thống chuyển sang trọng tâm tiếp theo từ JD."
+        },
+        "firstTextMs": 1267,
+        "completeMs": 1426,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 1192,
+          "upstream_first_frame": 1193,
+          "upstream_first_text": 1267,
+          "upstream_validated": 1426
+        }
+      },
+      {
+        "case": "declines-answer-vi",
+        "variant": "baseline",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Bạn sẽ thiết kế và xử lý trạng thái tải (loading state) và trạng thái lỗi (error state) khi gọi REST API trong React như thế nào?",
+          "topic": "Xử lý trạng thái tải và lỗi",
+          "reason": "Ứng viên yêu cầu chuyển câu hỏi trước, chuyển sang chủ đề tiếp theo theo JD."
+        },
+        "firstTextMs": 967,
+        "completeMs": 1138,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 932,
+          "upstream_first_frame": 933,
+          "upstream_first_text": 967,
+          "upstream_validated": 1138
+        }
+      },
+      {
+        "case": "follow-up-cap-en",
+        "variant": "baseline",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "How would you handle loading states and error feedback when fetching data from a REST API in a React component?",
+          "topic": "API error handling",
+          "reason": "The previous follow-up limit has been reached and the candidate could not explain request cancellation, so moving to the next JD focus topic."
+        },
+        "firstTextMs": 1485,
+        "completeMs": 1576,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 1461,
+          "upstream_first_frame": 1461,
+          "upstream_first_text": 1485,
+          "upstream_validated": 1576
+        }
+      },
+      {
+        "case": "follow-up-cap-en",
+        "variant": "candidate",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "How would you handle error states and display a retry option to the user when a REST API call fails in a React component?",
+          "topic": "Handling loading and error states",
+          "reason": "The follow-up cap is reached on the previous topic, so we transition to the next JD focus."
+        },
+        "firstTextMs": 959,
+        "completeMs": 1094,
+        "stages": {
+          "upstream_started": 1,
+          "upstream_headers": 899,
+          "upstream_first_frame": 900,
+          "upstream_first_text": 959,
+          "upstream_validated": 1094
+        }
+      },
+      {
+        "case": "long-memory-en",
+        "variant": "candidate",
+        "expectedActions": [
+          "follow_up"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "follow_up",
+          "question": "How would you structure the isolation level and query locks within that transaction to ensure concurrent updates do not oversell inventory?",
+          "topic": "PostgreSQL transactions",
+          "reason": "The answer mentions a transaction but does not explain the concurrency control mechanism."
+        },
+        "firstTextMs": 1124,
+        "completeMs": 1241,
+        "stages": {
+          "upstream_started": 2,
+          "upstream_headers": 1053,
+          "upstream_first_frame": 1053,
+          "upstream_first_text": 1124,
+          "upstream_validated": 1240
+        }
+      },
+      {
+        "case": "long-memory-en",
+        "variant": "baseline",
+        "expectedActions": [
+          "follow_up"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "follow_up",
+          "question": "Which specific transaction isolation level or concurrency control mechanism would you choose to prevent overselling, and why?",
+          "topic": "PostgreSQL transactions",
+          "reason": "The latest answer is vague about how the database handles concurrency."
+        },
+        "firstTextMs": 904,
+        "completeMs": 1034,
+        "stages": {
+          "upstream_started": 2,
+          "upstream_headers": 859,
+          "upstream_first_frame": 859,
+          "upstream_first_text": 904,
+          "upstream_validated": 1034
+        }
+      },
+      {
+        "case": "opening-vi-long",
+        "variant": "baseline",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Bạn sẽ xử lý việc gọi REST API và hiển thị trạng thái tải cũng như lỗi trong một component React như thế nào?",
+          "topic": "Xử lý API và trạng thái trong React",
+          "reason": "Bắt đầu phỏng vấn kỹ thuật với câu hỏi cốt lõi về React và REST API theo đúng JD."
+        },
+        "firstTextMs": 1627,
+        "completeMs": 1629,
+        "stages": {
+          "upstream_started": 7,
+          "upstream_headers": 1625,
+          "upstream_first_frame": 1626,
+          "upstream_first_text": 1627,
+          "upstream_validated": 1629
+        }
+      },
+      {
+        "case": "opening-vi-long",
+        "variant": "candidate",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "Bạn sẽ xử lý trạng thái tải và hiển thị lỗi như thế nào khi gọi một REST API trong ứng dụng React?",
+          "topic": "Frontend Intern: sử dụng React, JavaScript, gọi REST API và kiểm thử giao diện",
+          "reason": "Chuyển sang chủ đề JD đầu tiên để đánh giá kỹ năng React và xử lý API."
+        },
+        "firstTextMs": 1787,
+        "completeMs": 1806,
+        "stages": {
+          "upstream_started": 10,
+          "upstream_headers": 1787,
+          "upstream_first_frame": 1787,
+          "upstream_first_text": 1787,
+          "upstream_validated": 1806
+        }
+      },
+      {
+        "case": "opening-en-long",
+        "variant": "candidate",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "How would you handle loading states and API error responses when fetching data in a React component?",
+          "topic": "API Integration and State Management",
+          "reason": "Opening interview with the first scheduled JD focus topic."
+        },
+        "firstTextMs": 1365,
+        "completeMs": 1811,
+        "stages": {
+          "upstream_started": 9,
+          "upstream_headers": 1365,
+          "upstream_first_frame": 1365,
+          "upstream_first_text": 1365,
+          "upstream_validated": 1811
+        }
+      },
+      {
+        "case": "opening-en-long",
+        "variant": "baseline",
+        "expectedActions": [
+          "next_topic"
+        ],
+        "valid": true,
+        "expectedAction": true,
+        "decision": {
+          "action": "next_topic",
+          "question": "How would you handle loading states and error handling when fetching data from a REST API in a React component?",
+          "topic": "React REST API Integration",
+          "reason": "Starting the interview with the core JD focus on React and REST API handling."
+        },
+        "firstTextMs": 946,
+        "completeMs": 1045,
+        "stages": {
+          "upstream_started": 5,
+          "upstream_headers": 926,
+          "upstream_first_frame": 927,
+          "upstream_first_text": 946,
+          "upstream_validated": 1045
+        }
+      }
+    ],
+    "cases": [
+      {
+        "id": "opening-vi-short",
+        "language": "vi",
+        "cvCharacters": 123,
+        "baselineRequestCharacters": 8987,
+        "candidateRequestCharacters": 6463,
+        "expectedActions": [
+          "next_topic"
+        ]
+      },
+      {
+        "id": "opening-en-short",
+        "language": "en",
+        "cvCharacters": 123,
+        "baselineRequestCharacters": 8943,
+        "candidateRequestCharacters": 6511,
+        "expectedActions": [
+          "next_topic"
+        ]
+      },
+      {
+        "id": "vague-technical-en",
+        "language": "en",
+        "cvCharacters": 134,
+        "baselineRequestCharacters": 9227,
+        "candidateRequestCharacters": 6795,
+        "expectedActions": [
+          "follow_up"
+        ]
+      },
+      {
+        "id": "interesting-detail-en",
+        "language": "en",
+        "cvCharacters": 134,
+        "baselineRequestCharacters": 9721,
+        "candidateRequestCharacters": 7289,
+        "expectedActions": [
+          "follow_up"
+        ]
+      },
+      {
+        "id": "developed-behavioral-vi",
+        "language": "vi",
+        "cvCharacters": 122,
+        "baselineRequestCharacters": 9658,
+        "candidateRequestCharacters": 7134,
+        "expectedActions": [
+          "next_topic"
+        ]
+      },
+      {
+        "id": "declines-answer-vi",
+        "language": "vi",
+        "cvCharacters": 123,
+        "baselineRequestCharacters": 9103,
+        "candidateRequestCharacters": 6579,
+        "expectedActions": [
+          "next_topic"
+        ]
+      },
+      {
+        "id": "follow-up-cap-en",
+        "language": "en",
+        "cvCharacters": 123,
+        "baselineRequestCharacters": 9379,
+        "candidateRequestCharacters": 6947,
+        "expectedActions": [
+          "next_topic"
+        ]
+      },
+      {
+        "id": "long-memory-en",
+        "language": "en",
+        "cvCharacters": 134,
+        "baselineRequestCharacters": 12672,
+        "candidateRequestCharacters": 10240,
+        "expectedActions": [
+          "follow_up"
+        ]
+      },
+      {
+        "id": "opening-vi-long",
+        "language": "vi",
+        "cvCharacters": 12214,
+        "baselineRequestCharacters": 21301,
+        "candidateRequestCharacters": 6951,
+        "expectedActions": [
+          "next_topic"
+        ]
+      },
+      {
+        "id": "opening-en-long",
+        "language": "en",
+        "cvCharacters": 12214,
+        "baselineRequestCharacters": 21257,
+        "candidateRequestCharacters": 6999,
+        "expectedActions": [
+          "next_topic"
+        ]
+      }
+    ],
+    "summary": {
+      "baseline": {
+        "attempts": 10,
+        "valid": 10,
+        "expectedActions": 10,
+        "firstTextP50Ms": 1125.5,
+        "completeP50Ms": 1300,
+        "fastAndValid": 10
+      },
+      "candidate": {
+        "attempts": 10,
+        "valid": 10,
+        "expectedActions": 10,
+        "firstTextP50Ms": 1239.5,
+        "completeP50Ms": 1382.5,
+        "fastAndValid": 10
+      }
+    }
+  },
+  "backendTiming": {
+    "requests": 20,
+    "providerFirstTextP50Ms": 1061.6,
+    "contextReadyP50Ms": 127.7,
+    "saveP50Ms": 101.6
+  },
+  "earlierPhaseRetained": {
+    "prompt09ProductSummary": {
+      "attempts": 20,
+      "validSaved": 20,
+      "fastAndValid": 17,
+      "completeWithinFiveSeconds": 20,
+      "firstVisibleP50Ms": 1480.5999999998603,
+      "firstVisibleP95Ms": 2065.6999999999534,
+      "completeP50Ms": 1860.8999999999069,
+      "completeP95Ms": 2602.1999999999534,
+      "ackWithin200ms": 16,
+      "checksPassed": 13,
+      "checksTotal": 13
+    },
+    "prompt09ProviderSummary": {
+      "baseline": {
+        "attempts": 10,
+        "valid": 10,
+        "expectedActions": 10,
+        "firstTextP50Ms": 1176,
+        "completeP50Ms": 1283.5,
+        "fastAndValid": 10
+      },
+      "candidate": {
+        "attempts": 10,
+        "valid": 10,
+        "expectedActions": 10,
+        "firstTextP50Ms": 1134.5,
+        "completeP50Ms": 1307,
+        "fastAndValid": 10
+      }
+    },
+    "reviewFindings": [
+      "One English next_topic label copied Vietnamese source text.",
+      "One behavioral question revisited teamwork/communication after a developed team-debugging account."
+    ],
+    "resolution": "Prompt 0.10 explicitly translates a new English topic and selects a distinct untested competency; the corresponding final Gemini cases were reviewed again."
+  },
+  "contentReview": {
+    "reviewer": "Codex agent review; not an independent human/expert assessment",
+    "finalExpectedActions": 10,
+    "vagueAnswerFollowUps": 4,
+    "focusedCorrections": [
+      "follow-up-cap-en: Handling loading and error states (English).",
+      "developed-behavioral-vi: proactive discovery before a problem affects users/progress."
+    ],
+    "heuristicLanguageFlags": [],
+    "completeSemanticCoverageVerified": false
+  },
+  "limitations": [
+    "A/B sample is small; final candidate first-text median was higher than baseline. No stable causal provider speedup demonstrated.",
+    "Historical 07 Nov UI was dev on another day; this run is production. Do not attribute the whole difference to the prompt.",
+    "Implicit cache hits were not measured or guaranteed.",
+    "Verbatim lexical retrieval is not semantic completeness; full mode is available.",
+    "Feedback UC-08 and report creation remain outside this change.",
+    "Settings migration was not applied."
+  ],
+  "committed": false,
+  "pushed": false
+}
