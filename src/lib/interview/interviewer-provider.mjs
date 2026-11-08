@@ -24,7 +24,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
       const combined = AbortSignal.any([lifetime.signal, timeout, ...(signal ? [signal] : [])]);
       let output = ''; let preview = ''; let stopped = false; let firstFrame = true; let firstText = true;
       try {
-        const payload = JSON.stringify(buildInterviewerRequest(input));
+        const payload = JSON.stringify(buildInterviewerRequest(input, { contextMode: env.GEMINI_INTERVIEW_CONTEXT_MODE }));
         trace('upstream_started');
         const response = await fetchImpl(`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`, {
           method: 'POST', redirect: 'error', signal: combined,
@@ -110,7 +110,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
       const timeout = AbortSignal.timeout(timeoutMs);
       const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
       try {
-        const payload = JSON.stringify(buildInterviewerRequest(input));
+        const payload = JSON.stringify(buildInterviewerRequest(input, { contextMode: env.GEMINI_INTERVIEW_CONTEXT_MODE }));
         trace('upstream_started');
         const response = await fetchImpl(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
           method: 'POST', redirect: 'error', signal: combined,

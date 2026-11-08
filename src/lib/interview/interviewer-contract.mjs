@@ -91,12 +91,12 @@ export function getInterviewPolicy(input) {
 export const INTERVIEWER_OUTPUT_SCHEMA = {
   type: 'object', additionalProperties: false,
   properties: {
-    action: { type: 'string', enum: ['follow_up', 'next_topic', 'end'] },
     question: { type: ['string', 'null'], description: 'One focused question, or null only for end.' },
+    action: { type: 'string', enum: ['follow_up', 'next_topic', 'end'] },
     topic: { type: 'string', description: 'Concise topic. For follow_up copy the current topic exactly.' },
     reason: { type: 'string', description: 'One short decision rationale for developers, not hidden chain of thought or a candidate score.' },
   },
-  required: ['action', 'question', 'topic', 'reason'],
+  required: ['question', 'action', 'topic', 'reason'],
 };
 
 export function validateInterviewerOutput(value, input) {

@@ -1,7 +1,7 @@
 # Interview Next API v1 — SCRUM-92
 
 Status: implemented; requires migration review/application before hosted use. SCRUM-94 adds opt-in streaming in [Streaming API v1](INTERVIEW_STREAM_API_v1.md); final JSON remains compatible.
-Source: `src/app/api/interview/next/route.ts`. Internal AI contract remains [v0.1](AI_INTERVIEWER_CONTRACT_v0.1.md); current prompt is v0.8 after SCRUM-93.
+Source: `src/app/api/interview/next/route.ts`. Internal AI contract remains [v0.1](AI_INTERVIEWER_CONTRACT_v0.1.md); current prompt is v0.10 after the SCRUM-94 latency changes.
 
 ## Prerequisite
 
@@ -44,7 +44,11 @@ For `follow_up`, kind is `follow_up` and `parent_question_id` points to the late
 
 The atomic claim loads the signed-in user's session snapshot and ordered questions/answers. The service validates settings/history, derives time from `started_at` and uses JD/CV snapshots even if the linked analysis is deleted. The first opening claim sets `started_at` to the actual start of practice. The optional real interview date is not an elapsed-time clock.
 
-`question-plan.mjs` (context version `jd-cv-context-v3`) ranks JD passages by lexical overlap with previous topics, preferring the least-covered passage, and finds up to two relevant verbatim CV passages. It skips standalone section headings and the saved position title, preserves short technologies such as Go/C#, and normalizes selected technology aliases for matching (for example, JS/JavaScript). It does not rewrite source excerpts. This is a transparent heuristic, not a trained knowledge selector, semantic coverage guarantee or proof of competence. Negations remain in excerpts. The full JD/CV stay in the prompt; long passages skipped by the selector are not silently removed from the documents.
+`question-plan.mjs` (context version `jd-cv-context-v3`) ranks JD passages by lexical overlap with previous topics, preferring the least-covered passage, and finds up to two relevant verbatim CV passages. It skips standalone section headings and the saved position title, preserves short technologies such as Go/C#, and normalizes selected technology aliases for matching (for example, JS/JavaScript). It does not rewrite source excerpts. This is a transparent heuristic, not a trained knowledge selector, semantic coverage guarantee or proof of competence. Full CV/JD remain in the validated server context and saved snapshots.
+
+Prompt v0.10 puts stable documents/settings before changing turn data. `document-context.mjs` selects complete source passages with neighboring lines for large documents (CV budget 4000, JD 6000 UTF-16 units), reports omissions in `documentCoverage`, and retrieves up to 2200 extra units per document for the current question/answer. Short sources, unbroken oversized passages and sources with no useful lexical match are retained in full. Thus budgets are projection targets, not new upload limits. No source text or saved history is modified, no extra summarizer call is added, and omitted content is not evidence of absent skills. Server-only `GEMINI_INTERVIEW_CONTEXT_MODE=full` disables document projection for diagnosis; the concise instructions and question-first schema still apply. Prefix order makes implicit caching possible; a cache hit or latency reduction is not guaranteed.
+
+The Gemini schema now orders `question` before `action/topic/reason` so its text can stream earlier. The model still decides the action internally first; the service validates the full decision and persists it before sending `complete`. Provisional preview text is not a saved question. Output token limit, model, timeout, per-user quota and schema fields are unchanged.
 
 The prompt supplies policies for HR/technical/behavioral, easy/medium/hard and vi/en. Difficulty is specific to the interview round: hard technical questions can probe a hypothetical failure or concurrency trade-off; hard behavioral questions invite a real past disagreement or competing priorities and reflection; hard HR questions probe professional judgment without assuming management experience. Missing or heading-only documents use the target position. Technical questions prefer hypothetical wording for techniques not explicitly evidenced in the CV. Behavioral questions invite real past experiences using STAR. Output is validated through the existing schema/policy checks before SQL persists the question.
 
