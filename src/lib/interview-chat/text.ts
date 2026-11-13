@@ -30,9 +30,22 @@ type ChatText = {
   endConfirmYes: string;
   endConfirmNo: string;
   endedTitle: string;
-  endedBody: string;
   toDashboard: string;
   newInterview: string;
+  // SCRUM-128: end-of-interview screen (placeholder for the report until Week 8).
+  endedReason: Record<"completed" | "time_up" | "user" | "reopened", string>; // EndReason in types.ts
+  statMain: string;
+  statFollowUps: string;
+  statTime: string;
+  statTimeOf: (minutes: number) => string;
+  reportTitle: string;
+  reportSoon: string;
+  reportButton: string;
+  noAnswers: string;
+  reviewTranscript: string;
+  // SCRUM-129: empty answer and load-error states.
+  emptyAnswer: string;
+  loadErrorTitle: string;
   loading: string;
   emptyTranscript: string;
   panelRole: string;
@@ -80,9 +93,26 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     endConfirmYes: "Kết thúc",
     endConfirmNo: "Tiếp tục phỏng vấn",
     endedTitle: "Buổi phỏng vấn đã kết thúc",
-    endedBody: "Các câu trả lời đã được lưu. Trang nhận xét chi tiết sẽ có ở bản sau.",
     toDashboard: "Về Dashboard",
     newInterview: "Phỏng vấn mới",
+    endedReason: {
+      completed: "Bạn đã trả lời hết các câu hỏi chính của buổi này.",
+      time_up: "Đã hết thời gian của buổi phỏng vấn. Các câu đã gửi vẫn được lưu.",
+      user: "Bạn đã kết thúc buổi phỏng vấn sớm.",
+      reopened: "Buổi phỏng vấn này đã kết thúc trước đó.",
+    },
+    statMain: "Câu hỏi chính",
+    statFollowUps: "Câu hỏi đào sâu",
+    statTime: "Thời gian",
+    statTimeOf: (m) => `trên ${m} phút`,
+    reportTitle: "Báo cáo chi tiết",
+    reportSoon:
+      "Chấm điểm từng câu và báo cáo tổng kết sẽ có ở bản Build 2. Các câu trả lời của bạn đã được lưu để tạo báo cáo.",
+    reportButton: "Xem báo cáo (sắp có)",
+    noAnswers: "Bạn chưa trả lời câu nào nên buổi này không có báo cáo.",
+    reviewTranscript: "Xem lại hội thoại",
+    emptyAnswer: "Hãy viết câu trả lời trước khi gửi.",
+    loadErrorTitle: "Không mở được buổi phỏng vấn",
     loading: "Đang tải buổi phỏng vấn…",
     emptyTranscript: "Chưa có câu hỏi nào.",
     panelRole: "Vị trí",
@@ -167,9 +197,26 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     endConfirmYes: "End",
     endConfirmNo: "Keep going",
     endedTitle: "The interview has ended",
-    endedBody: "Your answers are saved. The detailed feedback page comes in a later version.",
     toDashboard: "Back to Dashboard",
     newInterview: "New interview",
+    endedReason: {
+      completed: "You answered all the main questions of this session.",
+      time_up: "The time for this interview is up. The answers you sent are saved.",
+      user: "You ended the interview early.",
+      reopened: "This interview has already ended.",
+    },
+    statMain: "Main questions",
+    statFollowUps: "Follow-up questions",
+    statTime: "Time",
+    statTimeOf: (m) => `of ${m} min`,
+    reportTitle: "Detailed report",
+    reportSoon:
+      "Per-answer scores and the summary report come in Build 2. Your answers are saved so the report can be built from them.",
+    reportButton: "View report (coming soon)",
+    noAnswers: "You did not answer any question, so this session has no report.",
+    reviewTranscript: "Review the conversation",
+    emptyAnswer: "Please write an answer before sending.",
+    loadErrorTitle: "Could not open the interview",
     loading: "Loading the interview…",
     emptyTranscript: "No questions yet.",
     panelRole: "Position",

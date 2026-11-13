@@ -77,5 +77,8 @@ export class InterviewChatError extends Error {
   }
 }
 
+// SCRUM-128: why the interview ended. "reopened" = a finished session opened again later.
+export type EndReason = "completed" | "time_up" | "user" | "reopened";
+
 // Same limit as the interview engine (each answer at most 12k characters).
 export const ANSWER_MAX_CHARS = 12000;
