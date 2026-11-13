@@ -1,5 +1,6 @@
 import { AnalysisError, invalidAiResponse } from './errors.mjs';
 import { GEMINI_ANALYSIS_SCHEMA } from './contracts.mjs';
+import { providerLimitMessage } from '../ai/provider-limit.mjs';
 
 export const DEFAULT_MODEL = 'gemini-3.5-flash-lite';
 
@@ -76,7 +77,7 @@ export function createGeminiProvider({ env = process.env, fetchImpl = globalThis
           // forward them, or automatically retry a potentially billed call.
           await response.body?.cancel();
           if (response.status === 429) {
-            throw new AnalysisError('AI_RATE_LIMITED', 'Gemini quota or rate limit reached. Please try again later.', 429);
+            throw new AnalysisError('AI_RATE_LIMITED', providerLimitMessage('en'), 429);
           }
           if ([400, 401, 403, 404].includes(response.status)) {
             throw new AnalysisError('AI_CONFIGURATION_ERROR', 'Check the server Gemini key and model configuration.', 503);

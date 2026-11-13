@@ -2,6 +2,7 @@ import { DEFAULT_MODEL } from '../analysis/gemini.mjs';
 import { createEndDecision, InterviewerError, validateInterviewerInput, validateInterviewerOutput } from './interviewer-contract.mjs';
 import { buildInterviewerRequest } from './interviewer-prompt.mjs';
 import { readSseEvents, questionTextPrefix, StreamProtocolError } from './stream-protocol.mjs';
+import { providerLimitMessage } from '../ai/provider-limit.mjs';
 
 /** Server / Node only: keep this provider out of client components. No DB writes or automatic retries. */
 export function createInterviewerProvider({ env = process.env, fetchImpl = globalThis.fetch } = {}) {
@@ -36,7 +37,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
           await response.body?.cancel();
           const code = response.status === 429 ? 'AI_RATE_LIMITED'
             : [400, 401, 403, 404].includes(response.status) ? 'AI_CONFIGURATION_ERROR' : 'AI_UNAVAILABLE';
-          throw new InterviewerError(code, 'Gemini could not complete the interview request.', code === 'AI_RATE_LIMITED' ? 429 : code === 'AI_CONFIGURATION_ERROR' ? 503 : 502);
+          throw new InterviewerError(code, code === 'AI_RATE_LIMITED' ? providerLimitMessage('en') : 'Gemini could not complete the interview request.', code === 'AI_RATE_LIMITED' ? 429 : code === 'AI_CONFIGURATION_ERROR' ? 503 : 502);
         }
         if (response.headers.get('content-type')?.split(';', 1)[0].trim().toLowerCase() !== 'text/event-stream') {
           await response.body?.cancel();
@@ -50,7 +51,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
             const status = Number(envelope.error.code);
             const code = status === 429 ? 'AI_RATE_LIMITED'
               : [400, 401, 403, 404].includes(status) ? 'AI_CONFIGURATION_ERROR' : 'AI_UNAVAILABLE';
-            throw new InterviewerError(code, 'Gemini could not complete the interview request.', code === 'AI_RATE_LIMITED' ? 429 : code === 'AI_CONFIGURATION_ERROR' ? 503 : 502);
+            throw new InterviewerError(code, code === 'AI_RATE_LIMITED' ? providerLimitMessage('en') : 'Gemini could not complete the interview request.', code === 'AI_RATE_LIMITED' ? 429 : code === 'AI_CONFIGURATION_ERROR' ? 503 : 502);
           }
           const candidate = envelope?.candidates?.[0];
           if (envelope?.promptFeedback?.blockReason || candidate?.finishReason === 'SAFETY') {
@@ -123,7 +124,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
           await response.body?.cancel();
           const code = response.status === 429 ? 'AI_RATE_LIMITED'
             : [400, 401, 403, 404].includes(response.status) ? 'AI_CONFIGURATION_ERROR' : 'AI_UNAVAILABLE';
-          throw new InterviewerError(code, 'Gemini could not complete the interview request.', code === 'AI_RATE_LIMITED' ? 429 : code === 'AI_CONFIGURATION_ERROR' ? 503 : 502);
+          throw new InterviewerError(code, code === 'AI_RATE_LIMITED' ? providerLimitMessage('en') : 'Gemini could not complete the interview request.', code === 'AI_RATE_LIMITED' ? 429 : code === 'AI_CONFIGURATION_ERROR' ? 503 : 502);
         }
         const envelope = await response.json();
         const candidate = envelope?.candidates?.[0];
