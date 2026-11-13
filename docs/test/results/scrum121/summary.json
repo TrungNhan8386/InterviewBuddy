@@ -1,0 +1,70 @@
+{
+  "baseline.json": {
+    "promptVersion": "0.10",
+    "recordedAttempts": 20,
+    "valid": 19,
+    "errors": 1,
+    "wrongAction": [
+      "S04-after-3",
+      "S07-after-3",
+      "S08-after-3",
+      "S09-after-3",
+      "S10-after-3"
+    ],
+    "expectedActionAndValid": 14
+  },
+  "candidate-0.11-incomplete.json": {
+    "promptVersion": "0.11",
+    "recordedAttempts": 6,
+    "valid": 6,
+    "errors": 0,
+    "wrongAction": [],
+    "expectedActionAndValid": 6
+  },
+  "candidate-0.12.json": {
+    "promptVersion": "0.12",
+    "recordedAttempts": 20,
+    "valid": 19,
+    "errors": 1,
+    "wrongAction": [
+      "S04-after-3",
+      "S07-after-3",
+      "S08-after-3",
+      "S09-after-3",
+      "S10-after-3"
+    ],
+    "expectedActionAndValid": 14
+  },
+  "candidate-0.13.json": {
+    "promptVersion": "0.13",
+    "recordedAttempts": 20,
+    "valid": 20,
+    "errors": 0,
+    "wrongAction": [
+      "S04-after-3",
+      "S07-after-3",
+      "S09-after-3"
+    ],
+    "expectedActionAndValid": 17
+  },
+  "candidate-0.14-rejected.json": {
+    "promptVersion": "0.14",
+    "recordedAttempts": 20,
+    "valid": 14,
+    "errors": 6,
+    "wrongAction": [],
+    "expectedActionAndValid": 14
+  },
+  "candidate.json": {
+    "promptVersion": "0.13",
+    "recordedAttempts": 20,
+    "valid": 20,
+    "errors": 0,
+    "wrongAction": [
+      "S04-after-3",
+      "S07-after-3",
+      "S09-after-3"
+    ],
+    "expectedActionAndValid": 17
+  }
+}

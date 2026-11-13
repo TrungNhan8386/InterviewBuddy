@@ -1,0 +1,309 @@
+{
+  "phase": "candidate",
+  "promptVersion": "0.13",
+  "model": "gemini-3.5-flash-lite",
+  "boundary": "Real Gemini REST replay of complete synthetic saved sessions; provider-only, no UI/Auth/Supabase write acceptance.",
+  "automaticRetries": 0,
+  "attempts": [
+    {
+      "id": "S01-after-1",
+      "language": "en",
+      "historyLength": 1,
+      "latestQuestion": "How would you structure a React component using TypeScript to handle asynchronous REST API loading, empty, success, and error states?",
+      "latestAnswer": "Yes.",
+      "output": {
+        "action": "follow_up",
+        "question": "Could you describe how you implement the loading and error states within that React component structure?",
+        "topic": "React and TypeScript Interfaces",
+        "reason": "The previous answer was a vague affirmation and requires clarification."
+      },
+      "status": "valid",
+      "elapsedMs": 1866
+    },
+    {
+      "id": "S01-after-3",
+      "language": "en",
+      "historyLength": 3,
+      "latestQuestion": "How would you implement keyboard focus management and screen reader accessibility when a modal dialog opens and closes in a React application?",
+      "latestAnswer": "In the synthetic React/TypeScript project I separated loading, success, empty and error states. I cancelled obsolete requests with AbortController, checked response.ok and updated the UI only from the current request. I preserved drafts after network failures, used idempotent IDs to prevent duplicate writes and tested ownership with two accounts. I measured visible latency and checked saved records rather than relying only on a success message.",
+      "output": {
+        "action": "follow_up",
+        "question": "When a modal dialog opens in your React application, where does the keyboard focus move initially, and how do you return focus when the modal closes?",
+        "topic": "Accessibility and Semantic HTML",
+        "reason": "The previous answer ignored the modal focus management question and repeated past project summary details."
+      },
+      "status": "valid",
+      "elapsedMs": 1481
+    },
+    {
+      "id": "S02-after-1",
+      "language": "vi",
+      "historyLength": 1,
+      "latestQuestion": "Bạn sẽ thiết kế và xử lý các trạng thái tải, trống, thành công và lỗi khi tích hợp REST API trong một component React như thế nào?",
+      "latestAnswer": "Dạ có.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn có thể cụ thể hóa cách xử lý các trạng thái tải, trống, thành công và lỗi trong component React bằng một ví dụ thực tế không?",
+        "topic": "Tích hợp REST API và quản lý trạng thái",
+        "reason": "Ứng viên trả lời chưa đầy đủ, cần làm rõ cơ chế xử lý các trạng thái API."
+      },
+      "status": "valid",
+      "elapsedMs": 1752
+    },
+    {
+      "id": "S02-after-3",
+      "language": "vi",
+      "historyLength": 3,
+      "latestQuestion": "Bạn sẽ xử lý việc hủy các request cũ không còn cần thiết bằng AbortController trong React useEffect như thế nào để tránh cập nhật state trên component đã unmount?",
+      "latestAnswer": "Trong dự án React/TypeScript tổng hợp, em tách trạng thái loading, success, empty và error. Khi người dùng gửi yêu cầu mới, em hủy request cũ bằng AbortController, kiểm tra response.ok và chỉ cập nhật giao diện từ request hiện tại. Em giữ dữ liệu form khi lỗi mạng, dùng ID để tránh ghi trùng và kiểm thử quyền truy cập giữa hai tài khoản. Em đo thời gian hiển thị và đối soát dữ liệu đã lưu thay vì chỉ nhìn thông báo thành công.",
+      "output": {
+        "action": "next_topic",
+        "question": "Bạn sẽ triển khai cơ chế xác thực và điều hướng bảo vệ các route trong ứng dụng React với TypeScript như thế nào?",
+        "topic": "Xác thực và điều hướng route",
+        "reason": "Đã hoàn thành các câu hỏi về tích hợp API, chuyển sang chủ đề xác thực và route."
+      },
+      "status": "valid",
+      "elapsedMs": 1796
+    },
+    {
+      "id": "S03-after-1",
+      "language": "en",
+      "historyLength": 1,
+      "latestQuestion": "How would you implement authentication-aware routing in a React application to protect private views?",
+      "latestAnswer": "Yes.",
+      "output": {
+        "action": "follow_up",
+        "question": "Could you briefly explain how you would check the user's authentication state before rendering a protected route?",
+        "topic": "Authentication-aware routing",
+        "reason": "The previous answer was vague and needs clarification on the mechanism."
+      },
+      "status": "valid",
+      "elapsedMs": 7468
+    },
+    {
+      "id": "S03-after-3",
+      "language": "en",
+      "historyLength": 3,
+      "latestQuestion": "How would you use AbortController to cancel an obsolete fetch request when a user rapidly changes search inputs in a React component?",
+      "latestAnswer": "In the synthetic React/TypeScript project I separated loading, success, empty and error states. I cancelled obsolete requests with AbortController, checked response.ok and updated the UI only from the current request. I preserved drafts after network failures, used idempotent IDs to prevent duplicate writes and tested ownership with two accounts. I measured visible latency and checked saved records rather than relying only on a success message.",
+      "output": {
+        "action": "next_topic",
+        "question": "How would you handle the loading state in your React component while a fetch request is pending?",
+        "topic": "Loading and empty states",
+        "reason": "The previous topic is complete and loading states are an untested JD focus."
+      },
+      "status": "valid",
+      "elapsedMs": 2050
+    },
+    {
+      "id": "S04-after-1",
+      "language": "vi",
+      "historyLength": 1,
+      "latestQuestion": "Bạn sẽ thiết lập AbortController trong một custom hook gọi API bằng React và TypeScript như thế nào để tự động hủy các request cũ khi người dùng gõ tìm kiếm liên tục?",
+      "latestAnswer": "Dạ có.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn có thể mô tả chi tiết cách viết đoạn code dùng AbortController trong custom hook đó để hủy request cũ không?",
+        "topic": "React và TypeScript",
+        "reason": "Câu trả lời trước chưa làm rõ cách triển khai chi tiết AbortController."
+      },
+      "status": "valid",
+      "elapsedMs": 8238
+    },
+    {
+      "id": "S04-after-3",
+      "language": "vi",
+      "historyLength": 3,
+      "latestQuestion": "Bạn sẽ triển khai việc xác thực form (form validation) kết hợp với TypeScript như thế nào để đảm bảo người dùng không thể submit dữ liệu khi có lỗi định dạng?",
+      "latestAnswer": "Trong dự án React/TypeScript tổng hợp, em tách trạng thái loading, success, empty và error. Khi người dùng gửi yêu cầu mới, em hủy request cũ bằng AbortController, kiểm tra response.ok và chỉ cập nhật giao diện từ request hiện tại. Em giữ dữ liệu form khi lỗi mạng, dùng ID để tránh ghi trùng và kiểm thử quyền truy cập giữa hai tài khoản. Em đo thời gian hiển thị và đối soát dữ liệu đã lưu thay vì chỉ nhìn thông báo thành công.",
+      "output": {
+        "action": "next_topic",
+        "question": "Bạn sẽ cấu hình các route được bảo vệ (protected routes) trong ứng dụng React bằng TypeScript như thế nào để chuyển hướng người dùng chưa xác thực đến trang đăng nhập?",
+        "topic": "Xác thực form và định tuyến",
+        "reason": "Ứng viên đã trả lời câu hỏi trước bằng văn bản mẫu lặp lại, chuyển sang câu hỏi tiếp theo về định tuyến bảo vệ."
+      },
+      "status": "valid",
+      "elapsedMs": 1919
+    },
+    {
+      "id": "S05-after-1",
+      "language": "en",
+      "historyLength": 1,
+      "latestQuestion": "How would you implement keyboard focus management and ensure proper semantic markup in a complex React modal component?",
+      "latestAnswer": "Yes.",
+      "output": {
+        "action": "follow_up",
+        "question": "Could you describe how you manage keyboard focus when a React modal opens and close it?",
+        "topic": "Frontend Accessibility",
+        "reason": "The previous answer was a vague confirmation, so I am asking for a targeted clarification on focus management."
+      },
+      "status": "valid",
+      "elapsedMs": 7319
+    },
+    {
+      "id": "S05-after-3",
+      "language": "en",
+      "historyLength": 3,
+      "latestQuestion": "How would you handle asynchronous state transitions and ensure the UI correctly reflects loading, empty, success, and error states when integrating a REST API in React?",
+      "latestAnswer": "In the synthetic React/TypeScript project I separated loading, success, empty and error states. I cancelled obsolete requests with AbortController, checked response.ok and updated the UI only from the current request. I preserved drafts after network failures, used idempotent IDs to prevent duplicate writes and tested ownership with two accounts. I measured visible latency and checked saved records rather than relying only on a success message.",
+      "output": {
+        "action": "next_topic",
+        "question": "How would you structure your React code and use AbortController to cancel an obsolete fetch request when a user rapidly changes search queries?",
+        "topic": "Use AbortController to cancel obsolete requests.",
+        "reason": "Transitioning to the next focus topic regarding AbortController implementation as outlined in the question plan."
+      },
+      "status": "valid",
+      "elapsedMs": 1470
+    },
+    {
+      "id": "S06-after-1",
+      "language": "vi",
+      "historyLength": 1,
+      "latestQuestion": "Trong React, bạn sẽ xử lý việc hủy các request HTTP cũ không còn cần thiết (ví dụ khi người dùng gõ tìm kiếm liên tục) như thế nào bằng cách sử dụng AbortController?",
+      "latestAnswer": "Dạ có.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn có thể mô tả chi tiết cách bạn truyền signal từ AbortController vào một hàm fetch trong component React và xử lý khi request bị hủy không?",
+        "topic": "AbortController",
+        "reason": "Câu trả lời trước chưa rõ ràng, cần làm rõ cách triển khai AbortController với fetch."
+      },
+      "status": "valid",
+      "elapsedMs": 7331
+    },
+    {
+      "id": "S06-after-3",
+      "language": "vi",
+      "historyLength": 3,
+      "latestQuestion": "Bạn sẽ xử lý việc dọn dẹp hoặc hủy bỏ signal của AbortController như thế nào khi component React bị unmount giữa chừng để tránh rò rỉ bộ nhớ hoặc cập nhật state trên component đã unmount?",
+      "latestAnswer": "Trong dự án React/TypeScript tổng hợp, em tách trạng thái loading, success, empty và error. Khi người dùng gửi yêu cầu mới, em hủy request cũ bằng AbortController, kiểm tra response.ok và chỉ cập nhật giao diện từ request hiện tại. Em giữ dữ liệu form khi lỗi mạng, dùng ID để tránh ghi trùng và kiểm thử quyền truy cập giữa hai tài khoản. Em đo thời gian hiển thị và đối soát dữ liệu đã lưu thay vì chỉ nhìn thông báo thành công.",
+      "output": {
+        "action": "next_topic",
+        "question": "Bạn sẽ viết unit test cho các component React và API error paths như thế nào trong dự án?",
+        "topic": "Testing",
+        "reason": "Đã đạt giới hạn follow-up của AbortController, chuyển sang chủ đề Testing theo kế hoạch."
+      },
+      "status": "valid",
+      "elapsedMs": 1723
+    },
+    {
+      "id": "S07-after-1",
+      "language": "en",
+      "historyLength": 1,
+      "latestQuestion": "How would you implement AbortController to cancel an obsolete fetch request when a user rapidly changes search inputs in a React component?",
+      "latestAnswer": "Yes.",
+      "output": {
+        "action": "follow_up",
+        "question": "Could you briefly explain the specific steps you take to attach an AbortController to a fetch request and handle the cancellation in a React component?",
+        "topic": "AbortController",
+        "reason": "The latest answer is vague and requires clarification on the AbortController implementation mechanism."
+      },
+      "status": "valid",
+      "elapsedMs": 1532
+    },
+    {
+      "id": "S07-after-3",
+      "language": "en",
+      "historyLength": 3,
+      "latestQuestion": "How would you structure authentication-aware routing in a React and TypeScript application to protect private views and redirect unauthorized users?",
+      "latestAnswer": "In the synthetic React/TypeScript project I separated loading, success, empty and error states. I cancelled obsolete requests with AbortController, checked response.ok and updated the UI only from the current request. I preserved drafts after network failures, used idempotent IDs to prevent duplicate writes and tested ownership with two accounts. I measured visible latency and checked saved records rather than relying only on a success message.",
+      "output": {
+        "action": "next_topic",
+        "question": "How would you handle unauthorized API responses when a user's session expires while they are navigating through protected routes?",
+        "topic": "Authentication-aware routing",
+        "reason": "The previous answer repeated template project details and did not address routing structure."
+      },
+      "status": "valid",
+      "elapsedMs": 1561
+    },
+    {
+      "id": "S08-after-1",
+      "language": "vi",
+      "historyLength": 1,
+      "latestQuestion": "Bạn sẽ xử lý việc hủy các request HTTP cũ bằng AbortController trong một component React như thế nào khi người dùng thay đổi từ khóa tìm kiếm liên tục?",
+      "latestAnswer": "Dạ có.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn có thể mô tả chi tiết cách khởi tạo và gọi hàm abort() của AbortController trong useEffect khi input thay đổi không?",
+        "topic": "AbortController",
+        "reason": "Câu trả lời trước chưa làm rõ cơ chế kỹ thuật."
+      },
+      "status": "valid",
+      "elapsedMs": 3696
+    },
+    {
+      "id": "S08-after-3",
+      "language": "vi",
+      "historyLength": 3,
+      "latestQuestion": "Bạn sẽ triển khai cơ chế xác thực và bảo vệ các route (authentication-aware routing) trong ứng dụng React như thế nào để ngăn người dùng chưa đăng nhập truy cập vào trang quản trị?",
+      "latestAnswer": "Trong dự án React/TypeScript tổng hợp, em tách trạng thái loading, success, empty và error. Khi người dùng gửi yêu cầu mới, em hủy request cũ bằng AbortController, kiểm tra response.ok và chỉ cập nhật giao diện từ request hiện tại. Em giữ dữ liệu form khi lỗi mạng, dùng ID để tránh ghi trùng và kiểm thử quyền truy cập giữa hai tài khoản. Em đo thời gian hiển thị và đối soát dữ liệu đã lưu thay vì chỉ nhìn thông báo thành công.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn sẽ cấu trúc các component và logic kiểm tra quyền của người dùng như thế nào bên trong một route được bảo vệ (protected route) trong React?",
+        "topic": "Authentication-aware routing",
+        "reason": "Câu trả lời trước chưa làm rõ cách triển khai chi tiết cơ chế bảo vệ route."
+      },
+      "status": "valid",
+      "elapsedMs": 9232
+    },
+    {
+      "id": "S09-after-1",
+      "language": "en",
+      "historyLength": 1,
+      "latestQuestion": "How would you structure a React component using TypeScript to handle asynchronous data fetching with loading, success, and error states?",
+      "latestAnswer": "Yes.",
+      "output": {
+        "action": "follow_up",
+        "question": "Can you describe how you implement the loading and error states within that React component?",
+        "topic": "React Component Data Fetching",
+        "reason": "The previous answer was vague and needs clarification on the specific implementation details."
+      },
+      "status": "valid",
+      "elapsedMs": 8535
+    },
+    {
+      "id": "S09-after-3",
+      "language": "en",
+      "historyLength": 3,
+      "latestQuestion": "How would you design unit or integration tests for a React component that submits form data and handles potential network failures or API error responses?",
+      "latestAnswer": "In the synthetic React/TypeScript project I separated loading, success, empty and error states. I cancelled obsolete requests with AbortController, checked response.ok and updated the UI only from the current request. I preserved drafts after network failures, used idempotent IDs to prevent duplicate writes and tested ownership with two accounts. I measured visible latency and checked saved records rather than relying only on a success message.",
+      "output": {
+        "action": "next_topic",
+        "question": "How would you implement keyboard focus management and ensure semantic HTML markup when building an accessible modal dialog component in React?",
+        "topic": "Accessible UI and Keyboard Navigation",
+        "reason": "Moving to a new JD focus on accessibility and keyboard navigation."
+      },
+      "status": "valid",
+      "elapsedMs": 1635
+    },
+    {
+      "id": "S10-after-1",
+      "language": "vi",
+      "historyLength": 1,
+      "latestQuestion": "Bạn sẽ xử lý việc hủy các request API cũ trong React component như thế nào khi người dùng thực hiện tìm kiếm liên tục?",
+      "latestAnswer": "Dạ có.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn có thể mô tả chi tiết cách sử dụng AbortController cùng với useEffect để hủy request trước đó không?",
+        "topic": "Hủy request API với AbortController",
+        "reason": "Ứng viên trả lời chưa làm rõ cơ chế kỹ thuật."
+      },
+      "status": "valid",
+      "elapsedMs": 8716
+    },
+    {
+      "id": "S10-after-3",
+      "language": "vi",
+      "historyLength": 3,
+      "latestQuestion": "Bạn sẽ thiết kế việc kiểm thử các trạng thái lỗi API (như lỗi kết nối, timeout, hoặc từ chối quyền) trong component React của mình như thế nào?",
+      "latestAnswer": "Trong dự án React/TypeScript tổng hợp, em tách trạng thái loading, success, empty và error. Khi người dùng gửi yêu cầu mới, em hủy request cũ bằng AbortController, kiểm tra response.ok và chỉ cập nhật giao diện từ request hiện tại. Em giữ dữ liệu form khi lỗi mạng, dùng ID để tránh ghi trùng và kiểm thử quyền truy cập giữa hai tài khoản. Em đo thời gian hiển thị và đối soát dữ liệu đã lưu thay vì chỉ nhìn thông báo thành công.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn sẽ viết unit test cho trường hợp timeout hoặc lỗi mạng khi gọi API trong component React như thế nào để đảm bảo component hiển thị đúng thông báo lỗi?",
+        "topic": "Kiểm thử component và trạng thái lỗi API",
+        "reason": "Ứng viên chưa nêu chi tiết cách viết test cho các kịch bản lỗi API cụ thể như timeout."
+      },
+      "status": "valid",
+      "elapsedMs": 1853
+    }
+  ]
+}
