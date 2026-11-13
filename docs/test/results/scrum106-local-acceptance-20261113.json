@@ -1,0 +1,522 @@
+{
+  "date": "2026-11-13",
+  "environment": {
+    "app": "next build + next start (production) on localhost:3000",
+    "commit": "0668228 (main) + PR #25 fix",
+    "database": "shared Supabase project, 5 migrations",
+    "model": "gemini-3.5-flash-lite (streaming)",
+    "accounts": "seed candidate.a / candidate.b",
+    "network": "home Wi-Fi, Vietnam",
+    "pacing": ">= 8 s between AI requests, no automatic retry"
+  },
+  "startedAt": "2026-11-13T08:50:05.536Z",
+  "finishedAt": "2026-11-13T08:53:39.929Z",
+  "checks": {
+    "UC02-03": [
+      {
+        "name": "B opens A session URL via API -> 404 NOT_FOUND",
+        "pass": true
+      },
+      {
+        "name": "B opens A seed session -> 404",
+        "pass": true
+      },
+      {
+        "name": "B lists sessions/analyses: only own rows (dashboard/analysis data source)",
+        "pass": true
+      },
+      {
+        "name": "B reads A questions -> 0 rows; answers visible are only B own",
+        "pass": true
+      },
+      {
+        "name": "A still reads own session -> 200",
+        "pass": true
+      },
+      {
+        "name": "Signed out -> 401",
+        "pass": true
+      }
+    ],
+    "UC06-02": [
+      {
+        "name": "Step 1: \"Có.\" -> clarifying follow-up in the same topic",
+        "pass": true
+      },
+      {
+        "name": "Step 2: unexplained term -> deeper follow-up, same topic, not a repeat",
+        "pass": true
+      },
+      {
+        "name": "Step 3: follow-up limit (2) reached -> next main question (new topic)",
+        "pass": true
+      },
+      {
+        "name": "Step 4: \"Em không biết.\" on a main question -> changes topic, no further probing",
+        "pass": true
+      },
+      {
+        "name": "Progress counts main questions only",
+        "pass": true
+      }
+    ],
+    "UC06-04": [
+      {
+        "name": "Answer sent after the time limit is still saved",
+        "pass": true
+      },
+      {
+        "name": "Next turn returns action \"end\" without calling Gemini",
+        "pass": true
+      },
+      {
+        "name": "No AI call counted for the end turn",
+        "pass": true
+      },
+      {
+        "name": "Session marked completed with endedAt; resume = finished",
+        "pass": true
+      },
+      {
+        "name": "Saved answer is kept in turns",
+        "pass": true
+      },
+      {
+        "name": "Reload keeps the same startedAt (timer does not restart)",
+        "pass": true
+      }
+    ],
+    "UC06-06": [
+      {
+        "name": "Step 1: reopen shows the same question (awaiting_answer) without an AI call",
+        "pass": true
+      },
+      {
+        "name": "Step 3: resend after a failed send saves the answer once",
+        "pass": true
+      },
+      {
+        "name": "Retrying the same next-question request returns the saved question, no second AI call",
+        "pass": true
+      },
+      {
+        "name": "Step 4: another user cannot open, answer or continue the session",
+        "pass": true
+      }
+    ],
+    "FLOW": [
+      {
+        "name": "Analyze CV/JD -> 200 with fitScore",
+        "pass": false,
+        "detail": {
+          "status": 502,
+          "error": {
+            "code": "SERVER_ERROR",
+            "message": "Không thể phân tích lúc này. Vui lòng thử lại sau."
+          }
+        }
+      },
+      {
+        "name": "Save the analysis as the user (RLS)",
+        "pass": true
+      },
+      {
+        "name": "Setup: new session links the latest analysis",
+        "pass": true
+      },
+      {
+        "name": "Interview runs to the end (action end) and the session is completed",
+        "pass": false,
+        "detail": {
+          "last": "AI_UNAVAILABLE",
+          "status": "in_progress",
+          "turns": 2
+        }
+      }
+    ]
+  },
+  "followUpTrace": [
+    {
+      "action": "next_topic",
+      "kind": "main",
+      "topic": "React Performance"
+    },
+    {
+      "action": "follow_up",
+      "kind": "follow_up",
+      "topic": "React Performance"
+    },
+    {
+      "action": "follow_up",
+      "kind": "follow_up",
+      "topic": "React Performance"
+    },
+    {
+      "action": "next_topic",
+      "kind": "main",
+      "topic": "API Handling"
+    },
+    {
+      "action": "next_topic",
+      "kind": "main",
+      "topic": "API Error Handling"
+    }
+  ],
+  "latency": {
+    "definition": "complete = time from sending POST /api/interview/next to the SSE complete event (question validated and saved); firstText = time to the first delta event",
+    "sampleSize": 20,
+    "validAndSavedWithin5s": 19,
+    "firstTextWithin2s": 0,
+    "errors": [
+      "AI_UNAVAILABLE"
+    ],
+    "completeP50": 2911,
+    "completeP95": 4126,
+    "firstTextP50": 2480,
+    "firstTextP95": 3184,
+    "completeMs": [
+      2524,
+      3695,
+      2792,
+      2999,
+      4126,
+      4082,
+      3659,
+      2780,
+      3384,
+      2568,
+      2241,
+      2764,
+      2735,
+      3236,
+      2911,
+      3077,
+      2704,
+      2607,
+      2810,
+      2978
+    ],
+    "firstDeltaMs": [
+      2130,
+      3184,
+      2610,
+      2285,
+      2983,
+      2766,
+      2603,
+      2435,
+      2420,
+      2197,
+      null,
+      2219,
+      2109,
+      2655,
+      2662,
+      2480,
+      2252,
+      2261,
+      2570,
+      2632
+    ],
+    "sample": [
+      {
+        "label": "UC06-02 opening",
+        "firstDeltaMs": 2130,
+        "completeMs": 2524,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "UC06-02 after \"Có.\"",
+        "firstDeltaMs": 3184,
+        "completeMs": 3695,
+        "action": "follow_up",
+        "kind": "follow_up",
+        "error": null
+      },
+      {
+        "label": "UC06-02 after unexplained term",
+        "firstDeltaMs": 2610,
+        "completeMs": 2792,
+        "action": "follow_up",
+        "kind": "follow_up",
+        "error": null
+      },
+      {
+        "label": "UC06-02 after 2nd follow-up",
+        "firstDeltaMs": 2285,
+        "completeMs": 2999,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "UC06-02 after \"I don't know\"",
+        "firstDeltaMs": 2983,
+        "completeMs": 4126,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "UC06-04 opening",
+        "firstDeltaMs": 2766,
+        "completeMs": 4082,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "UC06-06 opening",
+        "firstDeltaMs": 2603,
+        "completeMs": 3659,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "UC06-06 next after answer",
+        "firstDeltaMs": 2435,
+        "completeMs": 2780,
+        "action": "follow_up",
+        "kind": "follow_up",
+        "error": null
+      },
+      {
+        "label": "FLOW turn 1",
+        "firstDeltaMs": 2420,
+        "completeMs": 3384,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "FLOW turn 2",
+        "firstDeltaMs": 2197,
+        "completeMs": 2568,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "FLOW turn 3",
+        "firstDeltaMs": null,
+        "completeMs": 2241,
+        "action": null,
+        "kind": null,
+        "error": "AI_UNAVAILABLE"
+      },
+      {
+        "label": "LATENCY opening vi",
+        "firstDeltaMs": 2219,
+        "completeMs": 2764,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "LATENCY second turn vi",
+        "firstDeltaMs": 2109,
+        "completeMs": 2735,
+        "action": "follow_up",
+        "kind": "follow_up",
+        "error": null
+      },
+      {
+        "label": "LATENCY opening en",
+        "firstDeltaMs": 2655,
+        "completeMs": 3236,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "LATENCY second turn en",
+        "firstDeltaMs": 2662,
+        "completeMs": 2911,
+        "action": "follow_up",
+        "kind": "follow_up",
+        "error": null
+      },
+      {
+        "label": "LATENCY opening vi",
+        "firstDeltaMs": 2480,
+        "completeMs": 3077,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "LATENCY second turn vi",
+        "firstDeltaMs": 2252,
+        "completeMs": 2704,
+        "action": "follow_up",
+        "kind": "follow_up",
+        "error": null
+      },
+      {
+        "label": "LATENCY opening en",
+        "firstDeltaMs": 2261,
+        "completeMs": 2607,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      },
+      {
+        "label": "LATENCY second turn en",
+        "firstDeltaMs": 2570,
+        "completeMs": 2810,
+        "action": "follow_up",
+        "kind": "follow_up",
+        "error": null
+      },
+      {
+        "label": "LATENCY opening vi",
+        "firstDeltaMs": 2632,
+        "completeMs": 2978,
+        "action": "next_topic",
+        "kind": "main",
+        "error": null
+      }
+    ]
+  },
+  "fullFlow": {
+    "firstRun": {
+      "steps": [
+        {
+          "name": "1. Log in (email/password, Supabase Auth)",
+          "pass": true
+        },
+        {
+          "name": "2. Analyze CV/JD -> fit score",
+          "pass": true
+        },
+        {
+          "name": "3. Save analysis (as the Analysis page does)",
+          "pass": true
+        },
+        {
+          "name": "4. Setup creates the session and links the new analysis",
+          "pass": true
+        },
+        {
+          "name": "5. Interview runs until the engine ends it; session completed",
+          "pass": false
+        },
+        {
+          "name": "6. Dashboard data source shows the finished session",
+          "pass": false
+        }
+      ],
+      "turns": [
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "React and TypeScript",
+          "attempt": 1
+        },
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "attempt": 1
+        },
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "attempt": 1
+        },
+        {
+          "attempt": 3
+        }
+      ],
+      "retries": [
+        {
+          "label": "next 4",
+          "attempt": 1,
+          "error": "INVALID_OUTPUT"
+        },
+        {
+          "label": "next 4",
+          "attempt": 2,
+          "error": "INVALID_OUTPUT"
+        },
+        {
+          "label": "next 4",
+          "attempt": 3,
+          "error": "INVALID_OUTPUT"
+        }
+      ]
+    },
+    "secondRun": {
+      "steps": [
+        {
+          "name": "1. Log in (email/password, Supabase Auth)",
+          "pass": true
+        },
+        {
+          "name": "2. Analyze CV/JD -> fit score",
+          "pass": true
+        },
+        {
+          "name": "3. Save analysis (as the Analysis page does)",
+          "pass": true
+        },
+        {
+          "name": "4. Setup creates the session and links the new analysis",
+          "pass": true
+        },
+        {
+          "name": "5. Interview runs until the engine ends it; session completed",
+          "pass": true
+        },
+        {
+          "name": "6. Dashboard data source shows the finished session",
+          "pass": true
+        }
+      ],
+      "turns": [
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "Required skills: React and TypeScript.",
+          "attempt": 1
+        },
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "attempt": 1
+        },
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "Required skills: React and TypeScript.",
+          "attempt": 1
+        },
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "attempt": 1
+        },
+        {
+          "action": "next_topic",
+          "kind": "main",
+          "topic": "Required skills: React and TypeScript.",
+          "attempt": 1
+        },
+        {
+          "action": "end",
+          "attempt": 1
+        }
+      ]
+    }
+  },
+  "aiCallsUsedByAccountA": {
+    "start": 3,
+    "endOfMainRun": 25
+  }
+}
