@@ -44,6 +44,7 @@ const MESSAGES: Record<InterviewApiErrorCode, string> = {
   NOT_FOUND: "Interview session not found.",
   STALE_TURN: "This is not the current question any more. Reload the interview.",
   SESSION_CLOSED: "This interview has already ended.",
+  ANSWER_CONFLICT: "This question already has a different saved answer. Reload the interview.",
   SERVER_ERROR: "Could not save the interview session. Please try again.",
 };
 
@@ -53,6 +54,7 @@ const STATUS: Record<InterviewApiErrorCode, number> = {
   NOT_FOUND: 404,
   STALE_TURN: 409,
   SESSION_CLOSED: 409,
+  ANSWER_CONFLICT: 409,
   SERVER_ERROR: 500,
 };
 

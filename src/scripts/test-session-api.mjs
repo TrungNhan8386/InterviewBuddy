@@ -62,9 +62,11 @@ const B = await signIn('candidate.b@interviewbuddy.test');
 const created = [];
 
 // 1. Create a session: 201 + sessionId, latest analysis linked automatically.
+// Teammates may have saved newer analyses for A, so read A's latest one first.
+const latestA = (await A.client.from('fit_analyses').select('id').order('created_at', { ascending: false }).limit(1).maybeSingle()).data?.id ?? SEED_ANALYSIS.A;
 const r1 = await call('POST', '/api/interview', { token: A.token, body: settings });
 expect('1. A creates a session -> 201 with sessionId', r1.status === 201 && r1.body?.sessionId, r1);
-expect('   latest saved analysis is linked (UC-05 step 13)', r1.body?.fitAnalysisId === SEED_ANALYSIS.A, r1.body);
+expect('   latest saved analysis is linked (UC-05 step 13)', r1.body?.fitAnalysisId === latestA, r1.body);
 if (r1.body?.sessionId) created.push(r1.body.sessionId);
 
 // 2. Missing / invalid fields: 400 with the field names.
@@ -88,7 +90,7 @@ expect("4. B reads A's session -> 404", r4.status === 404 && r4.body?.error?.cod
 const r5 = await call('GET', `/api/interview/${r1.body?.sessionId}`, { token: A.token });
 expect('5. A reads own session -> 200 with settings and analysis',
   r5.status === 200 && r5.body?.settings?.durationMinutes === 30 && r5.body?.settings?.plannedQuestions === 8
-  && r5.body?.analysis?.id === SEED_ANALYSIS.A && typeof r5.body?.analysis?.fitScore === 'number', r5);
+  && r5.body?.analysis?.id === latestA && typeof r5.body?.analysis?.fitScore === 'number', r5);
 
 const r6 = await call('POST', '/api/interview', { token: B.token, body: { ...settings, fitAnalysisId: SEED_ANALYSIS.A } });
 expect("6. B links A's analysis -> 400 (analysis not found)",
@@ -127,6 +129,10 @@ expect('11. Resume after answering -> awaiting_question with afterAnswerId',
   r11.body?.resume?.state === 'awaiting_question' && r11.body.resume.afterAnswerId === r10.body?.answer?.id
   && r11.body.turns?.[0]?.answer?.content === answerBody.content
   && r11.body.progress?.mainQuestionsAnswered === 1 && r11.body.progress?.plannedQuestions === 8, r11.body);
+
+const r10edit = await call('POST', `/api/interview/${sid}/answers`, { token: A.token, body: { ...answerBody, content: 'Edited after a lost response.' } });
+expect('10b. Resend with different text -> 409 ANSWER_CONFLICT (saved answer kept)',
+  r10edit.status === 409 && r10edit.body?.error?.code === 'ANSWER_CONFLICT', r10edit);
 
 const r12 = await call('POST', `/api/interview/${sid}/answers`, { token: A.token, body: { questionId: q1, content: '  ', extra: 1 } });
 expect('12. Invalid answer -> 400 with field names',

@@ -47,6 +47,8 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
   const [endError, setEndError] = useState<string | null>(null);
   const [questionPreview, setQuestionPreview] = useState("");
   const [generationStatus, setGenerationStatus] = useState<InterviewStreamStatus>("generating");
+  // Why the page reloaded the saved session after a failed save (shown until the next send).
+  const [notice, setNotice] = useState<ChatErrorCode | null>(null);
   const generation = useRef<AbortController | null>(null);
 
   // Ignore results that arrive after the user left the page.
@@ -155,6 +157,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     if (!session || !last || last.answer || !content || content.length > ANSWER_MAX_CHARS) return;
 
     // Show the answer right away; roll back if saving fails (the draft stays in the box).
+    setNotice(null);
     setSession({
       ...session,
       turns: session.turns.map((t) =>
@@ -171,7 +174,17 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
       setSession((s) =>
         s ? { ...s, turns: s.turns.map((t) => (t.question.id === last.question.id ? { ...t, answer: null } : t)) } : s,
       );
-      setPhase({ kind: "error", code: codeOf(error) === "NETWORK_ERROR" ? "NETWORK_ERROR" : "SAVE_FAILED", retry: "save" });
+      const code = codeOf(error);
+      // Retrying cannot fix these: the saved session moved on (another tab, time
+      // limit, or an earlier send that was saved). Reload it and say why.
+      if (code === "STALE_TURN" || code === "SESSION_CLOSED" || code === "ANSWER_CONFLICT") {
+        setNotice(code);
+        setDraft(""); // it belonged to a question that is no longer open
+        setPhase({ kind: "loading" });
+        void startRef.current();
+        return;
+      }
+      setPhase({ kind: "error", code: code === "NETWORK_ERROR" ? "NETWORK_ERROR" : "SAVE_FAILED", retry: "save" });
       return;
     }
     if (!alive.current) return;
@@ -287,6 +300,12 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           <Button variant="secondary" onClick={() => generation.current?.abort()}>
             {text.cancelGeneration}
           </Button>
+        )}
+
+        {notice && (
+          <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900" role="status">
+            {text.errors[notice]}
+          </p>
         )}
 
         {phase.kind === "error" && (

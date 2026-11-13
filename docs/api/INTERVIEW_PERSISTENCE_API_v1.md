@@ -107,7 +107,7 @@ Unknown fields are rejected. The server counts the words (`word_count`) itself.
 { "answer": { "id": "a-2", "questionId": "q-2", "createdAt": "2026-11-05T10:18:40.000Z" }, "alreadySaved": false }
 ```
 
-Sending the same question again returns the answer that is already stored (`alreadySaved: true`, status 200) and does not change it. So after a network error the page can simply send again.
+Sending the same question again **with the same text** returns the answer that is already stored (`alreadySaved: true`, status 200) and does not change it, so after a network error the page can simply send again. Sending it with **different** text (the first request was saved but its response was lost, and the user edited the answer) returns `409 ANSWER_CONFLICT`; the page reloads the session and shows the saved answer.
 
 | Status | `error.code` | When |
 | --- | --- | --- |
@@ -116,6 +116,7 @@ Sending the same question again returns the answer that is already stored (`alre
 | 404 | `NOT_FOUND` | No such session or question, or it belongs to another user |
 | 409 | `STALE_TURN` | The question is not the last one any more. Reload the session. |
 | 409 | `SESSION_CLOSED` | The interview has already ended |
+| 409 | `ANSWER_CONFLICT` | This question already has a saved answer with different text. Reload the session. |
 | 500 | `SERVER_ERROR` | Database error (details are only in the server log) |
 
 ## 5. POST /api/interview/{id}/end – end the interview
@@ -208,3 +209,4 @@ The database tests run every migration on an in-memory PostgreSQL and check: ans
 | Version | Date | Change |
 | --- | --- | --- |
 | v1 | 05/11/2026 | First version: answers, resume, end, daily AI limit, error messages |
+| v1.2 | 13/11/2026 | `409 ANSWER_CONFLICT` for a resend with edited text (SCRUM-110) |
