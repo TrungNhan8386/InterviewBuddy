@@ -1,6 +1,6 @@
-# InterviewBuddy – Database Design (v1.1)
+# InterviewBuddy – Database Design (v1.2)
 
-Author: Nguyen Tran Trung Nhan · Sprint 3, week 5; extended with Week 7 Settings · Status: **local schema reference; verify all five migrations on staging**
+Author: Nguyen Tran Trung Nhan · Sprint 3, week 5; extended with Week 7 Settings · Status: **all five migrations checked on the shared Supabase project on 13/11/2026 (9 tables, RLS on every table; the API functions are not executable by anon)**
 
 Database: Supabase (PostgreSQL 17). Migrations, applied in order:
 
