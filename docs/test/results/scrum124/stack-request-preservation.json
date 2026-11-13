@@ -1,0 +1,11 @@
+{
+  "baseBranch": "feat/scrum-123-guardrails-hung",
+  "baseCommit": "732c5b6",
+  "promptVersion": "0.13-guardrails-1",
+  "interviewRequestsUnchanged": 56,
+  "analysisRequestsUnchanged": 2,
+  "healthRequestUnchanged": true,
+  "includesQuotaAndSafetySettings": true,
+  "boundary": "Offline exact request equality against the combined SCRUM-121/122/123 parent; no new live Gemini replay",
+  "sha256": "00eca7104f2f47e8b97fa91dc09f085d65b749d38327a0c680be6b87d6910168"
+}

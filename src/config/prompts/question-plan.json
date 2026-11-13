@@ -1,0 +1,25 @@
+{
+  "version": "jd-cv-context-v3",
+  "roundPolicies": {
+    "technical": "Assess job-relevant knowledge or a hypothetical implementation. Use past-project wording only for explicitly evidenced work. Do not require STAR for factual questions.",
+    "behavioral": "Ask for one real past situation, leaving room for Situation, Task, Action and Result. Do not invent the candidate's situation or result.",
+    "hr": "Ask a job-relevant motivation, collaboration or communication question; avoid private or protected personal attributes."
+  },
+  "difficultyPolicies": {
+    "technical": {
+      "easy": "Ask one foundational concept or a straightforward example; avoid a multi-part design problem.",
+      "medium": "Ask about implementation, testing, debugging or a concrete failure case at the configured role level.",
+      "hard": "Present a concrete hypothetical failure or concurrency constraint and ask for a justified design trade-off in one focused question; do not assume senior experience absent from the CV."
+    },
+    "behavioral": {
+      "easy": "Invite one straightforward real past teamwork situation at the candidate's experience level.",
+      "medium": "Invite a real past challenge and focus on personal contribution and an observable outcome, leaving room for STAR.",
+      "hard": "Invite a real past situation involving disagreement, limited time or competing priorities; focus one question on the decision and reflection. Do not invent leadership or successful outcomes."
+    },
+    "hr": {
+      "easy": "Ask one clear job-relevant motivation or collaboration question suitable for the candidate's experience level.",
+      "medium": "Ask for an explanation of motivation, communication or collaboration related to the target role.",
+      "hard": "Probe professional judgment when priorities or expectations conflict in the target role. Ask one focused question, without assuming management experience or demanding a technical design."
+    }
+  }
+}

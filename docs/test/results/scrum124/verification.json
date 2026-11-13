@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-13",
+  "baseCommit": "0668228",
+  "branch": "feat/scrum-124-prompt-config-hung",
+  "configurationFiles": 4,
+  "requestPreservation": {
+    "interview": 56,
+    "analysis": 2,
+    "health": 1,
+    "equalToPreRefactor": true
+  },
+  "checks": {
+    "fullSuite": {
+      "tests": 266,
+      "pass": 266,
+      "fail": 0,
+      "skip": 0
+    },
+    "newTests": 11,
+    "verifyPrompts": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "gitDiffCheck": "passed",
+    "credentialScan": {
+      "patternScan": "passed",
+      "knownLocalCredentialsCompared": true,
+      "matches": 0,
+      "filesScanned": 16
+    }
+  },
+  "boundary": "Offline request equality, unit/integration tests and production build with synthetic Supabase configuration; no live Gemini or shared Supabase acceptance.",
+  "integration": "SCRUM-121/122/123 are not merged; prompt integration instructions provided."
+}

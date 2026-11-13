@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-13",
+  "baseCommit": "0668228",
+  "checks": {
+    "tests": 266,
+    "passed": 266,
+    "failed": 0,
+    "lint": "pass",
+    "productionBuildAndTypeScript": "pass",
+    "credentialScan": "no known credential or key/JWT pattern matches"
+  },
+  "boundary": "Fresh offline checks before publication; archived live/UI results were not rerun.",
+  "integration": {
+    "baseBranch": "feat/scrum-123-guardrails-hung",
+    "baseCommit": "732c5b67ce9536c743a2a434a35aaf81126465b1",
+    "inherits": [
+      "SCRUM-121",
+      "SCRUM-122",
+      "SCRUM-123"
+    ],
+    "promptVersion": "0.13-guardrails-1",
+    "fullSuite": {
+      "pass": 294,
+      "fail": 0
+    },
+    "lint": "pass",
+    "productionBuildAndTypeScript": "pass",
+    "requestEquality": {
+      "interview": 56,
+      "analysis": 2,
+      "health": 1
+    },
+    "combinedPromptLiveReplay": "NOT_RUN; historical model results retain their original version boundaries"
+  }
+}
