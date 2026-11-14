@@ -1,0 +1,99 @@
+{
+  "phase": "candidate",
+  "promptVersion": "0.11",
+  "model": "gemini-3.5-flash-lite",
+  "boundary": "Real Gemini REST replay of complete synthetic saved sessions; provider-only, no UI/Auth/Supabase write acceptance.",
+  "automaticRetries": 0,
+  "attempts": [
+    {
+      "id": "S01-after-1",
+      "language": "en",
+      "historyLength": 1,
+      "latestQuestion": "How would you structure a React component using TypeScript to handle asynchronous REST API loading, empty, success, and error states?",
+      "latestAnswer": "Yes.",
+      "output": {
+        "action": "follow_up",
+        "question": "What specific visual feedback or UI elements do you render while an API request is in the pending state?",
+        "topic": "React and TypeScript Interfaces",
+        "reason": "The latest answer is a vague yes and does not explain the loading state mechanism."
+      },
+      "status": "valid",
+      "elapsedMs": 1941
+    },
+    {
+      "id": "S01-after-3",
+      "language": "en",
+      "historyLength": 3,
+      "latestQuestion": "How would you implement keyboard focus management and screen reader accessibility when a modal dialog opens and closes in a React application?",
+      "latestAnswer": "In the synthetic React/TypeScript project I separated loading, success, empty and error states. I cancelled obsolete requests with AbortController, checked response.ok and updated the UI only from the current request. I preserved drafts after network failures, used idempotent IDs to prevent duplicate writes and tested ownership with two accounts. I measured visible latency and checked saved records rather than relying only on a success message.",
+      "output": {
+        "action": "follow_up",
+        "question": "When the modal dialog opens, where does keyboard focus initially move, and how do you restore focus to the triggering element upon closing?",
+        "topic": "Accessibility and Semantic HTML",
+        "reason": "The previous answer did not address keyboard focus management for modal dialogs."
+      },
+      "status": "valid",
+      "elapsedMs": 1600
+    },
+    {
+      "id": "S02-after-1",
+      "language": "vi",
+      "historyLength": 1,
+      "latestQuestion": "Bạn sẽ thiết kế và xử lý các trạng thái tải, trống, thành công và lỗi khi tích hợp REST API trong một component React như thế nào?",
+      "latestAnswer": "Dạ có.",
+      "output": {
+        "action": "follow_up",
+        "question": "Bạn sẽ xử lý cụ thể trạng thái tải và hiển thị thông báo lỗi cho người dùng như thế nào trong component React đó?",
+        "topic": "Tích hợp REST API và quản lý trạng thái",
+        "reason": "Câu trả lời trước chưa làm rõ các trạng thái của API."
+      },
+      "status": "valid",
+      "elapsedMs": 2047
+    },
+    {
+      "id": "S02-after-3",
+      "language": "vi",
+      "historyLength": 3,
+      "latestQuestion": "Bạn sẽ xử lý việc hủy các request cũ không còn cần thiết bằng AbortController trong React useEffect như thế nào để tránh cập nhật state trên component đã unmount?",
+      "latestAnswer": "Trong dự án React/TypeScript tổng hợp, em tách trạng thái loading, success, empty và error. Khi người dùng gửi yêu cầu mới, em hủy request cũ bằng AbortController, kiểm tra response.ok và chỉ cập nhật giao diện từ request hiện tại. Em giữ dữ liệu form khi lỗi mạng, dùng ID để tránh ghi trùng và kiểm thử quyền truy cập giữa hai tài khoản. Em đo thời gian hiển thị và đối soát dữ liệu đã lưu thay vì chỉ nhìn thông báo thành công.",
+      "output": {
+        "action": "next_topic",
+        "question": "Bạn sẽ triển khai cơ chế định tuyến phân quyền (authentication-aware routing) trong ứng dụng React và TypeScript như thế nào để bảo vệ các trang yêu cầu đăng nhập?",
+        "topic": "Định tuyến phân quyền",
+        "reason": "Đã đạt giới hạn câu hỏi phụ cho chủ đề API, chuyển sang chủ đề định tuyến phân quyền."
+      },
+      "status": "valid",
+      "elapsedMs": 1510
+    },
+    {
+      "id": "S03-after-1",
+      "language": "en",
+      "historyLength": 1,
+      "latestQuestion": "How would you implement authentication-aware routing in a React application to protect private views?",
+      "latestAnswer": "Yes.",
+      "output": {
+        "action": "follow_up",
+        "question": "What specific mechanism would you use to check the user's authentication status before rendering a protected route?",
+        "topic": "Authentication-aware routing",
+        "reason": "The latest answer is a vague affirmative and does not explain the implementation mechanism."
+      },
+      "status": "valid",
+      "elapsedMs": 1504
+    },
+    {
+      "id": "S03-after-3",
+      "language": "en",
+      "historyLength": 3,
+      "latestQuestion": "How would you use AbortController to cancel an obsolete fetch request when a user rapidly changes search inputs in a React component?",
+      "latestAnswer": "In the synthetic React/TypeScript project I separated loading, success, empty and error states. I cancelled obsolete requests with AbortController, checked response.ok and updated the UI only from the current request. I preserved drafts after network failures, used idempotent IDs to prevent duplicate writes and tested ownership with two accounts. I measured visible latency and checked saved records rather than relying only on a success message.",
+      "output": {
+        "action": "next_topic",
+        "question": "How would you handle form validation and display error states for invalid user inputs in a React component?",
+        "topic": "Form validation and error states",
+        "reason": "The previous questions have been covered, and form validation is the next untested competency from the JD."
+      },
+      "status": "valid",
+      "elapsedMs": 1828
+    }
+  ]
+}
