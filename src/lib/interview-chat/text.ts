@@ -1,4 +1,5 @@
 import type { ChatErrorCode, InterviewDifficulty, InterviewLanguage, InterviewType } from "./types";
+import { providerLimitMessage } from "../ai/provider-limit.mjs";
 
 // UI text of the chat page, in the language of the interview session.
 type ChatText = {
@@ -152,7 +153,7 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       LEASE_LOST: "Phiên tạo câu hỏi đã hết hạn. Hãy tải lại trang.",
       SESSION_CONTEXT_INVALID: "Dữ liệu buổi phỏng vấn không hợp lệ. Hãy tạo buổi mới.",
       AI_CONTENT_BLOCKED: "AI từ chối nội dung này. Hãy sửa câu trả lời rồi gửi lại.",
-      AI_RATE_LIMITED: "AI đang quá tải hoặc hết lượt. Hãy thử lại sau ít phút.",
+      AI_RATE_LIMITED: providerLimitMessage("vi", "interview"),
       INVALID_OUTPUT: "AI trả về kết quả lỗi. Hãy thử lại.",
       AI_UNAVAILABLE: "Không kết nối được AI. Hãy thử lại.",
       DATABASE_NOT_READY: "Máy chủ chưa sẵn sàng (thiếu cấu hình hoặc migration).",
@@ -257,7 +258,7 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       LEASE_LOST: "The question request expired. Please reload the page.",
       SESSION_CONTEXT_INVALID: "This interview's data is invalid. Please start a new one.",
       AI_CONTENT_BLOCKED: "The AI rejected this content. Edit your answer and send it again.",
-      AI_RATE_LIMITED: "The AI is busy or out of quota. Try again in a few minutes.",
+      AI_RATE_LIMITED: providerLimitMessage("en", "interview"),
       INVALID_OUTPUT: "The AI returned an invalid result. Please try again.",
       AI_UNAVAILABLE: "Could not reach the AI. Please try again.",
       DATABASE_NOT_READY: "The server is not ready (missing configuration or migration).",

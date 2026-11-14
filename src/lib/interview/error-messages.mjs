@@ -4,6 +4,7 @@
 //   const { error } = await res.json();
 //   showError(interviewErrorMessage(error?.code, settings.language));
 
+import { providerLimitMessage } from '../ai/provider-limit.mjs';
 const MESSAGES = {
   vi: {
     BAD_INPUT: 'Dữ liệu gửi lên chưa hợp lệ. Vui lòng kiểm tra lại.',
@@ -16,7 +17,7 @@ const MESSAGES = {
     LEASE_LOST: 'Câu hỏi đã được tạo ở nơi khác. Đang tải lại…',
     SESSION_CONTEXT_INVALID: 'Dữ liệu buổi phỏng vấn bị lỗi. Vui lòng tạo buổi mới.',
     AI_DAILY_LIMIT: 'Bạn đã dùng hết lượt AI hôm nay. Hạn mức được làm mới lúc 0:00 (giờ Việt Nam).',
-    AI_RATE_LIMITED: 'AI đang quá tải. Vui lòng thử lại sau ít phút.',
+    AI_RATE_LIMITED: providerLimitMessage('vi', 'interview'),
     AI_CONTENT_BLOCKED: 'AI không xử lý được nội dung này. Hãy diễn đạt lại câu trả lời.',
     INVALID_OUTPUT: 'AI trả kết quả không hợp lệ. Vui lòng thử lại.',
     AI_UNAVAILABLE: 'Không kết nối được AI. Vui lòng thử lại.',
@@ -39,7 +40,7 @@ const MESSAGES = {
     LEASE_LOST: 'The question was created elsewhere. Reloading…',
     SESSION_CONTEXT_INVALID: 'This interview has invalid data. Please start a new one.',
     AI_DAILY_LIMIT: 'You have used all AI calls for today. The limit resets at 00:00 Vietnam time.',
-    AI_RATE_LIMITED: 'The AI service is busy. Please try again in a few minutes.',
+    AI_RATE_LIMITED: providerLimitMessage('en', 'interview'),
     AI_CONTENT_BLOCKED: 'The AI could not process this content. Please rephrase your answer.',
     INVALID_OUTPUT: 'The AI returned an invalid result. Please try again.',
     AI_UNAVAILABLE: 'Could not reach the AI service. Please try again.',

@@ -1,6 +1,7 @@
 // Adapter for the request/response contract already used by Khang's analysis page.
 // The Gemini call and weighted scoring remain in the shared analysis service.
 import { AnalysisError } from './errors.mjs';
+import { providerLimitMessage } from '../ai/provider-limit.mjs';
 import { LIMITS, validateInput } from './contracts.mjs';
 import { createAnalysisHandler } from './http.mjs';
 
@@ -59,7 +60,7 @@ export function formatFitError(error, status) {
   else if (error.code === 'INVALID_AI_RESPONSE' || error.code === 'AI_CONTENT_BLOCKED') code = 'INVALID_OUTPUT';
   const messages = {
     BAD_INPUT: 'JD hoặc CV không hợp lệ. Vui lòng kiểm tra lại.',
-    RATE_LIMIT: 'AI đang quá tải. Vui lòng thử lại sau.',
+    RATE_LIMIT: providerLimitMessage('vi', 'analysis'),
     INVALID_OUTPUT: 'AI chưa tạo được kết quả hợp lệ. Vui lòng thử lại.',
     SERVER_ERROR: 'Không thể phân tích lúc này. Vui lòng thử lại sau.',
   };
