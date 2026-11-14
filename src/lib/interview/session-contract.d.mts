@@ -121,7 +121,7 @@ export interface EndInterviewResponse {
 }
 
 export type InterviewApiErrorCode =
-  | 'BAD_INPUT' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'STALE_TURN' | 'SESSION_CLOSED' | 'SERVER_ERROR';
+  | 'BAD_INPUT' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'STALE_TURN' | 'SESSION_CLOSED' | 'ANSWER_CONFLICT' | 'SERVER_ERROR';
 
 export interface InterviewApiError {
   error: {

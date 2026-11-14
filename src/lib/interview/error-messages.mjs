@@ -11,6 +11,7 @@ const MESSAGES = {
     NOT_FOUND: 'Không tìm thấy buổi phỏng vấn này.',
     STALE_TURN: 'Câu hỏi đã thay đổi. Đang tải lại buổi phỏng vấn…',
     SESSION_CLOSED: 'Buổi phỏng vấn này đã kết thúc.',
+    ANSWER_CONFLICT: 'Câu hỏi này đã có câu trả lời được lưu trước đó. Đang tải lại buổi phỏng vấn…',
     GENERATION_IN_PROGRESS: 'AI đang soạn câu hỏi, vui lòng chờ một chút.',
     LEASE_LOST: 'Câu hỏi đã được tạo ở nơi khác. Đang tải lại…',
     SESSION_CONTEXT_INVALID: 'Dữ liệu buổi phỏng vấn bị lỗi. Vui lòng tạo buổi mới.',
@@ -33,6 +34,7 @@ const MESSAGES = {
     NOT_FOUND: 'This interview could not be found.',
     STALE_TURN: 'The question has changed. Reloading the interview…',
     SESSION_CLOSED: 'This interview has already ended.',
+    ANSWER_CONFLICT: 'This question already has a saved answer. Reloading the interview…',
     GENERATION_IN_PROGRESS: 'The AI is writing the question. Please wait a moment.',
     LEASE_LOST: 'The question was created elsewhere. Reloading…',
     SESSION_CONTEXT_INVALID: 'This interview has invalid data. Please start a new one.',
@@ -54,7 +56,7 @@ const MESSAGES = {
 export const INTERVIEW_ERROR_CODES = Object.keys(MESSAGES.en);
 
 /** Codes after which the page should reload GET /api/interview/{id} instead of retrying. */
-export const RELOAD_CODES = ['STALE_TURN', 'LEASE_LOST'];
+export const RELOAD_CODES = ['STALE_TURN', 'LEASE_LOST', 'ANSWER_CONFLICT', 'SESSION_CLOSED'];
 
 /** Codes the user can fix by pressing "Try again" (same request). */
 export const RETRY_CODES = [

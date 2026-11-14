@@ -62,6 +62,7 @@ export type ChatErrorCode =
   | "AI_TIMEOUT"
   | "AI_DAILY_LIMIT"
   | "SESSION_CLOSED"
+  | "ANSWER_CONFLICT" // the question already has a different saved answer (lost response, edited text)
   | "RESPONSE_TIMEOUT"
   | "REQUEST_CANCELLED"
   | "SAVE_FAILED" // client side: the answer could not be saved
