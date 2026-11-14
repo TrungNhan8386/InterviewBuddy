@@ -232,7 +232,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           <p className="font-medium text-red-700">{t.errors[phase.code]}</p>
           <div className="flex flex-col justify-center gap-2 sm:flex-row">
             {phase.code === "UNAUTHORIZED" ? (
-              <Link href="/login" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white">
+              <Link href="/login" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Đăng nhập
               </Link>
             ) : (

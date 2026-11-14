@@ -254,7 +254,7 @@ export default function ProfilePage() {
   if (loadError || !userId) {
     return (
       <Card>
-        <h1 className="text-xl font-semibold">Hồ sơ cá nhân</h1>
+        <h1 className="text-2xl font-bold">Hồ sơ cá nhân</h1>
 
         <p role="alert" className="mt-3 text-sm text-red-600">
           {loadError || "Đang chuyển đến trang đăng nhập…"}
