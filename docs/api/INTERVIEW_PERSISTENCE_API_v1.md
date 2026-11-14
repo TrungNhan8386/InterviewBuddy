@@ -203,5 +203,5 @@ The database tests run every migration on an in-memory PostgreSQL and check: ans
 | Version | Date | Change |
 | --- | --- | --- |
 | v1 | 05/11/2026 | First version: answers, resume, end, daily AI limit, error messages |
-| v1.2 | 13/11/2026 | `409 ANSWER_CONFLICT` for a resend with edited text (SCRUM-110) |
 | v1.1 | 13/11/2026 | §8 points to the built Settings endpoint (SCRUM-111) |
+| v1.2 | 13/11/2026 | `409 ANSWER_CONFLICT` for a resend with edited text (SCRUM-110) |
