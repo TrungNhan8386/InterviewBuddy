@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { PDFParse } from "pdf-parse";
-import { CV_MAX_FILE_BYTES } from "@/lib/analysis/types";
+import { CV_MAX_ANALYZED_CHARS, CV_MAX_FILE_BYTES } from "@/lib/analysis/types";
 
 // POST /api/extract-cv  (multipart/form-data, field "file": a PDF)
 // Returns { text, pages, noText } or { error: { code, message } }.
@@ -10,7 +10,7 @@ import { CV_MAX_FILE_BYTES } from "@/lib/analysis/types";
 export const runtime = "nodejs";
 
 const MIN_TEXT_CHARS = 50; // less than this = probably a scanned PDF
-const MAX_TEXT_CHARS = 20_000; // keeps the Gemini prompt small
+const MAX_TEXT_CHARS = CV_MAX_ANALYZED_CHARS; // keeps the Gemini prompt small
 
 export async function POST(request: Request) {
   let file: FormDataEntryValue | null;
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
     );
   } catch (e) {
     console.error("[extract-cv]", e);
-    return fail(400, "BAD_FILE", "Không đọc được file PDF (file hỏng hoặc có mật khẩu).");
+    return fail(400, "BAD_FILE", "Không đọc được file PDF (file hỏng hoặc có mật khẩu). Hãy dùng PDF dạng văn bản, không đặt mật khẩu, hoặc dán nội dung CV vào ô bên dưới.");
   } finally {
     await parser?.destroy();
   }

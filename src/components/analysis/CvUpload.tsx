@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type DragEvent } from "react";
-import { CV_MAX_FILE_BYTES } from "@/lib/analysis/types";
+import { CV_MAX_ANALYZED_CHARS, CV_MAX_FILE_BYTES } from "@/lib/analysis/types";
 
 export type CvStatus =
   | { kind: "idle" }
@@ -17,6 +17,8 @@ type CvUploadProps = {
   onRemove: () => void;
   pastedText: string;
   onPastedTextChange: (value: string) => void;
+  // Length of the pasted CV (0 when a PDF is used); above the limit a notice is shown.
+  pastedLength?: number;
   disabled?: boolean;
 };
 
@@ -27,6 +29,7 @@ export default function CvUpload({
   onRemove,
   pastedText,
   onPastedTextChange,
+  pastedLength = 0,
   disabled,
 }: CvUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -178,6 +181,11 @@ export default function CvUpload({
         placeholder={file ? "Đang dùng chữ lấy từ file PDF." : "Dán nội dung CV vào đây (không bắt buộc nếu đã tải PDF)."}
         className="w-full resize-y rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:bg-slate-100"
       />
+      {pastedLength > CV_MAX_ANALYZED_CHARS && (
+        <p role="status" className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
+          CV có {pastedLength.toLocaleString("vi-VN")} ký tự. Chỉ {CV_MAX_ANALYZED_CHARS.toLocaleString("vi-VN")} ký tự đầu được phân tích; phần còn lại chưa được xét. Hãy rút gọn CV nếu phần quan trọng nằm ở cuối.
+        </p>
+      )}
     </div>
   );
 }

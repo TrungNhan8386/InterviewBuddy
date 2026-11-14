@@ -16,6 +16,7 @@ import {
 } from "@/lib/analysis/client";
 import { getLatestFitAnalysis, saveFitAnalysis, type SavedFitAnalysis } from "@/lib/analysis/storage";
 import {
+  CV_MAX_ANALYZED_CHARS,
   JD_MAX_CHARS,
   MIN_TEXT_CHARS,
   type AnalysisLanguage,
@@ -59,7 +60,10 @@ export default function AnalysisWorkspace() {
   // Ignore a slow extraction result if the user already removed or replaced the file.
   const extractId = useRef(0);
 
-  const cvText = cvFile ? cvFromPdf : cvPasted.trim();
+  // Pasted text follows the same 20,000-character limit as PDF text: the rest is cut and the user is told.
+  const cvPastedTrimmed = cvPasted.trim();
+  const cvPastedLength = !cvFile ? cvPastedTrimmed.length : 0;
+  const cvText = cvFile ? cvFromPdf : cvPastedTrimmed.slice(0, CV_MAX_ANALYZED_CHARS);
   const busy = run.kind === "loading" || cvStatus.kind === "extracting";
   const jdLength = jd.trim().length;
   const jdTooShort = jdLength < MIN_TEXT_CHARS;
@@ -181,6 +185,7 @@ export default function AnalysisWorkspace() {
             onRemove={handleRemove}
             pastedText={cvPasted}
             onPastedTextChange={setCvPasted}
+            pastedLength={cvPastedLength}
             disabled={run.kind === "loading"}
           />
 

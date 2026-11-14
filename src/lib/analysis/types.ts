@@ -54,3 +54,5 @@ export const JD_MAX_CHARS = 3000;
 // /api/analyze-fit rejects JD or CV shorter than this (after trimming).
 export const MIN_TEXT_CHARS = 30;
 export const CV_MAX_FILE_BYTES = 5 * 1024 * 1024; // 5 MB
+// Only the first 20,000 characters of a CV are analysed (PDF text and pasted text alike).
+export const CV_MAX_ANALYZED_CHARS = 20_000;
