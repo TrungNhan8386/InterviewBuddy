@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-13",
+  "baseCommit": "0668228",
+  "branch": "feat/scrum-123-guardrails-hung",
+  "offline": {
+    "tests": 276,
+    "passed": 276,
+    "failed": 0,
+    "newGuardrailTests": 21,
+    "lint": "passed",
+    "productionBuild": "passed"
+  },
+  "live": {
+    "initial": {
+      "total": 10,
+      "valid": 7,
+      "error": 3
+    },
+    "separateRecheck": {
+      "total": 3,
+      "valid": 3
+    },
+    "boundary": "Real Gemini provider with synthetic data; no UI/Auth/shared Supabase writes; original service errors retained."
+  },
+  "secretScan": {
+    "knownCredentialValues": "no matches",
+    "jwtPatterns": "no matches",
+    "filesScanned": 12
+  },
+  "limitations": [
+    "Narrow pattern guardrails, not universal semantic moderation",
+    "No staging/UI acceptance",
+    "Streaming final checks cannot retract earlier deltas",
+    "SCRUM-120 locked-input recovery unchanged"
+  ]
+}

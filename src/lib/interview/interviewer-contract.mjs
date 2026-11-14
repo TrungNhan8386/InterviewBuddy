@@ -1,4 +1,5 @@
 import { DIFFICULTIES, DURATIONS, INTERVIEW_TYPES, LANGUAGES, QUESTIONS_BY_DURATION } from './session-contract.mjs';
+import { unsafeGeneratedText } from '../ai/guardrails.mjs';
 
 export const CONTRACT_VERSION = '0.1';
 export const FOLLOW_UP_LIMITS = Object.freeze({ easy: 1, medium: 2, hard: 3 });
@@ -104,6 +105,7 @@ export function validateInterviewerOutput(value, input) {
   if (!objectWith(value, ['action', 'question', 'topic', 'reason'])
     || !getInterviewPolicy(input).allowedActions.includes(value.action)
     || !text(value.topic, 1, 160) || !text(value.reason, 1, 700)) invalid();
+  if ([value.question, value.reason, value.topic].some(unsafeGeneratedText)) invalid();
   if (value.action === 'end') {
     if (value.question !== null) invalid();
   } else {
