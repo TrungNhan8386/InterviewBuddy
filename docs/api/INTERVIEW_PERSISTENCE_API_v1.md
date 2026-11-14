@@ -173,15 +173,9 @@ setError(interviewErrorMessage(error?.code, session.settings.language));
 
 The analysis page keeps its own messages (`src/lib/analysis/result-text.ts`), now with `DAILY_LIMIT` and `UNAUTHORIZED`.
 
-## 8. Deleting CV and history (for Tài's Settings page)
+## 8. Deleting CV and history (Settings page)
 
-No new endpoint is needed. RLS lets a user delete only their own rows, and the database deletes the related rows:
-
-```ts
-const supabase = createClient(); // browser client
-await supabase.from("interview_sessions").delete().eq("user_id", userId); // + questions, answers, feedbacks, reports, generations
-await supabase.from("fit_analyses").delete().eq("user_id", userId);       // saved CV text and analyses
-```
+The Settings page (Tài, SCRUM-88) calls `DELETE /api/settings/data` with `{ "confirmation": "DELETE" }`. The route runs `delete_own_practice_data()`, which deletes the caller's sessions (with their questions, answers, feedback, reports and generations) and saved analyses in one transaction, and returns `{ sessionsDeleted, analysesDeleted }`.
 
 The AI count (`ai_usage_daily`) is kept on purpose, so deleting history does not reset the daily limit.
 
@@ -208,3 +202,4 @@ The database tests run every migration on an in-memory PostgreSQL and check: ans
 | Version | Date | Change |
 | --- | --- | --- |
 | v1 | 05/11/2026 | First version: answers, resume, end, daily AI limit, error messages |
+| v1.1 | 13/11/2026 | §8 points to the built Settings endpoint (SCRUM-111) |
