@@ -1,0 +1,43 @@
+Analysis results
+
+Saved to your account. Your next mock interview will use this analysis.
+
+83%
+Job fit
+
+Great! Your CV meets most requirements for this position.
+
+Prepare before your interview
+
+TypeScript
+
+Review static typing concepts such as interfaces, generics, and union types in frontend applications. Build a small utility function that maps an API response object using custom interfaces and verify that the TypeScript compiler catches missing properties. Be prepared to explain the design trade-off between strict type safety and development speed in a rapidly changing internship project.
+
+Jest
+
+Review unit testing fundamentals using Jest and React Testing Library to verify component rendering and user interactions. Write a test case for a simple button component that asserts click handlers fire correctly and inspect the resulting test output report. Discuss how to handle asynchronous data fetching mocks and edge cases like error boundary states in your tests.
+
+Job requirements and your CV
+REQUIREMENT	STATUS
+React	Matched
+HTML and CSS	Matched
+REST APIs	Matched
+Git	Matched
+TypeScript	Missing
+Jest	Missing
+English	Matched
+Strengths to highlight in your interview
+
+React
+
+Discuss your experience building multi-page component hierarchies and handling state transitions. Be ready to explain how you managed component re-renders or passed props down the tree, and consider how you would lift state up if two sibling components needed shared data.
+
+REST APIs
+
+Highlight how you integrated asynchronous data fetching and managed user feedback during network requests. Prepare to discuss how your application handles edge cases like slow network responses or malformed JSON payloads from the server.
+
+Git
+
+Talk about your collaborative Git workflow involving branches, pull requests, and code reviews with peers. Be ready to explain how you resolve merge conflicts and how you structure commit messages to maintain a clean history.
+
+These AI-generated results support interview practice and may contain inaccuracies.
