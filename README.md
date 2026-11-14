@@ -36,6 +36,8 @@ Supabase handoff for Nhân: [configuration, migration status and test-account ch
 
 AI prompt configuration: [editable JSON files, versioning and deployment instructions](src/config/prompts/README.md).
 
+AI design (SCRUM-125): [prompts, JSON schemas, decision logic and review handoff](docs/analysis%20and%20design/ai-design.md).
+
 ## Repository structure
 
 ```

@@ -1,0 +1,99 @@
+{
+  "boundary": "Synthetic documentation examples only; UUIDs do not identify real sessions or accounts.",
+  "analysisFitInput": {
+    "jd": "React is required. Git is preferred for version control.",
+    "cv": "I built React components with automated unit tests.",
+    "language": "en"
+  },
+  "analysisModelOutput": {
+    "requirements": [
+      {
+        "skill": "React",
+        "importance": "required",
+        "matched": true,
+        "jdEvidence": "React is required.",
+        "cvEvidence": "built React components",
+        "reason": "The CV explicitly describes building React components."
+      },
+      {
+        "skill": "Git",
+        "importance": "preferred",
+        "matched": false,
+        "jdEvidence": "Git is preferred for version control.",
+        "cvEvidence": "",
+        "reason": "This CV does not provide affirmative Git evidence."
+      }
+    ],
+    "summary": "React is supported by the CV; Git is not demonstrated in this document.",
+    "coaching": {
+      "beforeInterview": [
+        {
+          "skill": "Git",
+          "advice": "Review branching and conflict resolution by creating two branches that edit the same line, then resolve and inspect the resulting commit. Prepare to explain when a merge is preferable to a rebase and how each changes history."
+        }
+      ],
+      "improvements": [
+        {
+          "skill": "Git",
+          "advice": "If you have used Git, add a truthful example of your workflow. Otherwise practise a branch-and-merge exercise before discussing it in the interview."
+        }
+      ],
+      "strengths": [
+        {
+          "skill": "React",
+          "advice": "Prepare to explain one component and its automated unit tests from the work described. Discuss the state transitions you tested and one trade-off in component responsibilities without claiming features beyond that work."
+        }
+      ]
+    }
+  },
+  "analysisExpected": {
+    "fitScore": 66.67,
+    "matchedWeight": 2,
+    "totalWeight": 3,
+    "matchedSkills": ["React"],
+    "missingSkills": ["Git"],
+    "roundedUiAndStoredColumnScore": 67
+  },
+  "interviewerInternalInput": {
+    "settings": {
+      "type": "technical",
+      "difficulty": "medium",
+      "language": "en",
+      "targetPosition": "Frontend Intern",
+      "durationMinutes": 15,
+      "plannedQuestions": 5
+    },
+    "state": { "status": "in_progress", "elapsedSeconds": 120 },
+    "jdText": "React is required. Git is preferred for version control.",
+    "cvText": "I built React components with automated unit tests.",
+    "history": [
+      {
+        "question": "How would you represent loading, empty, success and error states in React?",
+        "answer": "Yes.",
+        "topic": "React UI states",
+        "kind": "main"
+      }
+    ]
+  },
+  "interviewerModelOutput": {
+    "question": "What should users see while a React request is loading?",
+    "action": "follow_up",
+    "topic": "React UI states",
+    "reason": "Clarify the loading state before moving to another topic."
+  },
+  "nextPublicInput": {
+    "sessionId": "00000000-0000-4000-8000-000000000010",
+    "afterAnswerId": "00000000-0000-4000-8000-000000000011"
+  },
+  "nextPublicOutput": {
+    "sessionId": "00000000-0000-4000-8000-000000000010",
+    "action": "follow_up",
+    "question": {
+      "id": "00000000-0000-4000-8000-000000000012",
+      "content": "What should users see while a React request is loading?",
+      "topic": "React UI states",
+      "kind": "follow_up",
+      "position": 2
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "checkedAtUtc": "2026-11-14T08:26:02.641Z",
+  "task": "SCRUM-125",
+  "implementationCommit": "469bfbf8b2f8e0e39710087c57911e266b6e36e9",
+  "checks": {
+    "schemaSnapshotsEqualExports": 2,
+    "sourceHashesVerified": 36,
+    "versionsMatch": true,
+    "syntheticExamplesValidated": true,
+    "scoringExample": "66.67; UI/storage column round to 67",
+    "publicResponseValidatedByRealClient": true,
+    "localLinksChecked": 63,
+    "jsonExampleFencesChecked": 3
+  },
+  "boundary": "Offline source/document/schema checks with a controlled complete-only SSE replay; no live Gemini, Auth, UI or shared Supabase acceptance.",
+  "humanReview": {
+    "reviewer": "Nhan (AI backup per SCRUM-125)",
+    "status": "pending",
+    "independentlyApproved": false
+  }
+}
