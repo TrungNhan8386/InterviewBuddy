@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
+import { buildHealthRequest } from "@/lib/ai/health-prompt.mjs";
 
 // GET /api/health        -> checks Supabase (database + auth) and that the Gemini model exists.
 // GET /api/health?ai=1   -> also asks Gemini for a one-word reply (uses a little quota).
@@ -86,10 +87,7 @@ async function checkGenerate(apiKey: string, model: string): Promise<Check> {
       headers: { "x-goog-api-key": apiKey, "Content-Type": "application/json" },
       cache: "no-store",
       signal: AbortSignal.timeout(GENERATE_TIMEOUT_MS),
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: "Reply with exactly one word: OK" }] }],
-        generationConfig: { maxOutputTokens: 50 },
-      }),
+      body: JSON.stringify(buildHealthRequest()),
     });
     const body = await res.json().catch(() => null);
     if (!res.ok) {

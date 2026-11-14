@@ -20,7 +20,8 @@
     "verify:interview-next": "node scripts/verify-interview-next.mjs",
     "verify:interview-next:live": "node --env-file-if-exists=.env.local scripts/verify-interview-next.mjs --live",
     "verify:interview-flow": "node scripts/verify-interview-flow.mjs",
-    "verify:interview-flow:live": "node --env-file-if-exists=.env.local scripts/verify-interview-flow.mjs --live"
+    "verify:interview-flow:live": "node --env-file-if-exists=.env.local scripts/verify-interview-flow.mjs --live",
+    "verify:prompts": "node --test tests/prompt-config.test.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
