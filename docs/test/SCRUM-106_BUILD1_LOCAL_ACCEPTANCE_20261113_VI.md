@@ -80,6 +80,7 @@ Mẫu gồm cả câu mở đầu và câu hỏi tiếp theo; tiếng Việt và
 | B4 | `.env.local` trên máy Nhân dùng `gemini-3.1-flash-lite`: `/next` timeout sau 30 s. Model của nhóm (`gemini-3.5-flash-lite`) chạy bình thường. | Thấp (cấu hình) | Khi deploy, đặt `GEMINI_MODEL=gemini-3.5-flash-lite` như `.env.example`. |
 | B5 | Các route `/api/settings*` trả lỗi dạng `{ error: { message } }`, không có `code` như các API khác. | Thấp | Ghi vào bảng API (PR #24). Sửa sau Build 1 nếu cần. |
 | B6 | File test case có hai phần "Function 06" trùng nhau (dòng 23–33 và 34–43) với mã và người test khác nhau. | Thấp (tài liệu) | Báo Nguyên đánh số lại. Lần này điền theo 4 dòng trong Jira (9, 25, 27, 29). |
+| B7 | Kết quả nằm rải rác ở ba file (file chính, bản của Hưng, bản của Khang); bản của Hưng không mở được bằng Excel. | Thấp (tài liệu) | **14/11:** gộp hết vào `InterviewBuddy_Test_Cases_Build1_v1.0.xlsx` = bản trên Drive (Hưng test lại 13/11 + Nhân) + 5 dòng của Khang (Pass theo PR #34, Khang chưa điền cột Status/ngày). Đã bỏ hai bản sao. |
 
 Gemini có lúc trả `503 UNAVAILABLE – high demand` trong buổi chiều 13/11. App đã chuyển lỗi này thành `AI_UNAVAILABLE` hoặc thông báo phân tích thất bại kèm nút thử lại, đúng như thiết kế.
 
