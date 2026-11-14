@@ -17,11 +17,11 @@ Lưu ý: Build 1 chưa có voice, chấm điểm theo tiêu chí, báo cáo và 
 | Thời gian | Màn hình | Người nói | Hành động | Điểm cần nhấn mạnh |
 |---|---|---|---|---|
 | 0:00–0:20 | Trang chủ / đăng nhập | Tài | Giới thiệu InterviewBuddy trong một câu. Đăng nhập bằng email hoặc Google. | Đăng nhập xong vào được Dashboard, phiên được giữ sau khi tải lại trang (F1). |
-| 0:20–1:20 | Dashboard, sidebar | Tài | Chỉ sidebar và topbar. Mở trang hồ sơ, cho xem ngành học, vị trí mục tiêu, cấp độ kinh nghiệm, ngôn ngữ. | Hồ sơ là giá trị mặc định cho các bước sau (UC03). |
-| 1:20–2:20 | Phân tích CV/JD | Khang hoặc Tài | Dán JD, tải `cv_valid.pdf`, bấm Analyze. Khi có kết quả, chỉ điểm phù hợp, kỹ năng còn thiếu và bảng yêu cầu. | CV chỉ được đọc để lấy chữ, không lưu lại file. Kết quả dùng cho phỏng vấn sắp tới (F2). |
-| 2:20–3:00 | Thiết lập phỏng vấn | Tài | Mở "New Interview", chọn loại (kỹ thuật), độ khó, thời lượng, chế độ nhập chữ. Chỉ phần Session Preview cập nhật theo lựa chọn. Bấm bắt đầu. | Cấu hình ảnh hưởng đến phiên thật, không chỉ là giao diện (F3). |
-| 3:00–4:20 | Màn chat phỏng vấn | Tài | Trả lời một câu bằng chữ. Cho xem AI hỏi câu follow-up dựa trên câu trả lời trước. Chỉ thanh tiến độ "Câu n / N" và đồng hồ. | AI hỏi một câu một lần và có thể hỏi sâu thêm, không lặp lại câu cũ (F4). |
-| 4:20–4:50 | Kết thúc phiên | Tài | Bấm End Interview, xác nhận. | Có hộp xác nhận, không mất câu trả lời đã gửi. |
+| 0:20–1:20 | Dashboard, sidebar | Tài | Chỉ sidebar và topbar (Dashboard hiện nút "Start New Interview"; các ô điểm hiện "—" vì tính năng chấm điểm chưa có). Mở trang hồ sơ, cho xem ngành học, vị trí mục tiêu, cấp độ kinh nghiệm, ngôn ngữ. | Hồ sơ là giá trị mặc định cho các bước sau (UC03). |
+| 1:20–2:20 | Phân tích CV/JD | Khang hoặc Tài | Dán JD, tải `cv_valid.pdf`, bấm "Phân tích mức độ phù hợp" (phân tích mất khoảng 15–25 giây, nên làm sẵn trước demo nếu có thể). Khi có kết quả, chỉ điểm phù hợp, kỹ năng còn thiếu và bảng yêu cầu. | CV chỉ được đọc để lấy chữ, không lưu lại file. Kết quả dùng cho phỏng vấn sắp tới (F2). |
+| 2:20–3:00 | Thiết lập phỏng vấn | Tài | Mở "New Interview", chọn loại (Technical), độ khó, thời lượng, **Ngày phỏng vấn thực tế (bắt buộc, phải điền trước khi bấm bắt đầu)** và cách trả lời "Văn bản" (không bấm "Giọng nói", Build 1 chưa có voice). Chỉ phần Session Preview cập nhật theo lựa chọn. Bấm bắt đầu. | Cấu hình ảnh hưởng đến phiên thật, không chỉ là giao diện (F3). |
+| 3:00–4:20 | Màn chat phỏng vấn | Tài | Trả lời một câu bằng chữ. Cho xem AI hỏi câu follow-up dựa trên câu trả lời trước. Chỉ thanh tiến độ "Câu n / N" và đồng hồ (khi AI hỏi câu đào sâu, tiến độ vẫn giữ nguyên "Câu 1 / 5", nói trước để người xem không thắc mắc). | AI hỏi một câu một lần và có thể hỏi sâu thêm, không lặp lại câu cũ (F4). |
+| 4:20–4:50 | Kết thúc phiên | Tài | Bấm "Kết thúc phỏng vấn", rồi chọn "Kết thúc" trong hộp xác nhận. Trang báo "Buổi phỏng vấn đã kết thúc" và "Trang nhận xét chi tiết sẽ có ở bản sau". | Có hộp xác nhận, không mất câu trả lời đã gửi. |
 | 4:50–5:00 | Tổng kết | Nguyên hoặc Tài | Nêu những gì đã làm được và nói Build 2 sẽ có chấm điểm, voice và báo cáo. | Không hứa các tính năng chưa có. |
 
 ## Nếu gặp sự cố
@@ -35,4 +35,9 @@ Lưu ý: Build 1 chưa có voice, chấm điểm theo tiêu chí, báo cáo và 
 - Ghi lại mọi chỗ khác với kịch bản vào Jira, gắn với SCRUM-113 hoặc SCRUM-115.
 - Kiểm tra lại kịch bản khi nhóm tập tối nay và cập nhật thời gian từng phần.
 
-Ghi chú: tên nút và nhãn màn hình trong kịch bản lấy từ tài liệu test case. Trước khi tập, cần đối chiếu với giao diện staging thật.
+## Kết quả tập thử (14/11/2026, localhost)
+
+- Đã chạy trọn luồng: hồ sơ, phân tích CV/JD, thiết lập, chat có câu đào sâu, kết thúc. Không có lỗi chặn demo.
+- Thời gian AI: phân tích CV/JD khoảng 15–25 giây; câu hỏi đầu khoảng 8 giây; câu đào sâu khoảng 10 giây.
+- Nhãn trong kịch bản đã được đối chiếu với giao diện localhost. Cần đối chiếu lại với staging sau khi redeploy.
+- Chưa tập với người thật nói theo bảng thời gian. Nhóm tập tối nay và cập nhật thời gian từng phần.
