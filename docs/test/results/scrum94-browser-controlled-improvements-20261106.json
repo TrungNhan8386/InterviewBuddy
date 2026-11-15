@@ -1,0 +1,1567 @@
+{
+  "mode": "controlled",
+  "boundary": "Real browser + production consumer/handler/service/provider; simulated authentication and local PGlite. Live mode uses real Gemini.",
+  "provenance": "AI-authored synthetic CV/JD/answers. No real applicant data.",
+  "metric": "click to actual nonempty question text, measured after two requestAnimationFrame callbacks; ready/loading frames do not count",
+  "results": [
+    {
+      "id": "slow-success",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "4385f3dd-bef7-4987-908c-e12d3d35b0af",
+      "firstVisibleMs": 140.0999999998603,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 135.5999999998603,
+      "previewUpdates": 3,
+      "completeMs": 2540.5,
+      "acknowledgementMs": 23.199999999953434,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.5
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 2540.1999999999534
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 135.19999999995343,
+        "elapsedMs": 2539.8000000000466,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "c0185d60-99f9-4bd4-bacf-4578d598f5c2",
+          "kind": "main",
+          "topic": "Kiểm thử API",
+          "content": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+          "position": 1
+        },
+        "sessionId": "4385f3dd-bef7-4987-908c-e12d3d35b0af"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "request_started",
+            "elapsedMs": 0.06780000000071595,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "authenticated",
+            "elapsedMs": 0.1073000000014872,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "body_parsed",
+            "elapsedMs": 1.4109000000007654,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "claimed",
+            "elapsedMs": 5.6314000000002125,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "context_ready",
+            "elapsedMs": 7.834600000000137,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_started",
+            "elapsedMs": 13.81500000000051,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_headers",
+            "elapsedMs": 14.216400000001158,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 119.744200000001,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_first_text",
+            "elapsedMs": 121.03380000000107,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_validated",
+            "elapsedMs": 2518.1303000000007,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "decision_validated",
+            "elapsedMs": 2518.319300000001,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "persistence_started",
+            "elapsedMs": 2518.3217000000004,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "persisted",
+            "elapsedMs": 2525.4224000000013,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "complete",
+            "elapsedMs": 2525.486000000001,
+            "code": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "slow-success",
+      "mode": "controlled",
+      "replay": true,
+      "sessionId": "4385f3dd-bef7-4987-908c-e12d3d35b0af",
+      "firstVisibleMs": 41.199999999953434,
+      "firstVisibleText": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+      "firstVisibleStatus": "Đã lưu câu hỏi",
+      "firstPreviewMs": 9.699999999953434,
+      "previewUpdates": 1,
+      "completeMs": 9.799999999813735,
+      "acknowledgementMs": 24.199999999953434,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.2999999998137355
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 9.699999999953434
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": null,
+        "elapsedMs": 9.5,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "c0185d60-99f9-4bd4-bacf-4578d598f5c2",
+          "kind": "main",
+          "topic": "Kiểm thử API",
+          "content": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+          "position": 1
+        },
+        "sessionId": "4385f3dd-bef7-4987-908c-e12d3d35b0af"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "request_started",
+            "elapsedMs": 0.06780000000071595,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "authenticated",
+            "elapsedMs": 0.1073000000014872,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "body_parsed",
+            "elapsedMs": 1.4109000000007654,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "claimed",
+            "elapsedMs": 5.6314000000002125,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "context_ready",
+            "elapsedMs": 7.834600000000137,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_started",
+            "elapsedMs": 13.81500000000051,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_headers",
+            "elapsedMs": 14.216400000001158,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 119.744200000001,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_first_text",
+            "elapsedMs": 121.03380000000107,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "upstream_validated",
+            "elapsedMs": 2518.1303000000007,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "decision_validated",
+            "elapsedMs": 2518.319300000001,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "persistence_started",
+            "elapsedMs": 2518.3217000000004,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "persisted",
+            "elapsedMs": 2525.4224000000013,
+            "code": null
+          },
+          {
+            "requestId": "07d46881-5dd6-40c1-8ef2-cc271e51faa0",
+            "stage": "complete",
+            "elapsedMs": 2525.486000000001,
+            "code": null
+          },
+          {
+            "requestId": "73eb10f1-a02b-41f5-88c9-0f87b65ee4d6",
+            "stage": "request_started",
+            "elapsedMs": 0.0046999999995023245,
+            "code": null
+          },
+          {
+            "requestId": "73eb10f1-a02b-41f5-88c9-0f87b65ee4d6",
+            "stage": "authenticated",
+            "elapsedMs": 0.009400000000823638,
+            "code": null
+          },
+          {
+            "requestId": "73eb10f1-a02b-41f5-88c9-0f87b65ee4d6",
+            "stage": "body_parsed",
+            "elapsedMs": 0.09170000000085565,
+            "code": null
+          },
+          {
+            "requestId": "73eb10f1-a02b-41f5-88c9-0f87b65ee4d6",
+            "stage": "claimed",
+            "elapsedMs": 1.7620999999999185,
+            "code": null
+          },
+          {
+            "requestId": "73eb10f1-a02b-41f5-88c9-0f87b65ee4d6",
+            "stage": "replay",
+            "elapsedMs": 1.7649000000001251,
+            "code": null
+          },
+          {
+            "requestId": "73eb10f1-a02b-41f5-88c9-0f87b65ee4d6",
+            "stage": "complete",
+            "elapsedMs": 1.9420000000009168,
+            "code": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "unicode",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "ecff693b-7425-4ec5-b773-ba5f9545fef4",
+      "firstVisibleMs": 141.79999999981374,
+      "firstVisibleText": "Bạn chọn \"Go\" ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 113.39999999990687,
+      "previewUpdates": 3,
+      "completeMs": 871.0999999998603,
+      "acknowledgementMs": 24.5999999998603,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.19999999995343387
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 871.0999999998603
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 113.0999999998603,
+        "elapsedMs": 870.8999999999069,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "c0b2390c-0c4f-49b6-babc-0313e76d45d4",
+          "kind": "main",
+          "topic": "Ngôn ngữ",
+          "content": "Bạn chọn \"Go\" và 😀 như thế nào?",
+          "position": 1
+        },
+        "sessionId": "ecff693b-7425-4ec5-b773-ba5f9545fef4"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "request_started",
+            "elapsedMs": 0.0033999999996012775,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "authenticated",
+            "elapsedMs": 0.010299999999915599,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "body_parsed",
+            "elapsedMs": 0.15579999999863503,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "claimed",
+            "elapsedMs": 3.014099999998507,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "context_ready",
+            "elapsedMs": 3.5918000000001484,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "upstream_started",
+            "elapsedMs": 4.116799999999785,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "upstream_headers",
+            "elapsedMs": 4.263100000000122,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 109.04969999999958,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "upstream_first_text",
+            "elapsedMs": 109.46339999999873,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "upstream_validated",
+            "elapsedMs": 863.3197,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "decision_validated",
+            "elapsedMs": 863.5104999999985,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "persistence_started",
+            "elapsedMs": 863.5146999999997,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "persisted",
+            "elapsedMs": 866.6886999999988,
+            "code": null
+          },
+          {
+            "requestId": "90679a37-0471-46f1-a592-bb5f67145bb9",
+            "stage": "complete",
+            "elapsedMs": 866.7640999999985,
+            "code": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "invalid-output",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "73c69af7-257a-4207-9653-61f35e883239",
+      "firstVisibleMs": 143.19999999995343,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 115.5999999998603,
+      "previewUpdates": 2,
+      "completeMs": 867.8999999999069,
+      "acknowledgementMs": 26.399999999906868,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.2999999998137355
+        },
+        {
+          "status": "error",
+          "elapsedMs": 867.7999999998137
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 115.30000000004657,
+        "elapsedMs": 867.5,
+        "outcome": "error",
+        "code": "INVALID_OUTPUT"
+      },
+      "error": "INVALID_OUTPUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "failed",
+        "timings": [
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "request_started",
+            "elapsedMs": 0.004199999999400461,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "authenticated",
+            "elapsedMs": 0.009700000000520959,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "body_parsed",
+            "elapsedMs": 0.13210000000071886,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "claimed",
+            "elapsedMs": 3.5900999999994383,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "context_ready",
+            "elapsedMs": 4.389999999999418,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "upstream_started",
+            "elapsedMs": 5.0275000000001455,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "upstream_headers",
+            "elapsedMs": 5.162400000001071,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 111.17360000000008,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "upstream_first_text",
+            "elapsedMs": 111.23530000000028,
+            "code": null
+          },
+          {
+            "requestId": "9fd35939-5e44-44b6-9adb-3d5b8d22a01e",
+            "stage": "failed",
+            "elapsedMs": 862.7605000000003,
+            "code": "INVALID_OUTPUT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "truncated",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "cf927b14-28fd-407e-89cb-944ce1eeff1a",
+      "firstVisibleMs": 126.69999999995343,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 110,
+      "previewUpdates": 1,
+      "completeMs": 865,
+      "acknowledgementMs": 26.600000000093132,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.30000000004656613
+        },
+        {
+          "status": "error",
+          "elapsedMs": 865
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 109.80000000004657,
+        "elapsedMs": 864.8000000000466,
+        "outcome": "error",
+        "code": "INVALID_OUTPUT"
+      },
+      "error": "INVALID_OUTPUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "failed",
+        "timings": [
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "request_started",
+            "elapsedMs": 0.0034999999988940544,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "authenticated",
+            "elapsedMs": 0.008799999999610009,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "body_parsed",
+            "elapsedMs": 0.08039999999891734,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "claimed",
+            "elapsedMs": 2.747799999999188,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "context_ready",
+            "elapsedMs": 3.186699999998382,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "upstream_started",
+            "elapsedMs": 3.675199999999677,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "upstream_headers",
+            "elapsedMs": 3.845499999999447,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 106.39120000000003,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "upstream_first_text",
+            "elapsedMs": 106.4460999999992,
+            "code": null
+          },
+          {
+            "requestId": "f72bf33f-adf6-4205-b9a2-c26544485913",
+            "stage": "failed",
+            "elapsedMs": 861.1417999999994,
+            "code": "INVALID_OUTPUT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cancel",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "a2415601-a4b5-4f6c-9678-e8fb808403e9",
+      "firstVisibleMs": 126.30000000004657,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 118,
+      "previewUpdates": 1,
+      "completeMs": 215.9000000001397,
+      "acknowledgementMs": 26.300000000046566,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.19999999995343387
+        },
+        {
+          "status": "cancelled",
+          "elapsedMs": 215.9000000001397
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 117.80000000004657,
+        "elapsedMs": 215.70000000018626,
+        "outcome": "cancelled",
+        "code": "REQUEST_CANCELLED"
+      },
+      "error": "REQUEST_CANCELLED",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": true,
+        "newQuestions": 0,
+        "generationStatus": "failed",
+        "timings": [
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "request_started",
+            "elapsedMs": 0.0039000000015221303,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "authenticated",
+            "elapsedMs": 0.009900000000925502,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "body_parsed",
+            "elapsedMs": 0.08990000000085274,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "claimed",
+            "elapsedMs": 3.467800000000352,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "context_ready",
+            "elapsedMs": 4.1600000000016735,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "upstream_started",
+            "elapsedMs": 5.068600000000515,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "upstream_headers",
+            "elapsedMs": 5.308399999999892,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 114.46680000000015,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "upstream_first_text",
+            "elapsedMs": 114.60360000000037,
+            "code": null
+          },
+          {
+            "requestId": "2c841edd-7b0a-40a0-a048-5e8138c4e4b4",
+            "stage": "failed",
+            "elapsedMs": 229.70040000000154,
+            "code": "REQUEST_CANCELLED"
+          }
+        ]
+      }
+    },
+    {
+      "id": "closed",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "64c8922a-745c-424c-9039-fff193a3639e",
+      "firstVisibleMs": null,
+      "firstVisibleText": null,
+      "firstVisibleStatus": null,
+      "firstPreviewMs": null,
+      "previewUpdates": 0,
+      "completeMs": 13.300000000046566,
+      "acknowledgementMs": 27.4000000001397,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.10000000009313226
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 13.300000000046566
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": null,
+        "elapsedMs": 13.199999999953434,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "end",
+        "question": null,
+        "sessionId": "64c8922a-745c-424c-9039-fff193a3639e"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 0,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": null,
+        "timings": [
+          {
+            "requestId": "c7690219-488f-41be-a26e-d1535aaba8b5",
+            "stage": "request_started",
+            "elapsedMs": 0.003800000000410364,
+            "code": null
+          },
+          {
+            "requestId": "c7690219-488f-41be-a26e-d1535aaba8b5",
+            "stage": "authenticated",
+            "elapsedMs": 0.008399999998800922,
+            "code": null
+          },
+          {
+            "requestId": "c7690219-488f-41be-a26e-d1535aaba8b5",
+            "stage": "body_parsed",
+            "elapsedMs": 0.07330000000001746,
+            "code": null
+          },
+          {
+            "requestId": "c7690219-488f-41be-a26e-d1535aaba8b5",
+            "stage": "claimed",
+            "elapsedMs": 1.3788000000004104,
+            "code": null
+          },
+          {
+            "requestId": "c7690219-488f-41be-a26e-d1535aaba8b5",
+            "stage": "replay",
+            "elapsedMs": 1.382499999999709,
+            "code": null
+          },
+          {
+            "requestId": "c7690219-488f-41be-a26e-d1535aaba8b5",
+            "stage": "complete",
+            "elapsedMs": 1.512300000000323,
+            "code": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "stop-open",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "88a00507-5b20-439f-a2c1-87bc82dbdc2f",
+      "firstVisibleMs": 127,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 108.39999999990687,
+      "previewUpdates": 3,
+      "completeMs": 864.1999999999534,
+      "acknowledgementMs": 27,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.10000000009313226
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 864
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 108.29999999981374,
+        "elapsedMs": 863.8999999999069,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "aa1bd246-26d5-4202-a9e2-aaea00bb00ec",
+          "kind": "main",
+          "topic": "Kiểm thử API",
+          "content": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+          "position": 1
+        },
+        "sessionId": "88a00507-5b20-439f-a2c1-87bc82dbdc2f"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": true,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "request_started",
+            "elapsedMs": 0.034299999999348074,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "authenticated",
+            "elapsedMs": 0.04249999999956344,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "body_parsed",
+            "elapsedMs": 0.12919999999940046,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "claimed",
+            "elapsedMs": 1.9861999999993714,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "context_ready",
+            "elapsedMs": 2.441999999999098,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "upstream_started",
+            "elapsedMs": 3.0177999999996246,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "upstream_headers",
+            "elapsedMs": 3.180899999999383,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 104.48300000000017,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "upstream_first_text",
+            "elapsedMs": 104.57679999999891,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "upstream_validated",
+            "elapsedMs": 856.3431999999993,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "decision_validated",
+            "elapsedMs": 856.4409999999989,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "persistence_started",
+            "elapsedMs": 856.4455999999991,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "persisted",
+            "elapsedMs": 859.6859000000004,
+            "code": null
+          },
+          {
+            "requestId": "5d6f188f-c731-4476-b9d8-d840eba19ab2",
+            "stage": "complete",
+            "elapsedMs": 859.7435000000005,
+            "code": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "slow-notices",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "898dbb33-b252-4aa5-905a-6eb371c0dd68",
+      "firstVisibleMs": 126.0999999998603,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 110.69999999995343,
+      "previewUpdates": 3,
+      "completeMs": 12018.799999999814,
+      "acknowledgementMs": 26.0999999998603,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.09999999986030161
+        },
+        {
+          "status": "slow",
+          "elapsedMs": 5003.299999999814
+        },
+        {
+          "status": "extended",
+          "elapsedMs": 10004.799999999814
+        },
+        {
+          "status": "complete",
+          "elapsedMs": 12018.699999999953
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 110.60000000009313,
+        "elapsedMs": 12018.600000000093,
+        "outcome": "complete",
+        "code": null
+      },
+      "error": null,
+      "output": {
+        "action": "next_topic",
+        "question": {
+          "id": "4ed0347b-00d0-4e64-b8d4-63e7b2baca3c",
+          "kind": "main",
+          "topic": "Kiểm thử API",
+          "content": "Bạn sẽ kiểm thử lỗi API như thế nào?",
+          "position": 1
+        },
+        "sessionId": "898dbb33-b252-4aa5-905a-6eb371c0dd68"
+      },
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": false,
+        "newQuestions": 1,
+        "generationStatus": "completed",
+        "timings": [
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "request_started",
+            "elapsedMs": 0.003400000001420267,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "authenticated",
+            "elapsedMs": 0.008600000001024455,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "body_parsed",
+            "elapsedMs": 0.05189999999856809,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "claimed",
+            "elapsedMs": 1.7432000000007974,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "context_ready",
+            "elapsedMs": 2.2233999999989464,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "upstream_started",
+            "elapsedMs": 2.8228999999992084,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "upstream_headers",
+            "elapsedMs": 2.989399999998568,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 107.46329999999944,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "upstream_first_text",
+            "elapsedMs": 107.55740000000151,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "upstream_validated",
+            "elapsedMs": 12010.623,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "decision_validated",
+            "elapsedMs": 12010.782200000001,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "persistence_started",
+            "elapsedMs": 12010.786199999999,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "persisted",
+            "elapsedMs": 12015.0281,
+            "code": null
+          },
+          {
+            "requestId": "5aa99a17-b914-455a-b2c6-4655d854cd8c",
+            "stage": "complete",
+            "elapsedMs": 12015.0857,
+            "code": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider-timeout",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "780e1265-9732-4596-80d8-d24d4f8edf38",
+      "firstVisibleMs": 145.5,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 114.9000000001397,
+      "previewUpdates": 1,
+      "completeMs": 1012.5,
+      "acknowledgementMs": 28.5,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.19999999995343387
+        },
+        {
+          "status": "error",
+          "elapsedMs": 1012.5
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 114.70000000018626,
+        "elapsedMs": 1012.3000000000466,
+        "outcome": "error",
+        "code": "AI_TIMEOUT"
+      },
+      "error": "AI_TIMEOUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": true,
+        "newQuestions": 0,
+        "generationStatus": "failed",
+        "timings": [
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "request_started",
+            "elapsedMs": 0.003899999999703141,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "authenticated",
+            "elapsedMs": 0.011200000000826549,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "body_parsed",
+            "elapsedMs": 0.07150000000183354,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "claimed",
+            "elapsedMs": 1.7505000000019209,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "context_ready",
+            "elapsedMs": 2.234599999999773,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "upstream_started",
+            "elapsedMs": 2.790499999999156,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "upstream_headers",
+            "elapsedMs": 2.9527000000016415,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 111.6218000000008,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "upstream_first_text",
+            "elapsedMs": 111.67770000000019,
+            "code": null
+          },
+          {
+            "requestId": "91d47d0d-899d-4cc9-86d2-d675a57c8a1c",
+            "stage": "failed",
+            "elapsedMs": 1008.6749000000018,
+            "code": "AI_TIMEOUT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "browser-deadline",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "21a7666d-4b0d-4798-84ba-f655d3c54a1b",
+      "firstVisibleMs": 145.5,
+      "firstVisibleText": "Bạn sẽ kiểm thử ",
+      "firstVisibleStatus": "Đang tạo câu hỏi",
+      "firstPreviewMs": 113.69999999995343,
+      "previewUpdates": 1,
+      "completeMs": 1004.1999999999534,
+      "acknowledgementMs": 28.600000000093132,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.19999999995343387
+        },
+        {
+          "status": "error",
+          "elapsedMs": 1004.1999999999534
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": 113.5999999998603,
+        "elapsedMs": 1004.0999999998603,
+        "outcome": "timeout",
+        "code": "RESPONSE_TIMEOUT"
+      },
+      "error": "RESPONSE_TIMEOUT",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": true,
+        "newQuestions": 0,
+        "generationStatus": "failed",
+        "timings": [
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "request_started",
+            "elapsedMs": 0.0036000000000058208,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "authenticated",
+            "elapsedMs": 0.013100000000122236,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "body_parsed",
+            "elapsedMs": 0.1463000000003376,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "claimed",
+            "elapsedMs": 2.0515999999988708,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "context_ready",
+            "elapsedMs": 2.4765000000006694,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "upstream_started",
+            "elapsedMs": 3.1114999999990687,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "upstream_headers",
+            "elapsedMs": 3.3234000000011292,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 110.71949999999924,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "upstream_first_text",
+            "elapsedMs": 110.77950000000055,
+            "code": null
+          },
+          {
+            "requestId": "66b22210-ab64-42a2-a7d9-1cf05b0d7036",
+            "stage": "failed",
+            "elapsedMs": 1005.1906999999992,
+            "code": "REQUEST_CANCELLED"
+          }
+        ]
+      }
+    },
+    {
+      "id": "disconnect",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "eea24bd5-3fbd-4f3a-bdb3-e69f9b7ac667",
+      "firstVisibleMs": null,
+      "firstVisibleText": null,
+      "firstVisibleStatus": null,
+      "firstPreviewMs": null,
+      "previewUpdates": 0,
+      "completeMs": 116.5,
+      "acknowledgementMs": 26.9000000001397,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.30000000004656613
+        },
+        {
+          "status": "error",
+          "elapsedMs": 116.4000000001397
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": null,
+        "elapsedMs": 116.10000000009313,
+        "outcome": "error",
+        "code": "NETWORK_ERROR"
+      },
+      "error": "NETWORK_ERROR",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 1,
+        "upstreamCancelled": true,
+        "newQuestions": 0,
+        "generationStatus": "failed",
+        "timings": [
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "request_started",
+            "elapsedMs": 0.0028000000020256266,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "authenticated",
+            "elapsedMs": 0.013800000000628643,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "body_parsed",
+            "elapsedMs": 0.10910000000149012,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "claimed",
+            "elapsedMs": 1.6225000000013097,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "context_ready",
+            "elapsedMs": 2.0709999999999127,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "upstream_started",
+            "elapsedMs": 2.5711000000010245,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "upstream_headers",
+            "elapsedMs": 2.6794000000008964,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "upstream_first_frame",
+            "elapsedMs": 110.35420000000158,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "upstream_first_text",
+            "elapsedMs": 110.43340000000171,
+            "code": null
+          },
+          {
+            "requestId": "221e7d6d-5562-4d87-9033-3a2db9aaef09",
+            "stage": "cancelled",
+            "elapsedMs": 110.98730000000069,
+            "code": "REQUEST_CANCELLED"
+          }
+        ]
+      }
+    },
+    {
+      "id": "busy",
+      "mode": "controlled",
+      "replay": false,
+      "sessionId": "2143254c-efb1-4c2a-a4a7-ed2df528c0dd",
+      "firstVisibleMs": null,
+      "firstVisibleText": null,
+      "firstVisibleStatus": null,
+      "firstPreviewMs": null,
+      "previewUpdates": 0,
+      "completeMs": 13,
+      "acknowledgementMs": 27.100000000093132,
+      "statusEvents": [
+        {
+          "status": "generating",
+          "elapsedMs": 0.19999999995343387
+        },
+        {
+          "status": "error",
+          "elapsedMs": 12.899999999906868
+        }
+      ],
+      "clientMetrics": {
+        "firstDeltaMs": null,
+        "elapsedMs": 12.699999999953434,
+        "outcome": "error",
+        "code": "GENERATION_IN_PROGRESS"
+      },
+      "error": "GENERATION_IN_PROGRESS",
+      "output": null,
+      "finished": true,
+      "database": {
+        "externalRequests": 0,
+        "calls": 0,
+        "upstreamCancelled": false,
+        "newQuestions": 0,
+        "generationStatus": "generating",
+        "timings": [
+          {
+            "requestId": "b12f4c12-94e5-4185-81f1-d8539f0e8ccd",
+            "stage": "request_started",
+            "elapsedMs": 0.011399999999412103,
+            "code": null
+          },
+          {
+            "requestId": "b12f4c12-94e5-4185-81f1-d8539f0e8ccd",
+            "stage": "authenticated",
+            "elapsedMs": 0.07800000000133878,
+            "code": null
+          },
+          {
+            "requestId": "b12f4c12-94e5-4185-81f1-d8539f0e8ccd",
+            "stage": "body_parsed",
+            "elapsedMs": 0.17439999999987776,
+            "code": null
+          },
+          {
+            "requestId": "b12f4c12-94e5-4185-81f1-d8539f0e8ccd",
+            "stage": "claimed",
+            "elapsedMs": 2.210800000000745,
+            "code": null
+          },
+          {
+            "requestId": "b12f4c12-94e5-4185-81f1-d8539f0e8ccd",
+            "stage": "failed",
+            "elapsedMs": 2.388699999999517,
+            "code": "GENERATION_IN_PROGRESS"
+          }
+        ]
+      }
+    }
+  ],
+  "pageErrors": [],
+  "browser": "156.0.4314.58",
+  "fixtures": {
+    "instanceId": "bdcd8ae0-fdc0-41f9-b33c-f70284af289a",
+    "mode": "controlled",
+    "fixtures": [
+      {
+        "id": "slow-success",
+        "label": "Thành công · trả chữ trước khi hoàn tất",
+        "sessionId": "4385f3dd-bef7-4987-908c-e12d3d35b0af",
+        "afterAnswerId": null
+      },
+      {
+        "id": "invalid-output",
+        "label": "Lỗi · JSON có trường score không hợp lệ",
+        "sessionId": "73c69af7-257a-4207-9653-61f35e883239",
+        "afterAnswerId": null
+      },
+      {
+        "id": "truncated",
+        "label": "Lỗi · phản hồi bị cắt giữa chừng",
+        "sessionId": "cf927b14-28fd-407e-89cb-944ce1eeff1a",
+        "afterAnswerId": null
+      },
+      {
+        "id": "cancel",
+        "label": "Hủy khi đang nhận câu hỏi",
+        "sessionId": "a2415601-a4b5-4f6c-9678-e8fb808403e9",
+        "afterAnswerId": null
+      },
+      {
+        "id": "unicode",
+        "label": "Tiếng Việt, dấu ngoặc kép và emoji",
+        "sessionId": "ecff693b-7425-4ec5-b773-ba5f9545fef4",
+        "afterAnswerId": null
+      },
+      {
+        "id": "closed",
+        "label": "Phiên đã đóng · không gọi AI",
+        "sessionId": "64c8922a-745c-424c-9039-fff193a3639e",
+        "afterAnswerId": null
+      },
+      {
+        "id": "busy",
+        "label": "Lượt đang được tạo · HTTP 409",
+        "sessionId": "2143254c-efb1-4c2a-a4a7-ed2df528c0dd",
+        "afterAnswerId": null
+      },
+      {
+        "id": "stop-open",
+        "label": "STOP hợp lệ · upstream chưa đóng kết nối",
+        "sessionId": "88a00507-5b20-439f-a2c1-87bc82dbdc2f",
+        "afterAnswerId": null
+      },
+      {
+        "id": "slow-notices",
+        "label": "Chờ 12 giây · thông báo chậm và chờ kéo dài",
+        "sessionId": "898dbb33-b252-4aa5-905a-6eb371c0dd68",
+        "afterAnswerId": null
+      },
+      {
+        "id": "provider-timeout",
+        "label": "Timeout upstream · không lưu draft",
+        "sessionId": "780e1265-9732-4596-80d8-d24d4f8edf38",
+        "afterAnswerId": null
+      },
+      {
+        "id": "browser-deadline",
+        "label": "Hết thời gian chờ ở trình duyệt",
+        "sessionId": "21a7666d-4b0d-4798-84ba-f655d3c54a1b",
+        "afterAnswerId": null,
+        "browserTimeoutMs": 1000
+      },
+      {
+        "id": "disconnect",
+        "label": "Mất kết nối sau khi nhận chữ đầu",
+        "sessionId": "eea24bd5-3fbd-4f3a-bdb3-e69f9b7ac667",
+        "afterAnswerId": null
+      }
+    ]
+  },
+  "functionalChecks": "passed"
+}

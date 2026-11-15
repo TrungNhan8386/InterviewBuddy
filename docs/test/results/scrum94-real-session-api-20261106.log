@@ -1,0 +1,27 @@
+
+> interviewbuddy@0.1.0 test:session-api
+> node --env-file-if-exists=.env.local scripts/test-session-api.mjs
+
+Testing http://localhost:3000/api/interview
+
+PASS  1. A creates a session -> 201 with sessionId
+PASS     latest saved analysis is linked (UC-05 step 13)
+PASS  2. Missing targetPosition, bad duration -> 400 BAD_INPUT
+PASS  3. Not signed in -> 401 (POST and GET)
+PASS  4. B reads A's session -> 404
+PASS  5. A reads own session -> 200 with settings and analysis
+PASS  6. B links A's analysis -> 400 (analysis not found)
+PASS  7. fitAnalysisId: null -> session without analysis
+PASS  8. Invalid id -> 404
+PASS  9. Resume with an unanswered question -> awaiting_answer
+PASS  10. Save answer -> 201; sending it again -> 200 with the same answer
+PASS  11. Resume after answering -> awaiting_question with afterAnswerId
+PASS  12. Invalid answer -> 400 with field names
+PASS  13. B cannot answer, read A's answers, A's generations or A's AI count
+PASS  14. A user cannot write the AI usage table directly
+PASS  15. A ends the interview -> completed; B cannot end it
+PASS  16. Answer after the end -> 409 SESSION_CLOSED; resume -> finished
+PASS  17. /api/interview/next on an ended session -> action end (no AI call)
+PASS  18. /api/analyze-fit without sign-in -> 401
+
+19/19 checks passed.

@@ -1,0 +1,85 @@
+{
+  "task": "SCRUM-94",
+  "recordedDateLocal": "2026-11-06",
+  "branch": "feat/scrum-94-interview-streaming",
+  "baseCommit": "baa2f8e",
+  "status": "Local functional improvements verified; acceptance not passed",
+  "changes": [
+    "Validate and finish at terminal STOP without waiting for EOF",
+    "Client status notices at 5/10 seconds",
+    "Browser deadline 35 seconds; upstream default remains 30 seconds",
+    "Safe opt-in server timing spans and client metrics",
+    "Distinguish network loss, timeout, cancellation and invalid stream"
+  ],
+  "offlineTests": {
+    "log": "tmp/scrum94-tests-improvements-20261106.log",
+    "failed": 0,
+    "total": 212,
+    "passed": 212,
+    "newTests": 11
+  },
+  "targetedEslint": "passed",
+  "typecheck": "passed",
+  "build": {
+    "defaultTurbopack": "failed: sandbox Google Fonts connection, then child process CSS panic outside sandbox",
+    "webpack": "passed: npm run build -- --webpack",
+    "configurationChanged": false
+  },
+  "secretScan": {
+    "status": "passed",
+    "configuredKeyInDownloadedDocs": false,
+    "envIgnored": true,
+    "envTracked": false,
+    "temporaryDocsWithPublicExampleKeysRemoved": true
+  },
+  "controlledBrowser": {
+    "scenarios": 13,
+    "injectedDeadlineMs": 1000,
+    "includesReplay": true,
+    "source": "docs/test/results/scrum94-browser-controlled-improvements-20261106.json",
+    "injectedProviderTimeoutMs": 1000,
+    "checks": "passed"
+  },
+  "liveBrowser": {
+    "completeWithinFiveSecondsRate": 1,
+    "functionalChecks": "passed",
+    "productChat": false,
+    "firstTextP50Ms": 1278.2999999998137,
+    "fastAndValidRate": 0.8,
+    "newGeminiRequests": 5,
+    "uncontrolledComparisonToEarlierRun": true,
+    "completeWithinFiveSeconds": 5,
+    "source": "docs/test/results/scrum94-browser-live-improvements-20261106.json",
+    "firstTextP95Ms": 2293.3000000000466,
+    "validSaved": 5,
+    "attempts": 5,
+    "completeP95Ms": 2459.6999999999534,
+    "automaticRetries": 0,
+    "provenance": "AI-authored synthetic CV/JD/answers",
+    "fastAndValid": 4,
+    "database": "local PGlite",
+    "auth": "simulated",
+    "completeP50Ms": 1470,
+    "percentileMethod": "nearest-rank over all five valid saved attempts"
+  },
+  "acceptance": {
+    "fastRateTargetMet": false,
+    "overallPassed": false,
+    "observedCompletionRateTargetMet": true,
+    "requiredChatSupabaseEnvironmentMet": false,
+    "minimum20SamplesMet": false
+  },
+  "warningTimersImplementedInSharedClient": true,
+  "warningTimersIntegratedIntoProductChat": false,
+  "serverTimingEnabledByDefault": false,
+  "limits": [
+    "No hosted Supabase configuration or authenticated product Chat E2E",
+    "No new claim of fixing every 30-second timeout",
+    "Ambiguous acknowledgement and semantic duplicate policy remain SCRUM-93 work",
+    "No controlled A/B comparison proves a model latency gain",
+    "Default Turbopack build remains unverified after its failure"
+  ],
+  "committed": false,
+  "pushed": false,
+  "jiraStatusChanged": false
+}

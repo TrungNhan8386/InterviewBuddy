@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-12",
+  "commit": "0668228",
+  "checks": [
+    {
+      "case": "UC06-05@28/UC06-07@41",
+      "step": "quota",
+      "passed": true,
+      "actual": "Real consume_ai_call denies used test account at local server limit 1; session persists with zero questions.",
+      "mode": "real Supabase quota; local server-only limit override"
+    },
+    {
+      "case": "UC06-07@41",
+      "step": "3",
+      "passed": true,
+      "actual": "Unfinished quota-blocked session appears on real Dashboard.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-05@28/UC06-07@41",
+      "step": "resume",
+      "passed": true,
+      "actual": "Same session resumes on normal-limit server; one real Gemini question persisted.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-07@41",
+      "step": "5",
+      "passed": true,
+      "actual": "Expired owned session completed and kept submitted answer without generating a new question.",
+      "mode": "real backend expiry; controlled owned-test started_at"
+    },
+    {
+      "case": "UC06-05@28/UC06-06@40",
+      "step": "refusal-message",
+      "passed": true,
+      "actual": "AI_CONTENT_BLOCKED code displays a localized refusal message.",
+      "mode": "injected HTTP error code"
+    },
+    {
+      "case": "UC06-05@28/UC06-06@40",
+      "step": "refusal-editability",
+      "passed": false,
+      "actual": "Input is disabled after rejected answer was already persisted; user cannot edit/resend as instructed.",
+      "mode": "injected HTTP error code"
+    },
+    {
+      "case": "UC06-06@40",
+      "step": "invalid-format-message",
+      "passed": true,
+      "actual": "INVALID_OUTPUT displays a friendly localized message.",
+      "mode": "injected HTTP error code"
+    },
+    {
+      "case": "UC06-06@40",
+      "step": "busy-message",
+      "passed": true,
+      "actual": "Provider-busy message differs from app daily limit.",
+      "mode": "injected HTTP error code"
+    },
+    {
+      "case": "UC06-06@40",
+      "step": "retry-no-duplicates",
+      "passed": true,
+      "actual": "After three controlled error codes, real retry persists one next question and retains one answer; no duplicates.",
+      "mode": "real"
+    }
+  ],
+  "stages": [
+    "actual-daily-quota",
+    "resume-under-normal-limit",
+    "owned-test-session-expiry",
+    "controlled-ai-refusal",
+    "controlled-invalid-output",
+    "recover-same-turn-once",
+    "denied-callback-handler"
+  ],
+  "analysisRequests": 0,
+  "interviewRequests": 0,
+  "status": "stopped",
+  "boundary": "Real shared Supabase quota/persistence and Gemini recovery; injected HTTP error-code paths explicitly labelled. Expiry uses only an owned synthetic session timestamp.",
+  "errorType": "Error",
+  "errorStage": "denied-callback-handler"
+}

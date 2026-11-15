@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { todayInVietnam, validateCreateSession, isUuid } from "@/lib/interview/session-contract.mjs";
+import AiPracticeNotice from "@/components/interview/AiPracticeNotice";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
@@ -109,16 +113,6 @@ function optionLabel(options: Option[], value: string) {
   return options.find((option) => option.value === value)?.label ?? "—";
 }
 
-function localToday() {
-  const now = new Date();
-
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
-}
-
 function displayDate(value: string) {
   if (!value) return "Chưa chọn";
 
@@ -130,8 +124,26 @@ export default function InterviewSetupPage() {
   const [form, setForm] = useState<SetupForm>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [createdId, setCreatedId] = useState("");
+  const pending = useRef(false);
+  const languageEdited = useRef(false);
+  const router = useRouter();
+  useEffect(() => {
+    let active = true;
+    const client = createClient();
+    void client.auth.getUser().then(async ({ data }) => {
+      if (!data.user) return;
+      const { data: profile } = await client.from("profiles").select("preferred_language").eq("id", data.user.id).maybeSingle();
+      if (active && !languageEdited.current && ["vi", "en"].includes(profile?.preferred_language)) {
+        setForm(current => ({ ...current, language: profile!.preferred_language }));
+      }
+    }).catch(() => {});
+    return () => { active = false; };
+  }, []);
 
   function updateField(field: keyof SetupForm, value: string) {
+    if (field === "language") languageEdited.current = true;
     setForm((current) => ({
       ...current,
       [field]: value,
@@ -147,32 +159,33 @@ export default function InterviewSetupPage() {
     }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+    if (pending.current || createdId) return;
+    const payload = { targetPosition: form.targetPosition, type: form.roundType,
+      difficulty: form.difficulty, language: form.language, interviewDate: form.interviewDate || null,
+      durationMinutes: Number(form.duration), inputMode: form.answerMode };
+    const validation = validateCreateSession(payload, { today: todayInVietnam() });
     const nextErrors: FormErrors = {};
-
-    if (!form.targetPosition.trim()) {
-      nextErrors.targetPosition = "Vui lòng nhập vị trí muốn ứng tuyển.";
-    }
-
-    if (!form.interviewDate) {
-      nextErrors.interviewDate = "Vui lòng chọn ngày phỏng vấn.";
-    } else if (form.interviewDate < localToday()) {
-      nextErrors.interviewDate =
-        "Ngày phỏng vấn phải là hôm nay hoặc một ngày trong tương lai.";
-    }
-
+    if (!form.targetPosition.trim()) nextErrors.targetPosition = "Vui lòng nhập vị trí mục tiêu.";
+    if (!form.interviewDate || (!validation.ok && validation.fields.interviewDate)) nextErrors.interviewDate = "Chọn ngày hợp lệ, từ hôm nay trở đi (giờ Việt Nam).";
     setErrors(nextErrors);
-
-    if (Object.keys(nextErrors).length > 0) {
-      setMessage("");
-      return;
-    }
-
-    setMessage(
-      "Thiết lập hợp lệ. Bạn có thể kiểm tra lại thông tin trong phần xem trước."
-    );
+    if (!validation.ok || Object.keys(nextErrors).length) { setMessage("Vui lòng kiểm tra thông tin đã nhập."); return; }
+    pending.current = true; setBusy(true); setMessage("");
+    try {
+      const response = await fetch("/api/interview", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const result = await response.json();
+      if (!response.ok) {
+        setErrors(result.error?.fields ?? {});
+        throw new Error(response.status === 401 ? "Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại ở tab khác rồi thử lại." : result.error?.message || "Không tạo được phiên. Hãy thử lại.");
+      }
+      if (!isUuid(result.sessionId)) throw new Error("Phản hồi không hợp lệ. Hãy kiểm tra Dashboard trước khi tạo lại phiên.");
+      setCreatedId(result.sessionId);
+      router.push(`/interview/${result.sessionId}`);
+      router.refresh();
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Mất kết nối. Kiểm tra Dashboard trước khi tạo lại để tránh trùng phiên.");
+    } finally { pending.current = false; setBusy(false); }
   }
 
   const preview = [
@@ -208,6 +221,7 @@ export default function InterviewSetupPage() {
 
   return (
     <div className="space-y-6">
+      <AiPracticeNotice />
       <div>
         <h1 className="text-2xl font-bold text-slate-900">
           Thiết lập phỏng vấn
@@ -246,6 +260,7 @@ export default function InterviewSetupPage() {
           </p>
 
           <form
+            id="interview-setup-form"
             noValidate
             onSubmit={handleSubmit}
             className="mt-6 space-y-5"
@@ -317,13 +332,12 @@ export default function InterviewSetupPage() {
 
             {form.answerMode === "voice" && (
               <p className="rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-600">
-                Giọng nói cần quyền sử dụng micro và trình duyệt hỗ trợ.
-                Bạn luôn có thể chuyển sang văn bản.
+                Phiên ghi nhận lựa chọn giọng nói. Trong trang luyện tập hiện tại, bạn vẫn có thể nhập câu trả lời bằng văn bản.
               </p>
             )}
 
-            <Button type="submit" className="w-full sm:w-auto">
-              Kiểm tra thiết lập
+            <Button type="submit" disabled={busy || !!createdId} className="w-full sm:w-auto">
+              {busy ? "Đang tạo phiên…" : "Bắt đầu phỏng vấn"}
             </Button>
 
             <p
@@ -333,6 +347,7 @@ export default function InterviewSetupPage() {
             >
               {message}
             </p>
+            {createdId && <Link className="block text-indigo-700 underline" href={`/interview/${createdId}`}>Mở phiên vừa tạo</Link>}
           </form>
         </Card>
 
@@ -367,7 +382,7 @@ export default function InterviewSetupPage() {
             </dl>
 
             <Button
-              disabled
+              type="submit" form="interview-setup-form" disabled={busy || !!createdId}
               className="mt-6 w-full"
               aria-describedby="start-session-note"
             >
@@ -378,8 +393,7 @@ export default function InterviewSetupPage() {
               id="start-session-note"
               className="mt-3 text-xs leading-5 text-slate-500"
             >
-              Chức năng bắt đầu phiên chưa được mở.
-              Bạn có thể thiết lập và xem trước thông tin.
+              Phiên sẽ được lưu và mở trang luyện tập. Phân tích CV/JD gần nhất được liên kết nếu có.
             </p>
           </Card>
         </aside>

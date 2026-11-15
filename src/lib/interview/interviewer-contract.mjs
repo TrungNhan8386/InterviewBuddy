@@ -1,4 +1,5 @@
 import { DIFFICULTIES, DURATIONS, INTERVIEW_TYPES, LANGUAGES, QUESTIONS_BY_DURATION } from './session-contract.mjs';
+import { unsafeGeneratedText } from '../ai/guardrails.mjs';
 
 export const CONTRACT_VERSION = '0.1';
 export const FOLLOW_UP_LIMITS = Object.freeze({ easy: 1, medium: 2, hard: 3 });
@@ -91,12 +92,12 @@ export function getInterviewPolicy(input) {
 export const INTERVIEWER_OUTPUT_SCHEMA = {
   type: 'object', additionalProperties: false,
   properties: {
-    action: { type: 'string', enum: ['follow_up', 'next_topic', 'end'] },
     question: { type: ['string', 'null'], description: 'One focused question, or null only for end.' },
+    action: { type: 'string', enum: ['follow_up', 'next_topic', 'end'] },
     topic: { type: 'string', description: 'Concise topic. For follow_up copy the current topic exactly.' },
     reason: { type: 'string', description: 'One short decision rationale for developers, not hidden chain of thought or a candidate score.' },
   },
-  required: ['action', 'question', 'topic', 'reason'],
+  required: ['question', 'action', 'topic', 'reason'],
 };
 
 export function validateInterviewerOutput(value, input) {
@@ -104,6 +105,7 @@ export function validateInterviewerOutput(value, input) {
   if (!objectWith(value, ['action', 'question', 'topic', 'reason'])
     || !getInterviewPolicy(input).allowedActions.includes(value.action)
     || !text(value.topic, 1, 160) || !text(value.reason, 1, 700)) invalid();
+  if ([value.question, value.reason, value.topic].some(unsafeGeneratedText)) invalid();
   if (value.action === 'end') {
     if (value.question !== null) invalid();
   } else {

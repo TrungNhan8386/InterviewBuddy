@@ -1,5 +1,6 @@
 import { AnalysisError, invalidAiResponse } from './errors.mjs';
 import { LIMITS } from './contracts.mjs';
+import { unsafeGeneratedText, protectedRequirement } from '../ai/guardrails.mjs';
 
 export const SCORING_VERSION = 'weighted-skills-v1';
 export const WEIGHTS = Object.freeze({ required: 2, preferred: 1 });
@@ -40,6 +41,7 @@ function validateCoachingItems(items, allowedSkills, required, adviceMax = 500) 
       throw invalidAiResponse();
     }
     const key = canonicalSkill(item.skill);
+    if (unsafeGeneratedText(item.advice)) throw invalidAiResponse();
     const requirement = allowedSkills.get(key);
     if (!requirement || seen.has(key)) throw invalidAiResponse();
     seen.add(key);
@@ -61,8 +63,10 @@ export function scoreAnalysis(raw, input) {
   }
 
   const distinct = new Map();
+  if (unsafeGeneratedText(raw.summary)) throw invalidAiResponse();
   const fields = new Set(['skill', 'importance', 'matched', 'jdEvidence', 'cvEvidence', 'reason']);
   for (const item of raw.requirements) {
+    if (item && (protectedRequirement(item.skill) || unsafeGeneratedText(item.reason))) throw invalidAiResponse();
     if (!item || typeof item !== 'object' || Array.isArray(item)
         || Object.keys(item).some((key) => !fields.has(key))
         || !isText(item.skill, 160) || !Object.hasOwn(WEIGHTS, item.importance)

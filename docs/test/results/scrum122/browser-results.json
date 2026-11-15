@@ -1,0 +1,66 @@
+{
+  "boundary": "Local production UI + real Supabase test login/session creation. 429 injected at browser API boundary; no actual Gemini quota exhaustion or successful Gemini calls.",
+  "checks": [
+    {
+      "name": "analysis-vi provider quota shown and input kept",
+      "passed": true
+    },
+    {
+      "name": "analysis-vi raw provider details hidden",
+      "passed": true
+    },
+    {
+      "name": "analysis-vi app daily allowance is distinct",
+      "passed": true
+    },
+    {
+      "name": "chat-vi session retained after provider quota",
+      "passed": true
+    },
+    {
+      "name": "chat-vi reload keeps same empty pending session",
+      "passed": true
+    },
+    {
+      "name": "chat-vi daily limit remains distinct",
+      "passed": true
+    },
+    {
+      "name": "chat-vi cleanup own session",
+      "passed": true
+    },
+    {
+      "name": "analysis-en provider quota shown and input kept",
+      "passed": true
+    },
+    {
+      "name": "analysis-en raw provider details hidden",
+      "passed": true
+    },
+    {
+      "name": "analysis-en app daily allowance is distinct",
+      "passed": true
+    },
+    {
+      "name": "chat-en session retained after provider quota",
+      "passed": true
+    },
+    {
+      "name": "chat-en reload keeps same empty pending session",
+      "passed": true
+    },
+    {
+      "name": "chat-en daily limit remains distinct",
+      "passed": true
+    },
+    {
+      "name": "chat-en cleanup own session",
+      "passed": true
+    }
+  ],
+  "status": "completed",
+  "injectedRequests": {
+    "analysis": 4,
+    "chat": 6
+  }
+}

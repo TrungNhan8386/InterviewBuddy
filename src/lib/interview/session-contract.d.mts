@@ -44,6 +44,9 @@ export interface InterviewSessionResponse {
   id: string;
   status: SessionStatus;
   createdAt: string;
+  /** Set when the first question is requested; the interview timer starts here. */
+  startedAt: string | null;
+  endedAt: string | null;
   settings: InterviewSettings;
   analysis: {
     id: string;
@@ -55,8 +58,70 @@ export interface InterviewSessionResponse {
   } | null;
 }
 
+/** One question of the session and the user's answer (null until answered). */
+export interface InterviewTurn {
+  question: {
+    id: string;
+    position: number;
+    kind: 'main' | 'follow_up' | 'practice';
+    topic: string | null;
+    content: string;
+    createdAt: string;
+  };
+  answer: {
+    id: string;
+    content: string;
+    inputMode: InputMode;
+    durationSeconds: number | null;
+    createdAt: string;
+  } | null;
+}
+
+/** What the chat page should do when it opens a session (SCRUM-80). */
+export type ResumeState =
+  | { state: 'not_started'; afterAnswerId: null }
+  | { state: 'awaiting_answer'; questionId: string }
+  | { state: 'awaiting_question'; afterAnswerId: string }
+  | { state: 'finished' };
+
+export interface InterviewProgress {
+  mainQuestionsAsked: number;
+  mainQuestionsAnswered: number;
+  plannedQuestions: number;
+}
+
+/** 200 response of GET /api/interview/{id}. */
+export interface InterviewSessionDetailResponse extends InterviewSessionResponse {
+  turns: InterviewTurn[];
+  progress: InterviewProgress;
+  resume: ResumeState;
+}
+
+/** Body of POST /api/interview/{id}/answers. */
+export interface SaveAnswerRequest {
+  questionId: string;
+  content: string;
+  /** Default 'text'. */
+  inputMode?: InputMode;
+  /** Seconds spent answering (voice answers), 0–3600. */
+  durationSeconds?: number | null;
+}
+
+/** 201 (new) or 200 (already saved) response of POST /api/interview/{id}/answers. */
+export interface SaveAnswerResponse {
+  answer: { id: string; questionId: string; createdAt: string };
+  alreadySaved: boolean;
+}
+
+/** 200 response of POST /api/interview/{id}/end. */
+export interface EndInterviewResponse {
+  id: string;
+  status: SessionStatus;
+  endedAt: string | null;
+}
+
 export type InterviewApiErrorCode =
-  | 'BAD_INPUT' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'SERVER_ERROR';
+  | 'BAD_INPUT' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'STALE_TURN' | 'SESSION_CLOSED' | 'ANSWER_CONFLICT' | 'SERVER_ERROR';
 
 export interface InterviewApiError {
   error: {
@@ -87,3 +152,12 @@ export function toSessionRow(
   context: { userId: string; analysis: { id: string; jd_text: string; cv_text: string } | null },
 ): Record<string, unknown>;
 export function toSessionResponse(row: Record<string, unknown>): InterviewSessionResponse;
+
+export const ANSWER_MAX: number;
+export const ANSWER_DURATION_MAX: number;
+export function validateSaveAnswer(body: unknown):
+  | { ok: true; value: Required<SaveAnswerRequest> }
+  | { ok: false; fields: Record<string, string> };
+export function toTurns(questionRows: Record<string, unknown>[]): InterviewTurn[];
+export function toResumeState(status: SessionStatus, turns: InterviewTurn[]): ResumeState;
+export function toProgress(turns: InterviewTurn[], plannedQuestions: number): InterviewProgress;

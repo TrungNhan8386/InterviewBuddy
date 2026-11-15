@@ -1,0 +1,8 @@
+{
+  "base": "0668228",
+  "boundary": "Offline request equality against pre-refactor main; no provider call",
+  "interviewRequestsUnchanged": 56,
+  "analysisRequestsUnchanged": 2,
+  "healthRequestUnchanged": true,
+  "baselinePayloadSha256": "13b47124a66ec99b27365d3bdf603bd49cf2ceb264af7c01746b1aec21601b03"
+}

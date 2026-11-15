@@ -30,6 +30,14 @@ Group 3, class 24C01.
 
 The app lives in `/src`. Setup steps are in [src/README.md](src/README.md). Architecture and database design are in [docs/analysis and design](docs/analysis%20and%20design/).
 
+Team integration instructions (Vietnamese): [connect Supabase, CV/JD analysis, session setup, Chat and AI streaming](docs/integration/TEAM_INTEGRATION_GUIDE_VI.md). Includes ownership, local configuration, API handoffs and verification boundaries.
+
+Supabase handoff for Nhân: [configuration, migration status and test-account checklist](docs/integration/supabase-handoff/README.md).
+
+AI prompt configuration: [editable JSON files, versioning and deployment instructions](src/config/prompts/README.md).
+
+AI design (SCRUM-125): [prompts, JSON schemas, decision logic and review handoff](docs/analysis%20and%20design/ai-design.md).
+
 ## Repository structure
 
 ```
