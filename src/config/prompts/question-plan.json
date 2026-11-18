@@ -1,5 +1,5 @@
 {
-  "version": "jd-cv-context-v3",
+  "version": "jd-cv-coverage-v4",
   "roundPolicies": {
     "technical": "Assess job-relevant knowledge or a hypothetical implementation. Use past-project wording only for explicitly evidenced work. Do not require STAR for factual questions.",
     "behavioral": "Ask for one real past situation, leaving room for Situation, Task, Action and Result. Do not invent the candidate's situation or result.",

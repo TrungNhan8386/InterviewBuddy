@@ -40,7 +40,7 @@ async function streamingResponse(service, body, request, trace) {
           finished = true; controller.close(); cleanup(); await iterator.return();
         }
       } catch (error) {
-        trace('failed', error instanceof InterviewerError ? error.code : 'SERVER_ERROR');
+        trace('failed', error instanceof InterviewerError ? error.code : 'SERVER_ERROR', error?.validationReason);
         if (!cancelled) { controller.enqueue(encodeSseEvent('error', safeError(error))); controller.close(); }
         finished = true; cleanup();
       }
@@ -92,7 +92,7 @@ export function createNextHandler({ authenticate, makeService, observeTiming }) 
       trace('complete');
       return Response.json(result, { headers });
     } catch (error) {
-      trace('failed', error instanceof InterviewerError ? error.code : 'SERVER_ERROR');
+      trace('failed', error instanceof InterviewerError ? error.code : 'SERVER_ERROR', error?.validationReason);
       const known = error instanceof InterviewerError;
       return Response.json(safeError(error), { status: known ? error.status : 500, headers: {
         ...headers, ...(known && error.code === 'GENERATION_IN_PROGRESS' ? { 'Retry-After': '2' } : {}),

@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-18",
+  "task": "SCRUM-133",
+  "baseCommit": "2947292b22632d44c54a83f1ee03019ab6da9d9d",
+  "branch": "fix/scrum-133-question-repetition-hung",
+  "promptVersion": "0.14-diversity-1",
+  "questionPlanVersion": "jd-cv-coverage-v4",
+  "offline": {
+    "tests": 316,
+    "pass": 316,
+    "fail": 0,
+    "skipped": 0,
+    "lint": "pass",
+    "productionBuild": "pass",
+    "pgliteIntegration": "JSON/SSE repair, persistence and replay"
+  },
+  "live": {
+    "runs": [
+      {
+        "name": "English JSON",
+        "status": "completed",
+        "questions": 5,
+        "answers": 5,
+        "apiErrors": []
+      },
+      {
+        "name": "English SSE",
+        "status": "completed",
+        "questions": 5,
+        "answers": 5,
+        "apiErrors": []
+      },
+      {
+        "name": "Vietnamese SSE",
+        "status": "completed_with_errors",
+        "questions": 5,
+        "answers": 5,
+        "apiErrors": [
+          "INVALID_OUTPUT",
+          "AI_UNAVAILABLE"
+        ]
+      }
+    ],
+    "repairEvents": 4,
+    "validationReasons": [
+      "NON_QUESTION",
+      "NEAR_DUPLICATE",
+      "NEAR_DUPLICATE",
+      "NEAR_DUPLICATE",
+      "NEAR_DUPLICATE"
+    ]
+  },
+  "boundary": "Local production API, real Gemini/Supabase/Auth/RLS; synthetic Analysis fixture. No deployed staging/browser UI or independent human acceptance.",
+  "buildNote": "Next emitted a framework security-upgrade recommendation on some builds; ordinary rebuild succeeded; dependencies unchanged.",
+  "sourceHashNormalization": "UTF-8 text, CRLF to LF",
+  "sourceFingerprints": [
+    {
+      "path": "src/lib/interview/question-diversity.mjs",
+      "sha256": "0b99b2aa3575849cffc2018c9535caa7b24b8ba4257e323f2fca95971e5302e8"
+    },
+    {
+      "path": "src/app/api/interview/next/route.ts",
+      "sha256": "0fa0abdb9eb5363f8cb93b1b2520f409fb82008604e1eb2cccb994d137a4a9c9"
+    },
+    {
+      "path": "src/config/prompts/interviewer.json",
+      "sha256": "1138279c83b928d2fca61ad980a61e3734bce448cc42c5575387a9c58832eb56"
+    },
+    {
+      "path": "src/config/prompts/question-plan.json",
+      "sha256": "adfaaed31f7660d5a2d44701cd29fe2596ccf358e755af93b74fb345be76aed0"
+    },
+    {
+      "path": "src/lib/interview/interviewer-contract.d.mts",
+      "sha256": "7997e260d5b3157f657176b784fd0c9ed65f510df9554bb6b357fee3a468a430"
+    },
+    {
+      "path": "src/lib/interview/interviewer-contract.mjs",
+      "sha256": "7608fc4a4bce9e57f342b2f5d38e24d37f4e40e3e784eb83d5f4416fbc6f565c"
+    },
+    {
+      "path": "src/lib/interview/interviewer-prompt.mjs",
+      "sha256": "1dfb24d459dcfbbba3b3e5217ae06464645a471f1ed158b7f9008b881bdf0837"
+    },
+    {
+      "path": "src/lib/interview/interviewer-provider.d.mts",
+      "sha256": "b50181d8da94e74d02a84ec4d73a6813f6a66e2b3333e53daed46fb17768474d"
+    },
+    {
+      "path": "src/lib/interview/interviewer-provider.mjs",
+      "sha256": "d9c2907d974500d3f3eb6688ba9dab73d8db4bb124c3a122c7694b18c1b728d5"
+    },
+    {
+      "path": "src/lib/interview/next-http.mjs",
+      "sha256": "0ab0d8cb9bcdb43d984d6b7ebb4f0cf8984b417409f9469b856b691e316817c7"
+    },
+    {
+      "path": "src/lib/interview/next-service.d.mts",
+      "sha256": "11fcbdd890c14a9fe6a2c3a696384560b7a61c47086b41133ae009ff18904871"
+    },
+    {
+      "path": "src/lib/interview/next-service.mjs",
+      "sha256": "8426096930e3862d2408c624e3084931911accb11cefce7a971469fd1f0252ae"
+    },
+    {
+      "path": "src/lib/interview/question-plan.mjs",
+      "sha256": "b052704d279380301c3f93ee3b091bd1aacebbbc67145c1bfa84d6e9d463118b"
+    },
+    {
+      "path": "src/lib/interview/timing-trace.d.mts",
+      "sha256": "cc19f900048f89038ba87505c0d642d6f730e21a40fff5d75dd832854242d36d"
+    },
+    {
+      "path": "src/lib/interview/timing-trace.mjs",
+      "sha256": "0c5d74857bd8609e79feb6c5af6eb3131214e51108307101c40d8df351da656e"
+    }
+  ]
+}

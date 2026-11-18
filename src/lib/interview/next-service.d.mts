@@ -24,4 +24,5 @@ export function createNextService(options: {
   provider: { model: string; next(input: InterviewerInput, options?: { signal?: AbortSignal; trace?: TimingMark }): Promise<InterviewDecision>;
     stream?(input: InterviewerInput, options?: { signal?: AbortSignal; trace?: TimingMark }): AsyncGenerator<{ type: 'delta'; text: string } | { type: 'decision'; value: InterviewDecision }, void> };
   now?: () => number;
+  generationBudgetMs?: number;
 }): NextService;
