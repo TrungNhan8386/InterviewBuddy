@@ -1,0 +1,283 @@
+{
+  "date": "2026-11-18",
+  "baseCommit": "2947292",
+  "task": "SCRUM-133",
+  "runs": [
+    {
+      "name": "English JSON",
+      "language": "en",
+      "transport": "JSON",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "TypeScript",
+          "content": "How would you type a reusable component prop in TypeScript that accepts a list of items and a render function for each item?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "content": "How would you handle a merge conflict when collaborating with another developer on a feature branch in Git?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "React component testing",
+          "content": "How would you write a basic unit test for a React component that renders a dashboard widget with a loading state?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "React and TypeScript error handling",
+          "content": "How would you handle a failed API request inside a React component when fetching dashboard data?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "Git collaboration failure handling",
+          "content": "Can you describe a time when you had to resolve a complex version control conflict or failure while working in a team project using Git?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1978,
+          "firstTextMs": null
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1445,
+          "firstTextMs": null
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1543,
+          "firstTextMs": null
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1334,
+          "firstTextMs": null
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1415,
+          "firstTextMs": null
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 149,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    },
+    {
+      "name": "English SSE",
+      "language": "en",
+      "transport": "SSE",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "TypeScript",
+          "content": "How would you type a reusable component prop in TypeScript that accepts a list of items and a render function for each item?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Git version control",
+          "content": "How would you resolve a merge conflict in Git when two developers modify the same line in a file?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "React Testing",
+          "content": "How would you write a unit test in React using Jest and React Testing Library to verify that a button click triggers an asynchronous API call?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "React error handling",
+          "content": "How would you handle an error boundary in React to catch rendering failures in a component tree?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "React state management",
+          "content": "How would you manage state in a React component when dealing with multiple dependent input fields?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1179,
+          "firstTextMs": 1099
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1264,
+          "firstTextMs": 1147
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1531,
+          "firstTextMs": 1391
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1556,
+          "firstTextMs": 1424
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1315,
+          "firstTextMs": 1106
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 157,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    },
+    {
+      "name": "Vietnamese SSE",
+      "language": "vi",
+      "transport": "SSE",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "React và TypeScript",
+          "content": "Bạn sẽ triển khai cơ chế kiểm tra kiểu dữ liệu (type checking) với TypeScript trong một component React như thế nào để đảm bảo props nhận vào luôn chính xác?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ xử lý một xung đột merge code (merge conflict) khi làm việc với Git trong nhóm như thế nào?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ sử dụng các câu lệnh Git nào để đưa các thay đổi từ nhánh nhánh chính (main branch) vào nhánh tính năng của bạn khi đang làm việc nhóm?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ áp dụng chiến lược branch nào (như Git Flow hoặc GitHub Flow) khi bắt đầu một tính năng mới trong dự án nhóm?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "testing",
+          "content": "Bạn sẽ viết và chạy các bài kiểm thử (testing) tự động cho các component React như thế nào trong một dự án sử dụng TypeScript?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1218,
+          "firstTextMs": 994
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1435,
+          "firstTextMs": 1222
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1491,
+          "firstTextMs": 1351
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1293,
+          "firstTextMs": 1000
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1315,
+          "firstTextMs": 1171
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 217,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    }
+  ],
+  "status": "completed",
+  "boundary": "Real local production Next.js API + Supabase Auth/RLS/RPC + Gemini. Synthetic CVJD-01 analysis fixture seeded; Analysis generation and browser UI are outside this run.",
+  "contentReview": {
+    "status": "needs_revision",
+    "findings": [
+      {
+        "run": "English JSON",
+        "positions": [
+          2,
+          5
+        ],
+        "issue": "Answered Git conflict goal restated as a past-event story"
+      }
+    ]
+  }
+}

@@ -18,6 +18,7 @@ export const POST = createNextHandler({
     return getSignedInClient(request);
   },
   makeService: (auth) => createNextService({
+    generationBudgetMs: Number(process.env.GEMINI_TIMEOUT_MS || 30000),
     repository: createNextRepository(auth.supabase),
     // SCRUM-81: every Gemini request counts toward the user's daily AI limit.
     provider: withInterviewerLimit(createInterviewerProvider(), createAiCallCounter(auth.supabase)),

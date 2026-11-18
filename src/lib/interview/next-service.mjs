@@ -41,7 +41,7 @@ export function contextFromSnapshot(snapshot, now = Date.now()) {
   }
 }
 
-export function createNextService({ repository, provider, now = Date.now }) {
+export function createNextService({ repository, provider, now = Date.now, generationBudgetMs = 30000 }) {
   async function* generate(body, { signal, streaming = false, trace = () => {} } = {}) {
     const request = validateNextRequest(body);
     if (signal?.aborted) throw new InterviewerError('REQUEST_CANCELLED', 'Request cancelled.', 408);
@@ -57,15 +57,39 @@ export function createNextService({ repository, provider, now = Date.now }) {
       const context = contextFromSnapshot(claim, now());
       trace('context_ready');
       let decision;
-      if (streaming) {
-        if (typeof provider.stream !== 'function') throw new InterviewerError('AI_CONFIGURATION_ERROR', 'Streaming is not configured.', 503);
-        for await (const item of provider.stream(context, { signal, trace })) {
-          if (item.type === 'delta') yield { event: 'delta', data: { text: item.text } };
-          else if (item.type === 'decision' && !decision) decision = item.value;
-          else throw new InterviewerError('INVALID_OUTPUT', 'The interviewer returned an invalid stream.');
+      const budget = AbortSignal.timeout(Number.isInteger(generationBudgetMs) && generationBudgetMs > 0 && generationBudgetMs <= 45000 ? generationBudgetMs : 30000);
+      const modelSignal = signal ? AbortSignal.any([signal, budget]) : budget;
+      let repair;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        decision = undefined;
+        try {
+          if (streaming && attempt === 0) {
+            if (typeof provider.stream !== 'function') throw new InterviewerError('AI_CONFIGURATION_ERROR', 'Streaming is not configured.', 503);
+            for await (const item of provider.stream(context, { signal: modelSignal, trace })) {
+              if (item.type === 'delta') yield { event: 'delta', data: { text: item.text } };
+              else if (item.type === 'decision' && !decision) decision = item.value;
+              else throw new InterviewerError('INVALID_OUTPUT', 'The interviewer returned an invalid stream.');
+            }
+          } else {
+            // Repair uses final JSON, so its deltas cannot append to the rejected
+            // preview. The complete event replaces that provisional draft.
+            decision = await provider.next(context, { signal: modelSignal, trace, repair });
+          }
+          decision = validateInterviewerOutput(decision, context);
+          break;
+        } catch (error) {
+          if (error instanceof InterviewerError && error.code === 'INVALID_OUTPUT') trace('validation_failed', error.code, error.validationReason);
+          if (budget.aborted && !signal?.aborted) throw new InterviewerError('AI_TIMEOUT', 'The interview request timed out.', 504);
+          if (attempt === 0 && error instanceof InterviewerError && error.code === 'INVALID_OUTPUT'
+              && ['EXACT_DUPLICATE', 'NEAR_DUPLICATE', 'INVALID_ACTION', 'NON_QUESTION'].includes(error.validationReason) && !modelSignal.aborted) {
+            repair = { reason: error.validationReason, rejectedQuestion: error.rejectedQuestion, rejectedAction: error.rejectedAction };
+            trace('repair_started');
+            // Calling the wrapped provider again also consumes its own quota.
+            continue;
+          }
+          throw error;
         }
-      } else decision = await provider.next(context, { signal, trace });
-      decision = validateInterviewerOutput(decision, context);
+      }
       trace('decision_validated');
       if (decision.action === 'end') trace('end');
       if (signal?.aborted) throw new InterviewerError('REQUEST_CANCELLED', 'Request cancelled.', 408);

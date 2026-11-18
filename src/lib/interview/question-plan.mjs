@@ -1,4 +1,5 @@
 import { QUESTION_PLAN_PROMPT_CONFIG } from '../ai/prompt-config.mjs';
+import { questionAngle, questionTerms } from './question-diversity.mjs';
 
 // SCRUM-92: a small, deterministic context selector inspired by EZInterviewer
 // and PolyInterview. Lexical overlap selects context; it does NOT prove a skill.
@@ -36,23 +37,34 @@ function passages(text) {
 }
 
 export function planQuestion(input) {
-  const previousTopics = input.history.map((turn) => terms(`${turn.topic} ${turn.question}`));
+  const previousTopics = input.history.map((turn) => questionTerms(`${turn.topic} ${turn.question}`));
   const cv = passages(input.cvText || '').map((text) => ({ text, terms: terms(text) }));
   const ranked = passages(input.jdText || '').filter((text) => !isHeading(text, input.settings.targetPosition)).map((text, index) => {
     const tokens = terms(text);
-    const covered = previousTopics.reduce((max, topic) => Math.max(max, overlap(tokens, topic)), 0);
-    return { text, tokens, index, covered };
+    const coverageTokens = questionTerms(text);
+    const covered = previousTopics.reduce((max, topic) => Math.max(max, overlap(coverageTokens, topic)), 0);
+    return { text, tokens, index, covered, used: covered >= Math.min(2, coverageTokens.size) };
   }).sort((a, b) => a.covered - b.covered || a.index - b.index);
-  const focus = ranked[0];
+  const unused = ranked.find(part => !part.used);
+  const cvRanked = cv.filter(part => !isHeading(part.text, input.settings.targetPosition)).map((part, index) => ({ ...part, index,
+    covered: previousTopics.reduce((max, topic) => Math.max(max, overlap(questionTerms(part.text), topic)), 0),
+  })).sort((a, b) => a.covered - b.covered || a.index - b.index);
+  const cvFocus = !unused && ranked.length ? cvRanked.find(part => part.covered === 0) : null;
+  const focus = unused ?? (cvFocus ? null : ranked[0]);
   const related = focus ? cv.map((part, index) => ({ ...part, index, score: overlap(focus.tokens, part.terms) }))
     .filter((part) => part.score > 0).sort((a, b) => b.score - a.score || a.index - b.index).slice(0, 2) : [];
   const difficultyPolicy = QUESTION_PLAN_PROMPT_CONFIG.difficultyPolicies[input.settings.type]?.[input.settings.difficulty];
   const roundPolicy = QUESTION_PLAN_PROMPT_CONFIG.roundPolicies[input.settings.type];
+  const angles = input.settings.type === 'technical' ? ['implementation', 'testing', 'failure_handling', 'tradeoffs', 'performance']
+    : ['motivation', 'collaboration', 'decision', 'reflection'];
+  const angle = angles.map((id, index) => ({ id, index, count: input.history.filter(turn => questionAngle(turn.question) === id).length }))
+    .sort((a, b) => a.count - b.count || a.index - b.index)[0].id;
   return {
     version: QUESTION_PLAN_VERSION,
-    basis: focus ? 'jd' : 'role',
+    basis: cvFocus ? 'cv' : focus ? 'jd' : 'role',
     jdFocus: focus?.text ?? null,
-    cvContext: related.map((part) => part.text),
+    cvContext: cvFocus ? [cvFocus.text] : related.map((part) => part.text),
+    angle,
     difficultyPolicy, roundPolicy,
   };
 }

@@ -1,5 +1,6 @@
 import { DIFFICULTIES, DURATIONS, INTERVIEW_TYPES, LANGUAGES, QUESTIONS_BY_DURATION } from './session-contract.mjs';
 import { unsafeGeneratedText } from '../ai/guardrails.mjs';
+import { isNearDuplicate, isClosingStatement } from './question-diversity.mjs';
 
 export const CONTRACT_VERSION = '0.1';
 export const FOLLOW_UP_LIMITS = Object.freeze({ easy: 1, medium: 2, hard: 3 });
@@ -101,17 +102,27 @@ export const INTERVIEWER_OUTPUT_SCHEMA = {
 };
 
 export function validateInterviewerOutput(value, input) {
-  const invalid = () => { throw new InterviewerError('INVALID_OUTPUT', 'The interviewer returned an invalid decision.'); };
+  const invalid = (validationReason = 'SCHEMA_ERROR') => {
+    const error = new InterviewerError('INVALID_OUTPUT', 'The interviewer returned an invalid decision.');
+    error.validationReason = validationReason;
+    if (['EXACT_DUPLICATE', 'NEAR_DUPLICATE', 'INVALID_ACTION', 'NON_QUESTION'].includes(validationReason)) {
+      error.rejectedQuestion = value.question;
+      if (['end', 'follow_up', 'next_topic'].includes(value.action)) error.rejectedAction = value.action;
+    }
+    throw error;
+  };
   if (!objectWith(value, ['action', 'question', 'topic', 'reason'])
-    || !getInterviewPolicy(input).allowedActions.includes(value.action)
     || !text(value.topic, 1, 160) || !text(value.reason, 1, 700)) invalid();
-  if ([value.question, value.reason, value.topic].some(unsafeGeneratedText)) invalid();
+  if (!getInterviewPolicy(input).allowedActions.includes(value.action)) invalid('INVALID_ACTION');
+  if ([value.question, value.reason, value.topic].some(unsafeGeneratedText)) invalid('UNSAFE_CONTENT');
   if (value.action === 'end') {
-    if (value.question !== null) invalid();
+    if (value.question !== null) invalid('INVALID_END');
   } else {
     if (!text(value.question, 1, 1200)) invalid();
-    if (input.history.some((turn) => normalizeQuestion(turn.question) === normalizeQuestion(value.question))) invalid();
-    if (value.action === 'follow_up' && value.topic.trim() !== input.history.at(-1)?.topic) invalid();
+    if (isClosingStatement(value.question, value.topic)) invalid('NON_QUESTION');
+    if (input.history.some((turn) => normalizeQuestion(turn.question) === normalizeQuestion(value.question))) invalid('EXACT_DUPLICATE');
+    if (input.history.some(turn => isNearDuplicate(value.question, turn.question, { followUp: value.action === 'follow_up' }))) invalid('NEAR_DUPLICATE');
+    if (value.action === 'follow_up' && value.topic.trim() !== input.history.at(-1)?.topic) invalid('FOLLOW_UP_TOPIC');
   }
   return { action: value.action, question: value.question?.trim() ?? null, topic: value.topic.trim(), reason: value.reason.trim() };
 }

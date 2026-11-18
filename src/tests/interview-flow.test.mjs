@@ -162,7 +162,7 @@ test('persisted history is compacted only for Gemini; saved answers, metadata an
   } finally { await store.db.close(); }
 });
 
-test('an old duplicated Gemini question is neither saved nor automatically retried', async () => {
+test('an old duplicated Gemini question is not saved after one bounded repair', async () => {
   const store = await createTestDatabase();
   try {
     const { sessionId, afterAnswerId, turns } = await seedHistory(store); let requests = 0;
@@ -170,7 +170,7 @@ test('an old duplicated Gemini question is neither saved nor automatically retri
       requests++; return { action: 'next_topic', question: turns[0].question, topic: 'Old question relabeled', reason: 'Repeat.' };
     } } });
     await assert.rejects(next({ sessionId, afterAnswerId }), { code: 'INVALID_OUTPUT' });
-    assert.equal(requests, 1);
+    assert.equal(requests, 2);
     const rows = await store.db.query('select count(*)::int as n from public.questions where session_id=$1', [sessionId]);
     assert.equal(rows.rows[0].n, 9);
     assert.equal((await store.repository.claim({ sessionId, afterAnswerId })).kind, 'claimed');
