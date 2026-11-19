@@ -17,6 +17,7 @@ This document is the detailed design for Build 1. It extends the [architecture o
 | --- | --- | --- | --- |
 | 1.0 | 05/11/2026 | Nhân | First version for PA3 |
 | 1.1 | 13/11/2026 | Nhân | Matches the built Build 1: Setup, Dashboard and Settings pages, streaming `/next` (SSE), Settings API, chat transport, settings migration (SCRUM-111) |
+| 1.2 | 19/11/2026 | Nhân | API table: report endpoint (SCRUM-186, Build 2) |
 
 ## 1. Component / class diagram
 
@@ -278,6 +279,7 @@ All endpoints return JSON with `Cache-Control: no-store` (`/next` may stream SSE
 | 11 | `GET /api/settings` | Tài | yes | – | 200 `{ preferredLanguage: vi\|en }` | 401, 404 (no profile), 500, 503 | – |
 | 12 | `PATCH /api/settings` | Tài | yes, same origin | `{ preferredLanguage: vi\|en }` (only this field) | 200 `{ preferredLanguage }` | 400, 401, 403 (cross-site), 404, 500, 503 | – |
 | 13 | `DELETE /api/settings/data` | Tài | yes, same origin | `{ confirmation: "DELETE" }` | 200 `{ sessionsDeleted, analysesDeleted }`: sessions (with questions, answers, feedback, reports, generations) and saved analyses are deleted; account, profile and AI count are kept | 400, 401, 403, 500, 503 (function missing) | – |
+| 14 | `GET /api/report/{sessionId}` (`?retry=summary`) | Nhân | yes | – | 200 `{ sessionId, generatedAt, settings, overview (overallScore, trend…), criteria, structureApplies, speaking, summary, timeline[] }` | 401, 404 `NOT_FOUND`, 409 `SESSION_NOT_COMPLETED` / `NO_SCORED_ANSWERS`, 500 | [Report API v1](../api/REPORT_API_v1.md) |
 | – | `POST /api/evaluate-answer` | Hưng | yes | (week 7) | per-answer scores and feedback | – | to be added |
 
 Data the browser reads or writes **directly** through Supabase (RLS checks the owner):
