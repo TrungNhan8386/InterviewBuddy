@@ -1,4 +1,4 @@
-import type { ChatErrorCode, InterviewDifficulty, InterviewLanguage, InterviewType } from "./types";
+import type { ChatErrorCode, InterviewDifficulty, InterviewLanguage, InterviewType, VoiceError } from "./types";
 import { providerLimitMessage } from "../ai/provider-limit.mjs";
 
 // UI text of the chat page, in the language of the interview session.
@@ -20,7 +20,16 @@ type ChatText = {
   saving: string;
   answerLabel: string;
   answerPlaceholder: string;
+  answerPlaceholderVoice: string;
   answerHint: string;
+  // SCRUM-180/182/183 (UC-07): voice answers.
+  voiceStart: string;
+  voiceStop: string;
+  voiceListening: string;
+  voiceStopFirst: string;
+  voiceUnsupported: string;
+  voiceDismiss: string;
+  voiceErrors: Record<VoiceError, string>;
   answerTooLong: (max: number) => string;
   send: string;
   end: string;
@@ -82,7 +91,24 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     saving: "Đang lưu câu trả lời…",
     answerLabel: "Câu trả lời của bạn",
     answerPlaceholder: "Gõ câu trả lời ở đây…",
+    answerPlaceholderVoice: "Gõ câu trả lời, hoặc bấm “Trả lời bằng giọng nói” để nói…",
     answerHint: "Ctrl + Enter để gửi. Câu trả lời được lưu ngay sau khi gửi.",
+    voiceStart: "Trả lời bằng giọng nói",
+    voiceStop: "Dừng ghi",
+    voiceListening: "Đang nghe… Nói câu trả lời của bạn, rồi bấm “Dừng ghi”. Hệ thống tự dừng sau vài giây im lặng.",
+    voiceStopFirst: "Bấm “Dừng ghi” trước, kiểm tra và sửa bản chép lời rồi mới gửi.",
+    voiceUnsupported:
+      "Trình duyệt này không hỗ trợ nhận giọng nói, nên chỉ trả lời bằng cách gõ được. Dùng Chrome hoặc Edge để trả lời bằng giọng nói.",
+    voiceDismiss: "Đóng",
+    voiceErrors: {
+      denied:
+        "Trình duyệt chưa được phép dùng micro. Bấm biểu tượng ổ khóa hoặc micro trên thanh địa chỉ, chọn Cho phép (Allow) cho micro, rồi bấm lại nút giọng nói. Bạn vẫn có thể gõ câu trả lời.",
+      "no-mic": "Không tìm thấy micro. Hãy cắm hoặc bật micro rồi thử lại, hoặc gõ câu trả lời.",
+      "no-speech": "Không nghe thấy tiếng nói. Hãy nói gần micro hơn rồi thử lại, hoặc gõ câu trả lời.",
+      network:
+        "Mất kết nối tới dịch vụ nhận giọng nói. Phần đã nhận được vẫn ở trong ô, bạn có thể sửa rồi gửi, hoặc thử nói lại.",
+      unavailable: "Không bật được nhận giọng nói trên trình duyệt này. Hãy gõ câu trả lời.",
+    },
     answerTooLong: (max) => `Câu trả lời dài quá ${max} ký tự, hãy rút gọn.`,
     send: "Gửi",
     end: "Kết thúc phỏng vấn",
@@ -187,7 +213,24 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     saving: "Saving your answer…",
     answerLabel: "Your answer",
     answerPlaceholder: "Type your answer here…",
+    answerPlaceholderVoice: "Type your answer, or click “Answer by voice” to speak…",
     answerHint: "Ctrl + Enter to send. Your answer is saved as soon as you send it.",
+    voiceStart: "Answer by voice",
+    voiceStop: "Stop",
+    voiceListening: "Listening… Speak your answer, then click “Stop”. It also stops after a few seconds of silence.",
+    voiceStopFirst: "Click “Stop” first, then check and edit the transcript before sending.",
+    voiceUnsupported:
+      "This browser does not support speech recognition, so you can only type your answer. Use Chrome or Edge to answer by voice.",
+    voiceDismiss: "Close",
+    voiceErrors: {
+      denied:
+        "The browser is not allowed to use the microphone. Click the lock or microphone icon in the address bar, choose Allow for the microphone, then click the voice button again. You can still type your answer.",
+      "no-mic": "No microphone was found. Connect or turn on a microphone and try again, or type your answer.",
+      "no-speech": "No speech was detected. Speak closer to the microphone and try again, or type your answer.",
+      network:
+        "The speech recognition service could not be reached. The text recognised so far is in the box; you can edit and send it, or try speaking again.",
+      unavailable: "Speech recognition could not start in this browser. Please type your answer.",
+    },
     answerTooLong: (max) => `Your answer is longer than ${max} characters. Please shorten it.`,
     send: "Send",
     end: "End interview",
