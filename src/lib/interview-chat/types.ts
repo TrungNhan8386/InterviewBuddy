@@ -29,6 +29,13 @@ export type ChatQuestion = {
 
 export type ChatAnswer = { id: string; content: string };
 
+// UC-07: how the answer was given. durationSeconds is the speaking time of a voice answer
+// (used for the speaking pace in the report, UC-09); null for typed answers.
+export type AnswerMeta = { inputMode: "text" | "voice"; durationSeconds: number | null };
+
+/** Why voice input stopped without a usable result (UC-07 alternative flows 2–4). */
+export type VoiceError = "denied" | "no-mic" | "no-speech" | "network" | "unavailable";
+
 // One question and (once the user replied) its saved answer.
 export type ChatTurn = { question: ChatQuestion; answer: ChatAnswer | null };
 
