@@ -1,0 +1,167 @@
+{
+  "date": "2026-11-13",
+  "documentVersion": "1.0",
+  "mainFetched": "0668228",
+  "implementationCommit": "469bfbf8b2f8e0e39710087c57911e266b6e36e9",
+  "implementationBranch": "feat/scrum-124-prompt-config-hung",
+  "implementationPullRequest": "https://github.com/TrungNhan8386/InterviewBuddy/pull/31",
+  "review": {
+    "reviewer": "Nhan (AI backup per SCRUM-125)",
+    "status": "pending",
+    "independentHumanAcceptance": false
+  },
+  "versions": {
+    "prompt": "0.13-guardrails-1",
+    "questionPlan": "jd-cv-context-v3",
+    "memory": "last-four-extractive-v1",
+    "documentContext": "verbatim-passages-v1",
+    "scoring": "weighted-skills-v1"
+  },
+  "sources": [
+    {
+      "path": "src/package.json",
+      "sha256": "b6b43f9660202667100a9d3c104189cfa2ada3548335fb0560fb53f2b2bc37e6"
+    },
+    {
+      "path": "src/app/api/analyze/route.js",
+      "sha256": "9a22a8ff4b954d0b34fbc97a4d449e803061d2cf4e9d1e0f392bd2b3124711dd"
+    },
+    {
+      "path": "src/app/api/analyze-fit/route.js",
+      "sha256": "2b9fb930e735b1e8e68d3ba2a19fb145029216c422fa05dfbeb2948def90ba89"
+    },
+    {
+      "path": "src/app/api/extract-cv/route.ts",
+      "sha256": "d5383c81d6bbfc28c9dff23a2a44a76c561fcd3746c13ddf778a5f5f41b1f8b3"
+    },
+    {
+      "path": "src/app/api/interview/next/route.ts",
+      "sha256": "776e5e7d601b23800f00ba6812768626cb4fd22e51cdaf7ea05c2eab27f54bf3"
+    },
+    {
+      "path": "src/lib/analysis/contracts.mjs",
+      "sha256": "21379e1fcf2fcfcc1d2a70d60f8ca7fae25e6c146db66550d814f7597ffefc73"
+    },
+    {
+      "path": "src/lib/analysis/service.mjs",
+      "sha256": "be7389ff74749907e83e5dd1d1f2cf427fa24bc10ef93938f0f92980918cf6f7"
+    },
+    {
+      "path": "src/lib/analysis/gemini.mjs",
+      "sha256": "ea2dc13e5b607f46184e7af096a55aa11777166a90cad07865166ff06610bb6d"
+    },
+    {
+      "path": "src/lib/analysis/scoring.mjs",
+      "sha256": "b6cba2c449699117011841cdd640a8ce769257234f7b7afcc397d9a31d2b6393"
+    },
+    {
+      "path": "src/lib/analysis/analysis-fit.mjs",
+      "sha256": "9efcdebec306109d4a13823bf1a52f80aab648d0007b514034d8545f919e19c1"
+    },
+    {
+      "path": "src/lib/analysis/storage.ts",
+      "sha256": "fb8994fd91d84095f2a83ffac7428a9c59c57eb6c1e49aa9de94d1caae260d8f"
+    },
+    {
+      "path": "src/lib/ai/prompt-config.mjs",
+      "sha256": "f59ea5c8f53f4d200e5124db536a89e79623223caf39500e3f299450dabdca12"
+    },
+    {
+      "path": "src/lib/ai/guardrails.mjs",
+      "sha256": "357a1c7fba7c2ead80d2a0f1eebc9620fb87ef7b7829fac02ba0045bfd297096"
+    },
+    {
+      "path": "src/lib/ai/daily-limit.mjs",
+      "sha256": "31b5c9df2670960060b58444dc22adfeec6a9de5dd08a95a2ad958a322743289"
+    },
+    {
+      "path": "src/lib/ai/signed-in-analysis-route.mjs",
+      "sha256": "7eca2f5da3a42e6717f773224f7e39e80d02dad5fec4d0d8c379884fc3e7a2ec"
+    },
+    {
+      "path": "src/lib/interview/interviewer-contract.mjs",
+      "sha256": "1b62143176fb3ff1dccdd55fc30e7ea734f74fb44bded3d3e9d56d6d4ba7bab4"
+    },
+    {
+      "path": "src/lib/interview/interviewer-provider.mjs",
+      "sha256": "dc4e0dec3075bf4e0b77e9d313f954ac88ece40ed68b069184b4e3b95104fbee"
+    },
+    {
+      "path": "src/lib/interview/interviewer-prompt.mjs",
+      "sha256": "a34fac8418a795480ca98f48c6aa493cdc6f9e5b7dccba589db9d95bac836f8b"
+    },
+    {
+      "path": "src/lib/interview/question-plan.mjs",
+      "sha256": "49bd3c219caf58974869c84aba2e96244572f9abd84f9a08897ea1932df2fa38"
+    },
+    {
+      "path": "src/lib/interview/conversation-memory.mjs",
+      "sha256": "e252f56eed7a19b18061c1efd2d24b8e1aa4a3c44de5037a3ae1a95db7630e2f"
+    },
+    {
+      "path": "src/lib/interview/document-context.mjs",
+      "sha256": "062a57b28fd024fcedc945f9277e2c8bbbfdef1e5a3b664a0dffa57552a9a7ba"
+    },
+    {
+      "path": "src/lib/interview/next-http.mjs",
+      "sha256": "64a6baa15a7c08f94f7a885ace6b5122df10625e7660f114bb331a18adadfb94"
+    },
+    {
+      "path": "src/lib/interview/next-service.mjs",
+      "sha256": "433217ec35460287efad0d9605ba7e4be20b6bb48a762baa0457213c4bd4e3a2"
+    },
+    {
+      "path": "src/lib/interview/next-repository.mjs",
+      "sha256": "5b150fe13803620e5d53e55a1c5a9828e4c021eae8785d5d6648f5ea34ce840f"
+    },
+    {
+      "path": "src/lib/interview/next-stream-client.mjs",
+      "sha256": "6b1bbb2e4b4cea9c0ab7d1e5d5e1d182f0bde446fd43e16887177d410ea1f753"
+    },
+    {
+      "path": "src/lib/interview/timing-trace.mjs",
+      "sha256": "4de2191e7e2b445f40d2ab3fefd5c63f52f5c6b24925b732df87e96cffc693ea"
+    },
+    {
+      "path": "src/lib/interview-chat/transport.mjs",
+      "sha256": "eef40dbedab46709df4879d6bb86f55a40b1e976115a9901ff316132bdaf41cd"
+    },
+    {
+      "path": "src/components/analysis/FitResult.tsx",
+      "sha256": "76155bea06709eba699404de6a4bd625d2b5b300f49df59c00058ba77e513dd5"
+    },
+    {
+      "path": "src/components/analysis/AnalysisWorkspace.tsx",
+      "sha256": "5712e9c1137e76db2cdacd8d3b76f5d446df3adccae1cffd0f52a7ec58fcc503"
+    },
+    {
+      "path": "src/config/prompts/interviewer.json",
+      "sha256": "f206f9aa03844a7276b04b1bfa002400f113e08ca129d956092a73c4ab05f0c8"
+    },
+    {
+      "path": "src/config/prompts/analysis.json",
+      "sha256": "2e744cbaa78639d2ffe70a374fd1e76b1c189fe9eeb57987c15ae6f54cbc0f5e"
+    },
+    {
+      "path": "src/config/prompts/question-plan.json",
+      "sha256": "f03fa06c423ac8776fa085a4eb7d645cd7e51e5673f28eb89e6967bd7e9732bf"
+    },
+    {
+      "path": "src/config/prompts/health.json",
+      "sha256": "f3c6492ad34e1f0f8820818b2f384646eb260628588146a368379507eababf31"
+    },
+    {
+      "path": "src/supabase/migrations/20261103000000_interview_next.sql",
+      "sha256": "e21a424765824db726dbc394f4e72d22e69ab66b0e484772623fd8b770cc5585"
+    },
+    {
+      "path": "src/supabase/migrations/20261105000000_session_resume_ai_limit.sql",
+      "sha256": "d38423dee354b695a6d2bc1f0e2c6a404bc08d87908cbde1315c0cd31c54c026"
+    },
+    {
+      "path": "src/components/interview-chat/InterviewChat.tsx",
+      "sha256": "a73857f152883711b7a81ae76bf85a31cef390fbc337d61f45c4847e2b7b727a"
+    }
+  ],
+  "hashNormalization": "UTF-8 text; CRLF normalized to LF"
+}

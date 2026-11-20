@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-12",
+  "baseCommit": "0668228",
+  "branch": "feat/scrum-122-quota-hung",
+  "strategy": "clear provider-quota message; no fallback",
+  "tests": {
+    "pass": 262,
+    "fail": 0,
+    "newQuotaTests": 7
+  },
+  "lint": "pass",
+  "productionBuildAndTypeScript": "pass",
+  "browserChecks": {
+    "pass": 14,
+    "fail": 0,
+    "boundary": "Local production UI + real Supabase test login/session creation. 429 injected at browser API boundary; no actual Gemini quota exhaustion or successful Gemini calls."
+  },
+  "secretMatches": 0,
+  "providerQuotaActuallyExhausted": false,
+  "modelKeyQuotaChanged": false,
+  "automaticProviderRetriesAdded": 0,
+  "workspaceAndRepositoryAgentRuleMatch": true
+}

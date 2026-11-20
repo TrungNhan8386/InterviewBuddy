@@ -1,4 +1,5 @@
 import type { ChatErrorCode, InterviewDifficulty, InterviewLanguage, InterviewType } from "./types";
+import { providerLimitMessage } from "../ai/provider-limit.mjs";
 
 // UI text of the chat page, in the language of the interview session.
 type ChatText = {
@@ -30,9 +31,22 @@ type ChatText = {
   endConfirmYes: string;
   endConfirmNo: string;
   endedTitle: string;
-  endedBody: string;
   toDashboard: string;
   newInterview: string;
+  // SCRUM-128: end-of-interview screen (placeholder for the report until Week 8).
+  endedReason: Record<"completed" | "time_up" | "user" | "reopened", string>; // EndReason in types.ts
+  statMain: string;
+  statFollowUps: string;
+  statTime: string;
+  statTimeOf: (minutes: number) => string;
+  reportTitle: string;
+  reportSoon: string;
+  reportButton: string;
+  noAnswers: string;
+  reviewTranscript: string;
+  // SCRUM-129: empty answer and load-error states.
+  emptyAnswer: string;
+  loadErrorTitle: string;
   loading: string;
   emptyTranscript: string;
   panelRole: string;
@@ -80,9 +94,26 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     endConfirmYes: "Kết thúc",
     endConfirmNo: "Tiếp tục phỏng vấn",
     endedTitle: "Buổi phỏng vấn đã kết thúc",
-    endedBody: "Các câu trả lời đã được lưu. Trang nhận xét chi tiết sẽ có ở bản sau.",
     toDashboard: "Về Dashboard",
     newInterview: "Phỏng vấn mới",
+    endedReason: {
+      completed: "Bạn đã trả lời hết các câu hỏi chính của buổi này.",
+      time_up: "Đã hết thời gian của buổi phỏng vấn. Các câu đã gửi vẫn được lưu.",
+      user: "Bạn đã kết thúc buổi phỏng vấn sớm.",
+      reopened: "Buổi phỏng vấn này đã kết thúc trước đó.",
+    },
+    statMain: "Câu hỏi chính",
+    statFollowUps: "Câu hỏi đào sâu",
+    statTime: "Thời gian",
+    statTimeOf: (m) => `trên ${m} phút`,
+    reportTitle: "Báo cáo chi tiết",
+    reportSoon:
+      "Chấm điểm từng câu và báo cáo tổng kết sẽ có ở bản Build 2. Các câu trả lời của bạn đã được lưu để tạo báo cáo.",
+    reportButton: "Xem báo cáo (sắp có)",
+    noAnswers: "Bạn chưa trả lời câu nào nên buổi này không có báo cáo.",
+    reviewTranscript: "Xem lại hội thoại",
+    emptyAnswer: "Hãy viết câu trả lời trước khi gửi.",
+    loadErrorTitle: "Không mở được buổi phỏng vấn",
     loading: "Đang tải buổi phỏng vấn…",
     emptyTranscript: "Chưa có câu hỏi nào.",
     panelRole: "Vị trí",
@@ -122,7 +153,7 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       LEASE_LOST: "Phiên tạo câu hỏi đã hết hạn. Hãy tải lại trang.",
       SESSION_CONTEXT_INVALID: "Dữ liệu buổi phỏng vấn không hợp lệ. Hãy tạo buổi mới.",
       AI_CONTENT_BLOCKED: "AI từ chối nội dung này. Hãy sửa câu trả lời rồi gửi lại.",
-      AI_RATE_LIMITED: "AI đang quá tải hoặc hết lượt. Hãy thử lại sau ít phút.",
+      AI_RATE_LIMITED: providerLimitMessage("vi", "interview"),
       INVALID_OUTPUT: "AI trả về kết quả lỗi. Hãy thử lại.",
       AI_UNAVAILABLE: "Không kết nối được AI. Hãy thử lại.",
       DATABASE_NOT_READY: "Máy chủ chưa sẵn sàng (thiếu cấu hình hoặc migration).",
@@ -130,6 +161,7 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       AI_TIMEOUT: "AI phản hồi quá lâu. Hãy thử lại.",
       AI_DAILY_LIMIT: "Bạn đã dùng hết lượt AI hôm nay. Hạn mức làm mới lúc 0:00 giờ Việt Nam.",
       SESSION_CLOSED: "Buổi phỏng vấn đã đóng. Hãy tải lại trang.",
+      ANSWER_CONFLICT: "Câu trả lời trước của bạn đã được lưu, nên nội dung vừa sửa không được gửi. Đã tải lại buổi phỏng vấn theo câu trả lời đã lưu.",
       RESPONSE_TIMEOUT: "Máy chủ phản hồi quá lâu. Thử lại cùng lượt để lấy kết quả đã lưu nếu có.",
       REQUEST_CANCELLED: "Đã hủy tạo câu hỏi. Bạn có thể thử lại cùng lượt.",
       SAVE_FAILED: "Chưa lưu được câu trả lời. Nội dung vẫn còn trong ô, hãy thử lại.",
@@ -167,9 +199,26 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     endConfirmYes: "End",
     endConfirmNo: "Keep going",
     endedTitle: "The interview has ended",
-    endedBody: "Your answers are saved. The detailed feedback page comes in a later version.",
     toDashboard: "Back to Dashboard",
     newInterview: "New interview",
+    endedReason: {
+      completed: "You answered all the main questions of this session.",
+      time_up: "The time for this interview is up. The answers you sent are saved.",
+      user: "You ended the interview early.",
+      reopened: "This interview has already ended.",
+    },
+    statMain: "Main questions",
+    statFollowUps: "Follow-up questions",
+    statTime: "Time",
+    statTimeOf: (m) => `of ${m} min`,
+    reportTitle: "Detailed report",
+    reportSoon:
+      "Per-answer scores and the summary report come in Build 2. Your answers are saved so the report can be built from them.",
+    reportButton: "View report (coming soon)",
+    noAnswers: "You did not answer any question, so this session has no report.",
+    reviewTranscript: "Review the conversation",
+    emptyAnswer: "Please write an answer before sending.",
+    loadErrorTitle: "Could not open the interview",
     loading: "Loading the interview…",
     emptyTranscript: "No questions yet.",
     panelRole: "Position",
@@ -209,7 +258,7 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       LEASE_LOST: "The question request expired. Please reload the page.",
       SESSION_CONTEXT_INVALID: "This interview's data is invalid. Please start a new one.",
       AI_CONTENT_BLOCKED: "The AI rejected this content. Edit your answer and send it again.",
-      AI_RATE_LIMITED: "The AI is busy or out of quota. Try again in a few minutes.",
+      AI_RATE_LIMITED: providerLimitMessage("en", "interview"),
       INVALID_OUTPUT: "The AI returned an invalid result. Please try again.",
       AI_UNAVAILABLE: "Could not reach the AI. Please try again.",
       DATABASE_NOT_READY: "The server is not ready (missing configuration or migration).",
@@ -217,6 +266,7 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
       AI_TIMEOUT: "The AI took too long. Please try again.",
       AI_DAILY_LIMIT: "You have used today's AI allowance. It resets at 00:00 Vietnam time.",
       SESSION_CLOSED: "This interview is closed. Please reload the page.",
+      ANSWER_CONFLICT: "Your earlier answer was already saved, so the edited text was not sent. The interview was reloaded with the saved answer.",
       RESPONSE_TIMEOUT: "The server took too long. Retry the same turn to recover any saved question.",
       REQUEST_CANCELLED: "Question generation was cancelled. You can retry the same turn.",
       SAVE_FAILED: "Your answer was not saved. It is still in the box; please try again.",

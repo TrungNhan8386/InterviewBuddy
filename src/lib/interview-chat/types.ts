@@ -62,6 +62,7 @@ export type ChatErrorCode =
   | "AI_TIMEOUT"
   | "AI_DAILY_LIMIT"
   | "SESSION_CLOSED"
+  | "ANSWER_CONFLICT" // the question already has a different saved answer (lost response, edited text)
   | "RESPONSE_TIMEOUT"
   | "REQUEST_CANCELLED"
   | "SAVE_FAILED" // client side: the answer could not be saved
@@ -76,6 +77,9 @@ export class InterviewChatError extends Error {
     super(message);
   }
 }
+
+// SCRUM-128: why the interview ended. "reopened" = a finished session opened again later.
+export type EndReason = "completed" | "time_up" | "user" | "reopened";
 
 // Same limit as the interview engine (each answer at most 12k characters).
 export const ANSWER_MAX_CHARS = 12000;

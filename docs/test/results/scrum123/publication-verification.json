@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-13",
+  "baseCommit": "0668228",
+  "checks": {
+    "tests": 276,
+    "passed": 276,
+    "failed": 0,
+    "lint": "pass",
+    "productionBuildAndTypeScript": "pass",
+    "credentialScan": "no known credential or key/JWT pattern matches"
+  },
+  "boundary": "Fresh offline checks before publication; archived live/UI results were not rerun.",
+  "initialBuild": "Blocked by a >90-minute stale build; only the verified stale worktree build processes were stopped, then build passed",
+  "integration": {
+    "baseBranch": "feat/scrum-122-quota-hung",
+    "baseCommit": "76c3ae2c61f6f377548128f4561e90c9236c87d5",
+    "inherits": [
+      "SCRUM-121",
+      "SCRUM-122"
+    ],
+    "promptVersion": "0.13-guardrails-1",
+    "fullSuite": {
+      "pass": 283,
+      "fail": 0
+    },
+    "lint": "pass",
+    "productionBuildAndTypeScript": "pass",
+    "shortTurnRequestCharacters": 6995,
+    "combinedPromptLiveReplay": "NOT_RUN; historical live guardrail results are for 0.10-guardrails-1"
+  }
+}

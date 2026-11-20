@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -9,6 +10,7 @@ import MessageList from "./MessageList";
 import AnswerBox from "./AnswerBox";
 import SidePanel from "./SidePanel";
 import EndInterviewDialog from "./EndInterviewDialog";
+import EndScreen from "./EndScreen";
 import type { InterviewStreamStatus } from "@/lib/interview/next-stream-client.mjs";
 import { USE_MOCK, endSession, loadChatSession, requestNext, saveAnswer } from "@/lib/interview-chat/client";
 import { CHAT_TEXT } from "@/lib/interview-chat/text";
@@ -17,6 +19,7 @@ import {
   InterviewChatError,
   type ChatErrorCode,
   type ChatSession,
+  type EndReason,
 } from "@/lib/interview-chat/types";
 
 // Screen 4 (Chat Interview), /interview/[id]. Owner: Khang. Jira: SCRUM-95.
@@ -38,6 +41,18 @@ type Phase =
 const codeOf = (error: unknown): ChatErrorCode =>
   error instanceof InterviewChatError ? error.code : "SERVER_ERROR";
 
+// Load errors that "Try again" cannot fix: the link is wrong or the session is unusable.
+const FINAL_LOAD_ERRORS: ChatErrorCode[] = ["NOT_FOUND", "BAD_INPUT", "SESSION_CONTEXT_INVALID"];
+
+// The engine ends the interview when the questions are done or the time is up (UC06-05).
+function engineEndReason(session: ChatSession | null): EndReason {
+  const started = session?.startedAt ? Date.parse(session.startedAt) : NaN;
+  if (session && Number.isFinite(started) && Date.now() - started >= session.settings.durationMinutes * 60_000) {
+    return "time_up";
+  }
+  return "completed";
+}
+
 export default function InterviewChat({ sessionId }: { sessionId: string }) {
   const [session, setSession] = useState<ChatSession | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "loading" });
@@ -47,6 +62,8 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
   const [endError, setEndError] = useState<string | null>(null);
   const [questionPreview, setQuestionPreview] = useState("");
   const [generationStatus, setGenerationStatus] = useState<InterviewStreamStatus>("generating");
+  // Why the page reloaded the saved session after a failed save (shown until the next send).
+  const [notice, setNotice] = useState<ChatErrorCode | null>(null);
   const generation = useRef<AbortController | null>(null);
 
   // Ignore results that arrive after the user left the page.
@@ -61,6 +78,16 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
 
   // fetchNext needs start() to reload after STALE_TURN; a ref avoids a circular dependency.
   const startRef = useRef<() => Promise<void>>(async () => {});
+
+  // SCRUM-128: why and when the interview ended, for the end screen.
+  const [end, setEnd] = useState<{ reason: EndReason; at: number | null } | null>(null);
+  const router = useRouter();
+  const transcriptRef = useRef<HTMLDivElement>(null);
+  // fetchNext is memoised, so it reads the latest session (start time, duration) from a ref.
+  const sessionRef = useRef<ChatSession | null>(null);
+  useEffect(() => {
+    sessionRef.current = session;
+  }, [session]);
 
   const fetchNext = useCallback(
     async (afterAnswerId: string | null, isOpening: boolean) => {
@@ -79,6 +106,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           if (!alive.current || generation.current !== controller) return;
           if (controller.signal.aborted) throw new InterviewChatError("REQUEST_CANCELLED");
           if (next.action === "end" || !next.question) {
+            setEnd({ reason: engineEndReason(sessionRef.current), at: Date.now() });
             setSession((s) => (s ? { ...s, status: "completed" } : s));
             setPhase({ kind: "ended" });
             return;
@@ -124,6 +152,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
       if (!alive.current) return;
       setSession(loaded);
       if (loaded.status !== "in_progress") {
+        setEnd((e) => e ?? { reason: "reopened", at: null });
         setPhase({ kind: "ended" });
         return;
       }
@@ -155,6 +184,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     if (!session || !last || last.answer || !content || content.length > ANSWER_MAX_CHARS) return;
 
     // Show the answer right away; roll back if saving fails (the draft stays in the box).
+    setNotice(null);
     setSession({
       ...session,
       turns: session.turns.map((t) =>
@@ -171,7 +201,17 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
       setSession((s) =>
         s ? { ...s, turns: s.turns.map((t) => (t.question.id === last.question.id ? { ...t, answer: null } : t)) } : s,
       );
-      setPhase({ kind: "error", code: codeOf(error) === "NETWORK_ERROR" ? "NETWORK_ERROR" : "SAVE_FAILED", retry: "save" });
+      const code = codeOf(error);
+      // Retrying cannot fix these: the saved session moved on (another tab, time
+      // limit, or an earlier send that was saved). Reload it and say why.
+      if (code === "STALE_TURN" || code === "SESSION_CLOSED" || code === "ANSWER_CONFLICT") {
+        setNotice(code);
+        setDraft(""); // it belonged to a question that is no longer open
+        setPhase({ kind: "loading" });
+        void startRef.current();
+        return;
+      }
+      setPhase({ kind: "error", code: code === "NETWORK_ERROR" ? "NETWORK_ERROR" : "SAVE_FAILED", retry: "save" });
       return;
     }
     if (!alive.current) return;
@@ -206,8 +246,14 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     try {
       await endSession(session.id);
       if (!alive.current) return;
-      setSession({ ...session, status: "completed" });
       setConfirmEnd(false);
+      // UC-06: ending before any answer closes the session without a report → back to the Dashboard.
+      if (!session.turns.some((t) => t.answer && t.answer.id !== "pending")) {
+        router.push("/dashboard");
+        return;
+      }
+      setSession({ ...session, status: "completed" });
+      setEnd({ reason: "user", at: Date.now() });
       setPhase({ kind: "ended" });
     } catch (error) {
       if (alive.current) setEndError(CHAT_TEXT[session.settings.language].errors[codeOf(error)]);
@@ -227,13 +273,19 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
   if (!session) {
     const t = CHAT_TEXT.vi;
     if (phase.kind === "load-error") {
+      const final = FINAL_LOAD_ERRORS.includes(phase.code);
       return (
         <Card className="mx-auto max-w-lg space-y-3 text-center" role="alert">
-          <p className="font-medium text-red-700">{t.errors[phase.code]}</p>
+          <h1 className="text-lg font-semibold">{t.loadErrorTitle}</h1>
+          <p className="text-sm text-red-700">{t.errors[phase.code]}</p>
           <div className="flex flex-col justify-center gap-2 sm:flex-row">
             {phase.code === "UNAUTHORIZED" ? (
               <Link href="/login" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Đăng nhập
+              </Link>
+            ) : final ? (
+              <Link href="/interview/new" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white">
+                {t.newInterview}
               </Link>
             ) : (
               <Button onClick={reload}>{t.retry}</Button>
@@ -245,10 +297,19 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
         </Card>
       );
     }
+    // Skeleton in the shape of the page, so the screen is never blank while loading.
     return (
-      <p className="py-16 text-center text-sm text-slate-500" role="status">
-        {t.loading}
-      </p>
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]" aria-busy="true">
+        <div className="min-w-0 space-y-4">
+          <div className="h-28 animate-pulse rounded-xl bg-slate-100" />
+          <div className="flex min-h-64 flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-4">
+            <p className="text-sm text-slate-500" role="status">
+              {t.loading}
+            </p>
+          </div>
+        </div>
+        <div className="hidden h-64 animate-pulse rounded-xl bg-slate-100 lg:block" />
+      </div>
     );
   }
 
@@ -274,6 +335,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           running={!ended}
         />
 
+        <div ref={transcriptRef} className="scroll-mt-4">
         <MessageList
           text={text}
           turns={session.turns}
@@ -282,11 +344,18 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           preview={questionPreview}
           generationStatus={generationStatus}
         />
+        </div>
 
         {phase.kind === "thinking" && (
           <Button variant="secondary" onClick={() => generation.current?.abort()}>
             {text.cancelGeneration}
           </Button>
+        )}
+
+        {notice && (
+          <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900" role="status">
+            {text.errors[notice]}
+          </p>
         )}
 
         {phase.kind === "error" && (
@@ -308,18 +377,13 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
         )}
 
         {ended ? (
-          <Card className="space-y-3 text-center">
-            <h2 className="text-lg font-semibold">{text.endedTitle}</h2>
-            <p className="text-sm text-slate-600">{text.endedBody}</p>
-            <div className="flex flex-col justify-center gap-2 sm:flex-row">
-              <Link href="/dashboard" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white hover:bg-indigo-700">
-                {text.toDashboard}
-              </Link>
-              <Link href="/interview/new" className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-4 text-sm font-medium text-slate-700 hover:bg-slate-100">
-                {text.newInterview}
-              </Link>
-            </div>
-          </Card>
+          <EndScreen
+            text={text}
+            session={session}
+            reason={end?.reason ?? "reopened"}
+            endedAt={end?.at ?? null}
+            onReview={() => transcriptRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+          />
         ) : (
           <AnswerBox
             text={text}

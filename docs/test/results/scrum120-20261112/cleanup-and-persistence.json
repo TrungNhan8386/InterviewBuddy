@@ -1,0 +1,37 @@
+{
+  "ownedTestSessions": [
+    {
+      "alias": "test-session-1",
+      "status": "completed"
+    },
+    {
+      "alias": "test-session-2",
+      "status": "completed"
+    },
+    {
+      "alias": "test-session-3",
+      "status": "completed"
+    },
+    {
+      "alias": "test-session-4",
+      "status": "completed"
+    },
+    {
+      "alias": "test-session-5",
+      "status": "completed"
+    }
+  ],
+  "allOwnedTestSessionsCompleted": true,
+  "latestTwoAnalyses": [
+    {
+      "language": "en",
+      "cv_file_name": "cv_valid.pdf"
+    },
+    {
+      "language": "vi",
+      "cv_file_name": "cv_valid.pdf"
+    }
+  ],
+  "noTestRowsDeleted": true,
+  "noSharedQuotaConfigChanged": true
+}

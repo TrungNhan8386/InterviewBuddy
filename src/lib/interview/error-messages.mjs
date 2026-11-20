@@ -4,6 +4,7 @@
 //   const { error } = await res.json();
 //   showError(interviewErrorMessage(error?.code, settings.language));
 
+import { providerLimitMessage } from '../ai/provider-limit.mjs';
 const MESSAGES = {
   vi: {
     BAD_INPUT: 'Dữ liệu gửi lên chưa hợp lệ. Vui lòng kiểm tra lại.',
@@ -11,11 +12,12 @@ const MESSAGES = {
     NOT_FOUND: 'Không tìm thấy buổi phỏng vấn này.',
     STALE_TURN: 'Câu hỏi đã thay đổi. Đang tải lại buổi phỏng vấn…',
     SESSION_CLOSED: 'Buổi phỏng vấn này đã kết thúc.',
+    ANSWER_CONFLICT: 'Câu hỏi này đã có câu trả lời được lưu trước đó. Đang tải lại buổi phỏng vấn…',
     GENERATION_IN_PROGRESS: 'AI đang soạn câu hỏi, vui lòng chờ một chút.',
     LEASE_LOST: 'Câu hỏi đã được tạo ở nơi khác. Đang tải lại…',
     SESSION_CONTEXT_INVALID: 'Dữ liệu buổi phỏng vấn bị lỗi. Vui lòng tạo buổi mới.',
     AI_DAILY_LIMIT: 'Bạn đã dùng hết lượt AI hôm nay. Hạn mức được làm mới lúc 0:00 (giờ Việt Nam).',
-    AI_RATE_LIMITED: 'AI đang quá tải. Vui lòng thử lại sau ít phút.',
+    AI_RATE_LIMITED: providerLimitMessage('vi', 'interview'),
     AI_CONTENT_BLOCKED: 'AI không xử lý được nội dung này. Hãy diễn đạt lại câu trả lời.',
     INVALID_OUTPUT: 'AI trả kết quả không hợp lệ. Vui lòng thử lại.',
     AI_UNAVAILABLE: 'Không kết nối được AI. Vui lòng thử lại.',
@@ -33,11 +35,12 @@ const MESSAGES = {
     NOT_FOUND: 'This interview could not be found.',
     STALE_TURN: 'The question has changed. Reloading the interview…',
     SESSION_CLOSED: 'This interview has already ended.',
+    ANSWER_CONFLICT: 'This question already has a saved answer. Reloading the interview…',
     GENERATION_IN_PROGRESS: 'The AI is writing the question. Please wait a moment.',
     LEASE_LOST: 'The question was created elsewhere. Reloading…',
     SESSION_CONTEXT_INVALID: 'This interview has invalid data. Please start a new one.',
     AI_DAILY_LIMIT: 'You have used all AI calls for today. The limit resets at 00:00 Vietnam time.',
-    AI_RATE_LIMITED: 'The AI service is busy. Please try again in a few minutes.',
+    AI_RATE_LIMITED: providerLimitMessage('en', 'interview'),
     AI_CONTENT_BLOCKED: 'The AI could not process this content. Please rephrase your answer.',
     INVALID_OUTPUT: 'The AI returned an invalid result. Please try again.',
     AI_UNAVAILABLE: 'Could not reach the AI service. Please try again.',
@@ -54,7 +57,7 @@ const MESSAGES = {
 export const INTERVIEW_ERROR_CODES = Object.keys(MESSAGES.en);
 
 /** Codes after which the page should reload GET /api/interview/{id} instead of retrying. */
-export const RELOAD_CODES = ['STALE_TURN', 'LEASE_LOST'];
+export const RELOAD_CODES = ['STALE_TURN', 'LEASE_LOST', 'ANSWER_CONFLICT', 'SESSION_CLOSED'];
 
 /** Codes the user can fix by pressing "Try again" (same request). */
 export const RETRY_CODES = [

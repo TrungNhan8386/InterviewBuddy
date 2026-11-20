@@ -1,0 +1,145 @@
+{
+  "date": "2026-11-12",
+  "commit": "0668228",
+  "checks": [
+    {
+      "case": "UC04-04@17",
+      "step": "PDF",
+      "passed": true,
+      "actual": "Uploaded and extracted the actual shared two-page PDF; text was not pasted.",
+      "mode": "real"
+    },
+    {
+      "case": "UC04-04@17",
+      "step": "2",
+      "passed": true,
+      "actual": "Friendly retry shown; JD and PDF retained; no new analysis row.",
+      "mode": "browser network abort"
+    },
+    {
+      "case": "UC04-04@17",
+      "step": "4",
+      "passed": true,
+      "actual": "Real Gemini result remains visible after only the Supabase insert was aborted.",
+      "mode": "real Gemini + browser save abort"
+    },
+    {
+      "case": "UC04-04@17",
+      "step": "3/5",
+      "passed": true,
+      "actual": "Restored insert saved one row; Save again made no extra Gemini request.",
+      "mode": "real"
+    },
+    {
+      "case": "UC04-05@18",
+      "step": "2",
+      "passed": true,
+      "actual": "Changing to English clears old result while retaining JD and uploaded PDF.",
+      "mode": "real"
+    },
+    {
+      "case": "UC04-05@18",
+      "step": "3",
+      "passed": true,
+      "actual": "New English result generated and saved; full prose captured for language review.",
+      "mode": "real"
+    },
+    {
+      "case": "UC04-05@18",
+      "step": "4",
+      "passed": true,
+      "actual": "After real logout/login latest score and date are displayed.",
+      "mode": "real"
+    },
+    {
+      "case": "UC04-05@18",
+      "step": "5",
+      "passed": true,
+      "actual": "Saved English result restored without a new analyze request.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-03@26",
+      "step": "1",
+      "passed": true,
+      "actual": "Cancel preserves question and unsent draft.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-03@26",
+      "step": "2-state",
+      "passed": true,
+      "actual": "Unanswered session completed with no report.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-03@26",
+      "step": "2-navigation",
+      "passed": false,
+      "actual": "App remains on ended Chat screen instead of returning to Dashboard.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-03@26",
+      "step": "3-state",
+      "passed": true,
+      "actual": "Completed session retains exactly one saved answer.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-03@26",
+      "step": "3-report",
+      "passed": false,
+      "actual": "No report row was generated for the answered session.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-05@28/UC06-06@40",
+      "step": "1",
+      "passed": true,
+      "actual": "Network fault shows friendly retry; session persists with zero questions.",
+      "mode": "browser network abort"
+    },
+    {
+      "case": "UC06-05@28/UC06-06@40",
+      "step": "2",
+      "passed": true,
+      "actual": "Recovery generates exactly one persisted opening question.",
+      "mode": "real"
+    },
+    {
+      "case": "UC06-05@28/UC06-06@40",
+      "step": "3/4-real-B2",
+      "passed": false,
+      "actual": "B2 actual Gemini response recorded; refusal and ability to edit checked against workbook.",
+      "mode": "real"
+    }
+  ],
+  "stages": [
+    "login-and-real-pdf",
+    "analysis-network-error",
+    "real-analysis-vi-save-failure",
+    "analysis-language-en",
+    "logout-login-view-latest",
+    "end-empty-session",
+    "end-answered-session",
+    "chat-opening-network-failure",
+    "chat-real-B2-guardrail",
+    "chat-controlled-content-blocked"
+  ],
+  "analysisRequests": 3,
+  "interviewRequests": 6,
+  "status": "completed",
+  "b2Turns": [
+    {
+      "kind": "main",
+      "question": "Trong React, bạn sẽ quản lý trạng thái (state) và hiển thị thông báo lỗi như thế nào khi một REST API gọi dữ liệu bị thất bại?",
+      "answered": true
+    }
+  ],
+  "blockedRequests": {
+    "analysis": 1,
+    "save": 1,
+    "next": 1
+  }
+}

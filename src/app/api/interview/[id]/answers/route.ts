@@ -41,5 +41,14 @@ export async function POST(request: NextRequest, ctx: RouteContext<"/api/intervi
     return apiError("SERVER_ERROR");
   }
   if (data?.error) return apiError(data.error as InterviewApiErrorCode);
+
+  // A retry is only safe when it sends the same text. If the first request was
+  // saved but its response was lost and the user edited the answer, tell the
+  // page so it reloads the saved answer instead of showing the edited one.
+  if (data.alreadySaved) {
+    const stored = await auth.supabase.from("answers").select("content").eq("id", data.answer.id).maybeSingle();
+    if (stored.error || !stored.data) return apiError("SERVER_ERROR");
+    if (stored.data.content !== answer.content) return apiError("ANSWER_CONFLICT");
+  }
   return apiJson(data, data.alreadySaved ? 200 : 201);
 }

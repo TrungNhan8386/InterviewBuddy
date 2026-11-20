@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-14",
+  "task": "SCRUM-125",
+  "branch": "docs/scrum-125-ai-design-hung",
+  "implementationCommit": "469bfbf8b2f8e0e39710087c57911e266b6e36e9",
+  "mainFetched": "0668228",
+  "scope": "AI design document, review checklist, schema snapshots, synthetic examples, provenance manifest and offline documentation verifier; application behavior unchanged",
+  "checks": {
+    "fullSuite": {
+      "pass": 294,
+      "fail": 0,
+      "skip": 0
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "sourceFilesMatchImplementationCommit": 36,
+    "credentialPatterns": {
+      "filesChecked": 346,
+      "findings": 0
+    },
+    "knownCredentialComparison": {
+      "filesScanned": 11,
+      "localKnownSecretsAvailable": true,
+      "findings": 0
+    },
+    "gitDiffCheck": "pass"
+  },
+  "verificationHarnessNotes": [
+    "Initial controlled response was JSON; the real stream client rejected its content type. Corrected harness to complete-only SSE; no application code was changed for this issue.",
+    "Removed one unused import from the documentation verifier; final lint has no warnings."
+  ],
+  "boundary": "No live Gemini/Auth/shared Supabase or UI acceptance performed in this task. Historical model/UI evidence retains its original version and environment boundaries.",
+  "review": {
+    "reviewer": "Nhan, AI backup per Jira",
+    "status": "pending",
+    "independentHumanAcceptance": false
+  },
+  "publication": {
+    "snapshotStage": "pre-commit verification",
+    "baseBranch": "feat/scrum-124-prompt-config-hung",
+    "headBranch": "docs/scrum-125-ai-design-hung",
+    "note": "Publication status and final revision are available on the GitHub pull request; this file records checks performed before committing.",
+    "jiraUpdated": false
+  },
+  "verificationCommands": [
+    "node scripts/verify-ai-design.mjs --write-report",
+    "npm test",
+    "npm run lint",
+    "npm run verify:secrets",
+    "git diff --cached --check"
+  ]
+}

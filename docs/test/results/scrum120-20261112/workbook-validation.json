@@ -1,0 +1,41 @@
+{
+  "changedCells": [
+    "F17",
+    "F18",
+    "F26",
+    "F28",
+    "F40",
+    "F41",
+    "F5",
+    "G17",
+    "G18",
+    "G26",
+    "G28",
+    "G40",
+    "G41",
+    "G5",
+    "I17",
+    "I18",
+    "I26",
+    "I28",
+    "I40",
+    "I41",
+    "I5",
+    "J17",
+    "J18",
+    "J26",
+    "J28",
+    "J40",
+    "J41",
+    "J5"
+  ],
+  "onlyExpected28CellsChanged": true,
+  "onlySheet2XmlChanged": true,
+  "allOtherPackagePartsByteIdentical": true,
+  "sheetNamesAndExternalLinksPreserved": true,
+  "resultCounts": {
+    "Pass": 3,
+    "Fail": 3,
+    "Blocked": 1
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-12",
+  "baseCommit": "0668228",
+  "selectedPromptVersion": "0.13",
+  "sourceSha256": "b4205284f942d466d3493c22f7001bd5b371106d2728d4a3580c41e5151aa0db",
+  "unitTests": {
+    "pass": 255,
+    "fail": 0
+  },
+  "lint": "pass",
+  "productionBuildAndTypeScript": "pass",
+  "sourceSessionCount": 10,
+  "reviewedQuestionCount": 50,
+  "reviewedAnswerCount": 40,
+  "baseline": {
+    "attempts": 20,
+    "valid": 19,
+    "matchesExpectedActionAndValid": 14
+  },
+  "selected": {
+    "attempts": 20,
+    "valid": 20,
+    "matchesExpectedActionAndValid": 17,
+    "unresolved": [
+      "S04-after-3",
+      "S07-after-3",
+      "S09-after-3"
+    ]
+  },
+  "semanticGate": "NOT_ALL_PASS",
+  "boundary": "Synthetic archived complete transcripts + real provider-only replay; not new end-to-end UI sessions; no independent human acceptance",
+  "secretMatchCount": 0,
+  "databaseWrites": 0
+}

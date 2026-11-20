@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-13",
+  "baseCommit": "0668228",
+  "scope": "Publication verification only; historical live results retained, not rerun",
+  "workbookIntegrity": "pass",
+  "onlySheet2Changed": true,
+  "changedCellsVerified": 28,
+  "verifiedStatusRows": 7,
+  "caseResults": {
+    "Pass": 3,
+    "Fail": 3,
+    "Blocked": 1
+  },
+  "newGoogleAccountStillBlocked": true,
+  "secretScan": "no matches in text, binary or decompressed workbook parts",
+  "screenshotsVisuallyReviewed": 19
+}
