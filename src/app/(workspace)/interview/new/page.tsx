@@ -128,15 +128,20 @@ export default function InterviewSetupPage() {
   const [createdId, setCreatedId] = useState("");
   const pending = useRef(false);
   const languageEdited = useRef(false);
+  const targetEdited = useRef(false);
   const router = useRouter();
   useEffect(() => {
     let active = true;
     const client = createClient();
     void client.auth.getUser().then(async ({ data }) => {
       if (!data.user) return;
-      const { data: profile } = await client.from("profiles").select("preferred_language").eq("id", data.user.id).maybeSingle();
-      if (active && !languageEdited.current && ["vi", "en"].includes(profile?.preferred_language)) {
-        setForm(current => ({ ...current, language: profile!.preferred_language }));
+      const { data: profile } = await client.from("profiles").select("preferred_language, target_position").eq("id", data.user.id).maybeSingle();
+      if (!active || !profile) return;
+      if (!languageEdited.current && ["vi", "en"].includes(profile.preferred_language)) {
+        setForm(current => ({ ...current, language: profile.preferred_language }));
+      }
+      if (!targetEdited.current && profile.target_position?.trim()) {
+        setForm(current => ({ ...current, targetPosition: profile.target_position!.trim() }));
       }
     }).catch(() => {});
     return () => { active = false; };
@@ -144,6 +149,7 @@ export default function InterviewSetupPage() {
 
   function updateField(field: keyof SetupForm, value: string) {
     if (field === "language") languageEdited.current = true;
+    if (field === "targetPosition") targetEdited.current = true;
     setForm((current) => ({
       ...current,
       [field]: value,
