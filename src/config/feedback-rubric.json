@@ -1,0 +1,26 @@
+{
+  "version": "uc08-rubric-v1",
+  "scale": { "min": 0, "max": 10 },
+  "overallDecimals": 1,
+  "criteria": {
+    "content": { "weight": 1, "description": "Relevance and correctness of the answer to the question and role; concrete personal actions and verifiable outcomes." },
+    "star": { "weight": 1, "appliesTo": ["behavioral"], "description": "Situation, Task, Action and Result; distinguish the candidate's actions from the team's. A missing STAR element lowers the score." },
+    "clarity": { "weight": 1, "description": "A coherent, understandable sequence with sufficiently precise technical explanations and little irrelevant material." },
+    "confidence": { "weight": 1, "basis": "text_estimated", "description": "Only textual specificity, stated ownership and calibrated certainty. Do not infer voice, personality, emotions, accent, demographics or actual psychological confidence." }
+  },
+  "anchors": [
+    { "range": [0, 2], "meaning": "No usable relevant evidence, refusal, off-topic response, or only a vague acknowledgement." },
+    { "range": [3, 4], "meaning": "Some relevant content but substantial omissions or unsupported claims." },
+    { "range": [5, 6], "meaning": "A partially supported, understandable answer with identifiable gaps." },
+    { "range": [7, 8], "meaning": "A relevant, concrete and mostly complete answer with minor gaps." },
+    { "range": [9, 10], "meaning": "A precise, well-supported and complete answer satisfying this criterion without inventing facts." }
+  ],
+  "labels": {
+    "en": { "content": "Content", "star": "STAR structure", "clarity": "Clarity", "confidence": "Confidence (text-estimated)", "notApplicable": "Not applicable" },
+    "vi": { "content": "Nội dung", "star": "Cấu trúc STAR", "clarity": "Diễn đạt rõ ràng", "confidence": "Độ tự tin (ước lượng từ văn bản)", "notApplicable": "Không áp dụng" }
+  },
+  "disclaimer": {
+    "en": "AI feedback is for interview practice and may be incorrect. Confidence is estimated only from text, not voice or actual psychological confidence.",
+    "vi": "Phản hồi AI phục vụ luyện tập phỏng vấn và có thể sai. Độ tự tin chỉ được ước lượng từ văn bản, không phải từ giọng nói hay mức tự tin tâm lý thực tế."
+  }
+}
