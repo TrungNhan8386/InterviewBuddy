@@ -1,0 +1,72 @@
+{
+  "feedback": {
+    "id": "00000000-0000-4000-8000-000000000014",
+    "answerId": "00000000-0000-4000-8000-000000000011",
+    "questionId": "00000000-0000-4000-8000-000000000012",
+    "sessionId": "00000000-0000-4000-8000-000000000013",
+    "createdAt": "2026-11-22T00:00:00.000Z",
+    "schemaVersion": "uc08-feedback-v1",
+    "rubricVersion": "uc08-rubric-v1",
+    "language": "en",
+    "questionType": "technical",
+    "confidenceBasis": "text_estimated",
+    "scores": {
+      "content": {
+        "score": 8,
+        "reason": "The answer describes a relevant release problem and an action.",
+        "quotes": [
+          "I added validation and tests."
+        ],
+        "applicable": true
+      },
+      "star": {
+        "score": null,
+        "reason": null,
+        "quotes": [],
+        "applicable": false
+      },
+      "clarity": {
+        "score": 7,
+        "reason": "The sequence is easy to follow.",
+        "quotes": [
+          "I owned the React form."
+        ],
+        "applicable": true
+      },
+      "confidence": {
+        "score": 5,
+        "reason": "The text states personal responsibility; this does not measure spoken confidence.",
+        "quotes": [
+          "I owned the React form."
+        ],
+        "applicable": true
+      }
+    },
+    "overallScore": 6.7,
+    "strengths": [
+      "You describe your own React form changes instead of attributing everything to the team."
+    ],
+    "improvements": [
+      "Explain which validation cases you tested and how those checks reduced release risk."
+    ],
+    "outline": {
+      "kind": "key_points",
+      "sections": [
+        {
+          "label": "Approach",
+          "guidance": "Explain your validation approach and a concrete test case."
+        }
+      ]
+    },
+    "labels": {
+      "content": "Content",
+      "star": "STAR structure",
+      "clarity": "Clarity",
+      "confidence": "Confidence (text-estimated)",
+      "notApplicable": "Not applicable"
+    },
+    "disclaimer": "AI feedback is for interview practice and may be incorrect. Confidence is estimated only from text, not voice or actual psychological confidence."
+  },
+  "state": "ready",
+  "alreadySaved": false
+}
