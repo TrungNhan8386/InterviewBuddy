@@ -2,6 +2,7 @@ import analysis from '../../config/prompts/analysis.json' with { type: 'json' };
 import interviewer from '../../config/prompts/interviewer.json' with { type: 'json' };
 import health from '../../config/prompts/health.json' with { type: 'json' };
 import questionPlan from '../../config/prompts/question-plan.json' with { type: 'json' };
+import report from '../../config/prompts/report.json' with { type: 'json' };
 
 // Static JSON imports work in Next.js bundles and standalone Node scripts.
 // Config edits take effect after restart (Node) or rebuild/redeploy (production
@@ -47,6 +48,7 @@ export const ANALYSIS_PROMPT_CONFIG = checked(analysis, 'analysis', true);
 export const INTERVIEWER_PROMPT_CONFIG = checked(interviewer, 'interviewer', true);
 export const HEALTH_PROMPT_CONFIG = checked(health, 'health', false);
 export const QUESTION_PLAN_PROMPT_CONFIG = checkedPlan(questionPlan);
+export const REPORT_PROMPT_CONFIG = checked(report, 'report', true);
 
 export function promptText(config, language) {
   const localized = config.languageRules ? config.languageRules[language] : [];
