@@ -9,6 +9,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
+import { useSpeechSupported } from "@/lib/interview-chat/speech";
 
 const roundOptions = [
   { value: "hr", label: "HR" },
@@ -66,6 +67,7 @@ type ChoiceGroupProps = {
   value: string;
   options: Option[];
   onChange: (value: string) => void;
+  disabledValues?: string[];
 };
 
 function ChoiceGroup({
@@ -74,6 +76,7 @@ function ChoiceGroup({
   value,
   options,
   onChange,
+  disabledValues = [],
 }: ChoiceGroupProps) {
   return (
     <fieldset className="min-w-0">
@@ -88,22 +91,26 @@ function ChoiceGroup({
             : "grid-cols-1 sm:grid-cols-3"
         }`}
       >
-        {options.map((option) => (
-          <label key={option.value} className="min-w-0 cursor-pointer">
-            <input
-              type="radio"
-              name={name}
-              value={option.value}
-              checked={value === option.value}
-              onChange={() => onChange(option.value)}
-              className="peer sr-only"
-            />
+        {options.map((option) => {
+          const disabled = disabledValues.includes(option.value);
+          return (
+            <label key={option.value} className={`min-w-0 ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}>
+              <input
+                type="radio"
+                name={name}
+                value={option.value}
+                checked={value === option.value}
+                onChange={() => onChange(option.value)}
+                disabled={disabled}
+                className="peer sr-only"
+              />
 
-            <span className="flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-center text-sm text-slate-700 transition hover:border-indigo-400 peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-indigo-600">
-              {option.label}
-            </span>
-          </label>
-        ))}
+              <span className="flex min-h-11 items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-center text-sm text-slate-700 transition hover:border-indigo-400 peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-indigo-600 peer-disabled:border-slate-200 peer-disabled:bg-slate-50 peer-disabled:text-slate-400 peer-disabled:hover:border-slate-200">
+                {option.label}
+              </span>
+            </label>
+          );
+        })}
       </div>
     </fieldset>
   );
@@ -128,15 +135,23 @@ export default function InterviewSetupPage() {
   const [createdId, setCreatedId] = useState("");
   const pending = useRef(false);
   const languageEdited = useRef(false);
+  const targetEdited = useRef(false);
   const router = useRouter();
+  // UC-05 AF3: voice answers need speech recognition in the browser (Chrome, Edge).
+  const voiceSupported = useSpeechSupported();
+  const answerMode = voiceSupported === false ? "text" : form.answerMode;
   useEffect(() => {
     let active = true;
     const client = createClient();
     void client.auth.getUser().then(async ({ data }) => {
       if (!data.user) return;
-      const { data: profile } = await client.from("profiles").select("preferred_language").eq("id", data.user.id).maybeSingle();
-      if (active && !languageEdited.current && ["vi", "en"].includes(profile?.preferred_language)) {
-        setForm(current => ({ ...current, language: profile!.preferred_language }));
+      const { data: profile } = await client.from("profiles").select("preferred_language, target_position").eq("id", data.user.id).maybeSingle();
+      if (!active || !profile) return;
+      if (!languageEdited.current && ["vi", "en"].includes(profile.preferred_language)) {
+        setForm(current => ({ ...current, language: profile.preferred_language }));
+      }
+      if (!targetEdited.current && profile.target_position?.trim()) {
+        setForm(current => ({ ...current, targetPosition: profile.target_position!.trim() }));
       }
     }).catch(() => {});
     return () => { active = false; };
@@ -144,6 +159,7 @@ export default function InterviewSetupPage() {
 
   function updateField(field: keyof SetupForm, value: string) {
     if (field === "language") languageEdited.current = true;
+    if (field === "targetPosition") targetEdited.current = true;
     setForm((current) => ({
       ...current,
       [field]: value,
@@ -164,7 +180,7 @@ export default function InterviewSetupPage() {
     if (pending.current || createdId) return;
     const payload = { targetPosition: form.targetPosition, type: form.roundType,
       difficulty: form.difficulty, language: form.language, interviewDate: form.interviewDate || null,
-      durationMinutes: Number(form.duration), inputMode: form.answerMode };
+      durationMinutes: Number(form.duration), inputMode: answerMode };
     const validation = validateCreateSession(payload, { today: todayInVietnam() });
     const nextErrors: FormErrors = {};
     if (!form.targetPosition.trim()) nextErrors.targetPosition = "Vui lòng nhập vị trí mục tiêu.";
@@ -215,7 +231,7 @@ export default function InterviewSetupPage() {
     },
     {
       label: "Cách trả lời",
-      value: optionLabel(answerOptions, form.answerMode),
+      value: optionLabel(answerOptions, answerMode),
     },
   ];
 
@@ -325,15 +341,23 @@ export default function InterviewSetupPage() {
             <ChoiceGroup
               name="answer-mode"
               label="Cách trả lời"
-              value={form.answerMode}
+              value={answerMode}
               options={answerOptions}
               onChange={(value) => updateField("answerMode", value)}
+              disabledValues={voiceSupported === false ? ["voice"] : []}
             />
 
-            {form.answerMode === "voice" && (
+            {/* UC-05 AF3: no speech recognition (e.g. Firefox, Safari) → voice disabled, typing kept. */}
+            {voiceSupported === false ? (
               <p className="rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-600">
-                Phiên ghi nhận lựa chọn giọng nói. Trong trang luyện tập hiện tại, bạn vẫn có thể nhập câu trả lời bằng văn bản.
+                Trình duyệt này không hỗ trợ nhận giọng nói, nên chỉ trả lời bằng cách gõ được. Dùng Chrome hoặc Edge nếu muốn trả lời bằng giọng nói.
               </p>
+            ) : (
+              form.answerMode === "voice" && (
+                <p className="rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-600">
+                  Trong buổi phỏng vấn, bấm “Trả lời bằng giọng nói” để nói, kiểm tra và sửa bản chép lời rồi gửi. Bạn vẫn có thể gõ phím bất cứ lúc nào. Ứng dụng không ghi lại âm thanh.
+                </p>
+              )
             )}
 
             <Button type="submit" disabled={busy || !!createdId} className="w-full sm:w-auto">

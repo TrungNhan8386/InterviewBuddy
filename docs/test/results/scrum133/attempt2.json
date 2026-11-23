@@ -1,0 +1,288 @@
+{
+  "date": "2026-11-18",
+  "baseCommit": "2947292",
+  "task": "SCRUM-133",
+  "runs": [
+    {
+      "name": "English JSON",
+      "language": "en",
+      "transport": "JSON",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "TypeScript",
+          "content": "How would you type a reusable component prop in TypeScript that accepts either a string or a number?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "content": "How would you resolve a merge conflict in Git when two developers modify the same line in a file?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "React",
+          "content": "How would you use React state to manage the open and closed visibility of a modal component?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "React Testing",
+          "content": "How would you write a basic unit test for a React component that renders a dashboard title?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "end",
+          "content": "The planned questions are completed."
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1795,
+          "firstTextMs": null
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1679,
+          "firstTextMs": null
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1370,
+          "firstTextMs": null
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1287,
+          "firstTextMs": null
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1664,
+          "firstTextMs": null
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 122,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    },
+    {
+      "name": "English SSE",
+      "language": "en",
+      "transport": "SSE",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "TypeScript",
+          "content": "How would you type a component prop that accepts either a string or a number in TypeScript?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "content": "How would you resolve a merge conflict when collaborating on a feature branch using Git?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "React Testing",
+          "content": "How would you write a simple unit test for a React component that renders a dashboard widget using React Testing Library?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Error Handling",
+          "content": "How would you handle a failed API request when loading data in a React dashboard component?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "React and TypeScript",
+          "content": "How would you type the props for a React component that displays a dashboard widget with optional configuration settings?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1564,
+          "firstTextMs": 1503
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1487,
+          "firstTextMs": 1345
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1382,
+          "firstTextMs": 1007
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1612,
+          "firstTextMs": 1487
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1315,
+          "firstTextMs": 1218
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 122,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    },
+    {
+      "name": "Vietnamese SSE",
+      "language": "vi",
+      "transport": "SSE",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "React State Management",
+          "content": "Bạn sẽ xử lý việc quản lý state phức tạp trong ứng dụng React với TypeScript thế nào nếu component cây trở nên lớn?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ giải quyết xung đột merge (merge conflict) trong Git như thế nào khi làm việc nhóm trong một dự án?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "Git Workflow",
+          "content": "Bạn sẽ tổ chức các nhánh (branch) và quy trình commit như thế nào khi làm việc nhóm với Git để hạn chế xung đột?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ áp dụng chiến lược phân nhánh (branching strategy) như Git Flow hay GitHub Flow như thế nào trong một dự án React và TypeScript cùng team?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "React Testing",
+          "content": "Bạn sẽ viết và cấu trúc các unit test cho các component React sử dụng TypeScript như thế nào?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1258,
+          "firstTextMs": 1071
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1442,
+          "firstTextMs": 1315
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1473,
+          "firstTextMs": 1259
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1428,
+          "firstTextMs": 1234
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1309,
+          "firstTextMs": 1156
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 113,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    }
+  ],
+  "status": "completed",
+  "boundary": "Real local production Next.js API + Supabase Auth/RLS/RPC + Gemini. Synthetic CVJD-01 analysis fixture seeded; Analysis generation and browser UI are outside this run.",
+  "contentReview": {
+    "status": "failed",
+    "findings": [
+      {
+        "run": "English JSON",
+        "position": 5,
+        "issue": "Closing declaration saved as a main question"
+      },
+      {
+        "run": "Vietnamese SSE",
+        "positions": [
+          3,
+          4
+        ],
+        "issue": "Repeated Git branching workflow goal"
+      }
+    ]
+  }
+}

@@ -31,6 +31,23 @@ test('chat saves the answer through the persistence API and uses its confirmed a
   assert.equal(await api.saveAnswer(sessionId, questionId, 'I would test a cancelled request.'), answerId);
 });
 
+test('a voice answer is saved with its input mode and speaking time (UC-07)', async () => {
+  const api = await transport(async (url, options) => {
+    assert.equal(url, `/api/interview/${sessionId}/answers`);
+    assert.deepEqual(JSON.parse(options.body), { questionId, content: 'Edited transcript.', inputMode: 'voice', durationSeconds: 42.5 });
+    return Response.json({ answer: { id: answerId }, alreadySaved: false }, { status: 201 });
+  });
+  assert.equal(await api.saveAnswer(sessionId, questionId, 'Edited transcript.', { inputMode: 'voice', durationSeconds: 42.5 }), answerId);
+});
+
+test('a typed answer sends no duration, so it never counts for the speaking pace', async () => {
+  const api = await transport(async (url, options) => {
+    assert.deepEqual(JSON.parse(options.body), { questionId, content: 'Typed.', inputMode: 'text' });
+    return Response.json({ answer: { id: answerId }, alreadySaved: false }, { status: 201 });
+  });
+  assert.equal(await api.saveAnswer(sessionId, questionId, 'Typed.', { inputMode: 'text', durationSeconds: null }), answerId);
+});
+
 test('chat ends the session through the persistence endpoint', async () => {
   const api = await transport(async (url, options) => {
     assert.equal(url, `/api/interview/${sessionId}/end`); assert.equal(options.method, 'POST');

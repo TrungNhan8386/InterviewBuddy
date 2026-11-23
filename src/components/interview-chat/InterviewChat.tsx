@@ -21,6 +21,7 @@ import { CHAT_TEXT } from "@/lib/interview-chat/text";
 import {
   ANSWER_MAX_CHARS,
   InterviewChatError,
+  type AnswerMeta,
   type ChatErrorCode,
   type ChatSession,
   type EndReason,
@@ -72,6 +73,8 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
   // Why the page reloaded the saved session after a failed save (shown until the next send).
   const [notice, setNotice] = useState<ChatErrorCode | null>(null);
   const generation = useRef<AbortController | null>(null);
+  // How the current draft was given (typed or voice + speaking time), kept for "Try again" after a failed save.
+  const answerMeta = useRef<AnswerMeta>({ inputMode: "text", durationSeconds: null });
 
   // Ignore results that arrive after the user left the page.
   const alive = useRef(true);
@@ -237,7 +240,8 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     void Promise.resolve().then(start);
   }, [start]);
 
-  async function send() {
+  async function send(meta: AnswerMeta = answerMeta.current) {
+    answerMeta.current = meta;
     const content = draft.trim();
     const last = session?.turns.at(-1);
     if (!session || !last || last.answer || !content || content.length > ANSWER_MAX_CHARS) return;
@@ -254,7 +258,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
 
     let answerId: string;
     try {
-      answerId = await saveAnswer(session.id, last.question.id, content);
+      answerId = await saveAnswer(session.id, last.question.id, content, meta);
     } catch (error) {
       if (!alive.current) return;
       setSession((s) =>
@@ -280,6 +284,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
         : s,
     );
     setDraft("");
+    answerMeta.current = { inputMode: "text", durationSeconds: null };
     await evaluate(answerId, content);
   }
 
@@ -341,7 +346,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           <p className="text-sm text-red-700">{t.errors[phase.code]}</p>
           <div className="flex flex-col justify-center gap-2 sm:flex-row">
             {phase.code === "UNAUTHORIZED" ? (
-              <Link href="/login" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white">
+              <Link href="/login" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white transition hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Đăng nhập
               </Link>
             ) : final ? (
@@ -464,10 +469,13 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           />
         ) : (
           <AnswerBox
+            // A new question gets a fresh box, so voice state and speaking time never carry over.
+            key={last?.question.id ?? "none"}
             text={text}
+            language={session.settings.language}
             value={draft}
             onChange={setDraft}
-            onSend={() => void send()}
+            onSend={(meta) => void send(meta)}
             onEnd={() => setConfirmEnd(true)}
             canAnswer={waitingForAnswer && (phase.kind === "answering" || (phase.kind === "error" && phase.retry === "save"))}
             busy={phase.kind === "saving" || phase.kind === "thinking"}

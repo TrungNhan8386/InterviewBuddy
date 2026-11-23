@@ -10,7 +10,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
   const model = env.GEMINI_INTERVIEW_MODEL?.trim() || env.GEMINI_MODEL?.trim() || DEFAULT_MODEL;
   return {
     model,
-    async *stream(value, { signal, trace = () => {} } = {}) {
+    async *stream(value, { signal, trace = () => {}, repair } = {}) {
       const input = validateInterviewerInput(value);
       if (signal?.aborted) throw new InterviewerError('REQUEST_CANCELLED', 'The request was cancelled.', 408);
       const ending = createEndDecision(input);
@@ -26,7 +26,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
       const combined = AbortSignal.any([lifetime.signal, timeout, ...(signal ? [signal] : [])]);
       let output = ''; let preview = ''; let stopped = false; let firstFrame = true; let firstText = true;
       try {
-        const payload = JSON.stringify(buildInterviewerRequest(input, { contextMode: env.GEMINI_INTERVIEW_CONTEXT_MODE }));
+        const payload = JSON.stringify(buildInterviewerRequest(input, { contextMode: env.GEMINI_INTERVIEW_CONTEXT_MODE, repair }));
         trace('upstream_started');
         const response = await fetchImpl(`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`, {
           method: 'POST', redirect: 'error', signal: combined,
@@ -99,7 +99,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
         throw new InterviewerError('AI_UNAVAILABLE', 'Gemini is temporarily unavailable.');
       } finally { lifetime.abort(); }
     },
-    async next(value, { signal, trace = () => {} } = {}) {
+    async next(value, { signal, trace = () => {}, repair } = {}) {
       const input = validateInterviewerInput(value);
       if (signal?.aborted) throw new InterviewerError('REQUEST_CANCELLED', 'The request was cancelled.', 408);
       const ending = createEndDecision(input);
@@ -113,7 +113,7 @@ export function createInterviewerProvider({ env = process.env, fetchImpl = globa
       const timeout = AbortSignal.timeout(timeoutMs);
       const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
       try {
-        const payload = JSON.stringify(buildInterviewerRequest(input, { contextMode: env.GEMINI_INTERVIEW_CONTEXT_MODE }));
+        const payload = JSON.stringify(buildInterviewerRequest(input, { contextMode: env.GEMINI_INTERVIEW_CONTEXT_MODE, repair }));
         trace('upstream_started');
         const response = await fetchImpl(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
           method: 'POST', redirect: 'error', signal: combined,

@@ -26,9 +26,13 @@ export function createChatTransport({ fetchImpl = globalThis.fetch } = {}) {
         || !value.settings || !Array.isArray(value.turns)) throw new ChatTransportError('INVALID_OUTPUT');
       return value;
     },
-    async saveAnswer(sessionId, questionId, content) {
+    /** meta (UC-07): { inputMode: 'text' | 'voice', durationSeconds: speaking time of a voice answer or null }. */
+    async saveAnswer(sessionId, questionId, content, meta = {}) {
+      const inputMode = meta.inputMode === 'voice' ? 'voice' : 'text';
+      const body = { questionId, content, inputMode };
+      if (Number.isFinite(meta.durationSeconds) && meta.durationSeconds > 0) body.durationSeconds = meta.durationSeconds;
       const value = await json(path(sessionId) + '/answers', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ questionId, content, inputMode: 'text' }) });
+        body: JSON.stringify(body) });
       if (!isUuid(value.answer?.id)) throw new ChatTransportError('SAVE_FAILED');
       return value.answer.id;
     },

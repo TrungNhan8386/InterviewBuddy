@@ -1,5 +1,5 @@
 import { mockEndSession, mockLoadSession, mockRequestNext, mockSaveAnswer } from "./mock";
-import type { ChatErrorCode, ChatSession, ChatSettings, NextResult, SessionStatus } from "./types";
+import type { AnswerMeta, ChatErrorCode, ChatSession, ChatSettings, NextResult, SessionStatus } from "./types";
 import { InterviewChatError } from "./types";
 import { ChatTransportError, createChatTransport, type ChatStreamOptions } from "./transport.mjs";
 
@@ -36,9 +36,9 @@ export async function loadChatSession(id: string): Promise<ChatSession> {
     skills: result ? { matched: (result.matched ?? []).map((item) => item.skill).filter(Boolean),
       missing: (result.missing ?? []).map((item) => item.skill).filter(Boolean) } : null };
 }
-export async function saveAnswer(sessionId: string, questionId: string, content: string): Promise<string> {
+export async function saveAnswer(sessionId: string, questionId: string, content: string, meta?: AnswerMeta): Promise<string> {
   if (USE_MOCK) return mockSaveAnswer(sessionId, questionId, content);
-  return call(() => transport.saveAnswer(sessionId, questionId, content));
+  return call(() => transport.saveAnswer(sessionId, questionId, content, meta));
 }
 export async function requestNext(sessionId: string, afterAnswerId: string | null, options?: ChatStreamOptions): Promise<NextResult> {
   if (USE_MOCK) return mockRequestNext(sessionId, afterAnswerId);

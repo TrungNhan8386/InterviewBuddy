@@ -1,0 +1,289 @@
+{
+  "date": "2026-11-18",
+  "baseCommit": "2947292",
+  "task": "SCRUM-133",
+  "runs": [
+    {
+      "name": "English JSON",
+      "language": "en",
+      "transport": "JSON",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "TypeScript",
+          "content": "How would you type a reusable component prop in TypeScript that accepts either a string or a number?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "content": "How would you resolve a merge conflict in Git when two developers modify the same line of code?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "Required skills: React and TypeScript.",
+          "content": "How would you handle component state updates in React when dealing with asynchronous data fetching?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "testing",
+          "content": "How would you write a simple test for a React component using React Testing Library to verify that a button click triggers a callback function?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "Git Collaboration Strategy",
+          "content": "Can you share what Git branching strategy you used when collaborating on your team project?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1934,
+          "firstTextMs": null
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1176,
+          "firstTextMs": null
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1578,
+          "firstTextMs": null
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1474,
+          "firstTextMs": null
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 2752,
+          "firstTextMs": null
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 127,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    },
+    {
+      "name": "English SSE",
+      "language": "en",
+      "transport": "SSE",
+      "status": "completed",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "React and TypeScript",
+          "content": "How would you type the props for a React functional component that accepts a list of dashboard items and a selection callback function using TypeScript?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "content": "How would you resolve a merge conflict when collaborating with team members on a Git repository?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "Git workflow",
+          "content": "What steps do you take when setting up a new feature branch and keeping it updated with the main branch in Git?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Git rebase workflow",
+          "content": "How would you use Git rebase instead of merge to integrate changes from the main branch into your feature branch?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "Testing React components",
+          "content": "How would you write a simple test for a component that displays Git commit history?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1215,
+          "firstTextMs": 995
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1186,
+          "firstTextMs": 1040
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1304,
+          "firstTextMs": 1092
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 3096,
+          "firstTextMs": 1466
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 2886,
+          "firstTextMs": 1474
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 123,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    },
+    {
+      "name": "Vietnamese SSE",
+      "language": "vi",
+      "transport": "SSE",
+      "status": "completed_with_errors",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "React và TypeScript",
+          "content": "Bạn sẽ triển khai một custom hook trong React để quản lý state của một form đơn giản bằng TypeScript như thế nào?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ giải quyết xung đột mã nguồn (merge conflict) khi làm việc với Git trong một dự án nhóm như thế nào?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "Testing",
+          "content": "Bạn sẽ viết Unit Test cho một component React sử dụng TypeScript như thế nào?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ làm gì khi git push bị từ chối do nhánh từ xa có thay đổi mới hơn từ đồng nghiệp?"
+        },
+        {
+          "position": 5,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ làm gì khi commit nhầm code lên nhánh chính (main) và cần hoàn tác thay đổi đó mà vẫn giữ lại code ở thư mục làm việc?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1218,
+          "firstTextMs": 1007
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1080,
+          "firstTextMs": 1005
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1439,
+          "firstTextMs": 1304
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "error",
+          "code": "INVALID_OUTPUT",
+          "elapsedMs": 2593
+        },
+        {
+          "step": 3,
+          "attempt": 1,
+          "status": "success",
+          "elapsedMs": 1182,
+          "firstTextMs": 1037
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "error",
+          "code": "AI_UNAVAILABLE",
+          "elapsedMs": 938
+        },
+        {
+          "step": 4,
+          "attempt": 1,
+          "status": "success",
+          "elapsedMs": 1600,
+          "firstTextMs": 1369
+        },
+        {
+          "step": 5,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 140,
+          "firstTextMs": null
+        }
+      ],
+      "replaySameQuestion": true,
+      "savedQuestions": 5,
+      "savedAnswers": 5,
+      "sessionStatus": "completed",
+      "uniqueQuestionText": true
+    }
+  ],
+  "status": "completed",
+  "boundary": "Real local production Next.js API + Supabase Auth/RLS/RPC + Gemini. Synthetic CVJD-01 analysis fixture seeded; Analysis generation and browser UI are outside this run.",
+  "contentReview": {
+    "reviewer": "Codex tool-assisted review; not independent human acceptance",
+    "closingDeclarationsObserved": 0,
+    "notes": "Five saved questions per run with distinct concrete prompts. Same broad skills can recur at different implementation angles; no universal semantic guarantee."
+  }
+}

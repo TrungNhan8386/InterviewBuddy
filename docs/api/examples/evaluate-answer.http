@@ -1,0 +1,22 @@
+### VS Code REST Client: enter the local base URL and your own temporary user token locally.
+### Do not commit tokens, passwords, keys or modified local copies of this file.
+@baseUrl = http://localhost:3000
+@answerId = REPLACE_WITH_CONFIRMED_SAVED_ANSWER_UUID
+
+### Obtain a user access token locally; REST Client reads it from your process environment.
+POST {{baseUrl}}/api/evaluate-answer
+Authorization: Bearer {{$processEnv INTERVIEW_USER_ACCESS_TOKEN}}
+Content-Type: application/json
+
+{"answerId":"{{answerId}}"}
+
+### Read stored feedback without Gemini calls.
+GET {{baseUrl}}/api/evaluate-answer?answerId={{answerId}}
+Authorization: Bearer {{$processEnv INTERVIEW_USER_ACCESS_TOKEN}}
+
+### Error case: malformed UUID must return BAD_INPUT without an AI call.
+POST {{baseUrl}}/api/evaluate-answer
+Authorization: Bearer {{$processEnv INTERVIEW_USER_ACCESS_TOKEN}}
+Content-Type: application/json
+
+{"answerId":"invalid-uuid"}

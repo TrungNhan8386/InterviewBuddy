@@ -1,0 +1,252 @@
+{
+  "date": "2026-11-18",
+  "baseCommit": "2947292",
+  "task": "SCRUM-133",
+  "runs": [
+    {
+      "name": "English JSON",
+      "language": "en",
+      "transport": "JSON",
+      "status": "stopped",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "Required skills: React and TypeScript.",
+          "content": "How would you type a reusable component prop in TypeScript that accepts either a string or a number?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "content": "How would you resolve a merge conflict in Git when two developers modify the same line in a file?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "Git workflow",
+          "content": "How would you use Git branching strategy to manage a feature release in your team?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Testing React components",
+          "content": "How would you write a simple test to verify your component renders without crashing?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1931,
+          "firstTextMs": null
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1533,
+          "firstTextMs": null
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1340,
+          "firstTextMs": null
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1233,
+          "firstTextMs": null
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "error",
+          "code": "INVALID_OUTPUT",
+          "elapsedMs": 1431
+        },
+        {
+          "step": 4,
+          "attempt": 1,
+          "status": "error",
+          "code": "INVALID_OUTPUT",
+          "elapsedMs": 1383
+        }
+      ],
+      "replaySameQuestion": true,
+      "error": {
+        "code": "INVALID_OUTPUT",
+        "httpStatus": 502
+      }
+    },
+    {
+      "name": "English SSE",
+      "language": "en",
+      "transport": "SSE",
+      "status": "stopped",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "Required skills: React and TypeScript.",
+          "content": "How would you type a reusable component prop in TypeScript that accepts a list of dashboard items and a selection callback?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Preferred skill: Git.",
+          "content": "How do you typically handle resolving a merge conflict when collaborating on a team project using Git?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "Version Control and Collaboration",
+          "content": "How would you structure a Git branch naming convention and commit message format for a small frontend team?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Version Control Basics",
+          "content": "Can you explain what happens when you run 'git stash' and how you retrieve those changes later?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1375,
+          "firstTextMs": 1065
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1198,
+          "firstTextMs": 938
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1295,
+          "firstTextMs": 1104
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1745,
+          "firstTextMs": 1558
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "error",
+          "code": "INVALID_OUTPUT",
+          "elapsedMs": 1407
+        },
+        {
+          "step": 4,
+          "attempt": 1,
+          "status": "error",
+          "code": "INVALID_OUTPUT",
+          "elapsedMs": 1486
+        }
+      ],
+      "replaySameQuestion": true,
+      "error": {
+        "code": "INVALID_OUTPUT",
+        "httpStatus": 200
+      }
+    },
+    {
+      "name": "Vietnamese SSE",
+      "language": "vi",
+      "transport": "SSE",
+      "status": "stopped",
+      "questions": [
+        {
+          "position": 1,
+          "kind": "main",
+          "topic": "React",
+          "content": "Bạn sẽ tối ưu hóa hiệu suất của một component React hiển thị danh sách dữ liệu lớn (large list) bằng cách nào?"
+        },
+        {
+          "position": 2,
+          "kind": "main",
+          "topic": "Git",
+          "content": "Bạn sẽ sử dụng Git như thế nào để quản lý các thay đổi xung đột (merge conflict) khi làm việc nhóm trên một tính năng mới?"
+        },
+        {
+          "position": 3,
+          "kind": "main",
+          "topic": "TypeScript",
+          "content": "Bạn sẽ định nghĩa các kiểu dữ liệu (types) trong TypeScript như thế nào cho một prop object phức tạp nhận vào từ component cha?"
+        },
+        {
+          "position": 4,
+          "kind": "main",
+          "topic": "Testing",
+          "content": "Bạn sẽ viết Unit Test cho một component React sử dụng thư viện nào và kiểm tra những yếu tố gì?"
+        }
+      ],
+      "attempts": [
+        {
+          "step": 0,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1418,
+          "firstTextMs": 1244
+        },
+        {
+          "step": 1,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 2323,
+          "firstTextMs": 2124
+        },
+        {
+          "step": 2,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1325,
+          "firstTextMs": 1139
+        },
+        {
+          "step": 3,
+          "attempt": 0,
+          "status": "success",
+          "elapsedMs": 1401,
+          "firstTextMs": 1202
+        },
+        {
+          "step": 4,
+          "attempt": 0,
+          "status": "error",
+          "code": "INVALID_OUTPUT",
+          "elapsedMs": 1314
+        },
+        {
+          "step": 4,
+          "attempt": 1,
+          "status": "error",
+          "code": "AI_RATE_LIMITED",
+          "elapsedMs": 483
+        }
+      ],
+      "replaySameQuestion": true,
+      "error": {
+        "code": "AI_RATE_LIMITED",
+        "httpStatus": 200
+      }
+    }
+  ],
+  "status": "completed",
+  "boundary": "Real local production Next.js API + Supabase Auth/RLS/RPC + Gemini. Synthetic CVJD-01 analysis fixture seeded; Analysis generation and browser UI are outside this run."
+}
