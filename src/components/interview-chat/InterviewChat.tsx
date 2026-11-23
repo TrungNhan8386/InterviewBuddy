@@ -11,6 +11,10 @@ import AnswerBox from "./AnswerBox";
 import SidePanel from "./SidePanel";
 import EndInterviewDialog from "./EndInterviewDialog";
 import EndScreen from "./EndScreen";
+import AnswerFeedback, { type FeedbackState } from "@/components/answer-feedback/AnswerFeedback";
+import { FEEDBACK_MODE, evaluateAnswer } from "@/lib/answer-feedback/client";
+import { FEEDBACK_TEXT } from "@/lib/answer-feedback/text";
+import { AnswerFeedbackError } from "@/lib/answer-feedback/types";
 import type { InterviewStreamStatus } from "@/lib/interview/next-stream-client.mjs";
 import { USE_MOCK, endSession, loadChatSession, requestNext, saveAnswer } from "@/lib/interview-chat/client";
 import { CHAT_TEXT } from "@/lib/interview-chat/text";
@@ -25,10 +29,12 @@ import {
 
 // Screen 4 (Chat Interview), /interview/[id]. Owner: Khang. Jira: SCRUM-95.
 // Flow per turn (docs/api/INTERVIEW_NEXT_API_v1.md):
-//   1. save the answer  2. POST /api/interview/next with afterAnswerId = saved answer id
-//   3. show the next question, or the "ended" state when action = "end".
+//   1. save the answer  2. POST /api/evaluate-answer and show the Answer Feedback screen (UC-08, SCRUM-172)
+//   3. "Continue interview": POST /api/interview/next with afterAnswerId = saved answer id
+//   4. show the next question, or the "ended" state when action = "end".
+// NEXT_PUBLIC_FEEDBACK_MODE=off skips step 2 (see lib/answer-feedback/client.ts).
 // Reloading the page resumes where it stopped: the last unanswered question is shown again,
-// or the next question is requested with the latest saved answer id.
+// or the feedback of the latest saved answer is shown again before the next question (UC-06 AF8).
 
 type Phase =
   | { kind: "loading" }
@@ -36,6 +42,7 @@ type Phase =
   | { kind: "answering" }
   | { kind: "saving" }
   | { kind: "thinking" }
+  | { kind: "feedback"; answerId: string } // Answer Feedback screen, waiting for "Continue interview"
   | { kind: "error"; code: ChatErrorCode; retry: "save" | "next" }
   | { kind: "ended" };
 
@@ -81,6 +88,12 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
 
   // fetchNext needs start() to reload after STALE_TURN; a ref avoids a circular dependency.
   const startRef = useRef<() => Promise<void>>(async () => {});
+
+  // SCRUM-172: feedback of the last saved answer (UC-08).
+  const [feedback, setFeedback] = useState<FeedbackState>({ kind: "loading" });
+  const [feedbackCollapsed, setFeedbackCollapsed] = useState(false);
+  const scoring = useRef<AbortController | null>(null);
+  useEffect(() => () => scoring.current?.abort(), []);
 
   // SCRUM-128: why and when the interview ended, for the end screen.
   const [end, setEnd] = useState<{ reason: EndReason; at: number | null } | null>(null);
@@ -148,6 +161,49 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     [sessionId],
   );
 
+  // SCRUM-172: score the saved answer and show the Answer Feedback screen (UC-06 step 7).
+  // The server returns the saved feedback if it already exists, so resume and "Try again" are safe.
+  const evaluate = useCallback(
+    async (answerId: string, answer: string) => {
+      if (FEEDBACK_MODE === "off") {
+        await fetchNext(answerId, false);
+        return;
+      }
+      scoring.current?.abort();
+      const controller = new AbortController();
+      scoring.current = controller;
+      setFeedbackCollapsed(false);
+      setFeedback({ kind: "loading" });
+      setPhase({ kind: "feedback", answerId });
+      const s = sessionRef.current;
+      try {
+        const result = await evaluateAnswer(sessionId, answerId, {
+          signal: controller.signal,
+          sample: s ? { answer, questionType: s.settings.type, language: s.settings.language } : undefined,
+        });
+        if (!alive.current || scoring.current !== controller) return;
+        setFeedback({ kind: "ready", feedback: result });
+      } catch (error) {
+        if (!alive.current || scoring.current !== controller) return;
+        setFeedback({
+          kind: "error",
+          code: error instanceof AnswerFeedbackError ? error.code : "SERVER_ERROR",
+        });
+      } finally {
+        if (scoring.current === controller) scoring.current = null;
+      }
+    },
+    [sessionId, fetchNext],
+  );
+
+  // "Continue interview" (with or without feedback): ask the engine for the next step.
+  function continueInterview(answerId: string) {
+    scoring.current?.abort();
+    scoring.current = null;
+    setFeedbackCollapsed(false);
+    void fetchNext(answerId, false);
+  }
+
   // Loads the saved session and resumes it. Callers show the loading state themselves.
   const start = useCallback(async () => {
     try {
@@ -162,13 +218,16 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
       const last = loaded.turns.at(-1);
       if (last && !last.answer) {
         setPhase({ kind: "answering" });
+      } else if (last?.answer) {
+        // UC-06 AF8: the last answer has no next question yet → show its feedback again first.
+        await evaluate(last.answer.id, last.answer.content);
       } else {
-        await fetchNext(last?.answer?.id ?? null, !last);
+        await fetchNext(null, true);
       }
     } catch (error) {
       if (alive.current) setPhase({ kind: "load-error", code: codeOf(error) });
     }
-  }, [sessionId, fetchNext]);
+  }, [sessionId, fetchNext, evaluate]);
 
   // Start once per page. In `npm run dev`, React Strict Mode runs effects twice;
   // without this guard the page asks the API for the same turn twice (409 in the console).
@@ -226,7 +285,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     );
     setDraft("");
     answerMeta.current = { inputMode: "text", durationSeconds: null };
-    await fetchNext(answerId, false);
+    await evaluate(answerId, content);
   }
 
   function retry() {
@@ -241,6 +300,8 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
 
   async function confirmEndInterview() {
     if (!session) return;
+    scoring.current?.abort();
+    scoring.current = null;
     const active = generation.current;
     generation.current = null;
     active?.abort();
@@ -381,7 +442,24 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           </div>
         )}
 
-        {ended ? (
+        {phase.kind === "feedback" && last?.answer ? (
+          <AnswerFeedback
+            text={FEEDBACK_TEXT[session.settings.language]}
+            language={session.settings.language}
+            question={last.question}
+            answer={last.answer.content}
+            state={feedback}
+            collapsed={feedbackCollapsed}
+            onBack={() => {
+              setFeedbackCollapsed(true);
+              transcriptRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            onShow={() => setFeedbackCollapsed(false)}
+            onRetry={() => void evaluate(phase.answerId, last.answer?.content ?? "")}
+            onCancel={() => scoring.current?.abort()}
+            onContinue={() => continueInterview(phase.answerId)}
+          />
+        ) : ended ? (
           <EndScreen
             text={text}
             session={session}

@@ -3,6 +3,8 @@ import { InterviewChatError } from "./types";
 
 // Sample interview used when NEXT_PUBLIC_INTERVIEW_MOCK=1 (no database, no Gemini).
 // Open /interview/demo (Vietnamese) or /interview/demo-en (English).
+// An id containing "behavioral" (for example /interview/demo-behavioral) makes a behavioural
+// interview, so the Answer Feedback screen shows the STAR score (SCRUM-175).
 // Rules copied from docs/api/INTERVIEW_FLOW_CONTEXT_v1.md, simplified:
 // a short answer (< 15 words) gets one follow-up, otherwise the next topic;
 // the interview ends after plannedQuestions main questions are answered.
@@ -51,7 +53,7 @@ function store(id: string): MockStore {
         status: "in_progress",
         startedAt: new Date().toISOString(),
         settings: {
-          type: "technical",
+          type: id.includes("behavioral") ? "behavioral" : "technical",
           difficulty: "medium",
           language,
           targetPosition: "Frontend Intern",
