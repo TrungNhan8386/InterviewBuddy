@@ -21,6 +21,9 @@ export interface InterviewPolicy {
 }
 export class InterviewerError extends Error {
   code: string; status: number;
+  validationReason?: string;
+  rejectedQuestion?: string | null;
+  rejectedAction?: InterviewAction;
   constructor(code: string, message: string, status?: number);
 }
 export const CONTRACT_VERSION: string;

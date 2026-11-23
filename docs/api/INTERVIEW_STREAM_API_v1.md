@@ -43,7 +43,7 @@ As of 6 November 2026, `STOP` ends provider consumption immediately. The reader 
 
 Preview is deliberately provisional: structural or policy failure after a preview produces an error, clears the draft and saves no question. SQL is called only after validation. The full-history four-turn/summary projection, ownership checks, atomic claim/finish/release and replay contract are preserved. No database transaction remains open while Gemini streams.
 
-Cancelling the browser stream or request aborts upstream consumption and releases an uncommitted reservation. An uncertain acknowledgement after SQL commit retains the reservation so an explicit retry can recover the saved question without another model call. There is no automatic billable retry or canned fallback question.
+Cancelling the browser stream or request aborts upstream consumption and releases an uncommitted reservation. An uncertain acknowledgement after SQL commit retains the reservation so an explicit retry can recover the saved question without another model call. SCRUM-133 permits one server-side repair only for a duplicate question, an illegal action, or a closing declaration disguised as a question. Repair keeps the same reservation/anchor, consumes its own AI allowance, and shares the original generation deadline. Other failures require explicit retry; no canned fallback question is used. During streamed repair, no second set of deltas is appended: `complete` replaces the provisional draft with the validated question. If repair fails, `error` clears the draft as before.
 
 ## Browser integration
 
