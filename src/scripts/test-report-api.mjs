@@ -121,6 +121,15 @@ const rBad = await call('GET', '/api/report/not-a-uuid', A.token);
 expect('8. Another user -> 404, signed out -> 401, invalid id -> 404',
   rB.status === 404 && rB.body?.error?.code === 'NOT_FOUND' && rAnon.status === 401 && rBad.status === 404, { rB: rB.status, rAnon: rAnon.status, rBad: rBad.status });
 
+const pdf = await fetch(`${base}/api/report/${sid}/pdf`, { headers: { Authorization: `Bearer ${A.token}` } });
+const pdfBytes = new Uint8Array(await pdf.arrayBuffer());
+const pdfB = await call('GET', `/api/report/${sid}/pdf`, B.token);
+const usageAfterPdf = await aiCalls();
+expect('8b. PDF export (UC-14): attachment with the saved report, no AI call; another user -> 404',
+  pdf.status === 200 && pdf.headers.get('content-type') === 'application/pdf' && /^attachment; filename="interviewbuddy-report-\d{4}-\d{2}-\d{2}\.pdf"$/.test(pdf.headers.get('content-disposition') ?? '')
+  && new TextDecoder().decode(pdfBytes.subarray(0, 5)) === '%PDF-' && pdfBytes.length > 5000 && usageAfterPdf === usageAfterSecond && pdfB.status === 404,
+  { status: pdf.status, type: pdf.headers.get('content-type'), disposition: pdf.headers.get('content-disposition'), bytes: pdfBytes.length, pdfB: pdfB.status });
+
 const open = await interview('behavioral', [{ kind: 'main', topic: 'Teamwork', question: 'Kể về một lần bất đồng.', answer: 'Em đã trao đổi với nhóm.', scores: [6, 5, 6, 6, 5.8] }], { end: false });
 const rOpen = await call('GET', `/api/report/${open}`, A.token);
 expect('9. Session still in progress -> 409 SESSION_NOT_COMPLETED', rOpen.status === 409 && rOpen.body?.error?.code === 'SESSION_NOT_COMPLETED', rOpen);
