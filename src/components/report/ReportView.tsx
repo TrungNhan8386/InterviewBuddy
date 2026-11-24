@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import PracticeQuestions from "@/components/practice/PracticeQuestions";
 import { REPORT_TEXT } from "@/lib/report-view/text";
 import type { ReportCriterion, ReportResponse, ReportTimelineItem } from "@/lib/report-view/types";
 
@@ -272,6 +273,9 @@ export default function ReportView({ report, onRetrySummary }: Props) {
           ))}
         </ol>
       </Card>
+
+      {/* Targeted practice questions (UC-10). Owner: Khang, SCRUM-203/204. */}
+      <PracticeQuestions sessionId={report.sessionId} language={report.settings.language} />
 
       <p className="text-xs text-slate-500">{t.aiNotice}</p>
     </div>
