@@ -134,8 +134,8 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     statTimeOf: (m) => `trên ${m} phút`,
     reportTitle: "Báo cáo chi tiết",
     reportSoon:
-      "Chấm điểm từng câu và báo cáo tổng kết sẽ có ở bản Build 2. Các câu trả lời của bạn đã được lưu để tạo báo cáo.",
-    reportButton: "Xem báo cáo (sắp có)",
+      "Xem điểm từng tiêu chí, điểm mạnh, điểm cần cải thiện và dòng thời gian của buổi này.",
+    reportButton: "Xem báo cáo",
     noAnswers: "Bạn chưa trả lời câu nào nên buổi này không có báo cáo.",
     reviewTranscript: "Xem lại hội thoại",
     emptyAnswer: "Hãy viết câu trả lời trước khi gửi.",
@@ -256,8 +256,8 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     statTimeOf: (m) => `of ${m} min`,
     reportTitle: "Detailed report",
     reportSoon:
-      "Per-answer scores and the summary report come in Build 2. Your answers are saved so the report can be built from them.",
-    reportButton: "View report (coming soon)",
+      "See the score by criterion, strengths, areas to improve and the timeline of this session.",
+    reportButton: "View report",
     noAnswers: "You did not answer any question, so this session has no report.",
     reviewTranscript: "Review the conversation",
     emptyAnswer: "Please write an answer before sending.",
