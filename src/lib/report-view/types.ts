@@ -1,7 +1,8 @@
-// Report page (Screen 6, UC-09). Owner: Tài. Jira: SCRUM-185 (skeleton, W7), W8: connect to the API.
-// Shape of GET /api/report/{sessionId} (Nhân, SCRUM-186, docs/api/REPORT_API_v1.md).
-// Copied from src/lib/report/report-service.d.mts on branch feat/scrum-186-report-backend, which is
-// not merged yet. After the merge, import ReportResponse from there and delete this copy.
+// Report page (Screen 6, UC-09). Owner: Tài. Jira: SCRUM-185 (skeleton, W7), SCRUM-198 (connected, W8).
+// Shape of GET /api/report/{sessionId} (Nhân, SCRUM-186, docs/api/REPORT_API_v1.md; server types in
+// src/lib/report/report-service.d.mts). This copy is a little narrower: settings.type and
+// settings.difficulty are unions, so the page text can be typed per value. parseReport() in
+// client.ts checks the main parts of a response before it is used.
 
 export type ReportCriterion = "content" | "structure" | "clarity" | "confidence";
 

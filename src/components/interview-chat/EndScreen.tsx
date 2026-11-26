@@ -20,8 +20,8 @@ function formatDuration(ms: number) {
   return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
 }
 
-// SCRUM-128: end-of-interview screen. The report itself (score, criteria, timeline)
-// comes in Week 8 (F7, Nhân backend + Tài UI); until then this is a placeholder.
+// SCRUM-128: end-of-interview screen. The report itself (score, criteria, timeline) is the
+// Report page /reports/{sessionId} (UC-09, SCRUM-198); the button below links to it.
 export default function EndScreen({ text, session, reason, endedAt, onReview }: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -71,9 +71,12 @@ export default function EndScreen({ text, session, reason, endedAt, onReview }: 
         <h3 className="text-sm font-semibold">{text.reportTitle}</h3>
         <p className="mt-1 text-sm text-slate-600">{answered.length > 0 ? text.reportSoon : text.noAnswers}</p>
         {answered.length > 0 && (
-          <Button variant="secondary" className="mt-3 w-full sm:w-auto" disabled>
+          <Link
+            href={`/reports/${session.id}`}
+            className="mt-3 inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-300 px-4 text-sm font-medium text-slate-700 hover:bg-slate-100 sm:w-auto"
+          >
             {text.reportButton}
-          </Button>
+          </Link>
         )}
       </div>
 
