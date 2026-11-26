@@ -74,6 +74,7 @@ test('timeline lists every question in order with time and score', () => {
     [1, 'main', 60, true, 7.6], [2, 'follow_up', 120, true, 5.8], [3, 'main', 180, true, null], [4, 'main', 240, false, null],
   ]);
   assert.deepEqual(timeline[0].scores, { content: 8, structure: null, clarity: 8, confidence: 7 });
+  assert.deepEqual(timeline.map((t) => t.answerId), ['a1', 'a2', 'a3', null]);
 });
 
 test('buildReport needs at least one scored answer', () => {
