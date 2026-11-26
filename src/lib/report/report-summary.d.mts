@@ -1,4 +1,5 @@
 export const REPORT_PROMPT_VERSION: string;
+export const REPORT_SUMMARY_BUDGET_MS: number;
 export class ReportSummaryError extends Error {
   code: string;
 }

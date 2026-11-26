@@ -8,6 +8,12 @@ import { SUMMARY_SCHEMA, validateSummary } from './report-builder.mjs';
 
 export const REPORT_PROMPT_VERSION = REPORT_PROMPT_CONFIG.version;
 
+// UC-09 asks for the report within 30 seconds. Loading the session takes a few
+// seconds, so the summary gets at most 20 s even when GEMINI_TIMEOUT_MS (shared with
+// the interviewer, 30 s by default) is larger. After that the report is returned with
+// summary "unavailable" and a Try again button (Build 2 test UC09-01, SCRUM-222).
+export const REPORT_SUMMARY_BUDGET_MS = 20000;
+
 export class ReportSummaryError extends Error {
   constructor(code) {
     super(code);
@@ -32,7 +38,7 @@ export function createReportSummaryProvider({ env = process.env, fetchImpl = glo
     async summarize(input, { signal } = {}) {
       const apiKey = env.GEMINI_API_KEY?.trim();
       if (!apiKey) throw new ReportSummaryError('AI_NOT_CONFIGURED');
-      const timeoutMs = Number(env.GEMINI_TIMEOUT_MS || 30000);
+      const timeoutMs = Math.min(Number(env.GEMINI_TIMEOUT_MS || REPORT_SUMMARY_BUDGET_MS), REPORT_SUMMARY_BUDGET_MS);
       if (!/^[a-zA-Z0-9._-]{1,100}$/u.test(model) || !Number.isInteger(timeoutMs) || timeoutMs < 1000 || timeoutMs > 45000) {
         throw new ReportSummaryError('AI_CONFIGURATION_ERROR');
       }
