@@ -5,6 +5,7 @@ import type { Evidence } from "@/lib/answer-feedback/types";
 type Props = { text: FeedbackText; answer: string; evidence: Evidence[] };
 
 const MARK: Record<Evidence["effect"], string> = {
+  neutral: "bg-indigo-100 text-indigo-900",
   positive: "bg-emerald-100 text-emerald-900",
   negative: "bg-amber-100 text-amber-900",
 };

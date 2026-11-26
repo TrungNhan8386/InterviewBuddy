@@ -27,7 +27,7 @@ export type ChatQuestion = {
   position: number;
 };
 
-export type ChatAnswer = { id: string; content: string };
+export type ChatAnswer = { id: string; content: string; inputMode?: "text" | "voice"; durationSeconds?: number | null; createdAt?: string };
 
 // UC-07: how the answer was given. durationSeconds is the speaking time of a voice answer
 // (used for the speaking pace in the report, UC-09); null for typed answers.

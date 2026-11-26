@@ -1,5 +1,6 @@
 "use client";
 
+import { canRetryFeedback } from "@/lib/answer-feedback/transport.mjs";
 import { useEffect, useRef } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -21,6 +22,7 @@ type Props = {
   language: InterviewLanguage;
   question: ChatQuestion;
   answer: string;
+  durationSeconds?: number | null;
   state: FeedbackState;
   // "Back to question" hides the feedback while the user reads the transcript (UC-08 AF2).
   collapsed: boolean;
@@ -112,14 +114,14 @@ export default function AnswerFeedback(props: Props) {
   }
 
   if (state.kind === "error") {
-    const canRetry = !["FEEDBACK_UNAVAILABLE", "NOT_FOUND", "UNAUTHORIZED", "BAD_INPUT"].includes(state.code);
+    const canRetry = canRetryFeedback(state.code);
     return (
       <Card className="space-y-3" role="alert" data-testid="answer-feedback-error">
         <h2 ref={headingRef} tabIndex={-1} className="scroll-mt-4 text-lg font-semibold outline-none">
           {text.title}
         </h2>
         <p className="text-sm font-medium text-red-800">{text.errorTitle}</p>
-        <p className="text-sm text-red-700">{text.errors[state.code]}</p>
+        <p className="text-sm text-red-700">{text.errors[state.code] || text.errors.SERVER_ERROR}</p>
         <div className="flex flex-col gap-2 sm:flex-row">
           {canRetry && <Button onClick={props.onRetry}>{text.retry}</Button>}
           <Button variant="secondary" onClick={props.onContinue}>
@@ -147,11 +149,14 @@ export default function AnswerFeedback(props: Props) {
           {question.content}
         </p>
         <p className="mt-0.5 text-xs text-slate-500">{text.answeredAt(time)}</p>
+        {typeof props.durationSeconds === "number" && props.durationSeconds > 0 && (
+          <p className="text-xs text-slate-500">{language === "vi" ? "Thời lượng nói" : "Speaking duration"}: {props.durationSeconds}s</p>
+        )}
       </div>
 
       <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-start">
         <ScoreRing score={feedback.overall} label={text.overall} outOf={text.outOf10} />
-        <RubricScores text={text} scores={feedback.scores} />
+        <RubricScores text={text} scores={feedback.scores} reasons={feedback.reasons} />
       </div>
 
       <div className="flex flex-col gap-3 md:flex-row">
