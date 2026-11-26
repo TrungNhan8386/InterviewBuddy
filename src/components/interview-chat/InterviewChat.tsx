@@ -280,7 +280,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
     if (!alive.current) return;
     setSession((s) =>
       s
-        ? { ...s, turns: s.turns.map((t) => (t.question.id === last.question.id ? { ...t, answer: { id: answerId, content } } : t)) }
+        ? { ...s, turns: s.turns.map((t) => (t.question.id === last.question.id ? { ...t, answer: { id: answerId, content, inputMode: meta.inputMode, durationSeconds: meta.durationSeconds } } : t)) }
         : s,
     );
     setDraft("");
@@ -448,6 +448,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
             language={session.settings.language}
             question={last.question}
             answer={last.answer.content}
+            durationSeconds={last.answer.inputMode === "voice" ? last.answer.durationSeconds : null}
             state={feedback}
             collapsed={feedbackCollapsed}
             onBack={() => {

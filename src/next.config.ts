@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
   // pdf-parse (used by /api/extract-cv) loads the pdf.js worker from its own
   // folder at runtime, so it must not be bundled.
   serverExternalPackages: ["pdf-parse"],
+  // The report PDF (UC-14) reads its font from disk at runtime.
+  outputFileTracingIncludes: {
+    "/api/report/[sessionId]/pdf": ["./assets/fonts/**"],
+  },
   turbopack: {
     rules: {
       "*.css": {

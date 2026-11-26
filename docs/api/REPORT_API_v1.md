@@ -23,7 +23,7 @@ Sign-in as in the [Session API](INTERVIEW_SESSION_API_v1.md): the session cookie
 2. Computes the scores, the speaking indicators and the timeline **in code** on every request, so the report is never out of date.
 3. On the first request it asks Gemini once for the summary, strengths and areas to improve of the whole session. This counts as 1 call of the daily AI limit.
 4. Saves the result in `reports` (one row per session). Later requests reuse the saved summary and make no AI call.
-5. If the summary fails (AI busy, timeout, daily limit), the report is still returned with `summary.status = "unavailable"` (UC-09 alternative flow 2). Gemini is tried again only with `?retry=summary`, so opening the report never uses the AI limit by itself.
+5. The summary gets at most 20 seconds, so the report is always answered within the 30 seconds of UC-09. If the summary fails (AI busy, timeout, daily limit), the report is still returned with `summary.status = "unavailable"` (UC-09 alternative flow 2). Gemini is tried again only with `?retry=summary`, so opening the report never uses the AI limit by itself.
 
 ## 3. Response (200)
 
@@ -90,12 +90,25 @@ Body: `{ "error": { "code", "message" } }`.
 - **Answer duration:** speaking pace uses `answers.duration_seconds`. The Chat page sends it as `durationSeconds` in `POST /api/interview/{id}/answers` ([Persistence API §4](INTERVIEW_PERSISTENCE_API_v1.md)); Tài's voice input must fill it.
 - **Practice questions (Khang):** read the two lowest values of `criteria` (ignore `null`), or the saved `reports.criteria_scores`.
 
-## 6. How to test
+## 6. PDF export (UC-14, SCRUM-225)
+
+```http
+GET /api/report/{sessionId}/pdf
+```
+
+- Same sign-in, data and errors (§4, JSON body) as `GET /api/report/{sessionId}`. The saved AI summary is reused; the PDF never retries it, so export after "Try again" if the summary was unavailable.
+- 200: `Content-Type: application/pdf`, `Content-Disposition: attachment; filename="interviewbuddy-report-YYYY-MM-DD.pdf"` (day of the interview, Vietnam time), `Cache-Control: private, no-store`.
+- Content, in the session language: title and settings, overall score and trend, criteria bars (STAR left out when it does not apply), speaking indicators, AI summary with strengths and areas to improve (or a note that it is unavailable), and the timeline. Every page has the "practice guidance, Confidence is an estimate" notice and page numbers.
+- Font: Geist, the app's font (`src/assets/fonts`, SIL Open Font License), which has every Vietnamese letter. Characters it cannot draw (emoji, other scripts) are printed as `?`.
+- Code: `src/lib/report/report-pdf.mjs` (pdf-lib), route `src/app/api/report/[sessionId]/pdf/route.ts`. Sample: [examples/report.sample.pdf](examples/report.sample.pdf), made from the sample response.
+- **Report page (Tài, W9):** the Export PDF button can be a plain link: `<a href={`/api/report/${sessionId}/pdf`}>`. The cookie signs the request in and the browser downloads the file. On an error the response is JSON, so to show a message, `fetch` it first and check `response.ok`.
+
+## 7. How to test
 
 ```bash
-npm test                    # tests/report.test.mjs: scores, fillers, pace, timeline, summary, service (no network)
+npm test                    # tests/report.test.mjs and tests/report-pdf.test.mjs (no network)
 npm run dev                 # then, in another terminal:
-npm run test:report-api     # 10 checks against Supabase; makes 1 Gemini call
+npm run test:report-api     # 11 checks against Supabase (incl. the PDF); makes 1 Gemini call
 ```
 
 ## Change log
@@ -103,3 +116,5 @@ npm run test:report-api     # 10 checks against Supabase; makes 1 Gemini call
 | Version | Date | Change |
 | --- | --- | --- |
 | v1 | 19/11/2026 | First version |
+| v1.1 | 24/11/2026 | The AI summary is limited to 20 s (Build 2 test UC09-01 took 34 s when Gemini was slow). `npm run test:uc09-build2` runs the UC-09 Build 2 test cases. |
+| v1.2 | 24/11/2026 | §6 PDF export `GET /api/report/{sessionId}/pdf` (UC-14, SCRUM-225) |

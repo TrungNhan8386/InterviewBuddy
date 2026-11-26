@@ -24,7 +24,7 @@ type FeedbackText = {
   whyTitle: string;
   whyHint: string;
   noEvidence: string;
-  effect: Record<"positive" | "negative", string>;
+  effect: Record<"positive" | "negative" | "neutral", string>;
   outlineTitle: string;
   outlineKeyPoints: string;
   star: Record<"situation" | "task" | "action" | "result", string>;
@@ -66,7 +66,7 @@ const vi: FeedbackText = {
   whyTitle: "Vì sao có điểm này",
   whyHint: "Các câu được tô màu là lời của chính bạn mà AI dùng làm bằng chứng.",
   noEvidence: "AI không trích được câu cụ thể nào từ câu trả lời.",
-  effect: { positive: "Điểm cộng", negative: "Điểm trừ" },
+  effect: { positive: "Điểm cộng", negative: "Điểm trừ", neutral: "Bằng chứng" },
   outlineTitle: "Gợi ý dàn ý câu trả lời",
   outlineKeyPoints: "Các ý chính nên có",
   star: { situation: "Situation – Tình huống", task: "Task – Nhiệm vụ", action: "Action – Hành động", result: "Result – Kết quả" },
@@ -115,7 +115,7 @@ const en: FeedbackText = {
   whyTitle: "Why this score",
   whyHint: "Highlighted sentences are your own words that the AI used as evidence.",
   noEvidence: "The AI did not quote any specific sentence from your answer.",
-  effect: { positive: "Helped", negative: "Lowered" },
+  effect: { positive: "Helped", negative: "Lowered", neutral: "Evidence" },
   outlineTitle: "Suggested answer outline",
   outlineKeyPoints: "Key points to cover",
   star: { situation: "Situation", task: "Task", action: "Action", result: "Result" },

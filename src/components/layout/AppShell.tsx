@@ -12,7 +12,7 @@ const navigation = [
   { label: "Analysis", href: "/analysis", ready: true },
   { label: "Reports", href: "/reports", ready: false },
   { label: "Practice Plan", href: "/practice-plan", ready: true },
-  { label: "History", href: "/history", ready: false },
+  { label: "History", href: "/history", ready: true },
   { label: "Profile", href: "/profile", ready: true },
   { label: "Settings", href: "/settings", ready: true },
 ];
