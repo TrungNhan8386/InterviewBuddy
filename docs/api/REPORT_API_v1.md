@@ -53,7 +53,7 @@ Sign-in as in the [Session API](INTERVIEW_SESSION_API_v1.md): the session cookie
   },
   "timeline": [
     { "position": 1, "kind": "main", "topic": "React rendering", "question": "Bạn xử lý component render chậm như thế nào?",
-      "askedAt": "…", "offsetSeconds": 0, "answered": true, "answerWords": 20, "durationSeconds": null,
+      "askedAt": "…", "offsetSeconds": 0, "answered": true, "answerId": "…", "answerWords": 20, "durationSeconds": null,
       "score": 7.5, "scores": { "content": 8, "structure": null, "clarity": 7, "confidence": 7 } }
   ]
 }
@@ -68,7 +68,7 @@ Sign-in as in the [Session API](INTERVIEW_SESSION_API_v1.md): the session cookie
 | `speaking.avgAnswerWords` | Average words per answered question. |
 | `speaking.wordsPerMinute` | Speaking pace, only from answers that have a duration (voice answers, Tài's UC-07). `paceAvailable = false` and `null` when every answer was typed → show "not available for typed answers" (UC-09 AF4). |
 | `summary` | `status: "ready"` with `text`, 1–3 `strengths` and 1–3 `improvements`, in the session language. `status: "unavailable"` with `errorCode` → show the scores anyway and a "Try again" button that calls `?retry=summary`. |
-| `timeline` | Every question in order, including follow-ups and an unanswered last question (`answered: false`, `score: null`). `offsetSeconds` is the time after the interview started (timeline axis). |
+| `timeline` | Every question in order, including follow-ups and an unanswered last question (`answered: false`, `score: null`). `offsetSeconds` is the time after the interview started (timeline axis). `answerId` is the saved answer (null when not answered): clicking an answered question opens its saved feedback with `GET /api/evaluate-answer?answerId=…`, which never calls the AI (UC-09 step 7, UC08-04). |
 
 `summary.errorCode` values: `AI_DAILY_LIMIT`, `AI_RATE_LIMITED`, `AI_UNAVAILABLE`, `AI_TIMEOUT`, `AI_CONTENT_BLOCKED`, `INVALID_OUTPUT`, `AI_NOT_CONFIGURED`, `AI_CONFIGURATION_ERROR`, and `SUMMARY_NOT_GENERATED` (an earlier attempt failed and no retry was requested).
 
@@ -118,3 +118,4 @@ npm run test:report-api     # 11 checks against Supabase (incl. the PDF); makes 
 | v1 | 19/11/2026 | First version |
 | v1.1 | 24/11/2026 | The AI summary is limited to 20 s (Build 2 test UC09-01 took 34 s when Gemini was slow). `npm run test:uc09-build2` runs the UC-09 Build 2 test cases. |
 | v1.2 | 24/11/2026 | §6 PDF export `GET /api/report/{sessionId}/pdf` (UC-14, SCRUM-225) |
+| v1.3 | 27/11/2026 | `timeline[].answerId`, so the Report page can open the saved feedback of a question (Build 2 test UC09-01) |

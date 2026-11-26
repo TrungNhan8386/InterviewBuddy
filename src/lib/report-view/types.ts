@@ -26,6 +26,8 @@ export interface ReportTimelineItem {
   /** Seconds after the interview started. */
   offsetSeconds: number | null;
   answered: boolean;
+  /** Id of the saved answer, for GET /api/evaluate-answer?answerId=…; null when not answered. */
+  answerId: string | null;
   answerWords: number;
   durationSeconds: number | null;
   /** Overall score of the answer (0–10); null when not scored. */

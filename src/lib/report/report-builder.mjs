@@ -124,6 +124,8 @@ export function buildReport(session, questionRows, previous = null) {
       askedAt,
       offsetSeconds: offset,
       answered: Boolean(answer),
+      // Opens the saved feedback of this answer: GET /api/evaluate-answer?answerId= (UC-09 step 7, UC08-04).
+      answerId: answer?.id ?? null,
       answerWords: answer ? (Number.isInteger(answer.word_count) ? answer.word_count : countWords(answer.content)) : 0,
       durationSeconds: answer && answer.duration_seconds != null ? Number(answer.duration_seconds) : null,
       score: feedback ? Number(feedback.overall_score) : null,
