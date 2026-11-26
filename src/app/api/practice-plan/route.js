@@ -1,0 +1,13 @@
+import 'server-only';
+import { getSignedInClient, isSupabaseConfigured } from '@/lib/interview/http';
+import { createAiCallCounter } from '@/lib/ai/daily-limit.mjs';
+import { planningHandlers } from '@/lib/planning/http.mjs';
+import { PlanError } from '@/lib/planning/contract.mjs';
+import { createPlanningService } from '@/lib/planning/service.mjs';
+import { createPlanningRepository } from '@/lib/planning/repository.mjs';
+import { createPlanningProvider } from '@/lib/planning/provider.mjs';
+export const runtime='nodejs';
+export const maxDuration=60;
+const handlers=planningHandlers({authenticate:r=>{if(!isSupabaseConfigured)throw new PlanError('DATABASE_NOT_READY',503);return getSignedInClient(r);},makeRepository:a=>createPlanningRepository(a.supabase),makeService:a=>createPlanningService({repository:createPlanningRepository(a.supabase),provider:createPlanningProvider(),consume:createAiCallCounter(a.supabase)})});
+export const GET=handlers.GET;
+export const POST=handlers.POST;

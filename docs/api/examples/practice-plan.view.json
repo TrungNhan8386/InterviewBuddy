@@ -1,0 +1,31 @@
+{
+  "interviewDate": "2026-11-27",
+  "targetRole": "Frontend Intern",
+  "weakCriteria": [],
+  "tasks": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001:2026-11-25",
+      "date": "2026-11-25",
+      "task": "Explain one React project decision in two minutes.",
+      "reason": "Build a concise, concrete explanation without inventing work experience.",
+      "criterion": "clarity",
+      "done": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000001:2026-11-26",
+      "date": "2026-11-26",
+      "task": "Rewrite the explanation as problem, action and outcome.",
+      "reason": "Build a concise, concrete explanation without inventing work experience.",
+      "criterion": "clarity",
+      "done": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000001:2026-11-27",
+      "date": "2026-11-27",
+      "task": "Review the examples and prepare two questions for the interviewer.",
+      "reason": "Build a concise, concrete explanation without inventing work experience.",
+      "criterion": "clarity",
+      "done": false
+    }
+  ]
+}
