@@ -1,0 +1,362 @@
+{
+  "base": "https://interviewbuddy-main.vercel.app",
+  "aiDownBase": "http://localhost:3005",
+  "runAt": "2026-11-24T09:31:13.129Z",
+  "reportPage": "login redirect (signed out)",
+  "cases": [
+    {
+      "id": "UC09-01",
+      "name": "View report of a completed Behavioral interview",
+      "status": "Pass",
+      "checks": [
+        {
+          "label": "200 and ready within 30 s",
+          "pass": true
+        },
+        {
+          "label": "Summary cards: overall 7/10, type behavioral, duration, 5 main + 1 follow-up",
+          "pass": true
+        },
+        {
+          "label": "Trend vs the previous completed session with a report (S0, 6.0 -> +1.0)",
+          "pass": true
+        },
+        {
+          "label": "Bar chart data: Content 7, STAR 6, Clarity 8, Confidence 7 (STAR applies)",
+          "pass": true
+        },
+        {
+          "label": "Strengths and areas to improve written by AI (1 AI call)",
+          "pass": true
+        },
+        {
+          "label": "Filler words, speaking pace (voice), average answer length",
+          "pass": true
+        },
+        {
+          "label": "Timeline: 6 questions incl. the follow-up, each with time and score",
+          "pass": true
+        }
+      ],
+      "actual": {
+        "status": 200,
+        "ms": 8835,
+        "overview": {
+          "overallScore": 7,
+          "scale": 10,
+          "mainQuestions": 5,
+          "followUps": 1,
+          "answeredQuestions": 6,
+          "scoredAnswers": 6,
+          "startedAt": "2026-11-24T09:29:01.594141+00:00",
+          "endedAt": "2026-11-24T09:29:08.245+00:00",
+          "durationSeconds": 7,
+          "trend": {
+            "previousSessionId": "f237e149-4ddf-4d95-9cad-741cbb39bb88",
+            "previousOverallScore": 6,
+            "change": 1
+          }
+        },
+        "criteria": {
+          "content": 7,
+          "structure": 6,
+          "clarity": 8,
+          "confidence": 7
+        },
+        "speaking": {
+          "answeredQuestions": 6,
+          "totalWords": 219,
+          "avgAnswerWords": 37,
+          "fillerWords": {
+            "total": 10,
+            "per100Words": 4.6,
+            "top": [
+              {
+                "word": "um",
+                "count": 5
+              },
+              {
+                "word": "you know",
+                "count": 5
+              }
+            ]
+          },
+          "paceAvailable": true,
+          "timedAnswers": 6,
+          "wordsPerMinute": 63
+        },
+        "summary": {
+          "status": "ready",
+          "text": "You demonstrated a consistent ability to clearly explain your project management approach during stressful situations. To improve, focus on providing more specific, measurable outcomes and refining your response structure to be more engaging.",
+          "strengths": [
+            "You provided clear, logical examples of how you broke down complex tasks into manageable work items.",
+            "Your responses demonstrated effective problem-solving skills, specifically regarding team deadlines."
+          ],
+          "improvements": [
+            "Improve your response structure by ensuring each answer follows the STAR format more strictly and avoiding repetitive content across answers.",
+            "Include more specific, measurable results in your examples to demonstrate the quantitative impact of your actions."
+          ]
+        },
+        "aiCalls": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "id": "UC09-02",
+      "name": "Technical interview with typed answers: STAR hidden, pace not available",
+      "status": "Pass",
+      "checks": [
+        {
+          "label": "200",
+          "pass": true
+        },
+        {
+          "label": "Only Content, Clarity, Confidence: STAR is null (not 0), structureApplies false",
+          "pass": true
+        },
+        {
+          "label": "Filler words and average answer length shown",
+          "pass": true
+        },
+        {
+          "label": "Speaking pace not available for typed answers",
+          "pass": true
+        }
+      ],
+      "actual": {
+        "status": 200,
+        "criteria": {
+          "content": 7,
+          "structure": null,
+          "clarity": 6,
+          "confidence": 6
+        },
+        "structureApplies": false,
+        "speaking": {
+          "answeredQuestions": 5,
+          "totalWords": 105,
+          "avgAnswerWords": 21,
+          "fillerWords": {
+            "total": 0,
+            "per100Words": 0,
+            "top": []
+          },
+          "paceAvailable": false,
+          "timedAnswers": 0,
+          "wordsPerMinute": null
+        }
+      }
+    },
+    {
+      "id": "UC09-03",
+      "name": "Reopen a saved report: no new AI call",
+      "status": "Pass",
+      "checks": [
+        {
+          "label": "200",
+          "pass": true
+        },
+        {
+          "label": "Summary, strengths and areas identical to the first time",
+          "pass": true
+        },
+        {
+          "label": "No AI call: daily counter unchanged",
+          "pass": true
+        },
+        {
+          "label": "Faster than the first open",
+          "pass": true
+        }
+      ],
+      "actual": {
+        "status": 200,
+        "firstMs": 8835,
+        "reopenMs": 2293,
+        "aiCalls": [
+          8,
+          8
+        ]
+      }
+    },
+    {
+      "id": "UC09-04",
+      "name": "First session / ended early: trend \"-\" and unanswered last question",
+      "status": "Pass",
+      "checks": [
+        {
+          "label": "200, built from the answered question only",
+          "pass": true
+        },
+        {
+          "label": "No earlier report: trend is null (page shows \"-\")",
+          "pass": true
+        },
+        {
+          "label": "Last question listed without a score (not 0)",
+          "pass": true
+        }
+      ],
+      "actual": {
+        "status": 200,
+        "overview": {
+          "overallScore": 5.8,
+          "scale": 10,
+          "mainQuestions": 2,
+          "followUps": 0,
+          "answeredQuestions": 1,
+          "scoredAnswers": 1,
+          "startedAt": "2020-01-01T03:00:00+00:00",
+          "endedAt": "2020-01-01T03:05:00+00:00",
+          "durationSeconds": 300,
+          "trend": null
+        },
+        "timeline": [
+          {
+            "answered": true,
+            "score": 5.8
+          },
+          {
+            "answered": false,
+            "score": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "UC09-05",
+      "name": "AI summary unavailable: rest of the report still works",
+      "status": "Pass",
+      "checks": [
+        {
+          "label": "AI down: 200 with scores, criteria, indicators and timeline",
+          "pass": true
+        },
+        {
+          "label": "Summary marked unavailable with an error code (page shows message + Try again)",
+          "pass": true
+        },
+        {
+          "label": "Reopening without \"Try again\" does not call the AI again",
+          "pass": true
+        },
+        {
+          "label": "AI restored + Try again (?retry=summary): strengths and areas appear",
+          "pass": true
+        }
+      ],
+      "actual": {
+        "down": {
+          "status": 200,
+          "summary": {
+            "status": "unavailable",
+            "errorCode": "AI_CONFIGURATION_ERROR",
+            "text": null,
+            "strengths": [],
+            "improvements": []
+          }
+        },
+        "reopen": {
+          "status": "unavailable",
+          "errorCode": "SUMMARY_NOT_GENERATED",
+          "text": null,
+          "strengths": [],
+          "improvements": []
+        },
+        "retry": {
+          "status": 200,
+          "summary": "ready"
+        }
+      }
+    },
+    {
+      "id": "UC09-06",
+      "name": "Report not found / belongs to another user",
+      "status": "Pass",
+      "checks": [
+        {
+          "label": "R-B exists for its owner (200)",
+          "pass": true
+        },
+        {
+          "label": "Another user's report -> 404 NOT_FOUND, no report data",
+          "pass": true
+        },
+        {
+          "label": "Random UUID -> 404 NOT_FOUND",
+          "pass": true
+        },
+        {
+          "label": "Both responses are identical (existence not revealed)",
+          "pass": true
+        }
+      ],
+      "actual": {
+        "own": 200,
+        "other": {
+          "status": 404,
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "Report not found."
+            }
+          },
+          "ms": 1208
+        },
+        "random": {
+          "status": 404,
+          "body": {
+            "error": {
+              "code": "NOT_FOUND",
+              "message": "Report not found."
+            }
+          },
+          "ms": 1203
+        }
+      }
+    },
+    {
+      "id": "UC09-07",
+      "name": "No answer has a score: report not ready",
+      "status": "Pass",
+      "checks": [
+        {
+          "label": "409 NO_SCORED_ANSWERS (\"report is not ready\"), no scores or chart data",
+          "pass": true
+        },
+        {
+          "label": "Try again re-checks and is still not ready",
+          "pass": true
+        },
+        {
+          "label": "No report row saved and no AI call",
+          "pass": true
+        }
+      ],
+      "actual": {
+        "first": {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "NO_SCORED_ANSWERS",
+              "message": "No answer of this interview has been scored yet."
+            }
+          },
+          "ms": 1527
+        },
+        "retry": {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "NO_SCORED_ANSWERS",
+              "message": "No answer of this interview has been scored yet."
+            }
+          },
+          "ms": 1456
+        }
+      }
+    }
+  ]
+}

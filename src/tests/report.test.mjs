@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import {
   buildReport, buildSummaryInput, countFillers, countWords, toReportRow, validateSummary,
 } from '../lib/report/report-builder.mjs';
-import { buildSummaryRequest, createReportSummaryProvider, ReportSummaryError } from '../lib/report/report-summary.mjs';
+import { buildSummaryRequest, createReportSummaryProvider, REPORT_SUMMARY_BUDGET_MS, ReportSummaryError } from '../lib/report/report-summary.mjs';
 import { createReportService, ReportError } from '../lib/report/report-service.mjs';
 import { AiLimitError } from '../lib/ai/daily-limit.mjs';
 
@@ -135,6 +135,24 @@ test('summary provider sends a bounded JSON request and maps errors', async () =
   assert.equal(await code(geminiResponse({ summary: 'x' })), 'INVALID_OUTPUT');
   assert.equal(await code(geminiResponse({ ...good, strengths: ['You are stupid'] })), 'INVALID_OUTPUT');
   assert.equal(await code(async () => { throw new TypeError('network'); }), 'AI_UNAVAILABLE');
+});
+
+test('summary is cut at 20 s so the report stays within 30 s, even with GEMINI_TIMEOUT_MS=30000', async () => {
+  const input = buildSummaryInput(session(), buildReport(session(), rows(), null), rows());
+  const budgets = [];
+  const original = AbortSignal.timeout;
+  AbortSignal.timeout = (ms) => { budgets.push(ms); return AbortSignal.abort(); };
+  try {
+    for (const value of ['30000', undefined, '5000']) {
+      const err = await createReportSummaryProvider({ env: { GEMINI_API_KEY: 'k', GEMINI_TIMEOUT_MS: value }, fetchImpl: async (_url, init) => { init.signal.throwIfAborted(); } })
+        .summarize(input).catch((e) => e);
+      assert.equal(err.code, 'AI_TIMEOUT');
+    }
+  } finally {
+    AbortSignal.timeout = original;
+  }
+  assert.deepEqual(budgets, [REPORT_SUMMARY_BUDGET_MS, REPORT_SUMMARY_BUDGET_MS, 5000]);
+  assert.equal(REPORT_SUMMARY_BUDGET_MS, 20000);
 });
 
 function fakeRepository({ sess = session(), saved = null, previous = null, questions = rows() } = {}) {

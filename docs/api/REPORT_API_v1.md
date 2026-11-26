@@ -23,7 +23,7 @@ Sign-in as in the [Session API](INTERVIEW_SESSION_API_v1.md): the session cookie
 2. Computes the scores, the speaking indicators and the timeline **in code** on every request, so the report is never out of date.
 3. On the first request it asks Gemini once for the summary, strengths and areas to improve of the whole session. This counts as 1 call of the daily AI limit.
 4. Saves the result in `reports` (one row per session). Later requests reuse the saved summary and make no AI call.
-5. If the summary fails (AI busy, timeout, daily limit), the report is still returned with `summary.status = "unavailable"` (UC-09 alternative flow 2). Gemini is tried again only with `?retry=summary`, so opening the report never uses the AI limit by itself.
+5. The summary gets at most 20 seconds, so the report is always answered within the 30 seconds of UC-09. If the summary fails (AI busy, timeout, daily limit), the report is still returned with `summary.status = "unavailable"` (UC-09 alternative flow 2). Gemini is tried again only with `?retry=summary`, so opening the report never uses the AI limit by itself.
 
 ## 3. Response (200)
 
@@ -103,3 +103,4 @@ npm run test:report-api     # 10 checks against Supabase; makes 1 Gemini call
 | Version | Date | Change |
 | --- | --- | --- |
 | v1 | 19/11/2026 | First version |
+| v1.1 | 24/11/2026 | The AI summary is limited to 20 s (Build 2 test UC09-01 took 34 s when Gemini was slow). `npm run test:uc09-build2` runs the UC-09 Build 2 test cases. |
