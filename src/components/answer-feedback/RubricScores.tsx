@@ -2,10 +2,10 @@ import type { FeedbackText } from "@/lib/answer-feedback/text";
 import { CRITERIA, type CriterionScores } from "@/lib/answer-feedback/types";
 import { scoreColor } from "./ScoreRing";
 
-type Props = { text: FeedbackText; scores: CriterionScores };
+type Props = { text: FeedbackText; scores: CriterionScores; reasons?: Partial<Record<keyof CriterionScores, string>> };
 
 // SCRUM-174/175: the four rubric scores. STAR is hidden for non-behavioural questions (UC-08 AF1).
-export default function RubricScores({ text, scores }: Props) {
+export default function RubricScores({ text, scores, reasons }: Props) {
   return (
     <div className="min-w-0 flex-1 space-y-3">
       <ul className="space-y-3">
@@ -39,7 +39,7 @@ export default function RubricScores({ text, scores }: Props) {
               >
                 <div className={`h-full rounded-full ${color.bar}`} style={{ width: `${value * 10}%` }} />
               </div>
-              <p className="mt-0.5 text-xs text-slate-500">{text.criteriaHint[criterion]}</p>
+              <p className="mt-0.5 text-xs text-slate-500">{reasons?.[criterion] || text.criteriaHint[criterion]}</p>
             </li>
           );
         })}

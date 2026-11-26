@@ -1,7 +1,7 @@
 // Types for the Answer Feedback screen (Screen 5, UC-08). Owner: Khang. Jira: SCRUM-172 (174–177).
 // Contract: POST /api/evaluate-answer (Hưng, SCRUM-166/168).
-// Hưng has not sent the sample yet (SCRUM-168), so this is the DRAFT in
-// docs/api/EVALUATE_ANSWER_CONTRACT_DRAFT.md. When the real sample arrives, update this file first.
+// View model adapted from the persisted backend contract by transport.mjs.
+// Wire contract: lib/feedback/types.ts and docs/api/ANSWER_FEEDBACK_API_v1.md.
 
 import type { ChatErrorCode, InterviewType } from "../interview-chat/types";
 
@@ -25,7 +25,7 @@ export type Evidence = {
   quote: string;
   comment: string;
   // "positive" = helped the score, "negative" = lowered it.
-  effect: "positive" | "negative";
+  effect: "positive" | "negative" | "neutral";
 };
 
 // Suggested answer outline: STAR for behavioural questions, key points otherwise.
@@ -38,6 +38,7 @@ export type AnswerFeedback = {
   answerId: string;
   questionType: InterviewType;
   scores: CriterionScores;
+  reasons?: Partial<Record<Criterion, string>>;
   overall: number; // 0–10, one decimal
   evidence: Evidence[];
   strengths: string[];

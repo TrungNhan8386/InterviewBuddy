@@ -1,0 +1,9 @@
+{
+  "note": "Synthetic UI fixtures; not measured API responses.",
+  "empty": {"plan": null},
+  "generalConsent": {"error": {"code": "GENERAL_PLAN_CONFIRMATION", "message": "Complete an interview first, or explicitly accept a general plan."}},
+  "invalidDate": {"error": {"code": "BAD_INPUT", "message": "Check the date, language and target position."}},
+  "planLimit": {"error": {"code": "PLAN_DAILY_LIMIT", "message": "Daily plan limit reached. Resets at 00:00 Vietnam time."}},
+  "busy": {"error": {"code": "GENERATION_IN_PROGRESS", "message": "A plan is being generated. Please wait."}},
+  "timeout": {"error": {"code": "AI_TIMEOUT", "message": "The plan could not be generated. Try again later; existing data is preserved."}}
+}
