@@ -113,13 +113,17 @@ export async function loadPractice(
   return parsePractice(await post("/api/practice/generate", { sessionId }, options.signal), sessionId);
 }
 
-// Creates (or reopens) the practice session of one question; the page then opens /interview/{id}.
-export async function startPractice(practiceQuestionId: string, options: { signal?: AbortSignal } = {}): Promise<string> {
+// Creates (or reopens) a practice session; the page then opens /interview/{id}.
+// mode "single": only this question (UC10-02). "all": every saved question in list order (UC10-03).
+export async function startPractice(
+  practiceQuestionId: string,
+  options: { signal?: AbortSignal; mode?: "single" | "all" } = {},
+): Promise<string> {
   if (PRACTICE_MOCK) {
     await wait(500, options.signal);
     return "mock-practice";
   }
-  const body = (await post("/api/practice/start", { practiceQuestionId }, options.signal)) as { sessionId?: unknown };
+  const body = (await post("/api/practice/start", { practiceQuestionId, mode: options.mode ?? "single" }, options.signal)) as { sessionId?: unknown };
   if (!isText(body.sessionId)) throw new PracticeViewError("SERVER_ERROR");
   return body.sessionId;
 }

@@ -28,7 +28,7 @@ type PracticeText = {
 
 const vi: PracticeText = {
   title: "Câu hỏi luyện tập theo điểm yếu",
-  intro: "Chọn từ 2 tiêu chí có điểm thấp nhất trong buổi này. Bấm một câu để luyện trong phiên ngắn 15 phút.",
+  intro: "Chọn từ 2 tiêu chí có điểm thấp nhất trong buổi này. Bấm “Luyện câu này” để luyện riêng một câu, hoặc “Bắt đầu phiên luyện tập” để luyện lần lượt tất cả. Không giới hạn thời gian.",
   generating: "AI đang soạn câu hỏi luyện tập…",
   generatingHint: "Chỉ soạn một lần cho mỗi báo cáo, lần sau mở lại sẽ hiện ngay.",
   focusLabel: (score) => `Điểm trung bình ${score}/10`,
@@ -74,7 +74,7 @@ const vi: PracticeText = {
 
 const en: PracticeText = {
   title: "Targeted practice questions",
-  intro: "Based on the 2 lowest-scoring criteria of this session. Pick a question to practise it in a short 15-minute session.",
+  intro: "Based on the 2 lowest-scoring criteria of this session. Press “Practice this question” for one question, or “Start practice session” to go through all of them in order. No time limit.",
   generating: "AI is writing your practice questions…",
   generatingHint: "They are written once per report and show instantly next time.",
   focusLabel: (score) => `Average ${score}/10`,

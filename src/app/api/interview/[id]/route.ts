@@ -22,7 +22,7 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/api/intervie
   const { id } = await ctx.params;
   if (!isUuid(id)) return apiError("NOT_FOUND");
 
-  const [session, questions] = await Promise.all([
+  const [session, questions, practice] = await Promise.all([
     auth.supabase
       .from("interview_sessions")
       .select(
@@ -37,6 +37,13 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/api/intervie
       .select("id, position, kind, topic, content, created_at, answers (id, content, input_mode, duration_seconds, created_at)")
       .eq("session_id", id)
       .order("position"),
+    // UC-10 (SCRUM-205, Khang): practice sessions have no timer and link back to the report.
+    // A separate query, so the chat keeps working before migration 20261127000000 is applied.
+    auth.supabase
+      .from("interview_sessions")
+      .select("practice_mode, practice_question_ids, practice_source_session_id")
+      .eq("id", id)
+      .maybeSingle(),
   ]);
 
   if (session.error || questions.error) {
@@ -55,5 +62,17 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/api/intervie
     turns,
     progress: toProgress(turns, base.settings.plannedQuestions),
     resume: toResumeState(row.status as SessionStatus, turns),
+    practice: toPractice(practice.error ? null : (practice.data as Record<string, unknown> | null)),
   });
+}
+
+// null for a normal interview; otherwise { mode, total, sourceSessionId }.
+function toPractice(row: Record<string, unknown> | null) {
+  if (!row || (row.practice_mode !== "single" && row.practice_mode !== "all")) return null;
+  const ids = Array.isArray(row.practice_question_ids) ? row.practice_question_ids : [];
+  return {
+    mode: row.practice_mode,
+    total: ids.length,
+    sourceSessionId: typeof row.practice_source_session_id === "string" ? row.practice_source_session_id : null,
+  };
 }

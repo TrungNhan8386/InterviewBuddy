@@ -36,9 +36,15 @@ export default function EndScreen({ text, session, reason, endedAt, onReview }: 
   const followUpsAnswered = answered.length - mainAnswered;
   const started = session.startedAt ? Date.parse(session.startedAt) : NaN;
   const limit = session.settings.durationMinutes * 60_000;
-  const used = endedAt !== null && Number.isFinite(started) ? Math.min(endedAt - started, limit) : null;
+  const practice = session.practice ?? null;
+  const used = endedAt !== null && Number.isFinite(started)
+    ? (practice ? endedAt - started : Math.min(endedAt - started, limit)) : null;
 
-  const stats: { label: string; value: string; sub?: string }[] = [
+  // UC-10 (SCRUM-205): a practice session has no follow-ups, no time limit and no report.
+  const stats: { label: string; value: string; sub?: string }[] = practice ? [
+    { label: text.statMain, value: `${mainAnswered}/${practice.total}` },
+    { label: text.statTime, value: used === null ? "--:--" : formatDuration(used), sub: text.practiceNoLimit },
+  ] : [
     { label: text.statMain, value: `${mainAnswered}/${session.settings.plannedQuestions}` },
     { label: text.statFollowUps, value: String(followUpsAnswered) },
     {
@@ -52,12 +58,14 @@ export default function EndScreen({ text, session, reason, endedAt, onReview }: 
     <Card className="space-y-4" data-testid="end-screen">
       <div className="text-center">
         <h2 ref={headingRef} tabIndex={-1} className="scroll-mt-4 text-lg font-semibold outline-none">
-          {text.endedTitle}
+          {practice ? text.practiceEndedTitle : text.endedTitle}
         </h2>
-        <p className="mt-1 text-sm text-slate-600">{text.endedReason[reason]}</p>
+        <p className="mt-1 text-sm text-slate-600">
+          {practice && reason === "completed" ? text.practiceEnded : text.endedReason[reason]}
+        </p>
       </div>
 
-      <dl className="grid grid-cols-3 gap-2 text-center">
+      <dl className={`grid gap-2 text-center ${practice ? "grid-cols-2" : "grid-cols-3"}`}>
         {stats.map((s) => (
           <div key={s.label} className="rounded-lg bg-slate-50 px-2 py-3">
             <dt className="text-xs text-slate-500">{s.label}</dt>
@@ -67,6 +75,19 @@ export default function EndScreen({ text, session, reason, endedAt, onReview }: 
         ))}
       </dl>
 
+      {practice ? (
+        <div className="rounded-lg border border-dashed border-slate-300 p-4">
+          <p className="text-sm text-slate-600">{text.practiceNoReport}</p>
+          {practice.sourceSessionId && (
+            <Link
+              href={`/reports/${practice.sourceSessionId}`}
+              className="mt-3 inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white hover:bg-indigo-700 sm:w-auto"
+            >
+              {text.backToReport}
+            </Link>
+          )}
+        </div>
+      ) : (
       <div className="rounded-lg border border-dashed border-slate-300 p-4">
         <h3 className="text-sm font-semibold">{text.reportTitle}</h3>
         <p className="mt-1 text-sm text-slate-600">{answered.length > 0 ? text.reportSoon : text.noAnswers}</p>
@@ -79,11 +100,14 @@ export default function EndScreen({ text, session, reason, endedAt, onReview }: 
           </Link>
         )}
       </div>
+      )}
 
       <div className="flex flex-col gap-2 sm:flex-row sm:justify-center">
         <Link
           href="/dashboard"
-          className="inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white hover:bg-indigo-700"
+          className={practice
+            ? "inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-4 text-sm font-medium text-slate-700 hover:bg-slate-100"
+            : "inline-flex min-h-11 items-center justify-center rounded-lg bg-indigo-600 px-4 text-sm font-medium text-white hover:bg-indigo-700"}
         >
           {text.toDashboard}
         </Link>

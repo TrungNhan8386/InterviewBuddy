@@ -1,3 +1,4 @@
+export type PracticeMode = 'single' | 'all';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 export type PracticeCriterion = 'content' | 'structure' | 'clarity' | 'confidence';
@@ -44,7 +45,7 @@ export interface PracticeRepository {
   questions(id: string): Promise<unknown[] | null>;
   saved(id: string): Promise<unknown[] | null>;
   insert(rows: unknown[]): Promise<unknown[] | null>;
-  start(practiceQuestionId: string): Promise<{ sessionId: string; resumed: boolean }>;
+  start(practiceQuestionId: string, mode?: PracticeMode): Promise<{ sessionId: string; resumed: boolean }>;
 }
 
 export function createPracticeRepository(supabase: SupabaseClient): PracticeRepository;
@@ -56,5 +57,5 @@ export function createPracticeService(deps: {
 }): {
   read(sessionId: string): Promise<PracticeResponse>;
   generate(sessionId: string, options?: { signal?: AbortSignal }): Promise<PracticeResponse>;
-  start(practiceQuestionId: string): Promise<{ sessionId: string; resumed: boolean }>;
+  start(practiceQuestionId: string, mode?: PracticeMode): Promise<{ sessionId: string; resumed: boolean }>;
 };

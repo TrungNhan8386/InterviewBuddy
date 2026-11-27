@@ -27,6 +27,7 @@ async function call<T>(operation: () => Promise<T>): Promise<T> {
 type SessionApiResponse = {
   id: string; status: SessionStatus; settings: ChatSettings; startedAt: string | null; turns: ChatSession["turns"];
   analysis: null | { result?: { matched?: { skill: string }[]; missing?: { skill: string }[] } };
+  practice?: ChatSession["practice"];
 };
 export async function loadChatSession(id: string): Promise<ChatSession> {
   if (USE_MOCK) return mockLoadSession(id);
@@ -34,7 +35,8 @@ export async function loadChatSession(id: string): Promise<ChatSession> {
   const result = api.analysis?.result;
   return { id: api.id, status: api.status, startedAt: api.startedAt, settings: api.settings, turns: api.turns,
     skills: result ? { matched: (result.matched ?? []).map((item) => item.skill).filter(Boolean),
-      missing: (result.missing ?? []).map((item) => item.skill).filter(Boolean) } : null };
+      missing: (result.missing ?? []).map((item) => item.skill).filter(Boolean) } : null,
+    practice: api.practice ?? null };
 }
 export async function saveAnswer(sessionId: string, questionId: string, content: string, meta?: AnswerMeta): Promise<string> {
   if (USE_MOCK) return mockSaveAnswer(sessionId, questionId, content);

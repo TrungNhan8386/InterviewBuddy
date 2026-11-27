@@ -83,12 +83,13 @@ export default function PracticeQuestions({ sessionId, language }: Props) {
     fetchSet();
   }
 
-  async function start(question: PracticeQuestion) {
+  // "single": only this question (UC10-02). "all": every saved question in list order (UC10-03).
+  async function start(question: PracticeQuestion, mode: "single" | "all" = "single") {
     if (starting) return;
-    setStarting(question.id);
+    setStarting(mode === "all" ? "all" : question.id);
     setStartError(false);
     try {
-      const id = await startPractice(question.id);
+      const id = await startPractice(question.id, { mode });
       router.push(`/interview/${encodeURIComponent(id)}`);
     } catch {
       setStartError(true);
@@ -108,10 +109,10 @@ export default function PracticeQuestions({ sessionId, language }: Props) {
         {state.kind === "ready" && state.set.groups[0]?.questions[0] && (
           <Button
             className="w-full shrink-0 sm:w-auto"
-            onClick={() => start(state.set.groups[0].questions[0])}
+            onClick={() => start(state.set.groups[0].questions[0], "all")}
             disabled={starting !== null}
           >
-            {starting === state.set.groups[0].questions[0].id ? t.starting : t.startFirst}
+            {starting === "all" ? t.starting : t.startFirst}
           </Button>
         )}
       </div>

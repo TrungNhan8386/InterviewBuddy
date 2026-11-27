@@ -6,6 +6,7 @@ import { createInterviewerProvider } from '@/lib/interview/interviewer-provider.
 import { createNextHandler } from '@/lib/interview/next-http.mjs';
 import { createNextRepository } from '@/lib/interview/next-repository.mjs';
 import { createNextService } from '@/lib/interview/next-service.mjs';
+import { withPracticeTurns } from '@/lib/practice/practice-turns.mjs';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -19,7 +20,8 @@ export const POST = createNextHandler({
   },
   makeService: (auth) => createNextService({
     generationBudgetMs: Number(process.env.GEMINI_TIMEOUT_MS || 30000),
-    repository: createNextRepository(auth.supabase),
+    // UC-10 (SCRUM-205): practice sessions take their questions from the saved list, not the AI.
+    repository: withPracticeTurns(createNextRepository(auth.supabase), auth.supabase),
     // SCRUM-81: every Gemini request counts toward the user's daily AI limit.
     provider: withInterviewerLimit(createInterviewerProvider(), createAiCallCounter(auth.supabase)),
   }),

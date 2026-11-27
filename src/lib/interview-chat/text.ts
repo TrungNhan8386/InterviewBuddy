@@ -53,6 +53,13 @@ type ChatText = {
   reportButton: string;
   noAnswers: string;
   reviewTranscript: string;
+  // UC-10 (SCRUM-205): practice session from saved questions (no timer, no report).
+  practiceLabel: string;
+  practiceNoLimit: string;
+  practiceEndedTitle: string;
+  practiceEnded: string;
+  practiceNoReport: string;
+  backToReport: string;
   // SCRUM-129: empty answer and load-error states.
   emptyAnswer: string;
   loadErrorTitle: string;
@@ -138,6 +145,12 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     reportButton: "Xem báo cáo",
     noAnswers: "Bạn chưa trả lời câu nào nên buổi này không có báo cáo.",
     reviewTranscript: "Xem lại hội thoại",
+    practiceLabel: "Luyện tập",
+    practiceNoLimit: "Không giới hạn thời gian",
+    practiceEndedTitle: "Đã xong phần luyện tập",
+    practiceEnded: "Bạn đã trả lời hết các câu luyện tập đã chọn.",
+    practiceNoReport: "Phiên luyện tập không tạo báo cáo và không tính vào điểm tiến bộ. Điểm từng câu nằm trong phần nhận xét ở trên.",
+    backToReport: "Quay lại báo cáo",
     emptyAnswer: "Hãy viết câu trả lời trước khi gửi.",
     loadErrorTitle: "Không mở được buổi phỏng vấn",
     loading: "Đang tải buổi phỏng vấn…",
@@ -260,6 +273,12 @@ export const CHAT_TEXT: Record<InterviewLanguage, ChatText> = {
     reportButton: "View report",
     noAnswers: "You did not answer any question, so this session has no report.",
     reviewTranscript: "Review the conversation",
+    practiceLabel: "Practice",
+    practiceNoLimit: "No time limit",
+    practiceEndedTitle: "Practice finished",
+    practiceEnded: "You answered all the practice questions you chose.",
+    practiceNoReport: "A practice session has no report and does not count toward your progress. The score of each answer is in its feedback above.",
+    backToReport: "Back to report",
     emptyAnswer: "Please write an answer before sending.",
     loadErrorTitle: "Could not open the interview",
     loading: "Loading the interview…",

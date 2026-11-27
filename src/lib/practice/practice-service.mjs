@@ -70,10 +70,16 @@ export function createPracticeRepository(supabase) {
       if (result.error?.code === '23505') return null;
       return check(result);
     },
-    async start(practiceQuestionId) {
-      const data = check(await supabase.rpc('start_practice_session', { p_practice_question_id: practiceQuestionId }));
+    // mode 'single': only this question (UC10-02). mode 'all': every saved question
+    // of the report in list order, starting with this one (UC10-03).
+    async start(practiceQuestionId, mode = 'single') {
+      const args = { p_practice_question_id: practiceQuestionId };
+      if (mode !== 'single') args.p_mode = mode;
+      const data = check(await supabase.rpc('start_practice_session', args));
       if (!data || typeof data !== 'object') throw new PracticeError('SERVER_ERROR');
-      if (data.error) throw new PracticeError(data.error === 'NOT_FOUND' ? 'NOT_FOUND' : 'SERVER_ERROR');
+      if (data.error) {
+        throw new PracticeError(data.error === 'NOT_FOUND' ? 'NOT_FOUND' : data.error === 'BAD_INPUT' ? 'BAD_INPUT' : 'SERVER_ERROR');
+      }
       return { sessionId: data.sessionId, resumed: Boolean(data.resumed) };
     },
   };
@@ -137,8 +143,8 @@ export function createPracticeService({ repository, provider, consume }) {
     return toPracticeResponse(sessionId, final ?? [], { state: 'ready', alreadySaved: !inserted });
   }
 
-  async function start(practiceQuestionId) {
-    return repository.start(practiceQuestionId);
+  async function start(practiceQuestionId, mode = 'single') {
+    return repository.start(practiceQuestionId, mode);
   }
 
   return { read, generate, start };

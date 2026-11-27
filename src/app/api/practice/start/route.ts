@@ -6,11 +6,12 @@ import { PracticeError, createPracticeRepository } from "@/lib/practice/practice
 
 export const runtime = "nodejs";
 
-// POST /api/practice/start { "practiceQuestionId": … } – start a practice session
-// from one targeted question (UC-10 step 6–7, SCRUM-204). Owner: Khang.
-// Creates a 15-minute session with the same settings, JD and CV as the reported
-// interview and the chosen question as question 1, then the page opens
-// /interview/{sessionId} (the existing chat page). No AI call here.
+// POST /api/practice/start { "practiceQuestionId": …, "mode"?: "single" | "all" }
+// – start a practice session (UC-10 step 6–7, SCRUM-204, SCRUM-205). Owner: Khang.
+// mode "single" (default, "Practice this question"): only that question.
+// mode "all" ("Start practice session"): every saved question of the report in list order.
+// Same settings, JD and CV as the reported interview, no time limit, no follow-up
+// and no report. The page then opens /interview/{sessionId}. No AI call here.
 // Contract: docs/api/PRACTICE_API_v1.md
 
 const MESSAGES = {
@@ -37,13 +38,15 @@ export async function POST(request: NextRequest) {
   } catch {
     return error("BAD_INPUT");
   }
-  const id = (body as { practiceQuestionId?: unknown } | null)?.practiceQuestionId;
-  if (!body || typeof body !== "object" || Object.keys(body).some((k) => k !== "practiceQuestionId") || typeof id !== "string") {
+  const { practiceQuestionId: id, mode = "single" } = (body ?? {}) as { practiceQuestionId?: unknown; mode?: unknown };
+  if (!body || typeof body !== "object" || Array.isArray(body)
+      || Object.keys(body).some((k) => k !== "practiceQuestionId" && k !== "mode")
+      || typeof id !== "string" || (mode !== "single" && mode !== "all")) {
     return error("BAD_INPUT");
   }
   if (!isUuid(id)) return error("NOT_FOUND");
   try {
-    const started = await createPracticeRepository(auth.supabase).start(id);
+    const started = await createPracticeRepository(auth.supabase).start(id, mode);
     return NextResponse.json(started, { status: started.resumed ? 200 : 201, headers: { "Cache-Control": "no-store" } });
   } catch (e) {
     if (e instanceof PracticeError && e.code in MESSAGES) return error(e.code as Code);
