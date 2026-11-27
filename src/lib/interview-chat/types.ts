@@ -47,7 +47,12 @@ export type ChatSession = {
   // Skill names from the linked /api/analyze-fit result; null when no analysis is linked.
   skills: { matched: string[]; missing: string[] } | null;
   turns: ChatTurn[];
+  // UC-10 (SCRUM-205): set when the session practises saved questions from a report.
+  // No timer, no follow-up, no report; the end screen links back to the source report.
+  practice?: ChatPractice | null;
 };
+
+export type ChatPractice = { mode: "single" | "all"; total: number; sourceSessionId: string | null };
 
 export type NextAction = "follow_up" | "next_topic" | "end";
 export type NextResult = { action: NextAction; question: ChatQuestion | null };

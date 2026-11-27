@@ -55,7 +55,7 @@ const FINAL_LOAD_ERRORS: ChatErrorCode[] = ["NOT_FOUND", "BAD_INPUT", "SESSION_C
 // The engine ends the interview when the questions are done or the time is up (UC06-05).
 function engineEndReason(session: ChatSession | null): EndReason {
   const started = session?.startedAt ? Date.parse(session.startedAt) : NaN;
-  if (session && Number.isFinite(started) && Date.now() - started >= session.settings.durationMinutes * 60_000) {
+  if (session && !session.practice && Number.isFinite(started) && Date.now() - started >= session.settings.durationMinutes * 60_000) {
     return "time_up";
   }
   return "completed";
@@ -399,6 +399,7 @@ export default function InterviewChat({ sessionId }: { sessionId: string }) {
           currentQuestion={mainAsked}
           startedAt={session.startedAt}
           running={!ended}
+          practice={session.practice}
         />
 
         <div ref={transcriptRef} className="scroll-mt-4">

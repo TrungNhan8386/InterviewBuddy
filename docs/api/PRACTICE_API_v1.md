@@ -62,15 +62,29 @@ The prompt receives only the settings, the two criteria with their scores, the q
 | `noMajorWeakness` | `true` when both scores are 7.5 or more → the page shows "no major weakness, these questions help you improve further" (UC-10 AF3). |
 | `questions[].practiceSessionId` | Latest practice session started from the question, or `null`. The page shows "Continue practice" when set. |
 
-## 3. POST /api/practice/start – start a practice session from a question
+## 3. POST /api/practice/start – start a practice session
 
 ```json
-{ "practiceQuestionId": "…" }
+{ "practiceQuestionId": "…", "mode": "single" }
 → 201 { "sessionId": "…", "resumed": false }
-→ 200 { "sessionId": "…", "resumed": true }   (that practice is still running: open it again)
+→ 200 { "sessionId": "…", "resumed": true }   (that practice is still open: open it again)
 ```
 
-The database function `start_practice_session()` creates a new `interview_sessions` row with the same type, difficulty, language, target position, JD, CV and answer mode as the reported interview, `duration_minutes = 15`, `planned_questions = 3`, and `source_practice_question_id` set. The chosen question is saved as question 1 (`kind = 'main'`, topic "Luyện tập: …" / "Practice: …"). The page then opens `/interview/{sessionId}`: the chat page sees `resume.state = awaiting_answer`, shows the question, and the normal flow continues (save answer → feedback (UC-08) → `/api/interview/next`). No AI call happens in this route.
+| `mode` | Button | Session |
+| --- | --- | --- |
+| `"single"` (default) | "Luyện câu này" / "Practice this question" | Only that question (test case UC10-02). |
+| `"all"` | "Bắt đầu phiên luyện tập" / "Start practice session" (sends the first question) | Every saved question of the report, in list order (UC10-03). |
+
+The database function `start_practice_session(id, mode)` (migration `20261127000000_practice_session_mode.sql`) creates a new `interview_sessions` row with the same type, difficulty, language, target position, JD, CV and answer mode as the reported interview, plus `practice_mode`, `practice_question_ids` (the order) and `practice_source_session_id`. The first question is saved as question 1 (`kind = 'main'`, topic "Luyện tập: …" / "Practice: …"). The page then opens `/interview/{sessionId}`.
+
+A practice session (SCRUM-205):
+
+* gets its next question from `practice_next_turn()`, which `/api/interview/next` calls before the AI engine: the next saved question, or `action: "end"` after the last one. No follow-up and no AI question.
+* has **no time limit** (`duration_minutes` keeps 15 only for the column check; the chat page hides the timer).
+* has **no report**: the end screen shows "Back to report" (`/reports/{practice_source_session_id}`) instead of "View report", so it never enters the score trend.
+* `GET /api/interview/{id}` returns `practice: { mode, total, sourceSessionId }` (null for a normal interview).
+
+No AI call happens in this route. Each answer is still scored by `/api/evaluate-answer` (UC-08).
 
 ## 4. Errors
 
@@ -95,7 +109,7 @@ On every error nothing is saved and the rest of the report stays usable (UC-10 p
 ## 5. Testing
 
 ```bash
-npm test                         # tests/practice.test.mjs: 9 tests, includes the SQL on PGlite (RLS, start, resume)
+npm test                         # tests/practice.test.mjs (9) + tests/practice-session.test.mjs (4), SQL on PGlite
 NEXT_PUBLIC_PRACTICE_MODE=mock   # in .env.local: sample questions on /reports/{id}, no Gemini, no database
 # sample states: /reports/{id}?practice=strong | error | limit | few
 ```
@@ -107,3 +121,4 @@ Environment: optional `GEMINI_PRACTICE_MODEL` (empty = `GEMINI_MODEL`). No new s
 | Version | Date | Change |
 | --- | --- | --- |
 | v1 | 24/11/2026 | First version (SCRUM-178, SCRUM-203, SCRUM-204) |
+| v1.1 | 27/11/2026 | `mode` single/all; practice sessions follow the saved questions, no time limit, no report (SCRUM-205, UC10-02/03) |

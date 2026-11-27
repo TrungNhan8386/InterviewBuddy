@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { CHAT_TEXT } from "@/lib/interview-chat/text";
-import type { ChatSettings } from "@/lib/interview-chat/types";
+import type { ChatPractice, ChatSettings } from "@/lib/interview-chat/types";
 
 type Props = {
   text: (typeof CHAT_TEXT)["vi"];
@@ -10,6 +10,8 @@ type Props = {
   currentQuestion: number; // number of main questions asked so far
   startedAt: string | null;
   running: boolean;
+  // UC-10 (SCRUM-205): practice sessions have no time limit, so no timer is shown.
+  practice?: ChatPractice | null;
 };
 
 function formatClock(totalSeconds: number) {
@@ -18,16 +20,16 @@ function formatClock(totalSeconds: number) {
 }
 
 // SCRUM-97: interview type, progress "Question 3 of 10", timer.
-export default function ChatHeader({ text, settings, currentQuestion, startedAt, running }: Props) {
+export default function ChatHeader({ text, settings, currentQuestion, startedAt, running, practice }: Props) {
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    if (!running) return;
+    if (!running || practice) return;
     const timer = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(timer);
-  }, [running]);
+  }, [running, practice]);
 
-  const total = settings.plannedQuestions;
+  const total = practice ? Math.max(practice.total, 1) : settings.plannedQuestions;
   const shown = Math.min(Math.max(currentQuestion, 1), total);
   const percent = Math.round((Math.min(currentQuestion, total) / total) * 100);
 
@@ -40,20 +42,25 @@ export default function ChatHeader({ text, settings, currentQuestion, startedAt,
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs font-medium uppercase tracking-wide text-indigo-600">
+            {practice ? `${text.practiceLabel} · ` : ""}
             {text.types[settings.type]} · {text.difficulties[settings.difficulty]}
           </p>
           <h1 className="mt-1 break-words text-lg font-bold sm:text-xl">{settings.targetPosition}</h1>
         </div>
 
-        <div className="text-right" aria-live="off">
-          <p className="text-xs text-slate-500">{text.timeLeft}</p>
-          <p
-            className={`font-mono text-lg font-semibold tabular-nums ${lowTime ? "text-red-600" : "text-slate-900"}`}
-            role="timer"
-          >
-            {left === null ? "--:--" : left <= 0 ? text.timeUp : formatClock(left)}
-          </p>
-        </div>
+        {practice ? (
+          <p className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">{text.practiceNoLimit}</p>
+        ) : (
+          <div className="text-right" aria-live="off">
+            <p className="text-xs text-slate-500">{text.timeLeft}</p>
+            <p
+              className={`font-mono text-lg font-semibold tabular-nums ${lowTime ? "text-red-600" : "text-slate-900"}`}
+              role="timer"
+            >
+              {left === null ? "--:--" : left <= 0 ? text.timeUp : formatClock(left)}
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="mt-3">

@@ -9,6 +9,9 @@ import { InterviewChatError } from "./types";
 // a short answer (< 15 words) gets one follow-up, otherwise the next topic;
 // the interview ends after plannedQuestions main questions are answered.
 // Type "#loi" or "#error" in an answer to simulate one AI failure.
+// UC-10 (SCRUM-205): an id containing "practice" is a practice session from saved questions
+// (/interview/mock-practice = one question, /interview/mock-practice-all = three in order):
+// no timer, no follow-up, the end screen links back to the report.
 
 const MAIN: Record<InterviewLanguage, { topic: string; content: string }[]> = {
   vi: [
@@ -24,6 +27,19 @@ const MAIN: Record<InterviewLanguage, { topic: string; content: string }[]> = {
     { topic: "API requests", content: "If a user clicks search many times, how do you stop an old response from overwriting a newer one?" },
     { topic: "Teamwork", content: "Tell me about a time you disagreed with a teammate about how to do something. What did you do?" },
     { topic: "Performance", content: "Your page loads slowly on phones. What would you check first?" },
+  ],
+};
+
+const PRACTICE: Record<InterviewLanguage, string[]> = {
+  vi: [
+    "Hãy giải thích ngắn gọn cho người không chuyên: vì sao trang web cần trạng thái loading?",
+    "Kể lại một lỗi bạn từng sửa, nói ý chính trong câu đầu tiên.",
+    "Bạn sẽ trả lời thế nào nếu được hỏi về một công nghệ bạn chưa dùng?",
+  ],
+  en: [
+    "Explain to a non-technical person why a web page needs a loading state.",
+    "Describe a bug you fixed, with the main point in your first sentence.",
+    "How would you answer a question about a technology you have not used?",
   ],
 };
 
@@ -45,6 +61,9 @@ function store(id: string): MockStore {
   let s = stores.get(id);
   if (!s) {
     const language: InterviewLanguage = id.endsWith("en") ? "en" : "vi";
+    const practice = id.includes("practice")
+      ? { mode: id.includes("all") ? ("all" as const) : ("single" as const), total: id.includes("all") ? 3 : 1, sourceSessionId: "demo" }
+      : null;
     s = {
       failNext: false,
       replies: new Map(),
@@ -58,7 +77,7 @@ function store(id: string): MockStore {
           language,
           targetPosition: "Frontend Intern",
           durationMinutes: 15,
-          plannedQuestions: MAIN[language].length,
+          plannedQuestions: practice ? practice.total : MAIN[language].length,
           inputMode: "text",
         },
         skills: {
@@ -66,6 +85,7 @@ function store(id: string): MockStore {
           missing: ["Unit testing", "Next.js"],
         },
         turns: [],
+        practice,
       },
     };
     stores.set(id, s);
@@ -113,7 +133,17 @@ export async function mockRequestNext(sessionId: string, afterAnswerId: string |
 
   let question: ChatQuestion | null = null;
   let action: NextResult["action"] = "next_topic";
-  if (last && lastMain && words < 15 && followUps.length === 0) {
+  const practice = session.practice;
+  if (practice) {
+    // Saved questions in order, never a follow-up (UC10-02, UC10-03).
+    if (mains.length < practice.total) {
+      const topic = lang === "en" ? "Practice: clarity" : "Luyện tập: mạch lạc";
+      question = { id: newId(), kind: "main", topic, content: PRACTICE[lang][mains.length], position: session.turns.length + 1 };
+    } else {
+      action = "end";
+      session.status = "completed";
+    }
+  } else if (last && lastMain && words < 15 && followUps.length === 0) {
     action = "follow_up";
     question = { id: newId(), kind: "follow_up", topic: lastMain.question.topic, content: FOLLOW_UP[lang], position: session.turns.length + 1 };
   } else if (mains.length < session.settings.plannedQuestions) {
