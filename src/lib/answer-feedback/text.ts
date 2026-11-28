@@ -69,7 +69,8 @@ const vi: FeedbackText = {
   effect: { positive: "Điểm cộng", negative: "Điểm trừ", neutral: "Bằng chứng" },
   outlineTitle: "Gợi ý dàn ý câu trả lời",
   outlineKeyPoints: "Các ý chính nên có",
-  star: { situation: "Situation – Tình huống", task: "Task – Nhiệm vụ", action: "Action – Hành động", result: "Result – Kết quả" },
+  // UC08-03 (BUG-06): Vietnamese only in a Vietnamese interview.
+  star: { situation: "Tình huống", task: "Nhiệm vụ", action: "Hành động", result: "Kết quả" },
   notice:
     "Nhận xét do AI tạo ra để bạn luyện tập và có thể chưa chính xác. Điểm Tự tin chỉ là ước tính dựa trên văn bản.",
   backToQuestion: "Quay lại câu hỏi",
