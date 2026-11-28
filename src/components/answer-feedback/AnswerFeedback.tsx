@@ -133,10 +133,13 @@ export default function AnswerFeedback(props: Props) {
   }
 
   const { feedback } = state;
-  const time = new Date(feedback.createdAt).toLocaleTimeString(language === "vi" ? "vi-VN" : "en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  // UC08-01 (BUG-05): show the date as well as the time the answer was scored.
+  const scoredAt = new Date(feedback.createdAt);
+  const locale = language === "vi" ? "vi-VN" : "en-US";
+  const time = `${scoredAt.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}, ${scoredAt.toLocaleDateString(
+    locale,
+    language === "vi" ? { day: "2-digit", month: "2-digit", year: "numeric" } : { day: "numeric", month: "short", year: "numeric" },
+  )}`;
 
   return (
     <Card className="space-y-5" data-testid="answer-feedback">
